@@ -1,4 +1,4 @@
-ANTIGAS 7.4 — CLIENTE v43
+ANTIGAS 7.4 — CLIENTE v48
 
 INSTALAÇÃO
 1. Extraia todo o conteúdo deste ZIP para uma pasta própria, sem misturá-lo com outra instalação do cliente.
@@ -23,9 +23,25 @@ GAME VIEW
 - Widescreen se adapta ao espaço entre os painéis. Em servidores sem suporte, usa Classic.
 - Sprites, equipamentos, minimap e chat mantêm o estilo clássico.
 
-Menu lateral: clique no cabecalho Menu [-] para recolher e Menu [+] para
-expandir. Novas conquistas continuam destacadas no cabecalho recolhido.
+Barra de ícones: passe o mouse para ver o nome da ação e seu atalho, quando
+existir. O destaque âmbar indica os painéis abertos. Use o controle separado
+no fim da barra para recolher ou expandir os ícones.
 
 Achievements: Next objectives mostra a proxima meta de cada categoria.
 Claim rewards recebe premios pendentes apos liberar espaco/capacidade.
 Recompensas pendentes ficam salvas e nao sao deixadas no chao.
+
+RARIDADES DOS ITENS
+- Itens incomuns, raros, épicos, lendários e míticos aparecem com bordas verdes, azuis, roxas, amarelas e vermelhas.
+- Itens raros no chão recebem uma pulsação de cor lenta e discreta; o sprite original continua visível.
+- Ao abrir um corpo, o container já mostra as cores de raridade junto com os itens.
+- Passe o mouse sobre equipamentos no inventário ou em containers para consultar a raridade e seu bônus. Os atributos são definidos pelo servidor.
+
+CANAL LOOT
+- O canal Loot mostra os drops com os nomes coloridos pela raridade.
+- Um aviso visual destaca o melhor item raro de cada drop.
+- Corpos com loot ainda fechado recebem um brilho discreto ate serem abertos.
+
+RARIDADE DOS ITENS NO CHAO
+- Equipamentos com raridade recebem uma camada colorida no proprio sprite.
+- O destaque acompanha o item ao soltar, mover e recolher; itens comuns mantem sua aparencia.

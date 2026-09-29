@@ -18,6 +18,8 @@
  */
 
 #include "otpch.h"
+#include "loot.h"
+#include "groundrarity.h"
 #include "hunt_supply.h"
 
 #include "pugicast.h"
@@ -1578,6 +1580,9 @@ Item* Game::transformItem(Item* item, uint16_t newId, int32_t newCount /*= -1*/)
 					if (newItem == nullptr) {
 						return nullptr;
 					}
+					if (item->hasRarity()) {
+						newItem->setIntAttr(ITEM_ATTRIBUTE_RARITY, item->getIntAttr(ITEM_ATTRIBUTE_RARITY));
+					}
 
 					cylinder->replaceThing(itemIndex, newItem);
 					cylinder->postAddNotification(newItem, cylinder, itemIndex);
@@ -1623,6 +1628,9 @@ Item* Game::transformItem(Item* item, uint16_t newId, int32_t newCount /*= -1*/)
 
 	if (newItem == nullptr) {
 		return nullptr;
+	}
+	if (item->hasRarity()) {
+		newItem->setIntAttr(ITEM_ATTRIBUTE_RARITY, item->getIntAttr(ITEM_ATTRIBUTE_RARITY));
 	}
 
 	cylinder->replaceThing(itemIndex, newItem);
@@ -3352,6 +3360,29 @@ void Game::removeCreatureCheck(Creature* creature)
 	}
 }
 
+void Game::scheduleCreatureDeath(Creature* creature)
+{
+	if (!creature || creature->deathCheckPending) {
+		return;
+	}
+
+	creature->deathCheckPending = true;
+	g_dispatcher.addTask(createTask(std::bind(&Game::checkCreatureDeath, this, creature->getID())));
+}
+
+void Game::checkCreatureDeath(uint32_t creatureId)
+{
+	Creature* creature = getCreatureByID(creatureId);
+	if (!creature) {
+		return;
+	}
+
+	creature->deathCheckPending = false;
+	if (creature->getHealth() <= 0) {
+		creature->onDeath();
+	}
+}
+
 void Game::checkCreatures(size_t index)
 {
 	g_scheduler.addEvent(createSchedulerTask(EVENT_CHECK_CREATURE_INTERVAL, std::bind(&Game::checkCreatures, this, (index + 1) % EVENT_CREATURECOUNT)));
@@ -4560,6 +4591,14 @@ void Game::parsePlayerExtendedOpcode(uint32_t playerId, uint8_t opcode, const st
 {
 	Player* player = getPlayerByID(playerId);
 	if (!player) {
+		return;
+	}
+	if (opcode == 129) {
+		GroundRarity::handleRequest(*player, buffer);
+		return;
+	}
+	if (opcode == 128) {
+		LootTracker::handleRequest(*player, buffer);
 		return;
 	}
 

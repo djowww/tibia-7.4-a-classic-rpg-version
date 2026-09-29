@@ -22,6 +22,8 @@
 #include <boost/range/adaptor/reversed.hpp>
 
 #include "protocolgame.h"
+#include "loot.h"
+#include "groundrarity.h"
 
 #include "outputmessage.h"
 
@@ -44,6 +46,8 @@ void ProtocolGame::release()
 {
 	//dispatcher thread
 	if (player && player->client == shared_from_this()) {
+		LootTracker::resetSession(*player);
+		GroundRarity::resetSession(*player);
 		player->client.reset();
 		player->decrementReferenceCounter();
 		player = nullptr;
@@ -200,7 +204,12 @@ void ProtocolGame::connect(uint32_t playerId, OperatingSystem_t operatingSystem)
 	player->isConnecting = false;
 
 	player->client = getThis();
+	LootTracker::resetSession(*player);
+	GroundRarity::resetSession(*player);
 	sendAddCreature(player, player->getPosition(), 0, false);
+	if (ChatChannel* lootChannel = g_chat->addUserToChannel(*player, 10)) {
+		player->sendChannel(10, lootChannel->getName());
+	}
 	player->lastIP = player->getIP();
 	player->lastLoginSaved = std::max<time_t>(time(nullptr), player->lastLoginSaved + 1);
 	acceptPackets = true;
@@ -1265,8 +1274,9 @@ void ProtocolGame::sendContainer(uint8_t cid, const Container* container, bool h
 	msg.addByte(hasParent ? 0x01 : 0x00);
 
 	uint32_t containerSize = container->size();
+	uint8_t itemsToSend = 0;
 	if (firstIndex < containerSize) {
-		uint8_t itemsToSend = std::min<uint32_t>(std::min<uint32_t>(container->capacity(), containerSize - firstIndex), std::numeric_limits<uint8_t>::max());
+		itemsToSend = std::min<uint32_t>(std::min<uint32_t>(container->capacity(), containerSize - firstIndex), std::numeric_limits<uint8_t>::max());
 
 		msg.addByte(itemsToSend);
 		for (auto it = container->getItemList().begin() + firstIndex, end = it + itemsToSend; it != end; ++it) {
@@ -1274,6 +1284,35 @@ void ProtocolGame::sendContainer(uint8_t cid, const Container* container, bool h
 		}
 	} else {
 		msg.addByte(0x00);
+	}
+
+	// Ship rarity metadata in the same packet as the container contents. The
+	// client can then color loot as soon as the native container is opened,
+	// without waiting for a separate Lua extended-opcode round trip.
+	if (player && (otclientV8 || player->getOperatingSystem() >= CLIENTOS_OTCLIENT_LINUX) && firstIndex < containerSize) {
+		constexpr uint32_t rarityPageSize = 40;
+		const auto containerItems = container->getItemList().begin();
+		for (uint32_t offset = 0; offset < itemsToSend; offset += rarityPageSize) {
+			const uint32_t count = std::min<uint32_t>(rarityPageSize, itemsToSend - offset);
+			std::string payload = "P|C|" + std::to_string(cid) + "|" + std::to_string(firstIndex + offset) + "|";
+			for (uint32_t slot = 0; slot < count; ++slot) {
+				const uint32_t index = firstIndex + offset + slot;
+				const Item* item = *(containerItems + index);
+				if (slot != 0) payload.push_back(';');
+				payload += std::to_string(index);
+				payload.push_back(',');
+				payload += std::to_string(item && item->hasRarity() ? static_cast<uint8_t>(item->getRarityTier()) : 0);
+				payload.push_back(',');
+				payload += std::to_string(item && item->hasRarity() ? static_cast<uint8_t>(item->getRarityBonusType()) : 0);
+				payload.push_back(',');
+				payload += std::to_string(item && item->hasRarity() ? item->getRarityBonusValue() : 0);
+				payload.push_back(',');
+				payload += std::to_string(item && item->hasRarity() ? item->getRarityBonusSubtype() : 0);
+			}
+			msg.addByte(0x32);
+			msg.addByte(127);
+			msg.addString(payload);
+		}
 	}
 	writeToOutputBuffer(msg);
 }
@@ -1551,6 +1590,7 @@ void ProtocolGame::sendMapDescription(const Position& pos)
 				for (const Tile* tile : tiles) sendUpdateTile(tile, tile->getPosition());
 			}
 		}
+		GroundRarity::resetMap(*player);
 		return;
 	}
 	NetworkMessage msg;
@@ -1558,6 +1598,7 @@ void ProtocolGame::sendMapDescription(const Position& pos)
 	msg.addPosition(player->getPosition());
 	GetMapDescription(pos.x - mapViewport.x, pos.y - mapViewport.y, pos.z, mapViewport.width(), mapViewport.height(), msg);
 	writeToOutputBuffer(msg);
+	GroundRarity::resetMap(*player);
 }
 
 void ProtocolGame::sendAddTileItem(const Position& pos, const Item* item, uint32_t stackpos)
@@ -1576,6 +1617,7 @@ void ProtocolGame::sendAddTileItem(const Position& pos, const Item* item, uint32
 	writeToOutputBuffer(msg);
 	
 	checkPredictiveWalking(pos);
+	GroundRarity::updateTile(*player, pos);
 }
 
 void ProtocolGame::sendUpdateTileItem(const Position& pos, uint32_t stackpos, const Item* item)
@@ -1592,6 +1634,7 @@ void ProtocolGame::sendUpdateTileItem(const Position& pos, uint32_t stackpos, co
 	writeToOutputBuffer(msg);
 	
 	checkPredictiveWalking(pos);
+	GroundRarity::updateTile(*player, pos);
 }
 
 void ProtocolGame::sendRemoveTileThing(const Position& pos, uint32_t stackpos)
@@ -1603,6 +1646,7 @@ void ProtocolGame::sendRemoveTileThing(const Position& pos, uint32_t stackpos)
 	NetworkMessage msg;
 	RemoveTileThing(msg, pos, stackpos);
 	writeToOutputBuffer(msg);
+	GroundRarity::updateTile(*player, pos);
 }
 
 void ProtocolGame::sendUpdateTile(const Tile* tile, const Position& pos)
@@ -1625,6 +1669,7 @@ void ProtocolGame::sendUpdateTile(const Tile* tile, const Position& pos)
 	}
 
 	writeToOutputBuffer(msg);
+	GroundRarity::updateTile(*player, pos);
 }
 
 void ProtocolGame::sendFightModes()
@@ -1665,6 +1710,7 @@ void ProtocolGame::sendAddCreature(const Creature* creature, const Position& pos
 		}
 
 		checkPredictiveWalking(pos);
+		GroundRarity::updateTile(*player, pos);
 		return;
 	}
 
@@ -1741,6 +1787,13 @@ void ProtocolGame::sendMoveCreature(const Creature* creature, const Position& ne
 			sendMapDescription(newPos);
 		} else {
 			NetworkMessage msg;
+			std::vector<GroundRarityMapStrip> rarityStrips;
+			auto addMapStrip = [&](uint8_t opcode, int32_t x, int32_t y, int32_t width, int32_t height) {
+				msg.addByte(opcode);
+				GetMapDescription(x, y, newPos.z, width, height, msg);
+				// Record precisely the rectangle written to this native packet.
+				rarityStrips.push_back({x, y, newPos.z, width, height});
+			};
 			if (oldPos.z == 7 && newPos.z >= 8) {
 				RemoveTileThing(msg, oldPos, oldStackPos);
 			} else {
@@ -1760,21 +1813,24 @@ void ProtocolGame::sendMoveCreature(const Creature* creature, const Position& ne
 			}
 
 			if (oldPos.y > newPos.y) { // north, for old x
-				msg.addByte(0x65);
-				GetMapDescription(oldPos.x - mapViewport.x, newPos.y - mapViewport.y, newPos.z, mapViewport.width(), 1, msg);
+				addMapStrip(0x65, oldPos.x - mapViewport.x, newPos.y - mapViewport.y, mapViewport.width(), 1);
 			} else if (oldPos.y < newPos.y) { // south, for old x
-				msg.addByte(0x67);
-				GetMapDescription(oldPos.x - mapViewport.x, newPos.y + mapViewport.y + 1, newPos.z, mapViewport.width(), 1, msg);
+				addMapStrip(0x67, oldPos.x - mapViewport.x, newPos.y + mapViewport.y + 1, mapViewport.width(), 1);
 			}
 
 			if (oldPos.x < newPos.x) { // east, [with new y]
-				msg.addByte(0x66);
-				GetMapDescription(newPos.x + mapViewport.x + 1, newPos.y - mapViewport.y, newPos.z, 1, mapViewport.height(), msg);
+				addMapStrip(0x66, newPos.x + mapViewport.x + 1, newPos.y - mapViewport.y, 1, mapViewport.height());
 			} else if (oldPos.x > newPos.x) { // west, [with new y]
-				msg.addByte(0x68);
-				GetMapDescription(newPos.x - mapViewport.x, newPos.y - mapViewport.y, newPos.z, 1, mapViewport.height(), msg);
+				addMapStrip(0x68, newPos.x - mapViewport.x, newPos.y - mapViewport.y, 1, mapViewport.height());
 			}
 			writeToOutputBuffer(msg);
+			if (newPos.z != oldPos.z) {
+				// Classic floor packets also introduce full floors and compensating
+				// strips. Rebind the bounded new viewport immediately after them.
+				GroundRarity::resetMap(*player);
+			} else {
+				GroundRarity::refreshMapStrips(*player, rarityStrips);
+			}
 		}
 	} else if (canSee(oldPos) && canSee(creature->getPosition())) {
 		if (teleport || (oldPos.z == 7 && newPos.z >= 8) || oldStackPos >= 10) {
@@ -1798,6 +1854,8 @@ void ProtocolGame::sendMoveCreature(const Creature* creature, const Position& ne
 	} else if (canSee(creature->getPosition())) {
 		sendAddCreature(creature, newPos, newStackPos, false);
 	}
+	GroundRarity::updateTile(*player, oldPos);
+	GroundRarity::updateTile(*player, newPos);
 }
 
 void ProtocolGame::sendInventoryItem(slots_t slot, const Item* item)

@@ -1,5 +1,5 @@
 function onLogin(player)
-	local loginStr = "Welcome to Antigas 7.4\nOfficial client: v40 - https://tibia74.tech/Antigas-7.4-Client-v40.zip"
+	local loginStr = "Welcome to Antigas 7.4\nOfficial client: v46 - https://tibia74.tech/Antigas-7.4-Client-v46.zip"
 	if player:getLastLoginSaved() <= 0 then
 		player:sendOutfitWindow()
 	else
@@ -8,6 +8,7 @@ function onLogin(player)
 		player:openChannel(7)
 	end
 	player:sendTextMessage(MESSAGE_STATUS_DEFAULT, loginStr)
+	player:openChannel(10)
 
 	local completedBestiaries, migrated = AntigasBestiary.migrateCompletedCount(player)
 	if migrated and completedBestiaries > 0 then
@@ -88,6 +89,7 @@ Unmute Player: /unmute nick.
 	player:registerEvent('KillDeathCount')
 	player:registerEvent("Reward")
 	player:registerEvent("Bestiary")
+	player:registerEvent("ItemRaritySync")
 	player:registerEvent("QuestLog")
 	player:registerEvent("BestiaryKill")
 	player:registerEvent("AchievementsKill")

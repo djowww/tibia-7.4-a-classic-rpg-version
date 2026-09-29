@@ -30,12 +30,12 @@ VANISH,!           -> "Bye."
 "excalibug" -> "We FRANSes don't liiiike any bugssss."
 
 
-"offer"           -> "What do youuuu think I am? A lousy barberrrr? I'm selliiiing blank ruuuunes and spellboooooks."
+"offer"           -> "What do youuuu think I am? A lousy barberrrr? I'm selliiiing ruuuunes and spellboooooks."
 "goods"           -> *
 "do","you","sell" -> *
 "do","you","have" -> *
 
-"rune"          -> "I sell blank ruuuuunes."
+"rune"          -> "I sell blank ruuuuunes and spell ruuuuunes."
 "blank","rune"  -> Type=3147, Amount=1, Price=10,    "Do youuuu want to buy a blank ruuuune for %P gold?", Topic=1
 "spellbook"     -> Type=3059, Amount=1, Price=150,   "Do youuuu want to buy a spellboooook for %P gold?", Topic=1
 "bp", "blank", "rune" -> Amount=1, Price=200, "Do you want to buy backpack full of blank runes for %P gold?", Topic=50

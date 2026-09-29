@@ -431,7 +431,8 @@ class Player final : public Creature, public Cylinder
 		void addMessageBuffer();
 		void removeMessageBuffer();
 
-		bool removeItemOfType(uint16_t itemId, uint32_t amount, int32_t subType, bool ignoreEquipped = false) const;
+		bool removeItemOfType(uint16_t itemId, uint32_t amount, int32_t subType, bool ignoreEquipped = false, bool ignoreRarity = false) const;
+		uint32_t getItemTypeCount(uint16_t itemId, int32_t subType, bool ignoreRarity) const;
 
 		uint32_t getCapacity() const {
 			if (hasFlag(PlayerFlag_CannotPickupItem)) {
@@ -467,6 +468,12 @@ class Player final : public Creature, public Cylinder
 		void setItemAbility(slots_t slot, bool enabled) {
 			inventoryAbilities[slot] = enabled;
 		}
+		bool isItemRarityEnabled(slots_t slot) const {
+			return itemRarityItems[slot] != nullptr;
+		}
+		void equipItemRarity(slots_t slot, const Item* item);
+		void deEquipItemRarity(slots_t slot, const Item* item);
+		void refreshItemRarityBonuses();
 
 		void setVarSkill(skills_t skill, int32_t modifier) {
 			varSkills[skill] += modifier;
@@ -1027,6 +1034,15 @@ class Player final : public Creature, public Cylinder
 		}
 
 	protected:
+		bool groundRarityProtocol = false;
+		uint64_t groundRaritySequence = 0;
+		int64_t lastGroundRaritySync = 0;
+		int64_t lastGroundRarityReplay = 0;
+		std::map<uint64_t, std::string> groundRarityTiles;
+		bool lootProtocol = false;
+		int64_t lastLootSync = 0;
+		int64_t lastLootFullSync = 0;
+		std::map<uint64_t, std::string> lootMarkers;
 		std::forward_list<Condition*> getMuteConditions() const;
 
 		void checkTradeState(const Item* item);
@@ -1183,6 +1199,11 @@ class Player final : public Creature, public Cylinder
 		bool persistenceQuarantined = false;
 		bool addAttackSkillPoint = false;
 		bool inventoryAbilities[CONST_SLOT_LAST + 1] = {};
+		const Item* itemRarityItems[CONST_SLOT_LAST + 1] = {};
+		uint32_t itemRarityData[CONST_SLOT_LAST + 1] = {};
+		int32_t itemRarityStats[STAT_LAST + 1] = {};
+		int32_t itemRaritySkills[SKILL_LAST + 1] = {};
+		int32_t itemRaritySpeed = 0;
 
 		static uint32_t playerAutoID;
 
@@ -1196,6 +1217,7 @@ class Player final : public Creature, public Cylinder
 			} else {
 				baseSpeed = PLAYER_MAX_SPEED;
 			}
+			refreshItemRarityBonuses();
 		}
 
 		bool isPromoted() const;
@@ -1223,6 +1245,8 @@ class Player final : public Creature, public Cylinder
 		void getPathSearchParams(const Creature* creature, FindPathParams& fpp) const final;
 
 		friend class Game;
+		friend class LootTracker;
+		friend class GroundRarity;
 		friend class Npc;
 		friend class LuaScriptInterface;
 		friend class Map;
