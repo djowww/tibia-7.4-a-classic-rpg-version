@@ -1,12 +1,18 @@
 """One disposable player verifies pending rewards and exactly-once delivery.
 
-Requires the existing production environment. Never edits an existing player.
+Requires the explicit isolated-staging guard. Never edit or test against production.
 """
+
+if not __debug__:
+    raise SystemExit('Python optimization (-O) disables validation assertions; refusing to run this tool.')
+
 import hashlib
 import importlib.util
 from pathlib import Path
 import secrets
 import time
+
+from staging_safety import require_staging_target
 
 spec = importlib.util.spec_from_file_location('achievements_live', Path(__file__).with_name('achievements-live.py'))
 module = importlib.util.module_from_spec(spec)
@@ -26,6 +32,7 @@ def logout(probe, player):
 
 
 def main():
+    require_staging_target()
     account = 900000000 + secrets.randbelow(90000000)
     marker = 'claimprobe_' + secrets.token_hex(8) + '@test.invalid'
     password = secrets.token_hex(16)

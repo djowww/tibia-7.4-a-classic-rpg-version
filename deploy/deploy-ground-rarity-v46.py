@@ -14,6 +14,11 @@ import shutil
 import subprocess
 import sys
 import tarfile
+import tempfile
+
+def require(condition, message='Deployment precondition failed'):
+    if not condition:
+        raise RuntimeError(message)
 
 PREP = Path('/opt/antigas-groundrarity-20260928')
 SERVER = Path('/opt/imperium772/server')
@@ -41,33 +46,68 @@ def run(args, **kw):
 
 def atomic(source, target, uid=None, gid=None, mode=None):
     previous = target.stat() if target.exists() else None
-    temporary = target.with_name(target.name + '.v46-new')
-    shutil.copyfile(source, temporary)
-    os.chmod(temporary, mode if mode is not None else previous.st_mode & 0o777)
-    os.chown(temporary, uid if uid is not None else previous.st_uid,
-             gid if gid is not None else previous.st_gid)
-    with temporary.open('rb') as stream:
-        os.fsync(stream.fileno())
-    os.replace(temporary, target)
+    permissions = mode if mode is not None else previous.st_mode & 0o777
+    owner = uid if uid is not None else previous.st_uid
+    group = gid if gid is not None else previous.st_gid
+    fd, temporary_name = tempfile.mkstemp(
+        prefix='.' + target.name + '.', suffix='.tmp', dir=target.parent
+    )
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(fd, 'wb') as output:
+            with source.open('rb') as input_stream:
+                shutil.copyfileobj(input_stream, output)
+            output.flush()
+            os.fchown(output.fileno(), owner, group)
+            os.fchmod(output.fileno(), permissions)
+            os.fsync(output.fileno())
+        os.replace(temporary, target)
+    except BaseException:
+        try:
+            temporary.unlink()
+        except FileNotFoundError:
+            pass
+        raise
 
 
 def baseline():
-    assert digest(SERVER / 'tfs') == OLD_BINARY, 'Production binary changed during review'
+    require(
+        (digest(SERVER / 'tfs') == OLD_BINARY),
+        ('Production binary changed during review'),
+    )
     expected = json.loads((PREP / 'runtime-baseline.json').read_text())
     for name, checksum in expected.items():
         path = SERVER / name
-        assert (digest(path) if path.exists() else None) == checksum, 'Runtime changed: ' + name
+        require(
+            ((digest(path) if path.exists() else None) == checksum),
+            ('Runtime changed: ' + name),
+        )
 
 
 def preflight():
-    assert (PREP / 'build.exit').read_text().strip() == '0', 'Build must pass'
-    assert (PREP / 'core-test.exit').read_text().strip() == '0', 'Core tests must pass'
+    require(
+        ((PREP / 'build.exit').read_text().strip() == '0'),
+        ('Build must pass'),
+    )
+    require(
+        ((PREP / 'core-test.exit').read_text().strip() == '0'),
+        ('Core tests must pass'),
+    )
     binary = json.loads((PREP / 'binary-manifest.json').read_text())
-    assert digest(PREP / 'tfs') == binary['sha256'], 'Staged binary changed'
+    require(
+        (digest(PREP / 'tfs') == binary['sha256']),
+        ('Staged binary changed'),
+    )
     for name, checksum in json.loads((PREP / 'runtime-manifest.json').read_text()).items():
-        assert digest(PREP / 'runtime' / name) == checksum, 'Staged runtime changed: ' + name
+        require(
+            (digest(PREP / 'runtime' / name) == checksum),
+            ('Staged runtime changed: ' + name),
+        )
     release = json.loads((PREP / 'client-release.json').read_text())
-    assert release['version'] == 46 and release['sha256'] == digest(PREP / CLIENT), 'Invalid client package'
+    require(
+        (release['version'] == 46 and release['sha256'] == digest(PREP / CLIENT)),
+        ('Invalid client package'),
+    )
 
 
 def database_snapshot(target):
@@ -78,16 +118,25 @@ def database_snapshot(target):
         with gzip.GzipFile(fileobj=stream, mode='wb') as zipped:
             shutil.copyfileobj(process.stdout, zipped)
         error = process.stderr.read()
-        assert process.wait(timeout=60) == 0, 'Database backup failed; inspect private diagnostics'
+        require(
+            (process.wait(timeout=60) == 0),
+            ('Database backup failed; inspect private diagnostics'),
+        )
     os.chmod(target, 0o600)
-    assert target.stat().st_size > 1000, 'Database backup unexpectedly small'
+    require(
+        (target.stat().st_size > 1000),
+        ('Database backup unexpectedly small'),
+    )
     run(['gzip', '-t', str(target)])
 
 
 def backup():
     preflight()
     baseline()
-    assert not (PREP / 'backup-path.txt').exists(), 'Deployment backup already exists; inspect before repeating'
+    require(
+        (not (PREP / 'backup-path.txt').exists()),
+        ('Deployment backup already exists; inspect before repeating'),
+    )
     stamp = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
     folder = Path('/root/antigas-backups') / ('groundrarity-v46-' + stamp)
     folder.mkdir(parents=True, mode=0o700)
@@ -110,11 +159,23 @@ def install():
     preflight()
     baseline()
     state = run(['systemctl', 'show', SERVICE, '--property=MainPID', '--value'], capture_output=True, text=True).stdout.strip()
-    assert state == '0', 'Main process must have finished shutdown before installation'
-    assert subprocess.run(['systemctl', 'is-active', '--quiet', SERVICE]).returncode != 0
+    require(
+        (state == '0'),
+        ('Main process must have finished shutdown before installation'),
+    )
+    require(
+        (subprocess.run(['systemctl', 'is-active', '--quiet', SERVICE]).returncode != 0),
+        ('Service must be stopped before installation'),
+    )
     folder = Path((PREP / 'backup-path.txt').read_text().strip())
-    assert folder.parent == Path('/root/antigas-backups') and folder.name.startswith('groundrarity-v46-')
-    assert (folder / 'files-before.tar.gz').is_file()
+    require(
+        (folder.parent == Path('/root/antigas-backups') and folder.name.startswith('groundrarity-v46-')),
+        ('Backup directory does not match this deployment'),
+    )
+    require(
+        ((folder / 'files-before.tar.gz').is_file()),
+        ('Deployment files backup is missing'),
+    )
     try:
         database_snapshot(folder / 'database-after-stop.sql.gz')
         stat = (SERVER / 'tfs').stat()
@@ -148,10 +209,16 @@ def website():
     preflight()
     for name in ('ground-rarity-live-result.json', 'loot-live-result.json', 'rarity-live-result.json'):
         live = json.loads((PREP / name).read_text())
-        assert live['status'] == 'passed' and live['cleanup'], 'Production smoke must pass: ' + name
+        require(
+            (live['status'] == 'passed' and live['cleanup']),
+            ('Production smoke must pass: ' + name),
+        )
     expected = json.loads((PREP / 'web-baseline.json').read_text())
     for name, checksum in expected.items():
-        assert digest(WEB / name) == checksum, 'Public file changed during review: ' + name
+        require(
+            (digest(WEB / name) == checksum),
+            ('Public file changed during review: ' + name),
+        )
     run(['php', '-l', str(PREP / 'index.php')])
     owner = (WEB / 'client-release.json').stat()
     atomic(PREP / CLIENT, WEB / CLIENT, owner.st_uid, owner.st_gid, 0o644)
@@ -160,6 +227,10 @@ def website():
     note('client_and_download_published', version=46, sha256=digest(PREP / CLIENT))
 
 
-if len(sys.argv) != 2 or sys.argv[1] not in ('backup', 'install', 'website'):
-    raise SystemExit('Select backup, install or website explicitly')
-{'backup': backup, 'install': install, 'website': website}[sys.argv[1]]()
+if __name__ == '__main__':
+    phases = {'backup': backup, 'install': install, 'website': website}
+    if len(sys.argv) != 3 or sys.argv[2] != '--confirm-production-deploy':
+        raise SystemExit('Legacy production script: pass a phase and --confirm-production-deploy explicitly')
+    if sys.argv[1] not in phases:
+        raise SystemExit('Select backup, install or website')
+    phases[sys.argv[1]]()

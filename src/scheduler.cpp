@@ -28,6 +28,12 @@ void Scheduler::threadMain()
 		std::cv_status ret = std::cv_status::no_timeout;
 
 		eventLockUnique.lock();
+		// Shutdown may have completed after the loop condition was read, before
+		// this lock was acquired. Do not wait after its notification is gone.
+		if (getState() == THREAD_STATE_TERMINATED) {
+			eventLockUnique.unlock();
+			break;
+		}
 		if (eventList.empty()) {
 			eventSignal.wait(eventLockUnique);
 		} else {
@@ -35,6 +41,12 @@ void Scheduler::threadMain()
 		}
 
 		// the mutex is locked again now...
+		// A timeout does not guarantee the queue still contains the old head:
+		// cancellation/shutdown can remove it while wait_until releases the lock.
+		if (getState() == THREAD_STATE_TERMINATED || eventList.empty()) {
+			eventLockUnique.unlock();
+			continue;
+		}
 		if (ret == std::cv_status::timeout) {
 			// ok we had a timeout, so there has to be an event we have to execute...
 			SchedulerTask* task = eventList.top();
@@ -48,7 +60,14 @@ void Scheduler::threadMain()
 				continue;
 			}
 			eventIds.erase(it);
+			std::vector<SchedulerTask*> cancelledTasks;
+			if (eventList.needsCompaction(eventIds.size())) {
+				cancelledTasks = eventList.discardCancelled(eventIds);
+			}
 			eventLockUnique.unlock();
+			for (SchedulerTask* cancelledTask : cancelledTasks) {
+				delete cancelledTask;
+			}
 
 			task->setDontExpire();
 			g_dispatcher.addTask(task, true);
@@ -61,6 +80,7 @@ void Scheduler::threadMain()
 uint32_t Scheduler::addEvent(SchedulerTask* task)
 {
 	bool do_signal = false;
+	uint32_t eventId = 0;
 	eventLock.lock();
 
 	if (getState() == THREAD_STATE_RUNNING) {
@@ -74,8 +94,10 @@ uint32_t Scheduler::addEvent(SchedulerTask* task)
 			task->setEventId(lastEventId);
 		}
 
+		eventId = task->getEventId();
+
 		// insert the event id in the list of active events
-		eventIds.insert(task->getEventId());
+		eventIds.insert(eventId);
 
 		// add the event to the queue
 		eventList.push(task);
@@ -95,7 +117,7 @@ uint32_t Scheduler::addEvent(SchedulerTask* task)
 		eventSignal.notify_one();
 	}
 
-	return task->getEventId();
+	return eventId;
 }
 
 bool Scheduler::stopEvent(uint32_t eventid)
@@ -104,7 +126,7 @@ bool Scheduler::stopEvent(uint32_t eventid)
 		return false;
 	}
 
-	std::lock_guard<std::mutex> lockClass(eventLock);
+	std::unique_lock<std::mutex> lockClass(eventLock);
 
 	// search the event id..
 	auto it = eventIds.find(eventid);
@@ -113,6 +135,17 @@ bool Scheduler::stopEvent(uint32_t eventid)
 	}
 
 	eventIds.erase(it);
+	std::vector<SchedulerTask*> cancelledTasks;
+	if (eventList.needsCompaction(eventIds.size())) {
+		cancelledTasks = eventList.discardCancelled(eventIds);
+	}
+	lockClass.unlock();
+	if (!cancelledTasks.empty()) {
+		eventSignal.notify_one();
+	}
+	for (SchedulerTask* task : cancelledTasks) {
+		delete task;
+	}
 	return true;
 }
 

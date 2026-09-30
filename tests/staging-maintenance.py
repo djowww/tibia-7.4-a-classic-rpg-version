@@ -5,6 +5,10 @@ Run under a systemd transient service with RuntimeMaxSec=570 and an ExecStopPost
 that stops staging, restores MemoryMax=1G, and starts production. This gives the
 recovery an independent owner even if the test process is killed.
 """
+
+if not __debug__:
+    raise SystemExit('Python optimization (-O) disables validation assertions; refusing to run this tool.')
+
 import argparse
 import json
 import os
@@ -14,7 +18,8 @@ import subprocess
 import threading
 import time
 
-ROOT = Path('/opt/antigas-stability-20260927')
+ROOT = Path(__file__).resolve().parents[1]
+STAGE = Path('/opt/imperium772-staging/server')
 SAMPLES = []
 STOP = threading.Event()
 
@@ -48,6 +53,8 @@ def main():
     assert value('imperium772', 'ActiveState') == 'active'
     assert value('imperium772-staging', 'ActiveState') == 'inactive'
     assert os.environ.get('INVOCATION_ID'), 'Run under the documented systemd watchdog'
+    from staging_safety import pin_staging_rsa_public
+    pin_staging_rsa_public(os.environ, STAGE / 'staging-rsa-public.json')
     signal.signal(signal.SIGTERM, interrupt)
     signal.signal(signal.SIGINT, interrupt)
     monitor = threading.Thread(target=sample, daemon=True)

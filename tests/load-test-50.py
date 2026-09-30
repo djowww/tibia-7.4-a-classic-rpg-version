@@ -5,6 +5,10 @@ Run only on the staging VPS. It refuses to run unless the staging unit, loopback
 listener, staging environment file, and dedicated test schema are all present.
 All generated accounts use a reserved ID range and .test.invalid email addresses.
 """
+
+if not __debug__:
+    raise SystemExit('Python optimization (-O) disables validation assertions; refusing to run this tool.')
+
 import argparse
 import hashlib
 import json
@@ -21,6 +25,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from load_test_protocol import Client, string
+from staging_safety import require_staging_target
 
 DB = "antigas_load_v37"
 PORT = 7176
@@ -144,7 +149,9 @@ def seed_player(index, role):
     level, experience, sword_skill = (8, 4200, 70) if role == "hunter" else (8, 4200, 20)
     # Durable synthetic hunters must survive the paced login ramp before
     # combat begins. This is a capacity fixture, not a combat-balance test.
-    health = 5000 if role == "hunter" else 150
+    # The swamp fixture includes Slimes, whose summons can exhaust 5,000 HP
+    # during the ramp/hold. Stay below the classic 16-bit health field limit.
+    health = 60000 if role == "hunter" else 150
 
     sql(
         "INSERT INTO accounts(id,password,type,email) VALUES "
@@ -243,7 +250,11 @@ class StageClient(Client):
         while not stop.is_set():
             try:
                 self.send(bytes([0x1E]))
-                # Only request handlers read: background reads stole receipts.
+                # Real clients also consume world updates during the login ramp.
+                # These roles have no request receipts; Market clients retain a
+                # single reader in market_request so receipts cannot be stolen.
+                if self.record['role'] in ('hunter', 'chat', 'walker'):
+                    self.collect(0.05)
             except (OSError, socket.timeout) as error:
                 self.keepalive_error = str(error)
                 return
@@ -330,7 +341,13 @@ def monitor_online(online_ids, seconds):
         if any(client.keepalive_error for client in clients):
             raise RuntimeError("a synthetic session lost its keepalive connection")
         if online != PLAYER_COUNT:
-            raise RuntimeError(f"sessions dropped during load: {online}/{PLAYER_COUNT}")
+            missing = sql(f"SELECT p.id,p.name,p.health,p.healthmax,p.lastlogout "
+                          f"FROM players p LEFT JOIN players_online o ON o.player_id=p.id "
+                          f"WHERE p.id IN ({online_ids}) AND o.player_id IS NULL")
+            deaths = sql(f"SELECT player_id,time,level,killed_by FROM player_deaths "
+                         f"WHERE player_id IN ({online_ids}) ORDER BY time DESC LIMIT 10")
+            raise RuntimeError(f"sessions dropped during load: {online}/{PLAYER_COUNT}; "
+                               f"missing={missing!r}; deaths={deaths!r}")
         for client in clients:
             if client.record["role"] == "chat":
                 client.send(b"\x96\x01" + string("load test heartbeat"))
@@ -529,14 +546,14 @@ def run_load():
     stop.set()
     for thread in keepalive_threads:
         thread.join(timeout=1)
+    if MAINTENANCE_WINDOW:
+        assert run(["systemctl", "show", "imperium772", "-p", "ActiveState", "--value"]) == "inactive"
+        subprocess.run(["systemctl", "stop", "imperium772-staging"], check=True, timeout=50)
+        print("logout_mode=graceful_staging_stop_with_connected_clients", flush=True)
     for client in clients:
         client.close()
     clients.clear()
     time.sleep(2)
-    if MAINTENANCE_WINDOW:
-        assert run(["systemctl", "show", "imperium772", "-p", "ActiveState", "--value"]) == "inactive"
-        run(["systemctl", "stop", "imperium772-staging"])
-        print("logout_mode=graceful_staging_stop", flush=True)
     wait_for_logout([record["player"] for record in records])
     remaining_online = int(sql(f"SELECT COUNT(*) FROM players_online WHERE player_id IN ({online_ids})"))
     if remaining_online:
@@ -573,7 +590,9 @@ def main():
     parser.add_argument("--maintenance-window", action="store_true",
                         help="require production to be stopped for the isolated staging load")
     args = parser.parse_args()
-    global PLAYER_COUNT, NETWORK_ONLY, MAINTENANCE_WINDOW
+    global PLAYER_COUNT, NETWORK_ONLY, MAINTENANCE_WINDOW, DB, PORT, RSA_PUBLIC
+    DB, PORT = require_staging_target()
+    RSA_PUBLIC = Path(os.environ.get('ANTIGAS_RSA_PUBLIC', str(RSA_PUBLIC)))
     PLAYER_COUNT = args.players
     NETWORK_ONLY = args.network_only
     MAINTENANCE_WINDOW = args.maintenance_window

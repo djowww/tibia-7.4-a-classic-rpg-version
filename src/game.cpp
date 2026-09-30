@@ -138,12 +138,9 @@ void Game::setGameState(GameState_t newState)
 			saveMotdNum();
 			saveGameState();
 
-			g_dispatcher.addTask(
-				createTask(std::bind(&Game::shutdown, this)));
-
 			g_scheduler.stop();
 			g_databaseTasks.stop();
-			g_dispatcher.stop();
+			g_dispatcher.addTaskAndStop(createTask(std::bind(&Game::shutdown, this)));
 			break;
 		}
 
@@ -1581,7 +1578,11 @@ Item* Game::transformItem(Item* item, uint16_t newId, int32_t newCount /*= -1*/)
 						return nullptr;
 					}
 					if (item->hasRarity()) {
-						newItem->setIntAttr(ITEM_ATTRIBUTE_RARITY, item->getIntAttr(ITEM_ATTRIBUTE_RARITY));
+						newItem->setRarityData(item->getRarityTier(), item->getRarityBonusType(),
+							item->getRarityBonusValue(), item->getRarityBonusSubtype());
+						if (item->hasAttribute(ITEM_ATTRIBUTE_RARITY_EXTRAS)) {
+							newItem->setRarityExtraData(item->getRarityExtraData());
+						}
 					}
 
 					cylinder->replaceThing(itemIndex, newItem);
@@ -1630,7 +1631,11 @@ Item* Game::transformItem(Item* item, uint16_t newId, int32_t newCount /*= -1*/)
 		return nullptr;
 	}
 	if (item->hasRarity()) {
-		newItem->setIntAttr(ITEM_ATTRIBUTE_RARITY, item->getIntAttr(ITEM_ATTRIBUTE_RARITY));
+		newItem->setRarityData(item->getRarityTier(), item->getRarityBonusType(),
+			item->getRarityBonusValue(), item->getRarityBonusSubtype());
+		if (item->hasAttribute(ITEM_ATTRIBUTE_RARITY_EXTRAS)) {
+			newItem->setRarityExtraData(item->getRarityExtraData());
+		}
 	}
 
 	cylinder->replaceThing(itemIndex, newItem);
@@ -4088,12 +4093,10 @@ void Game::shutdown()
 		serviceManager->stop();
 	}
 
-	ConnectionManager::getInstance().closeAll();
-
 	std::cout << " done!" << std::endl;
 }
 
-void Game::cleanup()
+void Game::cleanup(bool final)
 {
 	//free memory
 	for (auto creature : ToReleaseCreatures) {
@@ -4105,6 +4108,22 @@ void Game::cleanup()
 		item->decrementReferenceCounter();
 	}
 	ToReleaseItems.clear();
+
+	if (final) {
+		for (Item* item : toDecayItems) {
+			item->setDecaying(DECAYING_FALSE);
+			item->decrementReferenceCounter();
+		}
+		toDecayItems.clear();
+		for (auto& bucket : decayItems) {
+			for (Item* item : bucket) {
+				item->setDecaying(DECAYING_FALSE);
+				item->decrementReferenceCounter();
+			}
+			bucket.clear();
+		}
+		return;
+	}
 
 	for (Item* item : toDecayItems) {
 		const uint32_t dur = item->getDuration();

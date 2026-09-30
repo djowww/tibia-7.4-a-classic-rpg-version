@@ -10,6 +10,11 @@ import shutil
 import subprocess
 import sys
 import tarfile
+import tempfile
+
+def require(condition, message='Deployment precondition failed'):
+    if not condition:
+        raise RuntimeError(message)
 
 PREP = Path('/opt/antigas-rarity-20260928')
 SERVER = Path('/opt/imperium772/server')
@@ -34,24 +39,56 @@ def run(args, **kw):
 
 def atomic(source, target, uid=None, gid=None, mode=None):
     previous = target.stat() if target.exists() else None
-    temporary = target.with_name(target.name + '.v44-new')
-    shutil.copyfile(source, temporary)
-    os.chmod(temporary, mode if mode is not None else previous.st_mode & 0o777)
-    os.chown(temporary, uid if uid is not None else previous.st_uid,
-             gid if gid is not None else previous.st_gid)
-    with temporary.open('rb') as stream:
-        os.fsync(stream.fileno())
-    os.replace(temporary, target)
+    permissions = mode if mode is not None else previous.st_mode & 0o777
+    owner = uid if uid is not None else previous.st_uid
+    group = gid if gid is not None else previous.st_gid
+    fd, temporary_name = tempfile.mkstemp(
+        prefix='.' + target.name + '.', suffix='.tmp', dir=target.parent
+    )
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(fd, 'wb') as output:
+            with source.open('rb') as input_stream:
+                shutil.copyfileobj(input_stream, output)
+            output.flush()
+            os.fchown(output.fileno(), owner, group)
+            os.fchmod(output.fileno(), permissions)
+            os.fsync(output.fileno())
+        os.replace(temporary, target)
+    except BaseException:
+        try:
+            temporary.unlink()
+        except FileNotFoundError:
+            pass
+        raise
 
 def server():
-    assert (PREP / 'build.exit').read_text().strip() == '0', 'Build must pass'
-    assert (PREP / 'core-test.exit').read_text().strip() == '0', 'Core tests must pass'
-    assert digest(SERVER / 'tfs') == OLD_BINARY, 'Production binary changed during review'
+    require(
+        ((PREP / 'build.exit').read_text().strip() == '0'),
+        ('Build must pass'),
+    )
+    require(
+        ((PREP / 'core-test.exit').read_text().strip() == '0'),
+        ('Core tests must pass'),
+    )
+    require(
+        (digest(SERVER / 'tfs') == OLD_BINARY),
+        ('Production binary changed during review'),
+    )
     expected = json.loads((PREP / 'runtime-baseline.json').read_text())
     for name, checksum in expected.items():
-        assert digest(SERVER / name) == checksum, 'Production runtime changed during review: ' + name
-    assert not (SERVER / RUNTIME[-1]).exists(), 'Unexpected existing rarity handler'
-    assert digest(PREP / CLIENT) == CLIENT_HASH
+        require(
+            (digest(SERVER / name) == checksum),
+            ('Production runtime changed during review: ' + name),
+        )
+    require(
+        (not (SERVER / RUNTIME[-1]).exists()),
+        ('Unexpected existing rarity handler'),
+    )
+    require(
+        (digest(PREP / CLIENT) == CLIENT_HASH),
+        ('Staged client package checksum mismatch'),
+    )
     web_owner = (WEB / 'client-release.json').stat()
     # Make the immutable download available before the new welcome message references it.
     atomic(PREP / CLIENT, WEB / CLIENT, web_owner.st_uid, web_owner.st_gid, 0o644)
@@ -76,7 +113,10 @@ def server():
     run(['/opt/antigas-stability-20260927/lua52_runner', '--syntax-only', str(staged_config)])
     note('backup_files_complete', backup=str(backup))
     run(['systemctl', 'stop', 'imperium772.service'], timeout=300)
-    assert subprocess.run(['systemctl', 'is-active', '--quiet', 'imperium772.service']).returncode != 0, 'Service must be stopped before install'
+    require(
+        (subprocess.run(['systemctl', 'is-active', '--quiet', 'imperium772.service']).returncode != 0),
+        ('Service must be stopped before install'),
+    )
     note('service_stopped_after_shutdown', residual_termination=(PREP / 'post-shutdown-residual-termination.txt').exists())
     installed = False
     try:
@@ -88,8 +128,14 @@ def server():
             with gzip.GzipFile(fileobj=target, mode='wb') as zipped:
                 shutil.copyfileobj(process.stdout, zipped)
             error = process.stderr.read()
-            assert process.wait(timeout=60) == 0, 'Database backup failed'
-        assert (backup / 'database.sql.gz').stat().st_size > 1000, 'Database backup unexpectedly small'
+            require(
+                (process.wait(timeout=60) == 0),
+                ('Database backup failed'),
+            )
+        require(
+            ((backup / 'database.sql.gz').stat().st_size > 1000),
+            ('Database backup unexpectedly small'),
+        )
         note('database_snapshot_complete', bytes=(backup / 'database.sql.gz').stat().st_size)
         server_stat = (SERVER / 'tfs').stat()
         atomic(PREP / 'build/tfs', SERVER / 'tfs')
@@ -120,13 +166,25 @@ def server():
 
 def website():
     live = json.loads((PREP / 'rarity-live-result.json').read_text())
-    assert live['status'] == 'passed' and live['cleanup'], 'Production smoke must pass'
-    assert digest(PREP / CLIENT) == CLIENT_HASH
+    require(
+        (live['status'] == 'passed' and live['cleanup']),
+        ('Production smoke must pass'),
+    )
+    require(
+        (digest(PREP / CLIENT) == CLIENT_HASH),
+        ('Client package changed before website publication'),
+    )
     release = json.loads((PREP / 'client-release.json').read_text())
-    assert release['version'] == 44 and release['sha256'] == CLIENT_HASH
+    require(
+        (release['version'] == 44 and release['sha256'] == CLIENT_HASH),
+        ('Client release manifest version or checksum mismatch'),
+    )
     expected = json.loads((PREP / 'web-baseline.json').read_text())
     for name, checksum in expected.items():
-        assert digest(WEB / name) == checksum, 'Public files changed during review: ' + name
+        require(
+            (digest(WEB / name) == checksum),
+            ('Public files changed during review: ' + name),
+        )
     run(['php', '-l', str(PREP / 'index.php')])
     owner = (WEB / 'client-release.json').stat()
     atomic(PREP / CLIENT, WEB / CLIENT, owner.st_uid, owner.st_gid, 0o644)
@@ -134,9 +192,12 @@ def website():
     atomic(PREP / 'client-release.json', WEB / 'client-release.json')
     note('client_and_download_published', version=44, sha256=CLIENT_HASH)
 
-if sys.argv[1:] == ['server']:
-    server()
-elif sys.argv[1:] == ['website']:
-    website()
-else:
-    raise SystemExit('Select server or website explicitly')
+if __name__ == '__main__':
+    if len(sys.argv) != 3 or sys.argv[2] != '--confirm-production-deploy':
+        raise SystemExit('Legacy production script: pass a phase and --confirm-production-deploy explicitly')
+    if sys.argv[1] == 'server':
+        server()
+    elif sys.argv[1] == 'website':
+        website()
+    else:
+        raise SystemExit('Select server or website')

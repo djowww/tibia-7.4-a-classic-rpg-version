@@ -22,6 +22,7 @@
 #include <fstream>
 
 #include "commands.h"
+#include "timeutils.h"
 #include "player.h"
 #include "npc.h"
 #include "game.h"
@@ -34,6 +35,7 @@
 #include "globalevent.h"
 #include "monster.h"
 #include "scheduler.h"
+#include "connection.h"
 
 #include "pugicast.h"
 
@@ -174,15 +176,24 @@ bool Commands::exeCommand(Player& player, const std::string& cmd)
 		player.sendTextMessage(MESSAGE_STATUS_CONSOLE_RED, cmd);
 
 		std::ostringstream logFile;
-		logFile << "data/logs/" << player.getName() << " commands.log";
+		// Keep imported or legacy path-like names out of the server's log directory path.
+		std::string logName = player.getName();
+		if (logName.empty() || logName.find('/') != std::string::npos || logName.find('\\') != std::string::npos) {
+			logName = std::to_string(player.getGUID());
+		}
+		logFile << "data/logs/" << logName << " commands.log";
 		std::ofstream out(logFile.str(), std::ios::app);
 		if (out.is_open()) {
 			time_t ticks = time(nullptr);
-			const tm* now = localtime(&ticks);
-			char buf[32];
-			strftime(buf, sizeof(buf), "%d/%m/%Y %H:%M", now);
-
-			out << '[' << buf << "] " << cmd << std::endl;
+			tm now;
+			std::string timestamp = "time unavailable";
+			if (getLocalTime(ticks, now)) {
+				char buf[32];
+				if (strftime(buf, sizeof(buf), "%d/%m/%Y %H:%M", &now) != 0) {
+					timestamp = buf;
+				}
+			}
+			out << '[' << timestamp << "] " << cmd << std::endl;
 			out.close();
 		}
 	}
@@ -196,8 +207,14 @@ void Commands::reloadInfo(Player& player, const std::string& param)
 		g_actions->reload();
 		player.sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "Reloaded actions.");
 	} else if (tmpParam == "config" || tmpParam == "configuration") {
-		g_config.reload();
-		player.sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "Reloaded config.");
+		if (g_config.reload()) {
+			ConnectionManager::getInstance().configureAdmission(
+			        static_cast<std::size_t>(g_config.getNumber(ConfigManager::MAX_CONNECTIONS)),
+			        static_cast<std::size_t>(g_config.getNumber(ConfigManager::MAX_CONNECTIONS_PER_IP)));
+			player.sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "Reloaded config.");
+		} else {
+			player.sendTextMessage(MESSAGE_STATUS_CONSOLE_RED, "Could not reload config.");
+		}
 	} else if (tmpParam == "command" || tmpParam == "commands") {
 		reload();
 		player.sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "Reloaded commands.");

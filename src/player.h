@@ -1038,6 +1038,7 @@ class Player final : public Creature, public Cylinder
 		uint64_t groundRaritySequence = 0;
 		int64_t lastGroundRaritySync = 0;
 		int64_t lastGroundRarityReplay = 0;
+		int64_t lastGroundRarityRequest = 0;
 		std::map<uint64_t, std::string> groundRarityTiles;
 		bool lootProtocol = false;
 		int64_t lastLootSync = 0;
@@ -1200,7 +1201,6 @@ class Player final : public Creature, public Cylinder
 		bool addAttackSkillPoint = false;
 		bool inventoryAbilities[CONST_SLOT_LAST + 1] = {};
 		const Item* itemRarityItems[CONST_SLOT_LAST + 1] = {};
-		uint32_t itemRarityData[CONST_SLOT_LAST + 1] = {};
 		int32_t itemRarityStats[STAT_LAST + 1] = {};
 		int32_t itemRaritySkills[SKILL_LAST + 1] = {};
 		int32_t itemRaritySpeed = 0;
@@ -1255,6 +1255,7 @@ class Player final : public Creature, public Cylinder
 		friend class ProtocolGame;
 		friend class BehaviourDatabase;
 		friend class ConjureSpell;
+		friend struct LoginGateCoreTestAccess;
 };
 
 #endif

@@ -10,8 +10,12 @@ No movement, combat, GM privileges, existing player writes or admin hooks.
 Deletion requires confirmed offline state and recovery of all dropped fixtures.
 Reads targeted packet signatures, not a complete game protocol/map decoder.
 Use --self-test without database/network access. Existing TFS_DB_NAME is needed
-for live execution; ANTIGAS_GROUND_PORT optionally overrides loopback port7174.
+for live execution; use ANTIGAS_STAGING_GAME_PORT=7176 or 7186 with explicit mutation approval.
 """
+
+if not __debug__:
+    raise SystemExit('Python optimization (-O) disables validation assertions; refusing to run this tool.')
+
 import importlib.util
 import json
 import os
@@ -22,6 +26,7 @@ import sys
 import time
 
 from load_test_protocol import string
+from staging_safety import require_staging_target
 
 _spec = importlib.util.spec_from_file_location('loot_live', Path(__file__).with_name('loot-live.py'))
 loot = importlib.util.module_from_spec(_spec)
@@ -29,15 +34,17 @@ _spec.loader.exec_module(loot)
 rarity = loot.rarity
 OPCODE = 129
 START = (32097, 32219, 7)
-SWORD = (6, 3264, 4, 6, 4, 0, '+4 attack')
-ARMOR = (0, 3361, 5, 1, 5, 0, '+5% maximum health')
+SWORD = (6, 3264, 4, 6, 4, 0, rarity.pack_codes(1, 2, 3), '+4 attack')
+ARMOR = (0, 3361, 5, 1, 5, 0, rarity.pack_codes(2, 3, 6, 7), '+5% maximum health')
 BACKPACK = 2854
 PLAIN_GROUND = {
     'You see stone floor.', 'You see a stone floor.',
     'You see tiled floor.', 'You see a tiled floor.',
     'You see marble floor.', 'You see a marble floor.',
+    'You see white marble floor.', 'You see black marble floor.',
     'You see wooden floor.', 'You see a wooden floor.',
     'You see dirt floor.', 'You see grass.',
+    'You see cobbled pavement.',
 }
 
 
@@ -121,13 +128,15 @@ def choose_empty_tile(probe, player, login):
         return None, 'Another player is online; ground drop/pickup skipped'
     if b'\x64' + position(START) not in login:
         return None, 'Expected starting map position was not confirmed; ground drop/pickup skipped'
-    for dx, dy in ((1, 0), (0, 1), (-1, 0), (0, -1)):
+    observed = []
+    for dx, dy in ((1, 0), (0, 1), (-1, 0), (0, -1), (1, 1), (-1, 1), (1, -1), (-1, -1)):
         candidate = (START[0] + dx, START[1] + dy, START[2])
         lines = probe.look(position(candidate))
+        observed.append({'position': candidate, 'look': lines})
         if len(lines) == 1 and lines[0] in PLAIN_GROUND:
             if alone(player) and probe.look(position(candidate)) == lines:
                 return candidate, None
-    return None, 'No adjacent tile was confidently empty plain ground; ground drop/pickup skipped'
+    return None, 'No confirmed empty plain ground; observations: ' + json.dumps(observed)
 
 
 def retrieve(probe, item, target):
@@ -159,12 +168,11 @@ def saved_fixtures(player, items):
 
 
 def main():
-    if 'ANTIGAS_GROUND_PORT' in os.environ:
-        os.environ['ANTIGAS_RARITY_PORT'] = os.environ['ANTIGAS_GROUND_PORT']
+    require_staging_target()
     report = {'test': 'ground-rarity-live', 'status': 'failed', 'checks': [], 'cleanup': False,
               'ground_lifecycle': 'not_attempted',
               'limitations': ['Targeted packet signatures; not a complete map/protocol decoder',
-                              'No visual rendering or combat in production',
+                              'No visual rendering or combat in staging',
                               'Physical fixture skipped if other players are online or tile is uncertain']}
     fixture = loot.new_character()
     fixture['marker'] = 'groundprobe_' + secrets.token_hex(8) + '@test.invalid'
@@ -273,6 +281,8 @@ def main():
         fixture['probe'] = None
         saved_fixtures(player, items)
         report['checks'].append('Logout saves exactly sword, backpack and nested armor with original rarity and unique markers; no progress/rewards')
+        if os.environ.get('ANTIGAS_REQUIRE_GROUND_LIFECYCLE') == '1':
+            assert report['ground_lifecycle'] == 'passed', 'Required physical ground lifecycle was not exercised'
         report['status'] = 'passed'
     except Exception as exc:
         report['failure_phase'] = phase
@@ -311,6 +321,9 @@ def main():
 
 
 def self_test():
+    # Fixture serialization must track the complete status payload before live setup.
+    assert len(rarity.rarity_bytes(SWORD)) == 10
+    assert len(rarity.rarity_bytes(ARMOR)) == 10
     data = {'event': 'tile', 'seq': 2, 'position': {'x': 100, 'y': 101, 'z': 7},
             'items': [{'itemId': 3264, 'stackpos': 1, 'tier': 4}]}
     encoded = b'\x32\x81' + string(json.dumps(data))

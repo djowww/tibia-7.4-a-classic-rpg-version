@@ -6,7 +6,7 @@ AntigasSidebarToggle < ButtonBox
   image-border: 3
   image-color: #ffffffbb
   icon-color: #e8dfd0
-  icon-size: 14 14
+  icon-size: 12 12
   text-offset: 0 0
   border-width: 1
   border-top-color: #8b7b62
@@ -26,7 +26,7 @@ AntigasSidebarToggle < ButtonBox
     border-bottom-color: #5b4326
 
   $checked:
-    image-clip: 0 46 22 23
+    image-clip: 0 0 22 23
     text-offset: 0 0
     icon-color: #ffe0a0
     image-color: #e0ad55
@@ -37,6 +37,7 @@ AntigasSidebarToggle < ButtonBox
     border-bottom-color: #8e622c
 
   $checked hover:
+    image-clip: 0 23 22 23
     icon-color: #fff5de
     image-color: #f2cf82
     border-top-color: #fff0b4
@@ -45,7 +46,6 @@ AntigasSidebarToggle < ButtonBox
   $pressed:
     image-clip: 0 46 22 23
     image-color: #b58c4b
-    icon-offset: 1 1
     border-top-color: #30271c
     border-left-color: #30271c
     border-right-color: #9a7841
@@ -67,7 +67,7 @@ AntigasSidebarAction < Button
   image-color: #ffffffbb
   color: #ded2bd
   icon-color: #e8dfd0
-  icon-size: 14 14
+  icon-size: 12 12
   text-align: center
   text-offset: 0 0
   border-width: 1
@@ -89,7 +89,7 @@ AntigasSidebarAction < Button
     border-bottom-color: #5b4326
 
   $on:
-    image-clip: 0 46 22 23
+    image-clip: 0 0 22 23
     image-color: #e0ad55
     icon-color: #ffe0a0
     border-top-color: #f4d27f
@@ -98,6 +98,7 @@ AntigasSidebarAction < Button
     border-bottom-color: #8e622c
 
   $on hover:
+    image-clip: 0 23 22 23
     image-color: #f2cf82
     icon-color: #fff5de
     border-top-color: #fff0b4
@@ -106,7 +107,6 @@ AntigasSidebarAction < Button
   $pressed:
     image-clip: 0 46 22 23
     image-color: #b58c4b
-    icon-offset: 1 1
     text-offset: 1 1
     border-top-color: #30271c
     border-left-color: #30271c
@@ -118,6 +118,21 @@ AntigasSidebarAction < Button
     color: #8b857b
     icon-color: #817b71
     change-cursor-image: false
+
+AntigasSidebarAchievementAction < AntigasSidebarAction
+  icon-color: #dddddd
+
+  $hover !disabled:
+    icon-color: #ffffff
+
+  $on:
+    icon-color: #ffe0a0
+
+  $on hover:
+    icon-color: #fff5de
+
+  $disabled:
+    icon-color: #817b71
 
 SpecialMiniWindow
   id: playerBarsWindow
@@ -220,9 +235,12 @@ SpecialMiniWindow
       @onClick: modules.game_market_antigas.toggle()
 
       UIWidget
+        id: marketIcon
         anchors.centerIn: parent
-        size: 14 14
+        margin-top: -1
+        size: 12 12
         image-source: /images/game/slots/coins
+        image-color: #e6e6e6
         phantom: true
 
     AntigasSidebarAction
@@ -233,13 +251,12 @@ SpecialMiniWindow
       tooltip: Diário de missões (Ctrl+J).
       @onClick: modules.game_questlog.toggle()
 
-    AntigasSidebarAction
+    AntigasSidebarAchievementAction
       id: achievementsButton
       anchors.left: questButton.right
       anchors.top: SkillsButton.top
       icon-source: /images/game/viplist/icons
       icon-clip: 60 0 12 12
-      icon-rect: 5 5 12 12
       tooltip: Conquistas.
       @onClick: modules.game_achievements.toggle()
 

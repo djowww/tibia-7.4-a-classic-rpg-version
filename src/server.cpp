@@ -61,6 +61,9 @@ void ServiceManager::run()
 {
 	assert(!running);
 	running = true;
+	ConnectionManager::getInstance().configureAdmission(
+	        static_cast<std::size_t>(g_config.getNumber(ConfigManager::MAX_CONNECTIONS)),
+	        static_cast<std::size_t>(g_config.getNumber(ConfigManager::MAX_CONNECTIONS_PER_IP)));
 	io_service.run();
 }
 
@@ -72,18 +75,28 @@ void ServiceManager::stop()
 
 	running = false;
 
-	for (auto& servicePortIt : acceptors) {
-		try {
-			io_service.post(std::bind(&ServicePort::onStopServer, servicePortIt.second));
-		} catch (boost::system::system_error& e) {
-			std::cout << "[ServiceManager::stop] Network Error: " << e.what() << std::endl;
-		}
+	std::vector<ServicePort_ptr> ports;
+	ports.reserve(acceptors.size());
+	for (const auto& servicePortIt : acceptors) {
+		ports.push_back(servicePortIt.second);
 	}
-
 	acceptors.clear();
 
-	death_timer.expires_from_now(boost::posix_time::seconds(3));
-	death_timer.async_wait(std::bind(&ServiceManager::die, this));
+	try {
+		io_service.post([this, ports]() {
+			for (const auto& servicePort : ports) {
+				servicePort->onStopServer();
+			}
+
+			ConnectionManager::getInstance().closeAll();
+
+			death_timer.expires_from_now(boost::posix_time::seconds(3));
+			death_timer.async_wait(std::bind(&ServiceManager::die, this));
+		});
+	} catch (const boost::system::system_error& e) {
+		std::cout << "[ServiceManager::stop] Network Error: " << e.what() << std::endl;
+		io_service.stop();
+	}
 }
 
 ServicePort::~ServicePort()
@@ -113,7 +126,7 @@ std::string ServicePort::get_protocol_names() const
 
 void ServicePort::accept()
 {
-	if (!acceptor) {
+	if (!acceptor || !acceptor->is_open()) {
 		return;
 	}
 
@@ -124,12 +137,14 @@ void ServicePort::accept()
 void ServicePort::onAccept(Connection_ptr connection, const boost::system::error_code& error)
 {
 	if (!error) {
-		if (services.empty()) {
+		if (services.empty() || !acceptor || !acceptor->is_open()) {
+			connection->close(Connection::FORCE_CLOSE);
 			return;
 		}
 
 		auto remote_ip = connection->getIP();
-		if (remote_ip != 0 && g_bans.acceptConnection(remote_ip)) {
+		if (remote_ip != 0 && g_bans.acceptConnection(remote_ip) &&
+		        ConnectionManager::getInstance().tryAdmitConnection(connection, remote_ip)) {
 			Service_ptr service = services.front();
 			if (service->is_single_socket()) {
 				connection->accept(service->make_protocol(connection));
@@ -141,12 +156,16 @@ void ServicePort::onAccept(Connection_ptr connection, const boost::system::error
 		}
 
 		accept();
-	} else if (error != boost::asio::error::operation_aborted) {
-		if (!pendingStart) {
+	} else {
+		// The connection was registered before async_accept; release it on every
+		// failed/cancelled accept so it cannot remain retained by ConnectionManager.
+		connection->close(Connection::FORCE_CLOSE);
+
+		if (error != boost::asio::error::operation_aborted && !pendingStart) {
 			close();
 			pendingStart = true;
 			g_scheduler.addEvent(createSchedulerTask(15000,
-			                     std::bind(&ServicePort::openAcceptor, std::weak_ptr<ServicePort>(shared_from_this()), serverPort)));
+				                     std::bind(&ServicePort::openAcceptor, std::weak_ptr<ServicePort>(shared_from_this()), serverPort)));
 		}
 	}
 }

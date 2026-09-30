@@ -19,22 +19,19 @@
 #ifndef FS_BAN_H_CADB975222D745F0BDA12D982F1006E3
 #define FS_BAN_H_CADB975222D745F0BDA12D982F1006E3
 
+#include "connectionattemptlimiter.h"
+
 struct BanInfo {
 	std::string bannedBy;
 	std::string reason;
-	time_t expiresAt;
+	time_t expiresAt = 0;
 };
 
-struct ConnectBlock {
-	constexpr ConnectBlock(uint64_t lastAttempt, uint64_t blockTime, uint32_t count) :
-		lastAttempt(lastAttempt), blockTime(blockTime), count(count) {}
-
-	uint64_t lastAttempt;
-	uint64_t blockTime;
-	uint32_t count;
+enum class BanLookupResult {
+	Clear,
+	Banned,
+	Error,
 };
-
-typedef std::map<uint32_t, ConnectBlock> IpConnectMap;
 
 class Ban
 {
@@ -42,16 +39,15 @@ class Ban
 		bool acceptConnection(uint32_t clientip);
 
 	protected:
-		IpConnectMap ipConnectMap;
-		std::recursive_mutex lock;
+		ConnectionAttemptLimiter connectionAttempts;
 };
 
 class IOBan
 {
 	public:
-		static bool isAccountBanned(uint32_t accountId, BanInfo& banInfo);
-		static bool isIpBanned(uint32_t ip, BanInfo& banInfo);
-		static bool isPlayerNamelocked(uint32_t playerId);
+		static BanLookupResult lookupAccountBan(uint32_t accountId, BanInfo& banInfo);
+		static BanLookupResult lookupIpBan(uint32_t ip, BanInfo& banInfo);
+		static BanLookupResult lookupPlayerNamelock(uint32_t playerId);
 };
 
 #endif
