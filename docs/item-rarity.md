@@ -4,13 +4,13 @@
 
 Cada equipamento elegível criado pelo loot de monstros pode receber uma raridade. A quantidade de status adicionais corresponde ao tier: verde 1, azul 2, roxo 3, lendário 4 e mítico 5. Cada item recebe status distintos, sem repetição no mesmo item. A configuração `itemRarityLootChance` usa escala de 0 a 10000; o padrão 1000 representa 10% dos equipamentos elegíveis. As chances originais de cada item no loot continuam valendo.
 
-| Raridade | Borda | Peso entre os itens com raridade | Status por item |
+| Raridade | Identidade visual | Peso entre os itens com raridade | Status por item |
 |---|---|---:|---:|
-| Incomum | Verde `#42C96B` | 50% | 1 |
-| Raro | Azul `#3E8BFF` | 27% | 2 |
-| Épico | Roxo `#A855F7` | 14% | 3 |
-| Lendário | Amarelo `#F5C542` | 7% | 4 |
-| Mítico | Vermelho `#EF4444` | 2% | 5 |
+| Incomum | Jade; 1 marca | 50% | 1 |
+| Raro | Azul aço; 2 marcas | 27% | 2 |
+| Épico | Lavanda; 3 marcas | 14% | 3 |
+| Lendário | Ouro antigo; 4 marcas | 7% | 4 |
+| Mítico | Carmim; 5 marcas | 2% | 5 |
 
 - A primeira linha preserva o status principal do tipo do equipamento: armas recebem ataque, escudos defesa, botas velocidade, joias uma skill, e torso/pernas vida, mana ou resistência.
 - Os status adicionais são sorteados sem repetição entre vida máxima, mana máxima, velocidade, resistências (físico, energia, terra, fogo e gelo) e skills (fist, club, sword, axe, distance, shielding, fishing e magic level). Eles também funcionam em outros equipamentos elegíveis.
@@ -19,6 +19,14 @@ Cada equipamento elegível criado pelo loot de monstros pode receber uma raridad
 - Capacetes, mochilas, munição e outros itens empilháveis ficam fora do sorteio desta versão.
 
 Percentuais de HP/mana usam os valores base e arredondam para cima; velocidade arredonda para o inteiro mais próximo. Bônus acompanham mudanças de nível e alterações dos máximos via Lua. Duas resistências do mesmo tipo se somam e são aplicadas ao dano restante após os efeitos nativos. Carregar armadura na mão não concede o bônus do slot de torso/pernas.
+
+## Identificação no cliente
+
+O módulo `game_rarityvisuals` reúne as cores e o ritmo dos efeitos. Inventário e containers preservam o desenho do item, com cantos de um pixel e de uma a cinco pequenas marcas para identificar o tier também pela forma. Um pequeno raio no canto do slot acompanha a cor da raridade e varia lentamente de intensidade. O próprio sprite recebe uma variação suave de tom e luminosidade, na mesma família e fase das bordas. Itens épicos, lendários e míticos também recebem um reflexo discreto na borda superior. A borda vermelha de slots bloqueados continua indicando o bloqueio.
+
+No chão, a cor é aplicada com intensidade moderada e transições contínuas de 4,2 segundos. Um raio da mesma família aparece em pulsos breves junto ao primeiro item raro da pilha, com limite de seis raios simultâneos. A fase depende da posição e da instância confirmada pelo servidor, evitando que todos os itens pulsem juntos. Corpos ainda não abertos usam uma tintura mais sutil, bronze para loot comum e a família correspondente para loot raro. Essa indicação usa a cor do sprite, separada do destaque do cursor, e termina quando o servidor confirma a abertura. Ela indica um corpo ainda não aberto, não a quantidade de itens que restam nele.
+
+Esses efeitos não alteram as chances, os atributos ou o protocolo de raridade. O efeito nativo emitido uma vez na morte do monstro continua sendo enviado pelo servidor.
 
 ## Persistência e integração
 
@@ -38,12 +46,8 @@ ctest --test-dir build --output-on-failure
 
 O teste C++ usa o núcleo real, `items.srv`, vocações e uma definição de NPC; não inicia mundo, banco ou listeners. Abrange atributos persistidos, refino, dano, resistência, evolução, chamadas Lua, loot e os caminhos de equipar/retirar/transformar anéis com efeitos nativos.
 
-As suítes `rarity-ui-tests.lua` e `rarity-economy-tests.lua` exercitam os scripts reais com objetos simulados. `rarity-ui-runner.py` executa Lua 5.2 e LuaJIT via Lupa. `rarity-live.py` é um teste operacional separado: cria uma única conta comum descartável e só a remove após confirmar o logout. Sua execução exige o ambiente administrativo do banco e o servidor já atualizado.
+As suítes [`rarity-ui-tests.lua`](../tests/rarity-ui-tests.lua) e [`rarity-economy-tests.lua`](../tests/rarity-economy-tests.lua) exercitam os scripts com objetos simulados. [`rarity-ui-runner.py`](../tests/rarity-ui-runner.py) executa os cenários Lua 5.2 e LuaJIT via Lupa.
 
-## Recuperação
+## Compatibilidade dos dados
 
-O binário anterior à raridade não entende os atributos 39 e 40. Não reinstalá-lo diretamente depois que itens raros forem salvos. `deploy/rarity-rollback-compat.patch` ensina o binário de recuperação a preservar ambos como dados opacos durante leitura, salvamento e transformação. Definir chance zero suspende novos sorteios, sem remover os atributos já existentes.
-
-`deploy/rarity-rollback-compat.patch`, aplicado à base `64f50b8`, adiciona apenas leitura, escrita e preservação opaca da raridade nas transformações. Serve para compilar um binário de recuperação que conserva o banco atual sem aplicar os bônus novos. `tests/rarity-compat-tests.cpp` valida essa base com o patch. Use esse fallback em manutenção e restaure os scripts da versão anterior: ele não oferece as APIs Lua nem as proteções de venda da v44.
-
-Backups de banco e configuração devem permanecer privados no host. Restaurar um banco antigo pode descartar progresso posterior; o fallback compatível evita essa exigência.
+Itens raros persistem os atributos 39 e 40. Uma versão do servidor que não conheça esses atributos pode perder os metadados ao carregar ou salvar itens. Mudanças no formato precisam preservar os dois atributos. Definir `itemRarityLootChance = 0` suspende novos sorteios e mantém a raridade dos itens existentes.

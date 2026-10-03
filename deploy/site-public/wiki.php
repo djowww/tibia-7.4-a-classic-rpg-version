@@ -28,16 +28,17 @@ $sections = [
   <link rel="stylesheet" href="/classic-2004.css?v=20260924-1">
   <link rel="stylesheet" href="/wiki.css?v=security-20260928">
   <link rel="stylesheet" href="/language.css?v=security-20260928">
-  <link rel="stylesheet" href="/classic-refinement.css?v=taste-4cddc266105f">
+  <link rel="stylesheet" href="/classic-refinement.css?v=classic-20261003-1">
 </head>
 <body class="wiki-page">
+  <a class="skip-link" href="#wiki-content"><?= siteT('Skip to content') ?></a>
   <div class="skyline">
     <header class="masthead">
       <a class="wordmark" href="/" aria-label="Antigas 7.4 — <?= siteT('Home') ?>"><span>Antigas</span><i>7.4 CLASSIC</i></a>
       <p class="motto"><?= siteT('Wiki Antigas') ?></p>
     </header>
     <nav class="topnav" aria-label="<?= siteT('Main navigation') ?>">
-      <a href="/"><?= siteT('Home') ?></a><a href="/wiki.php" aria-current="page"><?= siteT('Wiki Antigas') ?></a><a href="/account.php"><?= siteT('My account') ?></a><a href="/coins.php"><?= siteT('Buy coins') ?></a><a href="/Antigas-7.4-Launcher-v59.zip?site=hud-impeccable-v59-20261001"><?= siteT('Download') ?></a>
+      <a href="/"><?= siteT('Home') ?></a><a href="/wiki.php" aria-current="page"><?= siteT('Wiki Antigas') ?></a><a href="/account.php"><?= siteT('My account') ?></a><a href="/coins.php"><?= siteT('Buy coins') ?></a><a href="/Antigas-7.4-Launcher-v66.zip?site=achievement-ranks-v66-20261003"><?= siteT('Download') ?></a>
     </nav>
     <?= siteLanguageSwitcher() ?>
   </div>
@@ -50,9 +51,15 @@ $sections = [
         <a href="https://tibia74.tech/wiki.php#guia" target="_blank" rel="noopener noreferrer"><?= siteT('Original community wiki') ?> ↗</a>
       </nav>
     </aside>
-    <main class="paper wiki-paper" id="wiki-content">
+    <main class="paper wiki-paper" id="wiki-content" tabindex="-1">
       <section class="page-title"><h1><?= siteT('Wiki Antigas') ?></h1><p><?= siteT('Read the player guide in English or choose another language.') ?></p></section>
-      <div class="wiki-callout"><p><?= siteT('The local guide follows the current website and client release.') ?></p><a class="button" href="/Antigas-7.4-Launcher-v59.zip?site=hud-impeccable-v59-20261001"><?= siteT('Download Antigas 7.4 client') ?></a></div>
+      <details class="classic-index wiki-index">
+        <summary><?= siteT('Player guide') ?></summary>
+        <nav aria-label="<?= siteT('Player guide') ?>">
+          <?php foreach ($sections as $id => [$title, $body]): ?><a href="#<?= e($id) ?>"><?= siteT($title) ?></a><?php endforeach; ?>
+        </nav>
+      </details>
+      <div class="wiki-callout"><p><?= siteT('The local guide follows the current website and client release.') ?></p><a class="button" href="/Antigas-7.4-Launcher-v66.zip?site=achievement-ranks-v66-20261003"><?= siteT('Download Antigas 7.4 client') ?></a></div>
       <?php foreach ($sections as $id => [$title, $body]): ?>
         <section class="wiki-entry" id="<?= e($id) ?>">
           <h2><?= siteT($title) ?></h2>
