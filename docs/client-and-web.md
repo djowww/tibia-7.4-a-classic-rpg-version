@@ -1,12 +1,16 @@
 # Cliente, launcher e site
 
-O servidor apresenta as regras e a identidade Antigas 7.4, usando protocolo 772 (7.72) e extensões próprias. Os limites de versão estão em [src/definitions.h](../src/definitions.h). A compatibilidade exige os módulos, opcodes e chave pública esperados pelo servidor.
+O servidor e sua distribuição oficial usam a identidade Antigas 7.4 e extensões próprias. A compatibilidade exige os módulos, opcodes e chave pública esperados pelo servidor.
 
 ## Snapshot do cliente
 
 [deploy/client-current/](../deploy/client-current/) contém arquivos selecionados de uma distribuição personalizada baseada em OTClient: inicialização, módulos Lua, layouts OTUI e estilos. Não inclui o código C++ completo do OTClient, seu executável nem todos os assets necessários para montar o cliente do zero.
 
 Integre esses arquivos em uma base de cliente compatível e confira seus módulos e dependências. `init.lua` contém endpoints e uma chave RSA pública específicos da distribuição. Para uma instalação própria, ajuste os endpoints e use a chave pública correspondente à chave privada do servidor. O número de release do cliente é independente da versão de protocolo.
+
+Copie também `client.version` ao integrar o snapshot: o launcher consulta esse marcador antes de `APP_VERSION` em `init.lua`. O empacotador regrava ambos e as instruções com a versão solicitada, inclusive quando a entrada já está nessa versão; cada execução ainda exige uma pasta de saída nova.
+
+As edições de hotkeys ficam em memória ao trocar de preset. OK salva todos os presets editados; Cancel descarta todos os rascunhos, mantendo o preset selecionado. Reset prepara os padrões do preset atual para salvar em OK e preserva os itens legados ocultos no modo clássico. Ctrl+K apenas esconde ou reabre a janela, conservando os rascunhos.
 
 A distribuição usa interface em inglês. `allowedLocales` limita a instalação dos locales ao inglês e faz uma preferência anterior por outro idioma voltar a `en`. Rótulos locais dos módulos personalizados também usam inglês; nomes, narrativas e mensagens recebidos do servidor continuam sendo conteúdo do servidor.
 
