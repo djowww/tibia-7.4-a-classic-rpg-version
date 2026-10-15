@@ -757,32 +757,32 @@
 		<monster name="wasp" x="0" y="2" z="4" spawntime="90" />
 	</spawn>
 	<spawn centerx="32470" centery="32408" centerz="4" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="32482" centery="32409" centerz="4" radius="5">
-		<monster name="Cyclops Smith" x="2" y="-4" z="4" spawntime="60" />
-		<monster name="Cyclops Smith" x="4" y="2" z="4" spawntime="60" />
+
+
 	</spawn>
 	<spawn centerx="32969" centery="32409" centerz="4" radius="1">
 		<monster name="demon skeleton" x="0" y="0" z="4" spawntime="90" />
 	</spawn>
 	<spawn centerx="32459" centery="32411" centerz="4" radius="5">
-		<monster name="Cyclops Drone" x="1" y="-2" z="4" spawntime="60" />
-		<monster name="Cyclops Drone" x="-3" y="2" z="4" spawntime="60" />
+
+
 	</spawn>
 	<spawn centerx="32442" centery="32412" centerz="4" radius="3" />
 	<spawn centerx="32424" centery="32413" centerz="4" radius="5">
-		<monster name="Cyclops Drone" x="5" y="-2" z="4" spawntime="60" />
-		<monster name="Cyclops Drone" x="1" y="1" z="4" spawntime="60" />
+
+
 	</spawn>
 	<spawn centerx="32436" centery="32413" centerz="4" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="32448" centery="32413" centerz="4" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="32483" centery="32416" centerz="4" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="32990" centery="32416" centerz="4" radius="3">
 		<monster name="ghoul" x="2" y="-1" z="4" spawntime="90" />
@@ -794,21 +794,21 @@
 		<monster name="wasp" x="0" y="0" z="4" spawntime="90" />
 	</spawn>
 	<spawn centerx="32425" centery="32429" centerz="4" radius="3">
-		<monster name="Cyclops Smith" x="-1" y="1" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="32482" centery="32430" centerz="4" radius="3">
-		<monster name="Cyclops Smith" x="1" y="-3" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32438" centerz="4" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="32413" centery="32439" centerz="4" radius="5">
-		<monster name="Cyclops Smith" x="-3" y="-3" z="4" spawntime="60" />
-		<monster name="Cyclops Smith" x="2" y="-3" z="4" spawntime="60" />
-		<monster name="Cyclops Smith" x="-2" y="2" z="4" spawntime="60" />
+
+
+
 	</spawn>
 	<spawn centerx="32483" centery="32439" centerz="4" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="33074" centery="32448" centerz="4" radius="7">
 		<monster name="scorpion" x="-3" y="-3" z="4" spawntime="90" />
@@ -824,31 +824,31 @@
 	</spawn>
 	<spawn centerx="33079" centery="32448" centerz="4" radius="5" />
 	<spawn centerx="32412" centery="32450" centerz="4" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="32482" centery="32450" centerz="4" radius="5">
-		<monster name="Cyclops Smith" x="4" y="-2" z="4" spawntime="60" />
-		<monster name="Cyclops Smith" x="-2" y="4" z="4" spawntime="60" />
-		<monster name="Cyclops Smith" x="4" y="4" z="4" spawntime="60" />
+
+
+
 	</spawn>
 	<spawn centerx="32473" centery="32456" centerz="4" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="33065" centery="32456" centerz="4" radius="1">
 		<monster name="scorpion" x="0" y="0" z="4" spawntime="90" />
 	</spawn>
 	<spawn centerx="32413" centery="32459" centerz="4" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="32418" centery="32460" centerz="4" radius="3" />
 	<spawn centerx="32422" centery="32460" centerz="4" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="32429" centery="32461" centerz="4" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="32474" centery="32461" centerz="4" radius="3">
-		<monster name="Cyclops Smith" x="-1" y="2" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="33074" centery="32468" centerz="4" radius="4">
 		<monster name="scorpion" x="-1" y="0" z="4" spawntime="90" />
@@ -856,18 +856,18 @@
 		<monster name="scorpion" x="-1" y="1" z="4" spawntime="90" />
 	</spawn>
 	<spawn centerx="32433" centery="32471" centerz="4" radius="3">
-		<monster name="Cyclops Drone" x="1" y="1" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="32472" centery="32479" centerz="4" radius="5">
-		<monster name="Cyclops Smith" x="1" y="-4" z="4" spawntime="60" />
-		<monster name="Cyclops Drone" x="4" y="1" z="4" spawntime="60" />
+
+
 	</spawn>
 	<spawn centerx="32445" centery="32481" centerz="4" radius="5">
-		<monster name="Cyclops Drone" x="2" y="-3" z="4" spawntime="60" />
-		<monster name="Cyclops Drone" x="-1" y="4" z="4" spawntime="60" />
+
+
 	</spawn>
 	<spawn centerx="32461" centery="32482" centerz="4" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="4" spawntime="60" />
+
 	</spawn>
 	<spawn centerx="33101" centery="32521" centerz="4" radius="3">
 		<monster name="fire elemental" x="3" y="-1" z="4" spawntime="90" />
@@ -1013,7 +1013,7 @@
 		<monster name="ghoul" x="-4" y="5" z="5" spawntime="90" />
 	</spawn>
 	<spawn centerx="31917" centery="31590" centerz="5" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="5" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32431" centery="31591" centerz="5" radius="3">
 		<monster name="valkyrie" x="0" y="0" z="5" spawntime="90" />
@@ -1837,7 +1837,7 @@
 		<monster name="elf" x="-2" y="3" z="6" spawntime="90" />
 	</spawn>
 	<spawn centerx="31914" centery="31624" centerz="6" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="6" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32582" centery="31639" centerz="6" radius="3">
 		<monster name="orc warrior" x="1" y="-1" z="6" spawntime="90" />
@@ -2574,7 +2574,7 @@
 		<monster name="elf scout" x="-2" y="-2" z="6" spawntime="90" />
 		<monster name="elf scout" x="0" y="0" z="6" spawntime="90" />
 	</spawn>
-	<spawn centerx="32104" centery="32190" centerz="6" radius="1">
+	<spawn centerx="32104" centery="32190" centerz="6" radius="0">
 		<npc name="oracle" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="32855" centery="32190" centerz="6" radius="3">
@@ -3368,7 +3368,7 @@
 		<npc name="arito" x="0" y="0" z="6" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="32055" centery="31532" centerz="7" radius="1">
-		<npc name="angel" x="0" y="0" z="7" spawntime="60" direction="2" />
+
 	</spawn>
 	<spawn centerx="32083" centery="31533" centerz="7" radius="5">
 		<monster name="winter wolf" x="-1" y="0" z="7" spawntime="90" />
@@ -3442,7 +3442,7 @@
 		<npc name="ferryman3" x="0" y="0" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="31929" centery="31584" centerz="7" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="7" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32790" centery="31586" centerz="7" radius="4">
 		<monster name="scorpion" x="0" y="-2" z="7" spawntime="90" />
@@ -3479,7 +3479,7 @@
 		<monster name="skeleton" x="0" y="0" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="31901" centery="31589" centerz="7" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="7" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32692" centery="31589" centerz="7" radius="1">
 		<npc name="brasith" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -3529,7 +3529,7 @@
 		<monster name="snake" x="2" y="2" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="31910" centery="31603" centerz="7" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="7" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32486" centery="31604" centerz="7" radius="1">
 		<npc name="bruno" x="0" y="0" z="7" spawntime="60" direction="2" />
@@ -7370,9 +7370,6 @@
 	<spawn centerx="32441" centery="32235" centerz="7" radius="1">
 		<monster name="Horse" x="0" y="0" z="7" spawntime="150" />
 	</spawn>
-	<spawn centerx="32445" centery="32235" centerz="7" radius="1">
-		<monster name="Wild Horse" x="0" y="0" z="7" spawntime="150" />
-	</spawn>
 	<spawn centerx="32008" centery="32236" centerz="7" radius="1">
 		<monster name="chicken" x="0" y="0" z="7" spawntime="90" />
 	</spawn>
@@ -9245,142 +9242,142 @@
 		<monster name="cobra" x="1" y="3" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="32064" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32066" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32084" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32086" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32104" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32106" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32124" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32126" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32144" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32146" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32164" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32166" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32184" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32186" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32204" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32206" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32224" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32226" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32244" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32246" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32264" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32266" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32284" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32286" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32304" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32306" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32324" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32326" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32344" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32346" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32364" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32366" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32384" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32386" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32404" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32406" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32426" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32444" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32446" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32464" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32466" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32484" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32486" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32504" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32506" centery="32559" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32921" centery="32559" centerz="7" radius="5">
 		<monster name="centipede" x="-3" y="0" z="7" spawntime="90" />
@@ -9618,142 +9615,142 @@
 		<monster name="bug" x="1" y="2" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="32064" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32066" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32084" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32086" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32104" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32106" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32124" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32126" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32144" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32146" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32164" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32166" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32184" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32186" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32204" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32206" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32224" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32226" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32244" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32246" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32264" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32266" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32284" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32286" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32304" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32306" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32324" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32326" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32344" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32346" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32364" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32366" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32384" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32386" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32404" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32406" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32426" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32444" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32446" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32464" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32466" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32484" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32486" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32504" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32506" centery="32579" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32813" centery="32579" centerz="7" radius="3">
 		<monster name="kongra" x="1" y="-1" z="7" spawntime="90" />
@@ -9977,142 +9974,142 @@
 		<monster name="spider" x="0" y="3" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="32064" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32066" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32084" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32086" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32104" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32106" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32124" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32126" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32144" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32146" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32164" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32166" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32184" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32186" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32204" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32206" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32224" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32226" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32244" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32246" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32264" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32266" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32284" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32286" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32304" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32306" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32324" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32326" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32344" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32346" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32364" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32366" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32384" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32386" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32404" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32406" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32426" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32444" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32446" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32464" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32466" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32484" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32486" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32504" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32506" centery="32597" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32627" centery="32597" centerz="7" radius="4">
 		<monster name="swamp troll" x="-1" y="-2" z="7" spawntime="90" />
@@ -10324,142 +10321,142 @@
 		<monster name="cobra" x="0" y="0" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="32064" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32066" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32084" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32086" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32104" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32106" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32124" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32126" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32144" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32146" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32164" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32166" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32184" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32186" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32204" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32206" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32224" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32226" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32244" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32246" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32264" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32266" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32284" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32286" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32304" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32306" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32324" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32326" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32344" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32346" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32364" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32366" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32384" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32386" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32404" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32406" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32426" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32444" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32446" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32464" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32466" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32484" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32486" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32504" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32506" centery="32615" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32646" centery="32615" centerz="7" radius="3">
 		<monster name="crocodile" x="0" y="0" z="7" spawntime="90" />
@@ -10680,142 +10677,142 @@
 		<monster name="cobra" x="0" y="0" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="32064" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32066" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32084" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32086" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32104" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32106" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32124" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32126" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32144" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32146" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32164" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32166" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32184" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32186" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32204" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32206" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32224" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32226" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32244" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32246" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32264" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32266" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32284" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32286" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32304" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32306" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32324" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32326" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32344" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32346" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32364" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32366" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32384" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32386" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32404" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32406" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32426" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32444" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32446" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32464" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32466" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32484" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32486" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32504" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32506" centery="32633" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32678" centery="32633" centerz="7" radius="4">
 		<monster name="swamp troll" x="0" y="0" z="7" spawntime="90" />
@@ -11017,142 +11014,142 @@
 		<monster name="dwarf" x="-1" y="2" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="32064" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32066" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32084" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32086" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32104" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32106" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32124" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32126" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32144" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32146" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32164" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32166" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32184" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32186" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32204" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32206" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32224" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32226" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32244" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32246" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32264" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32266" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32284" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32286" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32304" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32306" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32324" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32326" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32344" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32346" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32364" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32366" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32384" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32386" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32404" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32406" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32426" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32444" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32446" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32464" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32466" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32484" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32486" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32504" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32506" centery="32653" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32645" centery="32653" centerz="7" radius="4">
 		<monster name="crocodile" x="0" y="0" z="7" spawntime="90" />
@@ -11358,142 +11355,142 @@
 		<monster name="wasp" x="-1" y="3" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="32064" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32066" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32084" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32086" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32104" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32106" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32124" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32126" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32144" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32146" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32164" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32166" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32184" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32186" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32204" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32206" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32224" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32226" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32244" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32246" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32264" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32266" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32284" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32286" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32304" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32306" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32324" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32326" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32344" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32346" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32364" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32366" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32384" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32386" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32404" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32406" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32426" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32444" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32446" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32464" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32466" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32484" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32486" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32504" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32506" centery="32671" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32622" centery="32671" centerz="7" radius="4">
 		<monster name="swamp troll" x="2" y="-2" z="7" spawntime="90" />
@@ -11727,142 +11724,142 @@
 		<monster name="bug" x="2" y="3" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="32064" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32066" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32084" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32086" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32104" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32106" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32124" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32126" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32144" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32146" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32164" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32166" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32184" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32186" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32204" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32206" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32224" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32226" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32244" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32246" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32264" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32266" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32284" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32286" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32304" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32306" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32324" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32326" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32344" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32346" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32364" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32366" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32384" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32386" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32404" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32406" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32426" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32444" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32446" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32464" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32466" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32484" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32486" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32504" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32506" centery="32689" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32632" centery="32690" centerz="7" radius="3">
 		<monster name="centipede" x="0" y="0" z="7" spawntime="90" />
@@ -12053,142 +12050,142 @@
 		<monster name="spit nettle" x="0" y="0" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="32064" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32066" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32084" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32086" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32104" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32106" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32124" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32126" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32144" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32146" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32164" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32166" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32184" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32186" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32204" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32206" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32224" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32226" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32244" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32246" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32264" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32266" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32284" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32286" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32304" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32306" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32324" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32326" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32344" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32346" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32364" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32366" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32384" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32386" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32404" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32406" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32426" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32444" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32446" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32464" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32466" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32484" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32486" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32504" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32506" centery="32707" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32668" centery="32707" centerz="7" radius="3">
 		<monster name="centipede" x="0" y="0" z="7" spawntime="90" />
@@ -12400,142 +12397,142 @@
 		<monster name="elephant" x="2" y="1" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="32064" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32066" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32084" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32086" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32104" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32106" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32124" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32126" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32144" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32146" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32164" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32166" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32184" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32186" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32204" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32206" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32224" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32226" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32244" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32246" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32264" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32266" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32284" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32286" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32304" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32306" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32324" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32326" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32344" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32346" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32364" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32366" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32384" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32386" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32404" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32406" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32426" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32444" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32446" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32464" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32466" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32484" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32486" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32504" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32506" centery="32727" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32729" centery="32727" centerz="7" radius="4">
 		<monster name="poison spider" x="0" y="0" z="7" spawntime="90" />
@@ -12702,142 +12699,142 @@
 		<monster name="flamingo" x="-3" y="2" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="32064" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32066" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32084" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32086" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32104" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32106" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32124" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32126" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32144" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32146" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32164" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32166" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32184" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32186" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32204" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32206" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32224" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32226" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32244" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32246" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32264" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32266" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32284" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32286" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32304" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32306" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32324" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32326" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32344" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32346" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32364" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32366" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32384" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32386" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32404" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32406" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32426" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32444" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32446" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32464" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32466" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32484" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32486" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32504" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32506" centery="32745" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32831" centery="32745" centerz="7" radius="1">
 		<monster name="spit nettle" x="0" y="0" z="7" spawntime="90" />
@@ -12998,142 +12995,142 @@
 		<monster name="crocodile" x="-3" y="3" z="7" spawntime="90" />
 	</spawn>
 	<spawn centerx="32064" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32066" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32084" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32086" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32104" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32106" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32124" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32126" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32144" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32146" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32164" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32166" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32184" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32186" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32204" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32206" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32224" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32226" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32244" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32246" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32264" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32266" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32284" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32286" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32304" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32306" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32324" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32326" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32344" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32346" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32364" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32366" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32384" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32386" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32404" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32406" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32424" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32426" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32444" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32446" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32464" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32466" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32484" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32486" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32504" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32506" centery="32763" centerz="7" radius="1">
-		<monster name="Training Monk" x="0" y="0" z="7" spawntime="150" />
+
 	</spawn>
 	<spawn centerx="32725" centery="32763" centerz="7" radius="5">
 		<monster name="flamingo" x="-4" y="-4" z="7" spawntime="90" />
@@ -14782,10 +14779,10 @@
 		<monster name="spider" x="0" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31889" centery="31546" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="31909" centery="31549" centerz="8" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32082" centery="31550" centerz="8" radius="4">
 		<monster name="spider" x="3" y="-1" z="8" spawntime="90" />
@@ -14798,16 +14795,16 @@
 		<monster name="rotworm" x="0" y="3" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31874" centery="31554" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="31937" centery="31556" centerz="8" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="31927" centery="31557" centerz="8" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="31909" centery="31560" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="31981" centery="31565" centerz="8" radius="4">
 		<monster name="frost troll" x="0" y="0" z="8" spawntime="90" />
@@ -14818,17 +14815,17 @@
 		<monster name="snake" x="0" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31859" centery="31566" centerz="8" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="31894" centery="31566" centerz="8" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="31998" centery="31567" centerz="8" radius="3">
 		<monster name="frost troll" x="0" y="0" z="8" spawntime="90" />
 		<monster name="frost troll" x="-1" y="2" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31937" centery="31570" centerz="8" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32096" centery="31571" centerz="8" radius="3">
 		<monster name="frost troll" x="0" y="0" z="8" spawntime="90" />
@@ -14839,7 +14836,7 @@
 		<monster name="frost troll" x="0" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31878" centery="31574" centerz="8" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32044" centery="31575" centerz="8" radius="4">
 		<monster name="spider" x="1" y="-1" z="8" spawntime="90" />
@@ -14873,7 +14870,7 @@
 		<monster name="scorpion" x="-1" y="2" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31924" centery="31580" centerz="8" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32132" centery="31580" centerz="8" radius="6">
 		<monster name="frost troll" x="0" y="-4" z="8" spawntime="90" />
@@ -14883,7 +14880,7 @@
 		<monster name="frost troll" x="1" y="4" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31905" centery="31582" centerz="8" radius="1">
-		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32006" centery="31583" centerz="8" radius="6">
 		<monster name="poison spider" x="-4" y="0" z="8" spawntime="90" />
@@ -15652,7 +15649,7 @@
 		<monster name="rat" x="0" y="2" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31938" centery="31709" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32606" centery="31709" centerz="8" radius="4">
 		<monster name="wasp" x="-2" y="0" z="8" spawntime="90" />
@@ -15660,7 +15657,7 @@
 		<monster name="wasp" x="1" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31957" centery="31711" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="33223" centery="31712" centerz="8" radius="3">
 		<monster name="dwarf guard" x="-2" y="-1" z="8" spawntime="90" />
@@ -15690,10 +15687,10 @@
 		<monster name="troll" x="0" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31927" centery="31721" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="31975" centery="31721" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32479" centery="31722" centerz="8" radius="4">
 		<monster name="wolf" x="0" y="-1" z="8" spawntime="90" />
@@ -15701,7 +15698,7 @@
 		<monster name="wolf" x="2" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31943" centery="31724" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="33069" centery="31728" centerz="8" radius="8">
 		<monster name="troll" x="1" y="-2" z="8" spawntime="90" />
@@ -15716,7 +15713,7 @@
 		<monster name="skeleton" x="0" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31912" centery="31729" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32408" centery="31729" centerz="8" radius="4">
 		<monster name="poison spider" x="-2" y="-1" z="8" spawntime="90" />
@@ -15728,7 +15725,7 @@
 		<monster name="cyclops" x="0" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31942" centery="31736" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="33097" centery="31736" centerz="8" radius="4">
 		<monster name="troll" x="1" y="-1" z="8" spawntime="90" />
@@ -15736,7 +15733,7 @@
 		<monster name="troll" x="-1" y="1" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31948" centery="31738" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32983" centery="31738" centerz="8" radius="3">
 		<monster name="orc shaman" x="-1" y="-1" z="8" spawntime="90" />
@@ -15751,10 +15748,10 @@
 	</spawn>
 	<spawn centerx="32981" centery="31740" centerz="8" radius="1" />
 	<spawn centerx="31922" centery="31741" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="31984" centery="31741" centerz="8" radius="1">
-		<monster name="Crystal Spider" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="33113" centery="31744" centerz="8" radius="5">
 		<monster name="troll" x="-4" y="-3" z="8" spawntime="90" />
@@ -17300,7 +17297,7 @@
 		<monster name="rat" x="1" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="32749" centery="32154" centerz="8" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32076" centery="32155" centerz="8" radius="4">
 		<monster name="bug" x="1" y="-3" z="8" spawntime="90" />
@@ -17337,7 +17334,7 @@
 		<monster name="elf" x="0" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="32755" centery="32157" centerz="8" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32026" centery="32158" centerz="8" radius="1">
 		<monster name="rat" x="0" y="0" z="8" spawntime="90" />
@@ -17350,7 +17347,7 @@
 		<monster name="elf" x="-1" y="1" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="32750" centery="32161" centerz="8" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="33104" centery="32161" centerz="8" radius="4">
 		<monster name="elf" x="0" y="0" z="8" spawntime="90" />
@@ -17431,7 +17428,7 @@
 		<monster name="rat" x="0" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="32744" centery="32174" centerz="8" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32935" centery="32174" centerz="8" radius="4">
 		<monster name="swamp troll" x="0" y="0" z="8" spawntime="90" />
@@ -17566,10 +17563,10 @@
 		<monster name="rat" x="0" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="32746" centery="32193" centerz="8" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32764" centery="32193" centerz="8" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="33069" centery="32193" centerz="8" radius="1">
 		<monster name="elf scout" x="0" y="0" z="8" spawntime="90" />
@@ -17594,10 +17591,10 @@
 		<monster name="elf arcanist" x="-3" y="2" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="32742" centery="32196" centerz="8" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32804" centery="32196" centerz="8" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="33053" centery="32196" centerz="8" radius="4">
 		<monster name="elf" x="-1" y="-2" z="8" spawntime="90" />
@@ -17614,7 +17611,7 @@
 		<monster name="rat" x="0" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="32816" centery="32197" centerz="8" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="33043" centery="32197" centerz="8" radius="1" />
 	<spawn centerx="32788" centery="32199" centerz="8" radius="1">
@@ -17634,7 +17631,7 @@
 		<monster name="troll" x="2" y="2" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="32765" centery="32200" centerz="8" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="33044" centery="32200" centerz="8" radius="4">
 		<monster name="elf" x="0" y="0" z="8" spawntime="90" />
@@ -17663,7 +17660,7 @@
 		<monster name="rat" x="0" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="32806" centery="32203" centerz="8" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="8" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32934" centery="32203" centerz="8" radius="4">
 		<monster name="swamp troll" x="0" y="0" z="8" spawntime="90" />
@@ -18683,7 +18680,7 @@
 	</spawn>
 	<spawn centerx="32628" centery="32396" centerz="8" radius="4" />
 	<spawn centerx="32403" centery="32398" centerz="8" radius="1">
-		<monster name="Cyclops Smith" x="-1" y="0" z="8" spawntime="200" direction="1" />
+
 	</spawn>
 	<spawn centerx="32601" centery="32399" centerz="8" radius="4">
 		<monster name="bandit" x="0" y="-3" z="8" spawntime="90" />
@@ -23112,16 +23109,16 @@
 		<monster name="poison spider" x="2" y="5" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32724" centery="32143" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32841" centery="32143" centerz="9" radius="1">
 		<monster name="dragon" x="0" y="0" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32745" centery="32146" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32714" centery="32147" centerz="9" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32142" centery="32148" centerz="9" radius="4">
 		<monster name="skeleton" x="0" y="0" z="9" spawntime="90" />
@@ -23135,7 +23132,7 @@
 		<monster name="cyclops" x="3" y="2" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32751" centery="32149" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="33103" centery="32149" centerz="9" radius="1" />
 	<spawn centerx="32867" centery="32152" centerz="9" radius="1">
@@ -23160,13 +23157,13 @@
 		<monster name="rat" x="2" y="2" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32747" centery="32159" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32814" centery="32159" centerz="9" radius="1">
 		<monster name="dragon" x="0" y="0" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32715" centery="32164" centerz="9" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="31978" centery="32165" centerz="9" radius="4">
 		<monster name="spider" x="0" y="0" z="9" spawntime="90" />
@@ -23174,7 +23171,7 @@
 		<monster name="spider" x="3" y="3" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32766" centery="32165" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32019" centery="32166" centerz="9" radius="3">
 		<monster name="rat" x="0" y="0" z="9" spawntime="90" />
@@ -23188,7 +23185,7 @@
 		<monster name="rat" x="0" y="2" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32782" centery="32168" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32815" centery="32169" centerz="9" radius="1">
 		<monster name="dragon" x="0" y="0" z="9" spawntime="90" />
@@ -23211,7 +23208,7 @@
 		<monster name="rat" x="0" y="0" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32787" centery="32173" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32841" centery="32173" centerz="9" radius="1">
 		<monster name="dragon" x="0" y="0" z="9" spawntime="90" />
@@ -23239,11 +23236,11 @@
 	</spawn>
 	<spawn centerx="32170" centery="32174" centerz="9" radius="1" />
 	<spawn centerx="32704" centery="32175" centerz="9" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="33032" centery="32175" centerz="9" radius="1" />
 	<spawn centerx="32720" centery="32176" centerz="9" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32838" centery="32176" centerz="9" radius="1">
 		<monster name="dragon lord" x="0" y="0" z="9" spawntime="90" />
@@ -23276,7 +23273,7 @@
 	</spawn>
 	<spawn centerx="33035" centery="32178" centerz="9" radius="3" />
 	<spawn centerx="32777" centery="32179" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="31987" centery="32180" centerz="9" radius="3">
 		<monster name="spider" x="-1" y="-1" z="9" spawntime="90" />
@@ -23299,7 +23296,7 @@
 	</spawn>
 	<spawn centerx="32145" centery="32181" centerz="9" radius="1" />
 	<spawn centerx="32707" centery="32181" centerz="9" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32739" centery="32181" centerz="9" radius="1">
 		<monster name="cyclops" x="0" y="0" z="9" spawntime="90" />
@@ -23319,7 +23316,7 @@
 		<monster name="rat" x="0" y="0" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32756" centery="32183" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32173" centery="32184" centerz="9" radius="1" />
 	<spawn centerx="32069" centery="32186" centerz="9" radius="1">
@@ -24329,7 +24326,7 @@
 		<monster name="cyclops" x="0" y="0" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32451" centery="32398" centerz="9" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32606" centery="32398" centerz="9" radius="3">
 		<monster name="witch" x="0" y="-1" z="9" spawntime="90" />
@@ -24347,7 +24344,7 @@
 		<monster name="witch" x="0" y="0" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32409" centery="32399" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32129" centery="32400" centerz="9" radius="5">
 		<monster name="rotworm" x="1" y="-2" z="9" spawntime="90" />
@@ -24373,7 +24370,7 @@
 		<monster name="wasp" x="-1" y="2" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32401" centery="32402" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32730" centery="32402" centerz="9" radius="4">
 		<monster name="skeleton" x="0" y="0" z="9" spawntime="90" />
@@ -24401,10 +24398,10 @@
 		<monster name="ghoul" x="0" y="0" z="9" spawntime="90" />
 	</spawn>
 	<spawn centerx="32405" centery="32408" centerz="9" radius="1">
-		<monster name="Cyclops Smith" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="32427" centery="32408" centerz="9" radius="1">
-		<monster name="Cyclops Drone" x="0" y="0" z="9" spawntime="90" />
+
 	</spawn>
 	<spawn centerx="33000" centery="32408" centerz="9" radius="5">
 		<monster name="demon skeleton" x="0" y="0" z="9" spawntime="90" />

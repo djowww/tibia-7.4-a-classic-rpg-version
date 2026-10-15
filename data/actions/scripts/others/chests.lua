@@ -1,6 +1,9 @@
 function onUse(player, item, fromPosition, target, toPosition)
 	
 	local chestQuestNumber = item:getAttribute(ITEM_ATTRIBUTE_CHESTQUESTNUMBER)
+	if not chestQuestNumber or chestQuestNumber <= 0 then
+		return false
+	end
 	
 	if player:getStorageValue(chestQuestNumber) > 0 then
 		player:sendTextMessage(MESSAGE_INFO_DESCR, "The " .. item:getName() .. " is empty.")
@@ -15,6 +18,10 @@ function onUse(player, item, fromPosition, target, toPosition)
 	end
 	
 	local reward = item:getItem(0)
+	if not reward or ItemType(reward:getId()):isRetired() then
+		player:sendTextMessage(MESSAGE_INFO_DESCR, "This item reward is no longer available.")
+		return true
+	end
 	local stackable = reward:getType():isStackable()
 	local rewardName = reward:getName()
 	local rewardWeight = reward:getWeight()
@@ -41,8 +48,17 @@ function onUse(player, item, fromPosition, target, toPosition)
 		return true
 	end
 	 
+	local copy = reward:clone()
+	if not copy then
+		player:sendTextMessage(MESSAGE_INFO_DESCR, "This reward could not be collected.")
+		return true
+	end
+	if player:addItemEx(copy, true) ~= RETURNVALUE_NOERROR then
+		copy:remove()
+		player:sendTextMessage(MESSAGE_INFO_DESCR, "Make room before collecting this reward.")
+		return true
+	end
 	player:sendTextMessage(MESSAGE_INFO_DESCR, "You have found " .. rewardName .. ".")
-	player:addItemEx(reward:clone(), true)
 	if not getPlayerFlagValue(player, PlayerFlag_HasInfiniteCapacity) then
 		player:setStorageValue(chestQuestNumber, 1)
 	end
