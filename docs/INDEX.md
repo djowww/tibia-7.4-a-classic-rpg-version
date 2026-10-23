@@ -1,9 +1,10 @@
-# Documentação do Antigas
+# Documentação — Tibia 7.4 - A classic rpg version
 
 Guias para conhecer o projeto, compilar o servidor e entender seus sistemas.
 
 ## Começar
 
+- [Jogar em localhost: servidor, banco e cliente](../local/README.md)
 - [Apresentação do projeto](../README.md)
 - [Compilação e configuração](building.md)
 - [Cliente, launcher e site](client-and-web.md)
