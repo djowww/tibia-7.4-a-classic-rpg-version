@@ -32,7 +32,7 @@ pode ser iniciado em Linux com `docker compose up -d --build --wait`.
 - Progresso: persiste no volume `local-db`. **STOP-LOCAL.cmd** para os serviços
   sem apagar os dados. Reiniciar o computador também não apaga esses volumes.
 
-O site de cadastro, pagamentos, launcher de produção e bots autônomos não são
+O site de cadastro, pagamentos e o launcher de produção não são
 necessários nem iniciados neste modo. O cliente não consulta o atualizador de
 produção. Use a conta pronta para explorar o servidor local.
 

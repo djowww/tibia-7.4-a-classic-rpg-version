@@ -7,11 +7,11 @@ import subprocess
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from tools.autonomous_players.wire import Writer, Reader, rsa_block, FrameCodec, LoginCredentials
-from tools.autonomous_players.runtime import Session
-from tools.autonomous_players.protocol import Decoder
-from tools.autonomous_players.definitions import load_items
-from tools.autonomous_players.navigation import DIRECTIONS, walkable
+from local.testclient.wire import Writer, Reader, rsa_block, FrameCodec, LoginCredentials
+from local.testclient.runtime import Session
+from local.testclient.protocol import Decoder
+from local.testclient.definitions import load_items
+from local.testclient.navigation import DIRECTIONS, walkable
 
 def read_exact(sock, length):
     data = b''
