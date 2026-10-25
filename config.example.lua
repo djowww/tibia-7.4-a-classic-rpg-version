@@ -99,4 +99,4 @@ startupDatabaseOptimization = true
 ownerName = "Local test"
 ownerEmail = "admin@example.invalid"
 url = "http://127.0.0.1"
-location = "Sao Paulo"
+location = "Brazil"

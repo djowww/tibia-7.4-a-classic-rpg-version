@@ -9,6 +9,10 @@ Servidor MMORPG independente inspirado em Tibia 7.4, anteriormente conhecido com
 
 **Site oficial do projeto:** [tibia74.tech](https://tibia74.tech/) — novidades, changelog, downloads e [wiki do jogador](https://tibia74.tech/wiki.php#guia).
 
+## Sobre esta versão
+
+O objetivo é chegar o mais perto possível do Tibia 7.4 da época, nos sprites e nos sistemas. A maior parte das fórmulas de combate, defesa, experiência e progressão foi baseada no código do servidor 7.72 que circula na comunidade, adaptada a este núcleo. As fórmulas implementadas estão em [Fórmulas de dano e defesa](docs/combat-formulas.md) e as diferenças conhecidas em relação ao 7.4 estão em [Compatibilidade com Tibia 7.4](docs/classic-74-compatibility.md).
+
 ## Testar no seu computador
 
 Baixe o [pacote local para Windows](https://github.com/djowww/tibia-7.4-a-classic-rpg-version/releases/tag/local-test-v1), extraia e abra **START-LOCAL.cmd**, com o Docker Desktop em execução. O pacote inclui o cliente; ao usar o repositório, o iniciador baixa e verifica o cliente automaticamente.
@@ -51,6 +55,7 @@ Consulte o [guia dos sistemas](docs/systems.md) para conhecer as regras e integr
 | `docs/` | Guias de compilação, sistemas e componentes complementares. |
 | `local/` e `compose.yaml` | Instalação local, banco vazio, conta de demonstração e iniciador do cliente. |
 | `config.example.lua` | Modelo de configuração para uma instalação própria. |
+| `unused-scripts/` | Scripts Lua da base que não são carregados por esta versão, guardados para consulta. Veja o [README da pasta](unused-scripts/README.md). |
 
 O servidor usa MySQL/MariaDB. O ambiente local inclui banco de demonstração e preparação por Docker Compose; o cliente completo é distribuído na release local. Os serviços privados do portal e de pagamentos ficam fora desse ambiente. O launcher de produção verifica assinaturas ECDSA e SHA-256. Consulte [compilação e configuração](docs/building.md) e [cliente, launcher e site](docs/client-and-web.md).
 
