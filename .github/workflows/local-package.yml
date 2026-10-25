@@ -1,0 +1,50 @@
+name: Local package
+
+# Rebuilds Tibia74-Local-Complete.zip from this commit plus the verified
+# client asset, then replaces the zip and SHA256SUMS.txt on the release.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag that holds Tibia74-Local-Client.zip
+        required: true
+        default: local-test-v1
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the selected commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Download and verify the client
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern Tibia74-Local-Client.zip --dir "$RUNNER_TEMP"
+          expected=$(python3 -c 'import json; print(json.load(open("local/client-release.json"))["sha256"])')
+          echo "$expected  $RUNNER_TEMP/Tibia74-Local-Client.zip" | sha256sum --check
+
+      - name: Build the complete package
+        run: |
+          package="$RUNNER_TEMP/package"
+          mkdir -p "$package/local/client"
+          git archive HEAD | tar -x -C "$package"
+          unzip -q "$RUNNER_TEMP/Tibia74-Local-Client.zip" -d "$package/local/client"
+          test -f "$package/local/client/.local-client-complete"
+          (cd "$package" && zip -qr -X "$RUNNER_TEMP/Tibia74-Local-Complete.zip" .)
+          (cd "$RUNNER_TEMP" && sha256sum Tibia74-Local-Client.zip Tibia74-Local-Complete.zip > SHA256SUMS.txt && cat SHA256SUMS.txt)
+
+      - name: Replace the release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          gh release upload "$TAG" --repo "$GITHUB_REPOSITORY" --clobber \
+            "$RUNNER_TEMP/Tibia74-Local-Complete.zip" "$RUNNER_TEMP/SHA256SUMS.txt"
