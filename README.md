@@ -13,6 +13,16 @@ Servidor MMORPG independente inspirado em Tibia 7.4, anteriormente conhecido com
 
 O objetivo é chegar o mais perto possível do Tibia 7.4 da época, nos sprites e nos sistemas. A maior parte das fórmulas de combate, defesa, experiência e progressão foi baseada no código do servidor 7.72 que circula na comunidade, adaptada a este núcleo. As fórmulas implementadas estão em [Fórmulas de dano e defesa](docs/combat-formulas.md) e as diferenças conhecidas em relação ao 7.4 estão em [Compatibilidade com Tibia 7.4](docs/classic-74-compatibility.md).
 
+## Imagens
+
+Capturas feitas no ambiente local, com o cliente do projeto em wide screen.
+
+| | |
+| --- | --- |
+| ![Caça em wide screen com o canal Loot colorido por raridade](docs/screenshots/01-widescreen-hunt.jpg) | ![Achievements com ranks, contadores e bônus](docs/screenshots/02-achievements.jpg) |
+| ![Bestiary com o progresso de abates por monstro](docs/screenshots/03-bestiary.jpg) | ![Itens com raridade e tooltip dos atributos](docs/screenshots/04-rarity-loot.jpg) |
+| ![Market com ofertas de compra e venda](docs/screenshots/05-market.jpg) | |
+
 ## Testar no seu computador
 
 Baixe o [pacote local para Windows](https://github.com/djowww/tibia-7.4-a-classic-rpg-version/releases/tag/local-test-v1), extraia e abra **START-LOCAL.cmd**, com o Docker Desktop em execução. O pacote inclui o cliente; ao usar o repositório, o iniciador baixa e verifica o cliente automaticamente.
