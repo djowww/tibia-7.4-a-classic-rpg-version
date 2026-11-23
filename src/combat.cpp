@@ -422,6 +422,19 @@ CallBack* Combat::getCallback(CallBackParam_t key)
 	return nullptr;
 }
 
+// Scales a negative damage value by the percentage kept in a player storage.
+static int32_t applyAchievementDamageBonus(const Player* player, uint32_t storageKey, int32_t damage)
+{
+	int32_t bonus = 0;
+	player->getStorageValue(storageKey, bonus);
+	bonus = std::max<int32_t>(0, std::min<int32_t>(1000, bonus));
+	if (bonus == 0) {
+		return damage;
+	}
+	const double scaled = std::floor(std::abs(static_cast<double>(damage)) * (100.0 + bonus) / 100.0);
+	return -static_cast<int32_t>(std::min<double>(scaled, std::numeric_limits<int32_t>::max()));
+}
+
 void Combat::CombatHealthFunc(Creature* caster, Creature* target, const CombatParams& params, CombatDamage* data)
 {
 	assert(data);
@@ -448,6 +461,17 @@ void Combat::CombatHealthFunc(Creature* caster, Creature* target, const CombatPa
 	}
 
 	// PvP and all native mitigation are performed once in Creature::blockHit.
+
+	// Achievement rewards: storage 17804 adds a percentage to every direct hit
+	// of the player, storage 17805 adds another one when the target is a player.
+	if (damage.value < 0 && caster) {
+		if (const Player* attackerPlayer = caster->getPlayer()) {
+			damage.value = applyAchievementDamageBonus(attackerPlayer, 17804, damage.value);
+			if (target->getPlayer() && target != caster) {
+				damage.value = applyAchievementDamageBonus(attackerPlayer, 17805, damage.value);
+			}
+		}
+	}
 
 	if (g_game.combatChangeHealth(caster, target, damage)) {
 		CombatConditionFunc(caster, target, params, nullptr);

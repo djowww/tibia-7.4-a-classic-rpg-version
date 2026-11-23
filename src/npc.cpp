@@ -32,29 +32,6 @@ extern Game g_game;
 
 uint32_t Npc::npcAutoID = 0x80000000;
 
-void Npcs::loadNpcs()
-{
-	std::cout << ">> Loading npcs..." << std::endl;
-
-	std::vector<boost::filesystem::path> files;
-	getFilesInDirectory("data/npc/", ".npc", files);
-	for (auto file : files)
-	{
-		std::string npcName = file.filename().string();
-		int32_t end = npcName.find_first_of('/');
-		npcName = npcName.substr(end + 1, npcName.length() - end);
-		end = npcName.find_first_of('.');
-		npcName = npcName.substr(0, end);
-
-		Npc* npc = Npc::createNpc(npcName);
-		if (!npc) {
-			return;
-		}
-
-		g_game.placeCreature(npc, npc->getMasterPos(), false, true);
-	}
-}
-
 void Npcs::reload()
 {
 	const std::map<uint32_t, Npc*>& npcs = g_game.getNpcs();
@@ -161,6 +138,7 @@ bool Npc::load()
 			if (!behaviourDatabase->loadDatabase(script)) {
 				return false;
 			}
+			behaviourDatabase->buildTradeOffers();
 		}
 	}
 
@@ -292,6 +270,14 @@ void Npc::onCreatureSay(Creature* creature, SpeakClasses type, const std::string
 		} else if (focusCreature == player->getID()) {
 			behaviourDatabase->react(SITUATION_NONE, player, text);
 		}
+
+		if (focusCreature == player->getID()) {
+			std::string word = asLowerCaseString(text);
+			trimString(word);
+			if (word == "trade") {
+				behaviourDatabase->openTrade(player);
+			}
+		}
 	}
 }
 
@@ -318,6 +304,20 @@ void Npc::onThink(uint32_t interval)
 				}
 			}
 		}
+	}
+}
+
+void Npc::handleTradeRequest(Player* player, size_t index, int32_t count)
+{
+	if (behaviourDatabase) {
+		behaviourDatabase->handleTrade(player, index, count);
+	}
+}
+
+void Npc::closeTradeRequest(Player* player)
+{
+	if (behaviourDatabase && player && focusCreature == player->getID()) {
+		behaviourDatabase->closeTrade(false);
 	}
 }
 
@@ -430,14 +430,6 @@ bool Npc::getRandomStep(Direction& dir) const
 
 	dir = dirList[uniform_random(0, dirList.size() - 1)];
 	return true;
-}
-
-void Npc::doMoveTo(const Position& target)
-{
-	std::list<Direction> listDir;
-	if (getPathTo(target, listDir, 1, 1, true, true)) {
-		startAutoWalk(listDir);
-	}
 }
 
 void Npc::turnToCreature(Creature* creature)

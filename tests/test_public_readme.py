@@ -1,5 +1,5 @@
+import struct
 import unittest
-import xml.etree.ElementTree as ET
 from pathlib import Path
 
 
@@ -7,22 +7,18 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PublicReadmeTests(unittest.TestCase):
-    def test_banner_is_valid_scalable_svg_with_readable_alt_text(self):
+    def test_banner_is_wide_png_with_readable_alt_text(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        banner = ROOT / "docs/assets/antigas-74-banner.svg"
+        banner = ROOT / "docs/assets/tibia74-banner.png"
         self.assertTrue(banner.is_file())
-        root = ET.parse(banner).getroot()
-        self.assertTrue(root.attrib.get("viewBox"))
-        svg_ns = "{http://www.w3.org/2000/svg}"
-        tagline = next(
-            (node for node in root.iter(f"{svg_ns}text") if (node.text or "").strip() == "A classic rpg version"),
-            None,
-        )
-        self.assertIsNotNone(tagline)
-        self.assertGreaterEqual(float(tagline.attrib["font-size"]), 24)
+        data = banner.read_bytes()
+        self.assertEqual(data[:8], b"\x89PNG\r\n\x1a\n")
+        width, height = struct.unpack(">II", data[16:24])
+        self.assertGreaterEqual(width, 1200)
+        self.assertGreater(width, height * 3)
         self.assertRegex(
             readme,
-            r"!\[([^\]]*Tibia 7\.4[^\]]*)\]\(docs/assets/antigas-74-banner\.svg\)",
+            r"!\[([^\]]*Tibia 7\.4[^\]]*)\]\(docs/assets/tibia74-banner\.png\)",
         )
 
     def test_readme_has_player_and_contributor_paths_and_public_boundary(self):
@@ -32,6 +28,7 @@ class PublicReadmeTests(unittest.TestCase):
             "https://tibia74.tech/index.php?jogar=1#criar-conta",
             "https://tibia74.tech/#download",
             "https://tibia74.tech/wiki.php",
+            "https://discord.gg/CVneyh53mZ",
             "docs/building.md",
             "CONTRIBUTING.md",
             "SECURITY.md",

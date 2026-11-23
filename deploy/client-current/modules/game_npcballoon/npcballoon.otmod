@@ -1,0 +1,11 @@
+Module
+  name: game_npcballoon
+  description: Clickable speech balloon next to NPCs that greets them
+  author: Antigas
+  sandboxed: true
+  autoload: true
+  autoload-priority: 1003
+  dependencies: [ game_interface ]
+  scripts: [ npcballoon ]
+  @onLoad: init()
+  @onUnload: terminate()

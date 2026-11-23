@@ -7,7 +7,7 @@ for w=200,3440,19 do
     assert(d.width%2==1 and d.height%2==1)
     assert(d.width>=3 and d.width<=29 and d.height>=3 and d.height<=15)
     local x,y=AntigasViewport.requestSize(d)
-    assert(x>=16 and x<=30 and y>=12 and y<=16)
+    assert(x>=18 and x<=32 and y>=14 and y<=18)
     local c=AntigasViewport.calculate(w,h,1)
     assert(c.width==15 and c.height==11 and not c.wide)
     count=count+1

@@ -141,7 +141,6 @@ class Chat
 
 		ChatChannel* getChannel(const Player& player, uint16_t channelId);
 		ChatChannel* getChannelById(uint16_t channelId);
-		ChatChannel* getGuildChannelById(uint32_t guildId);
 		PrivateChatChannel* getPrivateChannel(const Player& player);
 
 		LuaScriptInterface* getScriptInterface() {

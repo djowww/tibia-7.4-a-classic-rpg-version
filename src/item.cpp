@@ -1033,25 +1033,6 @@ bool Item::getRarityBonus(uint8_t index, ItemRarityBonus_t& type, uint8_t& value
 	return true;
 }
 
-uint32_t Item::getRarityBonusSum(ItemRarityBonus_t bonusType) const
-{
-	if (!hasRarity()) return 0;
-	const uint8_t tier = static_cast<uint8_t>(getRarityTier());
-	uint32_t total = 0;
-	if (getRarityBonusType() == bonusType) total += getRarityBonusValue();
-	if (!hasAttribute(ITEM_ATTRIBUTE_RARITY_EXTRAS)) return total;
-
-	const uint32_t extras = getRarityExtraData();
-	for (uint8_t index = 0; index < tier - 1; ++index) {
-		const uint8_t code = static_cast<uint8_t>((extras >> (index * 5)) & 0x1F);
-		ItemRarityBonus_t type;
-		uint8_t subtype;
-		if (!getRarityBonusFromCode(code, type, subtype) || type != bonusType) continue;
-		total += type == ITEM_RARITY_BONUS_SPEED_PERCENT ? tier * 2 : tier;
-	}
-	return total;
-}
-
 std::string Item::getRarityDescription() const
 {
 	if (!hasRarity()) {

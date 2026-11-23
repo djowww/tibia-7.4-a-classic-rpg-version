@@ -106,11 +106,12 @@ internal static class ClientPackage
     }
 
     public static bool HasRunnableClient(string root) =>
-        File.Exists(Path.Combine(root, "Antigas_gl.exe")) || File.Exists(Path.Combine(root, "Antigas_dx.exe"));
+        File.Exists(Path.Combine(root, "Antigas_gl.exe"));
 
     public static bool IsGameRunningFrom(string root)
     {
         var fullRoot = Path.GetFullPath(root).TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
+        // Antigas_dx is no longer shipped, but an old install may still have it open.
         foreach (var name in new[] { "Antigas_gl", "Antigas_dx" })
         {
             foreach (var process in Process.GetProcessesByName(name))
@@ -182,6 +183,7 @@ internal static class ClientPackage
                 completed++;
                 progress.Report(completed);
             }
+            RemoveObsoleteFiles(stage, installRoot, backupRoot, changes);
             return backupRoot;
         }
         catch (Exception updateError)
@@ -207,6 +209,30 @@ internal static class ClientPackage
             if (rollbackErrors.Count > 0)
                 throw new AggregateException($"A atualização falhou e houve erro ao restaurar arquivos. Cópias de segurança em: {backupRoot}", new[] { updateError }.Concat(rollbackErrors));
             throw new IOException($"A atualização falhou; os arquivos anteriores foram restaurados. Backup: {backupRoot}", updateError);
+        }
+    }
+
+    // Files of the DirectX client, which is no longer shipped. Only these names, in the install root, are removed.
+    private static readonly string[] ObsoleteFiles = { "Antigas_dx.exe", "libEGL.dll", "libGLESv2.dll", "d3dcompiler_46.dll" };
+
+    private static void RemoveObsoleteFiles(string stage, string installRoot, string backupRoot, List<FileChange> changes)
+    {
+        foreach (var name in ObsoleteFiles)
+        {
+            if (File.Exists(Path.Combine(stage, name))) continue;
+            var target = Path.Combine(installRoot, name);
+            if (!File.Exists(target) || (File.GetAttributes(target) & FileAttributes.ReparsePoint) != 0) continue;
+            try
+            {
+                var backup = Path.Combine(backupRoot, name);
+                File.Copy(target, backup, false);
+                changes.Add(new FileChange(target, backup, true));
+                File.Delete(target);
+            }
+            catch (Exception error) when (error is IOException or UnauthorizedAccessException)
+            {
+                // A leftover file does no harm; the update itself is already applied.
+            }
         }
     }
 

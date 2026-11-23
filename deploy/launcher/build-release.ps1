@@ -24,6 +24,11 @@ if (Test-Path $stage) { throw "Staging already exists; choose a new output direc
 if ((Test-Path $packagePath) -or (Test-Path $legacyPath) -or (Test-Path $bundlePath)) { throw 'A release ZIP already exists; choose a new output directory.' }
 New-Item -ItemType Directory -Force -Path $output,$stage | Out-Null
 Get-ChildItem -LiteralPath $source -Force | Copy-Item -Destination $stage -Recurse -Force
+# Only the OpenGL client is shipped: drop the DirectX build and its ANGLE runtime.
+foreach ($name in @('Antigas_dx.exe', 'libEGL.dll', 'libGLESv2.dll')) {
+    Remove-Item -LiteralPath (Join-Path $stage $name) -Force -ErrorAction SilentlyContinue
+}
+Get-ChildItem -LiteralPath $stage -Filter 'd3dcompiler_*.dll' -File | Remove-Item -Force
 
 $initPath = Join-Path $stage 'init.lua'
 $init = [System.IO.File]::ReadAllText($initPath)
@@ -35,6 +40,7 @@ $updatedInit = [regex]::Replace($init, $versionPattern, "APP_VERSION = $Version"
 [System.IO.File]::WriteAllText((Join-Path $stage 'LEIA-ME.txt'), ([System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'CLIENT-README.txt')).Replace('{{VERSION}}', "$Version")), [System.Text.UTF8Encoding]::new($false))
 Copy-Item -LiteralPath $launcher -Destination (Join-Path $stage 'AntigasLauncher.exe')
 
+Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 function Write-ClientZip([string]$Target, [bool]$IncludeLauncher) {
     $archive = [System.IO.Compression.ZipFile]::Open($Target, [System.IO.Compression.ZipArchiveMode]::Create)

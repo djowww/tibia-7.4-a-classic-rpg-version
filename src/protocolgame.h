@@ -276,7 +276,6 @@ class ProtocolGame final : public Protocol
 		void sendNewCancelWalk();
 
 		friend class Player;
-		friend class ProtocolSpectator;
 		friend class GroundRarity;
 		friend struct ViewportCoreTestAccess;
 

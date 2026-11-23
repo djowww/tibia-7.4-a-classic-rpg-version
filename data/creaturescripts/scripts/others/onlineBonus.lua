@@ -1,4 +1,5 @@
 -- Login and logout are loaded separately; share their timer registry.
+-- luacheck: globals OnlineBonusEvents
 OnlineBonusEvents = OnlineBonusEvents or {}
 local events = OnlineBonusEvents
 local rewardInterval = 60 * 60 * 1000

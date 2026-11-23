@@ -29,32 +29,16 @@ function ModalWindow(...)
     return modalWindows.modalWindowConstructor(...)
 end
 
-function MT:setDefaultCallback(callback)
-    self.defaultCallback = callback
-end
-
 function MT:addButton(text, callback)
     local button = {text = tostring(text), callback = callback}
     table.insert(self.buttons, button)
     return button
 end
 
-function MT:addButtons(...)
-    for _, text in ipairs({...}) do
-        table.insert(self.buttons, {text = tostring(text)})
-    end
-end
-
 function MT:addChoice(text)
     local choice = {text = tostring(text)}
     table.insert(self.choices, choice)
     return choice
-end
-
-function MT:addChoices(...)
-    for _, text in ipairs({...}) do
-        table.insert(self.choices, {text = tostring(text)})
-    end
 end
 
 function MT:setDefaultEnterButton(text)

@@ -992,22 +992,6 @@ bool ConditionDamage::executeCondition(Creature* creature, int32_t interval)
  return legacyReserve > 0;
 }
 
-bool ConditionDamage::getNextDamage(int32_t& damage)
-{
-	if (periodDamage != 0) {
-		damage = periodDamage;
-		return true;
-	} else if (!damageList.empty()) {
-		IntervalInfo& damageInfo = damageList.front();
-		damage = damageInfo.value;
-		if (ticks != -1) {
-			damageList.pop_front();
-		}
-		return true;
-	}
-	return false;
-}
-
 bool ConditionDamage::doDamage(Creature* creature, int32_t healthChange)
 {
 	if (creature->isSuppress(getType())) {

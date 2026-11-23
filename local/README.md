@@ -10,8 +10,9 @@ ou progresso do servidor público acompanha o pacote.
 2. Baixe e extraia o repositório, ou o pacote completo da release local.
 3. Dê dois cliques em **START-LOCAL.cmd**. Na primeira vez, aguarde o download das
    imagens e a compilação. As seguintes partidas aproveitam o cache.
-4. O cliente abre automaticamente. Entre com **conta `1`**, **senha `local123`**
-   e o personagem **Local Adventurer**.
+4. O cliente abre automaticamente. Entre com **conta `2`**, **senha `local123`**
+   e o personagem **Local Adventurer**. Para testar como GOD, use a **conta `1`**,
+   **senha `1`**, personagem **Dev**.
 
 O repositório baixa o cliente da release e confere seu SHA-256. O pacote completo
 já o inclui em `local/client/`. Não é preciso instalar compilador, PHP ou MySQL,

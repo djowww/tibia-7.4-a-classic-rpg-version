@@ -38,7 +38,7 @@ function onUse(player, item, fromPosition, target, toPosition)
 		rewardName = reward:getArticle() .. " " .. rewardName
 	end
 	
-	if rewardWeight > playerCapacity and not getPlayerFlagValue(player, layerFlag_HasInfiniteCapacity) then
+	if rewardWeight > playerCapacity and not getPlayerFlagValue(player, PlayerFlag_HasInfiniteCapacity) then
 		local term = "it is"
 		if stackable and reward:getCount() > 1 then
 			term = "they are"

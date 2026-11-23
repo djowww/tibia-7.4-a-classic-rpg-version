@@ -568,15 +568,6 @@ ChatChannel* Chat::getChannel(const Player& player, uint16_t channelId)
 	return nullptr;
 }
 
-ChatChannel* Chat::getGuildChannelById(uint32_t guildId)
-{
-	auto it = guildChannels.find(guildId);
-	if (it == guildChannels.end()) {
-		return nullptr;
-	}
-	return &it->second;
-}
-
 ChatChannel* Chat::getChannelById(uint16_t channelId)
 {
 	auto it = normalChannels.find(channelId);

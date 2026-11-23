@@ -229,6 +229,23 @@ struct NpcBehaviour
 	NpcBehaviour& operator=(const NpcBehaviour&) = delete;
 };
 
+struct NpcTradeOffer
+{
+	const NpcBehaviour* unit = nullptr; // rule that offers a single unit
+	const NpcBehaviour* counted = nullptr; // rule that offers %1 units, if the NPC has one
+	uint16_t itemId = 0;
+	int32_t data = -1;
+	int32_t amount = 1;
+	int32_t price = 0;
+	int32_t topic = 0;
+	bool sell = false; // true when the NPC buys the item from the player
+};
+
+namespace NpcTrade
+{
+	void handleRequest(Player& player, const std::string& request);
+}
+
 struct NpcQueueEntry
 {
 	uint32_t playerId;
@@ -253,6 +270,12 @@ class BehaviourDatabase
 		NpcBehaviourNode* readFactor(ScriptReader& script, NpcBehaviourNode* nextNode);
 
 		void react(BehaviourSituation_t situation, Player* player, const std::string& message);
+
+		// trade window (extended opcode 130)
+		void buildTradeOffers();
+		bool openTrade(Player* player);
+		void handleTrade(Player* player, size_t index, int32_t count);
+		void closeTrade(bool notify = true);
 
 		static bool compareBehaviour(const NpcBehaviour* left, const NpcBehaviour* right) {
 			return left->priority >= right->priority;
@@ -289,6 +312,14 @@ class BehaviourDatabase
 		bool excludedRarityFromCount = false;
 		bool raritySaleFailed = false;
 		uint64_t pendingSaleMoney = 0;
+
+		bool sendTrade(Player* player);
+		bool tradeOfferAvailable(const NpcTradeOffer& offer, Player* player);
+
+		std::vector<NpcTradeOffer> tradeOffers;
+		uint32_t tradePlayer = 0;
+		int64_t lastTradeTime = 0;
+		bool tradeKeyword = false;
 
 		Npc* npc = nullptr;
 		NpcBehaviour* previousBehaviour = nullptr;

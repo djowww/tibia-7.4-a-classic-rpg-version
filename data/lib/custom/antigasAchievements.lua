@@ -49,10 +49,15 @@ local function notifyCompletion(player, title, reward)
 	player:sendTextMessage(MESSAGE_EVENT_ADVANCE, string.format('Achievement completed: %s. Reward: %s.', title, reward))
 end
 
-local function addCounterReward(player, counterKey, newValue)
+-- Storage name of each counter. Walking calls this on every step, so the name
+-- is looked up here instead of being rebuilt from the counter key each time.
+local counterStorageName = {steps = 'STEPS', monsterKills = 'MONSTER_KILLS', deaths = 'DEATHS', pvpKills = 'PVP_KILLS'}
+
+-- oldValue is optional: callers that already read the counter pass it along.
+local function addCounterReward(player, counterKey, newValue, oldValue)
 	local milestones = A.COUNTER_MILESTONES[counterKey]
-	local key = A.STORAGE[string.upper(counterKey:gsub('(%l)(%u)', '%1_%2'))]
-	local oldValue = storage(player, key)
+	local key = A.STORAGE[counterStorageName[counterKey]]
+	oldValue = oldValue or storage(player, key)
 	newValue = math.max(oldValue, math.floor(tonumber(newValue) or 0))
 	if newValue == oldValue then return false end
 	player:setStorageValue(key, newValue)
@@ -204,7 +209,8 @@ function A.onWalk(player, fromPosition, toPosition)
 	local dz = math.abs(toPosition.z - fromPosition.z)
 	-- Adjacent tiles (including stairs) are a step; teleports and jumps are not.
 	if dx <= 1 and dy <= 1 and dz <= 1 and dx + dy + dz > 0 then
-		if addCounterReward(player, 'steps', storage(player, A.STORAGE.STEPS) + 1) then A.sendProgress(player) end
+		local steps = storage(player, A.STORAGE.STEPS)
+		if addCounterReward(player, 'steps', steps + 1, steps) then A.sendProgress(player) end
 	end
 	return true
 end
@@ -214,11 +220,13 @@ function A.onKill(killer, target)
 	local changed = false
 	if target:isPlayer() then
 		if killer:getId() == target:getId() then return true end
-		changed = addCounterReward(killer, 'pvpKills', storage(killer, A.STORAGE.PVP_KILLS) + 1)
+		local kills = storage(killer, A.STORAGE.PVP_KILLS)
+		changed = addCounterReward(killer, 'pvpKills', kills + 1, kills)
 	elseif target:isMonster() then
 		local master = target:getMaster()
 		if not (master and master:isPlayer()) then
-			changed = addCounterReward(killer, 'monsterKills', storage(killer, A.STORAGE.MONSTER_KILLS) + 1)
+			local kills = storage(killer, A.STORAGE.MONSTER_KILLS)
+			changed = addCounterReward(killer, 'monsterKills', kills + 1, kills)
 		end
 	end
 	if changed then A.sendProgress(killer) end

@@ -85,16 +85,11 @@
 	<action actionid="81" script="main/81.lua" />
 	<action actionid="82" script="main/82.lua" />
 	<action actionid="83" script="main/83.lua" />
-	<action actionid="84" script="main/84.lua" />
-	<action actionid="85" script="main/85.lua" />
-	<action actionid="86" script="main/86.lua" />
-	<action actionid="87" script="main/87.lua" />
 	<action actionid="2200" script="main/2200.lua" />
 	<action actionid="2201" script="main/2201.lua" />
 	<action actionid="2202" script="main/2202.lua" />
 	<action actionid="2203" script="main/2203.lua" />
 	<action actionid="2204" script="main/2204.lua" />
-	<action actionid="2205" script="main/2205.lua" />
 	<action actionid="2207" script="main/2207.lua" />
 	<action actionid="2208" script="main/2208.lua" />
 	<action actionid="2209" script="main/2209.lua" />
@@ -103,7 +98,6 @@
 	<action actionid="2212" script="main/2212.lua" />
 	<action actionid="2213" script="main/2213.lua" />
 	<action actionid="2214" script="main/2214.lua" />
-	<action actionid="2215" script="main/2215.lua" />
 	<action actionid="2280" script="main/2280.lua" />
 
 	<!-- main Default Actions -->
@@ -461,17 +455,5 @@
 
 
 
-	<!-- Pits of Inferno
-	<action actionid="17642" script="pits_of_inferno/oil.lua" />
-	<action fromaid="17653" toaid="17656" script="pits_of_inferno/hall_of_the_four_ways.lua" />
-	<action fromaid="2050" toaid="2065" script="pits_of_inferno/levers.lua" />
-	<action fromaid="3301" toaid="3302" script="pits_of_inferno/ladderLevers.lua" />
-	<action actionid="50160" script="pits_of_inferno/mazeStone.lua" />
-	<action actionid="3300" script="pits_of_inferno/stoneLever.lua" />
-	<action actionid="3304" script="pits_of_inferno/trapLever.lua" />
-	<action actionid="50106" script="pits_of_inferno/fireThroneLever.lua" />
-	<action fromaid="50095" toaid="50104" script="pits_of_inferno/bazirWrongLevers.lua" />
-	<action actionid="50105" script="pits_of_inferno/bazirMazeLever.lua" />
-	<action fromaid="39511" toaid="39512" script="pits_of_inferno/bazirMirror.lua" /> -->
 
 </actions>

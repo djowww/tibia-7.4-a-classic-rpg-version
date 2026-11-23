@@ -4,13 +4,11 @@ worldType = "pvp"
 protectionLevel = 1
 pzLocked = 60000
 removeChargesFromRunes = true
-timeToDecreaseFrags = 6 * 60 * 60 * 1000
 stairJumpExhaustion = 0
 experienceByKillingPlayers = false
 expFromPlayersLevelRange = 75
 hotkeyAimbotEnabled = false
 
-banLength = 3 * 24 * 60 * 60
 whiteSkullTime = 15 * 60 * 1000
 redSkullTime = 30 * 24 * 60 * 60
 killsDayRedSkull = 3
@@ -29,7 +27,7 @@ maxPlayers = 2000
 -- 0 selects maxPlayers + 256 (or 4096 when maxPlayers is unlimited).
 maxConnections = 0
 maxConnectionsPerIP = 128
-motd = "Local test server. Account: 1 / local123"
+motd = "Local test server. Account: 2 / local123. Dev (GOD): 1 / 1"
 onePlayerOnlinePerAccount = true
 allowClones = false
 serverName = "Tibia 7.4 - Local"
@@ -63,7 +61,6 @@ mysqlPass = "localgame"
 mysqlDatabase = "tibia_local"
 mysqlPort = 3306
 mysqlSock = ""
-passwordType = "sha1"
 
 allowChangeOutfit = true
 freePremium = false

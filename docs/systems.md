@@ -30,6 +30,8 @@ O Bestiary mantém contadores de abates por monstro e personagem. Os dados são 
 
 Cada Bestiary concluído concede um bônus permanente de **0,2% de experiência**. O servidor controla os contadores e o total de conclusões.
 
+No cliente, o Bestiary é uma aba da **Game Wiki** (botão Wiki do inventário), ao lado da Itempedia, do Hunting Guide e do Bosstiary. Os dados dessas abas são gerados dos arquivos do servidor por [`generate-game-wiki.py`](../tools/generate-game-wiki.py): locais vêm de `spawns.xml`, loot dos monstros, atributos de `items.srv` e compra e venda dos NPCs. Rode o script depois de mudar spawns, monstros, itens ou NPCs.
+
 Referências: [`antigasBestiary.lua`](../data/lib/custom/antigasBestiary.lua) e [`bestiary.lua`](../data/creaturescripts/scripts/bestiary.lua).
 
 ## Diário de quests

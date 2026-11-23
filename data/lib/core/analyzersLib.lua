@@ -87,11 +87,6 @@ function Player.addAnalyzerDrop(self, value)
 return true
 end
 
-function Player.addAnalyzerSupply(self, value)
-	self:sendOpcode(SUPPLY_ANALYZER_OPCODE, value)
-return true
-end
-
 function Player.sendOpcode(self, code, ...)
 	local res = {...}
 	if #res > 0 then

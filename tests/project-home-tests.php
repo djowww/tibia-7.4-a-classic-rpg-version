@@ -26,6 +26,7 @@ function checkHome(bool $condition, string $message): void
 }
 
 $site = __DIR__ . '/../deploy/site-public';
+$curatedUpdates = count(json_decode(file_get_contents($site . '/project-updates.json'), true, 512, JSON_THROW_ON_ERROR));
 foreach (['pt' => 'pt-BR', 'en' => 'en', 'es' => 'es', 'pl' => 'pl'] as $language => $tag) {
     foreach (['wiki.php', 'index.php'] as $page) {
         $html = renderProjectHome($language, $page);
@@ -35,13 +36,13 @@ foreach (['pt' => 'pt-BR', 'en' => 'en', 'es' => 'es', 'pl' => 'pl'] as $languag
             checkHome(str_contains($html, $required), 'Missing project home content: ' . $required);
         }
         foreach (['getting-started', 'vocations', 'online-bonus', 'combat-pvp', 'spells-runes',
-            'quests-bestiary', 'market-coins', 'client-support', 'faq'] as $anchor) {
+            'quests-bestiary', 'npcs-trade', 'world-map', 'market-coins', 'client-support', 'faq'] as $anchor) {
             checkHome(str_contains($html, 'id="' . $anchor . '"'), 'Existing wiki section lost: ' . $anchor);
         }
         checkHome(str_contains($html, '<html lang="' . $tag . '"'), 'Language selection was lost.');
         checkHome(!str_contains($html, '/blog.css'), 'The separate blog design must not replace the wiki.');
         checkHome(!str_contains($html, 'href="/coins.php"'), 'Payment link reintroduced.');
-        checkHome(substr_count($html, 'class="project-update"') === 2, 'Only curated project updates should be published.');
+        checkHome(substr_count($html, 'class="project-update"') === $curatedUpdates, 'Only curated project updates should be published.');
         echo 'PASS project wiki homepage: ' . $page . ' ' . $language . PHP_EOL;
     }
 }

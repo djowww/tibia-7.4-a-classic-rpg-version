@@ -5,7 +5,7 @@ INSTALAÇÃO
 2. O pacote Antigas-7.4-Update-v{{VERSION}}.zip é usado pelo launcher para atualizar o cliente. Quando há uma versão nova do launcher, ela também é incluída na atualização assinada.
 3. O link de atualização do cliente antigo baixa Antigas-7.4-Client-v{{VERSION}}.zip, o pacote completo com launcher. O site também oferece Antigas-7.4-Launcher-v{{VERSION}}.zip para novas instalações.
 4. Evite Program Files para que as atualizações não precisem de permissões de administrador.
-5. Se preferir, Antigas_gl.exe e Antigas_dx.exe continuam disponíveis para abrir o cliente diretamente.
+5. Se preferir, Antigas_gl.exe continua disponível para abrir o cliente diretamente.
 6. Site oficial: https://tibia74.tech.
 
 SEGURANÇA E DADOS
@@ -17,7 +17,7 @@ SEGURANÇA E DADOS
 - Não compartilhe logs que possam conter dados técnicos da sessão; envie-os ao suporte oficial quando solicitado.
 
 CLIENTE
-- Se houver incompatibilidade com o driver gráfico, feche o launcher e abra Antigas_dx.exe ou Antigas_gl.exe.
+- O cliente usa OpenGL. Se a tela não abrir, atualize o driver da placa de vídeo.
 - Raridades, conquistas, interface e os demais recursos do cliente permanecem disponíveis.
 
 ITENS E COMPATIBILIDADE 7.4

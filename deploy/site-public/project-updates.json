@@ -1,5 +1,45 @@
 [
   {
+    "id": "public-server-20261123",
+    "date": "2026-11-23",
+    "title": "The public server is back, with a fresh start.",
+    "summary": "The online world was rebuilt with a new database. Create your account on this site and download launcher v78 to play.",
+    "changes": [
+      "New server and new database: accounts from the old server no longer exist, so please register again.",
+      "Account sign-up and My account work again on this site.",
+      "Launcher v78 connects to the new server and keeps the client updated automatically.",
+      "The game database is backed up every day."
+    ],
+    "paragraphs": [
+      "Open Create account, choose your account number, character and password, then download launcher v78 on the same page. Extract it and open AntigasLauncher.exe.",
+      "Questions, bugs or ideas? Join the community on Discord: discord.gg/CVneyh53mZ"
+    ],
+    "url": "https://github.com/djowww/tibia-7.4-a-classic-rpg-version"
+  },
+  {
+    "id": "npcs-map-client-20261123",
+    "date": "2026-11-23",
+    "title": "Friendlier NPCs, the original 7.4 map and a lighter client.",
+    "summary": "Talking and trading with NPCs is easier, the world is back to the original 7.4 map, and the client is lighter and smoother to play.",
+    "changes": [
+      "New NPC trade window: say hi, then trade, and pick items in a grid.",
+      "A chat balloon above NPCs: click it to say hi.",
+      "Right-clicking an NPC now greets it instead of attacking.",
+      "NPCs have a blue health bar, so they stand out from monsters.",
+      "Drinking water gives +1 mana every 10 seconds for 1 hour.",
+      "The map is back to the original 7.4: trainers, Yalahar, custom islands, the arena and horses were removed.",
+      "New minimap with markers for temples, banks, shops, quests and stairs.",
+      "The client now comes only in the OpenGL version (Antigas_gl.exe); the DirectX version was removed.",
+      "Widescreen fix and smoother walking when your ping is high.",
+      "The Discord button in the client opens our new community server."
+    ],
+    "paragraphs": [
+      "These changes are in launcher v78 for the public server and in the localhost package local-test-v2.",
+      "Coming soon: a Game Wiki book inside the client, with Bestiary, Itempedia and a Hunting Guide."
+    ],
+    "url": "https://github.com/djowww/tibia-7.4-a-classic-rpg-version/releases/tag/local-test-v2"
+  },
+  {
     "id": "localhost-release",
     "date": "2026-10-23",
     "title": "Server and Windows client, ready for localhost.",
@@ -7,7 +47,7 @@
     "changes": [
       "Server, test database and Windows .exe client in one package.",
       "START-LOCAL.cmd prepares the world; STOP-LOCAL.cmd preserves its progress.",
-      "Normal demo account: 1 / local123, character Local Adventurer."
+      "Normal demo account: 2 / local123, character Local Adventurer."
     ],
     "paragraphs": [
       "Requires Docker Desktop with Linux containers and internet for the first setup. The Windows client is already included.",

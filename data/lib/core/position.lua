@@ -78,11 +78,6 @@ function Position.getTile(self)
     return Tile(self)
 end
 
-function Position:isInRange(fromPosition, toPosition)
-    return (self.x >= fromPosition.x and self.y >= fromPosition.y and self.z >= fromPosition.z
-        and self.x <= toPosition.x and self.y <= toPosition.y and self.z <= toPosition.z)
-end
-
 function Position:sendAnimatedText(text, color, player)
     local spectators = player and {player} or Game.getSpectators(self, false, true)
     if #spectators == 0 then

@@ -12,9 +12,9 @@ int main() {
 	for (int x = 0; x <= 255; ++x) {
 		for (int y = 0; y <= 255; ++y) {
 			view.set(x, y);
-			require(view.x >= 8 && view.x <= 15 && view.y >= 6 && view.y <= 8);
-			require(view.width() >= 18 && view.width() <= 32);
-			require(view.height() >= 14 && view.height() <= 18);
+			require(view.x >= 8 && view.x <= 16 && view.y >= 6 && view.y <= 9);
+			require(view.width() >= 18 && view.width() <= 34);
+			require(view.height() >= 14 && view.height() <= 20);
 			// Inclusive bounds contain exactly the serialized row/column count.
 			require((view.x + 1) - (-view.x) + 1 == view.width());
 			require((view.y + 1) - (-view.y) + 1 == view.height());

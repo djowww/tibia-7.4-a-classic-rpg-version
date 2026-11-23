@@ -7,8 +7,8 @@
 // OTCv8 range excludes the extra east/south row. Visible odd dimensions are
 // wire range - 1; the transmitted map includes a margin for walking/floors.
 struct MapViewport {
-	static constexpr int32_t maxRangeX = 15; // at most 29 visible columns
-	static constexpr int32_t maxRangeY = 8;  // at most 15 visible rows
+	static constexpr int32_t maxRangeX = 16; // 29 visible columns + 2-step prewalk margin
+	static constexpr int32_t maxRangeY = 9;  // 15 visible rows + 2-step prewalk margin
 	int32_t x = 8;
 	int32_t y = 6;
 

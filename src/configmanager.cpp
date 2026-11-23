@@ -135,7 +135,6 @@ bool ConfigManager::load()
 	integer[RATE_MAGIC] = getGlobalNumber(L, "rateMagic", 1);
 	integer[RATE_SPAWN] = getGlobalNumber(L, "rateSpawn", 2);
 	integer[RATE_REGENERATION] = getGlobalNumber(L, "rateRegen", 1);
-	integer[BAN_LENGTH] = getGlobalNumber(L, "banLength", 15 * 24 * 60 * 60);
 	integer[ACTIONS_DELAY_INTERVAL] = getGlobalNumber(L, "timeBetweenActions", 200);
 	integer[EX_ACTIONS_DELAY_INTERVAL] = getGlobalNumber(L, "timeBetweenExActions", 1000);
 	integer[MAX_MESSAGEBUFFER] = getGlobalNumber(L, "maxMessageBuffer", 4);

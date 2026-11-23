@@ -3259,20 +3259,6 @@ bool Player::isAttackable() const
 	return !hasFlag(PlayerFlag_CannotBeAttacked);
 }
 
-bool Player::lastHitIsPlayer(Creature* lastHitCreature)
-{
-	if (!lastHitCreature) {
-		return false;
-	}
-
-	if (lastHitCreature->getPlayer()) {
-		return true;
-	}
-
-	Creature* lastHitMaster = lastHitCreature->getMaster();
-	return lastHitMaster && lastHitMaster->getPlayer();
-}
-
 void Player::changeHealth(int32_t healthChange, bool sendHealthChange/* = true*/)
 {
 	Creature::changeHealth(healthChange, sendHealthChange);
@@ -3660,11 +3646,6 @@ Skulls_t Player::getSkullClient(const Creature* creature) const
  return SKULL_NONE;
 }
 
-bool Player::hasAttacked(const Player* attacked) const
-{
- return hasLegacyAttacked(attacked,false);
-}
-
 void Player::addAttacked(const Player* attacked)
 {
  if(!attacked || attacked==this || hasFlag(PlayerFlag_NotGainInFight) || g_game.getWorldType()!=WORLD_TYPE_PVP) return;
@@ -3872,14 +3853,6 @@ bool Player::isPartner(const Player* player) const
 		return false;
 	}
 	return party == player->party;
-}
-
-bool Player::isGuildMate(const Player* player) const
-{
-	if (!player || !guild) {
-		return false;
-	}
-	return guild == player->guild;
 }
 
 void Player::sendPlayerPartyIcons(Player* player)

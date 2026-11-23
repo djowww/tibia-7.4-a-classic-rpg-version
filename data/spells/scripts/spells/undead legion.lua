@@ -7,7 +7,7 @@ setCombatArea(combat, area)
 function onTargetCorpse(cid, pos)
     local getPos = pos
     getPos.stackpos = 255
-    corpse = getThingfromPos(getPos)
+    local corpse = getThingfromPos(getPos)
     if(corpse.uid > 0 and isCorpse(corpse.uid) and isMoveable(corpse.uid) and getPlayerSkullType(cid) ~= 5) then
        
  

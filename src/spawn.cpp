@@ -204,11 +204,6 @@ bool Spawn::findPlayer(const Position& pos)
 	return false;
 }
 
-bool Spawn::isInSpawnZone(const Position& pos)
-{
-	return Spawns::isInZone(centerPos, radius, pos);
-}
-
 bool Spawn::spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& pos, Direction dir, bool startup /*= false*/)
 {
 	std::unique_ptr<Monster> monster_ptr(new Monster(mType));

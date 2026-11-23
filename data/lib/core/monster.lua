@@ -1,7 +1,3 @@
-function Monster.getMonster(self)
-	return self:isMonster() and self or nil
-end
-
 function Monster.isItem(self)
 	return false
 end

@@ -259,11 +259,9 @@ class LuaScriptInterface
 		static void pushThing(lua_State* L, Thing* thing);
 		static void pushVariant(lua_State* L, const LuaVariant& var);
 		static void pushString(lua_State* L, const std::string& value);
-		static void pushCallback(lua_State* L, int32_t callback);
 		static void pushCylinder(lua_State* L, Cylinder* cylinder);
 
 		static std::string popString(lua_State* L);
-		static int32_t popCallback(lua_State* L);
 
 		// Userdata
 		template<class T>

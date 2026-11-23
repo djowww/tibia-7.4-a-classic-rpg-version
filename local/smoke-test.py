@@ -27,7 +27,7 @@ def check_list(modulus):
     plain = Writer().u8(0)
     for value in key:
         plain.u32(value)
-    plain.u32(1).string('local123').u16(0)
+    plain.u32(2).string('local123').u16(0)
     packet = Writer().u8(1).u16(11).u16(772).raw(bytes(12)).string('Antigas-26').raw(rsa_block(plain.data, modulus)).data
     with socket.create_connection(('127.0.0.1', 17173), timeout=15) as sock:
         sock.sendall(Writer().u16(len(packet)).raw(packet).data)
@@ -47,7 +47,7 @@ def check_list(modulus):
 
 async def check_game(modulus):
     decoder = Decoder(load_items(Path('data/items/items.srv')))
-    s = await Session.connect('127.0.0.1', 17174, LoginCredentials(1, 'Local Adventurer', 'local123'), modulus, decoder)
+    s = await Session.connect('127.0.0.1', 17174, LoginCredentials(2, 'Local Adventurer', 'local123'), modulus, decoder)
     task = asyncio.create_task(s.receive())
     try:
         for _ in range(100):

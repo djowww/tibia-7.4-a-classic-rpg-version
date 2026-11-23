@@ -39,9 +39,14 @@ local player={getAccountId=function() return 1 end,getGuid=function() return 1 e
  getStorageValue=function(_,k) return storage[k] or -1 end,setStorageValue=function(_,k,v) storage[k]=v end}
 check('shop catalogs omit retired offers and empty categories; original offers remain',function()
  dofile('data/creaturescripts/scripts/shop.lua')
- sendJSON=function(_,action,data) requests[action]=data end
- sendMessage=function(_,_,text) requests.message=text end
- init()
+ -- Shop helpers are file-local; reach them through the handler's upvalues.
+ local shopProcessBuy=upvalue(onExtendedOpcode,'processBuy')
+ replaceUpvalue(onExtendedOpcode,'sendJSON',function(_,action,data) requests[action]=data end)
+ replaceUpvalue(shopProcessBuy,'sendMessage',function(_,_,text) requests.message=text end)
+ for _,name in ipairs({'init','addCategory','getPoints','sendJSON','sendMessage','processBuy','sendHistory','defaultItemBuyAction'}) do
+  assert(rawget(_G,name)==nil,'shop helper leaked into the global namespace: '..name)
+ end
+ upvalue(onExtendedOpcode,'init')()
  assert(onExtendedOpcode(player,201,json.encode({action='init',data={}})))
  local categories=requests.categories
  assert(#categories==3,'Premium Points, Regeneration Items and Utilities must have offers')
@@ -63,8 +68,9 @@ end)
 check('shop direct retired purchase never reads or debits points',function()
  local categories=requests.categories
  categories[1].offers[1].itemId=3157 -- simulate an old cached offer.
- getPoints=function() error('retired purchases must reject before reading/debiting funds') end
- processBuy(player,{category=1,offer=1,title=categories[1].offers[1].title,cost=categories[1].offers[1].cost})
+ local shopProcessBuy=upvalue(onExtendedOpcode,'processBuy')
+ replaceUpvalue(shopProcessBuy,'getPoints',function() error('retired purchases must reject before reading/debiting funds') end)
+ shopProcessBuy(player,{category=1,offer=1,title=categories[1].offers[1].title,cost=categories[1].offers[1].cost})
  assert(requests.message and requests.message:lower():find('unavailable',1,true))
 end)
 WEAPON_SHIELD,WEAPON_AMMO,WEAPON_WAND=4,7,6
@@ -220,14 +226,6 @@ check('economy rejects retired grants before creating inventory objects',functio
  Game={createItem=function() calls=calls+1;error('retired grant must stop before native creation') end}
  assert(Economy.run(subject,function(ctx) return ctx:give(3157,1) end)==false)
  assert(calls==0)
-end)
-check('retired arena reward neither consumes chest entitlement nor dereferences nil',function()
- dofile('data/actions/scripts/arena/arenachest.lua')
- local subject={getStorageValue=function() return -1 end,getVocation=function() return {getId=function() return 1 end} end,
-  addItem=function() error('retired reward must never attempt grant') end,setStorageValue=function() error('chest entitlement must remain untouched') end,
-  sendTextMessage=function() end}
- MESSAGE_INFO_DESCR=1
- assert(onUse(subject,{getMovementId=function() return 7100 end,getPosition=function() return {sendMagicEffect=function() end} end}))
 end)
 check('retired achievement reward preserves qualification, skills and bonuses',function()
  SKILL_FIST,SKILL_CLUB,SKILL_SWORD,SKILL_AXE,SKILL_DISTANCE,SKILL_SHIELD,SKILL_MAGLEVEL,SKILL_LEVEL=0,1,2,3,4,5,7,8

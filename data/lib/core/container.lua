@@ -35,7 +35,7 @@ function Container.createLootItem(self, item)
 	end
 
 	local itemCount = 0
-	local randvalue = getLootRandom()
+	local randvalue = math.random(0, 99999)
 	if randvalue < item.chance then
 		if ItemType(item.itemId):isStackable() then
 			itemCount = randvalue % item.maxCount + 1

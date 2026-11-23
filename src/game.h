@@ -426,7 +426,6 @@ class Game
 		void changeLight(const Creature* creature);
 		void updateCreatureSkull(const Creature* player);
 		void updatePlayerShield(Player* player);
-		void updateCreatureWalkthrough(const Creature* creature);
 
 		GameState_t getGameState() const;
 		void setGameState(GameState_t newState);
@@ -475,8 +474,6 @@ class Game
 		const std::string& getMotdHash() const { return motdHash; }
 		uint32_t getMotdNum() const { return motdNum; }
 		void incrementMotdNum() { motdNum++; }
-		
-		void sendOfflineTrainingDialog(Player* player);
 
 		const std::unordered_map<uint32_t, RuleViolation>& getRuleViolationReports() const { return ruleViolations; }
 		const std::unordered_map<uint32_t, Player*>& getPlayers() const { return players; }
@@ -546,7 +543,6 @@ class Game
 		std::map<uint32_t, BedItem*> bedSleepersMap;
 
 		Commands commands;
-		ModalWindow offlineTrainingWindow;
 
 		static constexpr int32_t LIGHT_LEVEL_DAY = 250;
 		static constexpr int32_t LIGHT_LEVEL_NIGHT = 40;

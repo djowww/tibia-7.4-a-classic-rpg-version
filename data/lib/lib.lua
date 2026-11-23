@@ -10,9 +10,6 @@ dofile('data/lib/modalwindow.lua')
 -- Crash-safe inventory/SQL changes for purchases and currency exchange.
 dofile('data/lib/custom/economy.lua')
 
--- Online Time System
-dofile('data/lib/custom/onlineTime.lua')
-
 -- Persistent online bonus and fixed-point fractional gain accounting.
 dofile('data/lib/custom/onlineBonus.lua')
 

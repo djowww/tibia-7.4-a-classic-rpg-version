@@ -9,6 +9,41 @@ local SHOP_AD = { -- can be nil
 	text = ""
 }
 
+-- Every helper stays local: this file shares one Lua state with all other
+-- scripts, so generic global names such as init or sendMessage could be
+-- silently overwritten by (or overwrite) unrelated code.
+local init, addCategory, getPoints, getStatus, sendJSON, sendMessage
+local processBuy, sendHistory
+local defaultItemBuyAction, defaultPremiumBuyAction, defaultOutfitBuyAction
+local defaultImageBuyAction
+
+-- Request throttling lives in memory. Player storages are persisted to the
+-- database, which made every Shop click produce a storage write.
+local STATUS_INTERVAL = 10
+local HISTORY_INTERVAL = 10
+local THROTTLE_CLEANUP_INTERVAL = 60
+local throttles = {}
+local lastThrottleCleanup = 0
+
+local function throttleOf(player)
+	local now, guid = os.time(), player:getGuid()
+	if now - lastThrottleCleanup >= THROTTLE_CLEANUP_INTERVAL then
+		lastThrottleCleanup = now
+		for id, entry in pairs(throttles) do
+			if entry.seen < now - THROTTLE_CLEANUP_INTERVAL then
+				throttles[id] = nil
+			end
+		end
+	end
+	local entry = throttles[guid]
+	if not entry then
+		entry = {}
+		throttles[guid] = entry
+	end
+	entry.seen = now
+	return entry, now
+end
+
 function init()
 	SHOP_CATEGORIES = {}
 	
@@ -159,10 +194,11 @@ end
 
 function sendJSON(player, action, data, forceStatus)
 	local status = nil
-	if not player:getStorageValue(1150001) or player:getStorageValue(1150001) + 10 < 	os.time() or forceStatus then
-      status = getStatus(player)
+	local throttle, now = throttleOf(player)
+	if not throttle.status or throttle.status + STATUS_INTERVAL < now or forceStatus then
+		status = getStatus(player)
 	end
-	player:setStorageValue(1150001, os.time())
+	throttle.status = now
 
 	local msg = NetworkMessage()
 	msg:addByte(50)
@@ -188,9 +224,11 @@ function onExtendedOpcode(player, opcode, buffer)
 
 	local action = json_data['action']
 	local data = json_data['data']
-	local now,key=os.time(),json_data.action=='buy' and 1150004 or 1150003
-	if player:getStorageValue(key)==now then return false end
-	player:setStorageValue(key,now)
+	-- At most one purchase and one other request per second.
+	local throttle, now = throttleOf(player)
+	local key = action == 'buy' and 'buy' or 'read'
+	if throttle[key] == now then return false end
+	throttle[key] = now
 	if not action or not data then
 		return false
 	end
@@ -245,10 +283,11 @@ function processBuy(player, data)
 end
 
 function sendHistory(player)
-  if player:getStorageValue(1150002) and player:getStorageValue(1150002) + 10 > os.time() then
+  local throttle, now = throttleOf(player)
+  if throttle.history and throttle.history + HISTORY_INTERVAL > now then
     return -- min 10s delay
   end
-  player:setStorageValue(1150002, os.time())
+  throttle.history = now
 
   local history = {}
 	local resultId = db.storeQuery("SELECT `details`, `title`, `cost`, `date` FROM `shop_history` WHERE `account` = " .. player:getAccountId() .. " order by `id` DESC LIMIT 50")
@@ -304,8 +343,4 @@ end
 
 function defaultImageBuyAction(player, offer)
   return "default image buy action is not implemented"
-end
-
-function customImageBuyAction(player, offer)
-  return "custom image buy action is not implemented. Offer: " .. offer['title']
 end

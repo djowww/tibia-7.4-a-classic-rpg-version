@@ -1,5 +1,5 @@
-DISABLE_CONTAINER_WEIGHT = 0 -- 0 = ENABLE CONTAINER WEIGHT CHECK | 1 = DISABLE CONTAINER WEIGHT CHECK
-CONTAINER_WEIGHT = 1000000 -- 1000000 = 10k = 10000.00 oz | this function is only for containers, item below the weight determined here can be moved inside the container, for others items look game.cpp at the src
+local DISABLE_CONTAINER_WEIGHT = 0 -- 0 = ENABLE CONTAINER WEIGHT CHECK | 1 = DISABLE CONTAINER WEIGHT CHECK
+local CONTAINER_WEIGHT = 1000000 -- 1000000 = 10k = 10000.00 oz | this function is only for containers, item below the weight determined here can be moved inside the container, for others items look game.cpp at the src
 
 function Player:onLook(thing, position, distance)
 	local description = "You see " .. thing:getDescription(distance)
@@ -85,12 +85,13 @@ function Player:onLookInTrade(partner, item, distance)
 end
 
 function Player:onMoveItem(item, count, fromPosition, toPosition, fromCylinder, toCylinder)
-	local t = fromCylinder and Tile(fromCylinder:getPosition())
+	-- Only a move into a container can be loot, so the tile is looked up just then.
+	local t = toPosition.x == CONTAINER_POSITION and fromCylinder and Tile(fromCylinder:getPosition())
 	local corpse = t and t:getTopDownItem()
 	
 	if corpse then
 		local itemType = corpse:getType()
-		if (itemType:isCorpse() or corpse:isRecoveryCorpse()) and toPosition.x == CONTAINER_POSITION then
+		if itemType:isCorpse() or corpse:isRecoveryCorpse() then
 			self:checkAnalyzerLootItem(item:getId(), count)
 			
 			local dropAnalyzer = {}
@@ -144,7 +145,7 @@ function Player:onReportBug(message, position, category)
 
 	file:write("------------------------------\n")
 	file:write("Name: " .. name)
-	if category == BUG_CATEGORY_MAP then
+	if position then
 		file:write(" [Map position: " .. position.x .. ", " .. position.y .. ", " .. position.z .. "]")
 	end
 	local playerPosition = self:getPosition()
@@ -187,6 +188,10 @@ function Player:onGainExperience(source, exp, rawExp)
   soulCondition:setParameter(CONDITION_PARAM_SOULTICKS, vocation:getSoulGainTicks() * 1000)
   self:addCondition(soulCondition)
  end
+ -- Online bonus and completed bestiaries add their percentage to monster kills.
+ if source and not source:isPlayer() then
+  exp = exp + self:applyOnlineStayBonus(exp, ONLINE_STAY_BONUS_XP_REMAINDER_STORAGE) + self:applyBestiaryExperienceBonus(exp)
+ end
  self:addAnalyzerExp(exp, math.max(0, getExpForLevel(self:getLevel() + 1) - self:getExperience() - exp))
  return exp
 end
@@ -196,7 +201,8 @@ function Player:onLoseExperience(exp)
 end
 
 function Player:onGainSkillTries(skill, tries)
- return tries
+ -- The online bonus also applies to skill and magic level training.
+ return tries + self:applyOnlineStayBonus(tries, ONLINE_STAY_BONUS_SKILL_REMAINDER_BASE + skill)
 end
 
 function Player:onUseItem(item, target)

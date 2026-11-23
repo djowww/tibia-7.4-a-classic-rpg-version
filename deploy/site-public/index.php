@@ -12,7 +12,7 @@ require __DIR__.'/i18n.php';
 $language=siteStartI18n();
 function e(string $v): string { return htmlspecialchars($v,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8'); }
 $message='';$messageType='info';$accountName='';$email='';$characterName='';$sex='1';
-$downloadUrl='https://tibia74.tech/Antigas-7.4-Launcher-v76.zip?site=login-fix-v76-20261016';
+$downloadUrl='https://tibia74.tech/Antigas-7.4-Launcher-v78.zip';
 if ($_SERVER['REQUEST_METHOD']==='POST') {
     $accountName=trim(webField('account_name',9));
     $email=trim(webField('email',255));
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
       <p class="motto"><?= siteTHtml('A world of adventures.<br><span>Like the old days.</span>') ?></p>
     </header>
     <nav class="topnav" aria-label="<?= siteT('Main navigation') ?>">
-      <a href="#inicio" aria-current="page"><?= siteT('Home') ?></a><a href="#noticias"><?= siteT('News') ?></a><a href="#mundo"><?= siteT('The world') ?></a><a href="#market">Market</a><a href="/account.php"><?= siteT('My account') ?></a><a href="#criar-conta"><?= siteT('Create account') ?></a><a href="#download"><?= siteT('Download') ?></a>
+      <a href="#inicio" aria-current="page"><?= siteT('Home') ?></a><a href="#noticias"><?= siteT('News') ?></a><a href="#mundo"><?= siteT('The world') ?></a><a href="#market">Market</a><a href="/account.php"><?= siteT('My account') ?></a><a href="#criar-conta"><?= siteT('Create account') ?></a><a href="#download"><?= siteT('Download') ?></a><a href="https://discord.gg/CVneyh53mZ">Discord</a>
     </nav>
     <?= siteLanguageSwitcher() ?>
   </div>
@@ -87,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
         <a href="#primeiros-passos"><?= siteT('Getting started') ?></a>
         <a href="/wiki.php" aria-label="<?= siteT('Game wiki') ?>"> <?= siteT('Game wiki') ?> ↗</a>
         <a href="#sobre"><?= siteT('About Antigas') ?></a>
+        <a href="https://discord.gg/CVneyh53mZ">Discord ↗</a>
         <div class="side-rule" aria-hidden="true"></div>
         <p class="side-signature">Antigas<span>7.4</span></p>
       </nav>
@@ -97,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
       </section>
       <nav class="side-news" aria-label="<?= siteT('Featured news') ?>">
         <h2><?= siteT('On the notice board') ?></h2>
+        <a href="#client-v78"><?= siteT('Client v78: friendlier NPCs, the original map and a fresh start') ?><time datetime="2026-11-23"><?= siteT('23 Nov 2026') ?></time></a>
         <a href="#coins-v75"><?= siteT('Antigas Coins return in client v75') ?><time datetime="2026-10-15"><?= siteT('15 Oct 2026 · Client v75') ?></time></a>
         <a href="#client-v72"><?= siteT('Classic items only in client v72') ?><time datetime="2026-10-14"><?= siteT('14 Oct 2026') ?></time></a>
         <a href="#client-v71"><?= siteT('Reference 7.4 sprites restored in client v71') ?><time datetime="2026-10-14"><?= siteT('14 Oct 2026') ?></time></a>
@@ -133,6 +135,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
       <details class="classic-index news-index">
         <summary><?= siteT('News index') ?></summary>
         <nav aria-label="<?= siteT('News index') ?>">
+          <a href="#client-v78"><?= siteT('Client v78: friendlier NPCs, the original map and a fresh start') ?><time datetime="2026-11-23"><?= siteT('23 Nov 2026') ?></time></a>
           <a href="#coins-v75"><?= siteT('Antigas Coins return in client v75') ?><time datetime="2026-10-15"><?= siteT('15 Oct 2026 · Client v75') ?></time></a>
           <a href="#client-v72"><?= siteT('Classic items only in client v72') ?><time datetime="2026-10-14"><?= siteT('14 Oct 2026') ?></time></a>
         <a href="#client-v71"><?= siteT('Reference 7.4 sprites restored in client v71') ?><time datetime="2026-10-14"><?= siteT('14 Oct 2026') ?></time></a>
@@ -153,6 +156,15 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
           <a href="#mundo"><?= siteT('The world is open for new adventures') ?><time datetime="2026-09-23"><?= siteT('23 Sep 2026') ?></time></a>
         </nav>
       </details>
+      <article id="client-v78" class="news-article update-article">
+        <header class="news-ribbon"><h3><?= siteT('Client v78: friendlier NPCs, the original map and a fresh start') ?></h3><time datetime="2026-11-23"><?= siteT('23 Nov 2026 · Client v78') ?></time></header>
+        <div class="news-body">
+          <p class="dropcap"><?= siteT('The public server was rebuilt with a new database. Accounts from the old server no longer exist: create a new account below and download launcher v78.') ?></p>
+          <ul class="gold-list"><li><?= siteT('New NPC trade window: say hi, then trade, and pick items in a grid.') ?></li><li><?= siteT('A chat balloon above NPCs: click it to say hi.') ?></li><li><?= siteT('Right-clicking an NPC now greets it instead of attacking.') ?></li><li><?= siteT('NPCs have a blue health bar, so they stand out from monsters.') ?></li><li><?= siteT('Drinking water gives +1 mana every 10 seconds for 1 hour.') ?></li><li><?= siteT('The map is back to the original 7.4: trainers, Yalahar, custom islands, the arena and horses were removed.') ?></li><li><?= siteT('New minimap with markers for temples, banks, shops, quests and stairs.') ?></li><li><?= siteT('The client now comes only in the OpenGL version (Antigas_gl.exe); the DirectX version was removed.') ?></li><li><?= siteT('Widescreen fix and smoother walking when your ping is high.') ?></li><li><?= siteT('The Discord button in the client opens our new community server.') ?></li></ul>
+          <p><?= siteT('Coming soon: a Game Wiki book inside the client, with Bestiary, Itempedia and a Hunting Guide.') ?></p>
+          <p><a href="https://discord.gg/CVneyh53mZ"><?= siteT('Questions, bugs or ideas? Join us on Discord.') ?></a></p>
+        </div>
+      </article>
       <article id="coins-v75" class="news-article update-article">
         <header class="news-ribbon"><h3><?= siteT('Antigas Coins return in client v75') ?></h3><time datetime="2026-10-15"><?= siteT('15 Oct 2026 · Client v75') ?></time></header>
         <div class="news-body">
@@ -303,7 +315,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
       <section class="content-section" id="primeiros-passos">
         <h4><?= siteT('Begin your journey') ?></h4>
         <p><?= siteT('From the streets of Thais to the tunnels of Rookgaard, rediscover a world of exploration. No shortcuts: a rope, a torch and curiosity are a good start.') ?></p>
-        <p><?= siteTHtml('Create your account and first character here. Then download the client, extract the archive and open <strong>Antigas_gl.exe</strong>. The server address is already configured.') ?></p>
+        <p><?= siteTHtml('Create your account and first character here. Then download launcher v78, extract the archive and open <strong>AntigasLauncher.exe</strong>: it installs the client and starts <strong>Antigas_gl.exe</strong>. The server address is already configured.') ?></p>
       </section>
       </article>
 

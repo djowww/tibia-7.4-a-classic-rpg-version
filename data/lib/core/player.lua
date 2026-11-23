@@ -28,14 +28,6 @@ function Player.getClosestFreePosition(self, position, extended)
 	return Creature.getClosestFreePosition(self, position, extended)
 end
 
-function Player.getDepotItems(self, depotId)
-	return self:getDepotChest(depotId, true):getItemHoldingCount()
-end
-
-function Player.isNoVocation(self)
-	return self:getVocation():getId() == 0
-end
-
 function Player.isSorcerer(self)
 	return self:getVocation():getId() == 1 or self:getVocation():getId() == 5
 end
@@ -46,10 +38,6 @@ end
 
 function Player.isPaladin(self)
 	return self:getVocation():getId() == 3 or self:getVocation():getId() == 7
-end
-
-function Player.isMage(self)
-	return isInArray({1, 2, 5, 6}, self:getVocation():getId())
 end
 
 function Player.isKnight(self)
@@ -65,10 +53,6 @@ function Player.sendCancelMessage(self, message)
 		message = Game.getReturnMessage(message)
 	end
 	return self:sendTextMessage(MESSAGE_STATUS_SMALL, message)
-end
-
-function Player.isUsingOtClient(self)
-	return self:getClient().os >= CLIENTOS_OTCLIENT_LINUX
 end
 
 function Player.sendExtendedOpcode(self, opcode, buffer)

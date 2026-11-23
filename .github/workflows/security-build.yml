@@ -135,7 +135,7 @@ jobs:
       - name: Install LuaJIT syntax checker
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends -y luajit php-cli
+          sudo apt-get install --no-install-recommends -y luajit lua-check php-cli
 
       - name: Parse tracked PHP files
         shell: bash
@@ -168,6 +168,15 @@ jobs:
               luajit -b "$file" /dev/null
             fi
           done < <(git ls-files -z -- '*.lua')
+
+      - name: Lint Lua scripts for undefined names and leaked globals
+        run: python3 tools/check_lua_lint.py
+
+      - name: Run map tile teleport and quest flag tests
+        run: luajit tests/map-tiles-tests.lua
+
+      - name: Run minimap guide mark tests
+        run: luajit tests/minimap-guide-marks-tests.lua
 
       - name: Run player bar UI regression tests
         run: luajit tests/playerbars-ui-tests.lua

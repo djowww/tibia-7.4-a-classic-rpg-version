@@ -87,25 +87,6 @@ bool DatabaseManager::isDatabaseSetup(bool* querySucceeded)
 	return result != nullptr;
 }
 
-int32_t DatabaseManager::getDatabaseVersion()
-{
-	bool querySucceeded = false;
-	const bool configTableExists = tableExists("server_config", &querySucceeded);
-	if (!querySucceeded) return -1;
-	if (!configTableExists) {
-		Database* db = Database::getInstance();
-		db->executeQuery("CREATE TABLE `server_config` (`config` VARCHAR(50) NOT NULL, `value` VARCHAR(256) NOT NULL DEFAULT '', UNIQUE(`config`)) ENGINE = InnoDB");
-		db->executeQuery("INSERT INTO `server_config` VALUES ('db_version', 0)");
-		return 0;
-	}
-
-	int32_t version = 0;
-	if (getDatabaseConfig("db_version", version)) {
-		return version;
-	}
-	return -1;
-}
-
 bool DatabaseManager::getDatabaseConfig(const std::string& config, int32_t& value, bool* querySucceeded)
 {
 	if (querySucceeded) *querySucceeded = false;
@@ -126,23 +107,3 @@ bool DatabaseManager::getDatabaseConfig(const std::string& config, int32_t& valu
 	return true;
 }
 
-void DatabaseManager::registerDatabaseConfig(const std::string& config, int32_t value)
-{
-	Database* db = Database::getInstance();
-	std::ostringstream query;
-	std::string escapedConfig;
-	if (!db->escapeString(config, escapedConfig)) return;
-
-	int32_t tmp;
-	bool querySucceeded = false;
-	const bool configExists = getDatabaseConfig(config, tmp, &querySucceeded);
-	if (!querySucceeded) return;
-
-	if (!configExists) {
-		query << "INSERT INTO `server_config` VALUES (" << escapedConfig << ", '" << value << "')";
-	} else {
-		query << "UPDATE `server_config` SET `value` = '" << value << "' WHERE `config` = " << escapedConfig;
-	}
-
-	db->executeQuery(query.str());
-}

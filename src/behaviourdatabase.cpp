@@ -1331,6 +1331,10 @@ void BehaviourDatabase::attendCustomer(uint32_t playerId)
 {
 	std::lock_guard<std::recursive_mutex> lock(mutex);
 
+	if (tradePlayer != 0 && tradePlayer != playerId) {
+		closeTrade();
+	}
+
 	reset();
 	npc->conversationStartTime = OTSYS_TIME();
 	npc->conversationEndTime = OTSYS_TIME() + 60000;
@@ -1356,6 +1360,8 @@ void BehaviourDatabase::queueCustomer(uint32_t playerId, const std::string& mess
 void BehaviourDatabase::idle()
 {
 	std::lock_guard<std::recursive_mutex> lock(mutex);
+
+	closeTrade();
 
 	if (queueList.empty()) {
 		if (OTSYS_TIME() - npc->conversationStartTime <= 3000) {

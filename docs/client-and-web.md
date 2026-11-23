@@ -10,6 +10,41 @@ O snapshot versionado agora usa o perfil local, com login em `127.0.0.1:17173`. 
 
 Copie também `client.version` ao integrar o snapshot: o launcher consulta esse marcador antes de `APP_VERSION` em `init.lua`. O empacotador atualiza ambos e as instruções com a versão solicitada; cada execução exige uma pasta de saída nova.
 
+## Minimapa completo
+
+[deploy/client-current/data/minimap.otmm](../deploy/client-current/data/minimap.otmm) é o minimapa do mundo inteiro, com os 16 andares já revelados. O cliente carrega `data/minimap.otmm` antes do arquivo de minimapa do próprio jogador, então todo personagem começa com o mapa aberto. As marcações feitas pelo jogador continuam salvas à parte.
+
+O arquivo é gerado a partir do mapa do servidor e do `Tibia.dat` do cliente 7.72, com as mesmas cores, bloqueios e velocidades que o cliente gravaria ao explorar cada tile:
+
+```sh
+python3 tools/generate-minimap.py --dat caminho/para/data/things/772/Tibia.dat --out deploy/client-current/data/minimap.otmm
+```
+
+Gere de novo sempre que `data/world/map.otbm` mudar. O pacote local inclui o arquivo automaticamente; ao montar a distribuição de produção, copie-o para a pasta `data/` do cliente.
+
+## Marcações prontas no minimapa
+
+[deploy/client-current/data/minimap-markers.txt](../deploy/client-current/data/minimap-markers.txt) traz as marcações que todo jogador já vê no minimapa, uma por linha no formato `x,y,z,ícone,descrição`:
+
+| Ícone | O que marca |
+| --- | --- |
+| Seta para cima | Escadas, rampas, escadas de mão e pontos de corda que sobem |
+| Seta para baixo | Buracos, escadas e grades que descem |
+| Bolsa | NPCs que negociam runas, wands ou blank runes |
+| Espada | NPCs que negociam armas, armaduras ou escudos |
+| Lança | NPCs que negociam arcos, flechas, bolts ou lanças |
+| Cifrão | NPCs com serviço de banco |
+| Cruz | Templo de cada cidade |
+| Exclamação | Baús de quest |
+
+As posições saem dos dados do servidor (mapa, scripts de troca de andar, arquivos dos NPCs e `items.srv`):
+
+```sh
+python3 tools/generate-minimap-markers.py
+```
+
+Gere de novo quando o mapa ou os NPCs mudarem. O cliente lê o arquivo em [uiminimap.lua](../deploy/client-current/modules/gamelib/ui/uiminimap.lua) e cria só as marcações próximas da câmera, no andar atual. As setas aparecem a partir do zoom normal; lojas, bancos, templos e quests continuam visíveis com o mapa mais afastado. Elas não são gravadas nas configurações do jogador, então as marcações criadas por ele continuam funcionando como antes, e o menu do botão direito no minimapa tem a opção de esconder ou mostrar as marcações prontas. Ao montar a distribuição de produção, copie o arquivo para a pasta `data/` do cliente junto com o `minimap.otmm`.
+
 ## Launcher Windows
 
 O [projeto do launcher](../deploy/launcher/AntigasLauncher/AntigasLauncher.csproj) usa Windows Forms, .NET 10 e runtime `win-x64`. Em Windows com o SDK .NET 10, execute na raiz do repositório:

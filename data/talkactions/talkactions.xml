@@ -54,13 +54,10 @@
 	
 	<talkaction words="!pz" script="pz.lua" permission="public" />
 	
-	<!-- <talkaction words="!cast" separator=" " script="cast.lua"/> -->
 
 	<!-- test talkactions -->
 	<talkaction words="!z" separator=" " script="magiceffect.lua" permission="access" />
 	<talkaction words="!x" separator=" " script="animationeffect.lua" permission="access" />
 	<!-- Legacy auction has no database schema and unsafe withdrawals. Keep offline. -->
-	<!-- <talkaction words="!offer" separator=" " script="auctionsystem.lua"/> -->
 	<!-- Legacy war command requires absent guild balance/payment columns. -->
-	<!-- <talkaction words="!war" separator=" " script="war_system.lua" /> -->
 </talkactions>

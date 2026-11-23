@@ -1,6 +1,6 @@
 Module
   name: game_wiki
-  description: Monster bestiary and kill progress
+  description: Game Wiki - bestiary with kill progress, items, hunting places and bosses
   author: bowt
   reloadable: true
   sandboxed: true

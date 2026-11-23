@@ -1,4 +1,4 @@
--- Empty local test schema. No production data. Demo login: 1 / local123
+-- Empty local test schema. No production data. Dev login (GOD): 1 / 1. Demo login: 2 / local123
 SET FOREIGN_KEY_CHECKS=0;
 CREATE TABLE `accounts` (
   `id` int(11) NOT NULL,
@@ -406,8 +406,9 @@ CREATE TABLE `tile_store` (
 SET FOREIGN_KEY_CHECKS=1;
 
 INSERT INTO server_config VALUES ('db_version','0');
-INSERT INTO accounts (id,password,type,premdays) VALUES (1,SHA1('local123'),1,0);
+INSERT INTO accounts (id,password,type,premdays) VALUES (1,SHA1('1'),5,0),(2,SHA1('local123'),1,0);
 INSERT INTO players (id,name,account_id,group_id,town_id,posx,posy,posz,cap,conditions,comment,sex,looktype)
- VALUES (1,'Local Adventurer',1,1,11,32097,32219,7,400,X'','Local demo character',1,128);
+ VALUES (1,'Local Adventurer',2,1,11,32097,32219,7,400,X'','Local demo character',1,128),
+ (2,'Dev',1,3,1,32369,32241,7,400,X'','Local developer character',1,75);
 INSERT INTO player_items (player_id,pid,sid,itemtype,count,attributes) VALUES
  (1,3,101,2854,1,X''),(1,4,102,3562,1,X''),(1,6,103,3270,1,X''),(1,7,104,3559,1,X''),(1,101,105,3577,5,X'');

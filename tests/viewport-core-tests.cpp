@@ -263,7 +263,7 @@ static void preservedGameplayLimits(Fixture& fixture, bool wide)
 	require(Map::maxViewportX == 11 && Map::maxViewportY == 11, "ordinary discovery and spawn limits must remain unchanged");
 	require(fixture.player.canSee(Position(1009, 1000, 7)), "native protocol keeps the east walking margin visible");
 	require(fixture.player.canSee(Position(1015, 1000, 7)) == wide, "only acknowledged wide protocol sees the wider map");
-	require(!fixture.player.canSee(Position(1017, 1000, 7)), "maximal wide viewport must reject positions beyond its own buffer");
+	require(!fixture.player.canSee(Position(1018, 1000, 7)), "maximal wide viewport must reject positions beyond its own buffer");
 	Actions actions;
 	for (int sign : {-1, 1}) {
 		require(actions.canUseFar(&fixture.player, Position(1000+sign*7,1000+sign*5,7), false, true) == RETURNVALUE_NOERROR,
@@ -304,12 +304,12 @@ static void rangeParserAndCooldown(Fixture& fixture)
 	ViewportCoreTestAccess::cooldown(*fixture.protocol,OTSYS_TIME()-1000);
 	DispatcherProbe::drain(g_dispatcher);
 	auto range = ViewportCoreTestAccess::viewport(*fixture.protocol);
-	require(range.x == 15 && range.y == 8, "actual dispatched request must clamp oversized dimensions");
+	require(range.x == 16 && range.y == 9, "actual dispatched request must clamp oversized dimensions");
 	const auto length = fixture.protocol->getCurrentBuffer()->getLength();
 	ViewportCoreTestAccess::cooldown(*fixture.protocol,OTSYS_TIME()+1000);
 	ViewportCoreTestAccess::change(*fixture.protocol,16,12);
 	range = ViewportCoreTestAccess::viewport(*fixture.protocol);
-	require(range.x == 15 && range.y == 8, "actual rate-limited request must leave the acknowledged viewport intact");
+	require(range.x == 16 && range.y == 9, "actual rate-limited request must leave the acknowledged viewport intact");
 	require(fixture.protocol->getCurrentBuffer()->getLength() == length, "actual cooldown must not acknowledge an unapplied viewport");
 	ViewportCoreTestAccess::cooldown(*fixture.protocol,OTSYS_TIME()-1000);
 	ViewportCoreTestAccess::change(*fixture.protocol,0,0);
@@ -352,7 +352,7 @@ int main(int argc, char** argv)
 			CreatureEvents creatureEvents;
 			g_events = &events; g_moveEvents = &moves; g_creatureEvents = &creatureEvents;
 			{
-				Fixture fixture(mode == "wide" ? 30 : 16, mode == "wide" ? 16 : 12);
+				Fixture fixture(mode == "wide" ? 32 : 16, mode == "wide" ? 18 : 12);
 				sightAndNotifications(fixture);
 				rangedAttackAndLineOfSight(fixture);
 				preservedGameplayLimits(fixture,mode == "wide");

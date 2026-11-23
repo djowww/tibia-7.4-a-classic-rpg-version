@@ -101,8 +101,7 @@ internal sealed class LauncherForm : Form
         {
             _status.Text = "O jogo já está aberto."; _detail.Text = "Feche a outra janela do Antigas antes de abrir novamente."; _play.Enabled = false; return;
         }
-        var gl = Path.Combine(_root, "Antigas_gl.exe"); var dx = Path.Combine(_root, "Antigas_dx.exe");
-        var exe = File.Exists(gl) ? gl : dx;
+        var exe = Path.Combine(_root, "Antigas_gl.exe");
         if (!File.Exists(exe))
         {
             _status.Text = "Os arquivos do jogo não foram encontrados."; _detail.Text = "Clique em Verificar novamente para baixar o cliente."; _play.Enabled = false; return;

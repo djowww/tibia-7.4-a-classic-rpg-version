@@ -1,6 +1,6 @@
 local combat = Combat()
-combat:setParameter(COMBAT_PARAM_EFFECT, CONST_ME_CARNIPHILA)
-combat:setParameter(COMBAT_PARAM_DISTANCEEFFECT, CONST_ANI_EARTH)
+combat:setParameter(COMBAT_PARAM_EFFECT, CONST_ME_GREEN_RINGS)
+combat:setParameter(COMBAT_PARAM_DISTANCEEFFECT, CONST_ANI_POISON)
 
 
 local castForce = 0

@@ -15,6 +15,20 @@ local function sendBonusMessage(player, completed, action)
 	player:sendTextMessage(MESSAGE_EVENT_ADVANCE, message)
 end
 
+-- Normalized name and storage key of each monster killed so far. Only names of
+-- real monsters reach this cache, so it stays as small as the monster roster.
+local killKeys = {}
+
+local function killKey(name)
+	local entry = killKeys[name]
+	if entry == nil then
+		local storageKey = AntigasBestiary.storageKey(name)
+		entry = storageKey and {storageKey = storageKey, monster = AntigasBestiary.normalizeName(name)} or false
+		killKeys[name] = entry
+	end
+	return entry
+end
+
 function onKill(killer, target)
 	if not killer or not killer:isPlayer() or not target or not target:isMonster() then
 		return true
@@ -24,10 +38,11 @@ function onKill(killer, target)
 		return true
 	end
 
-	local storageKey = AntigasBestiary.storageKey(target:getName())
-	if not storageKey then
+	local entry = killKey(target:getName())
+	if not entry then
 		return true
 	end
+	local storageKey = entry.storageKey
 
 	local kills = math.max(0, math.min(AntigasBestiary.MAX_KILLS, killer:getStorageValue(storageKey)))
 	if kills < AntigasBestiary.MAX_KILLS then
@@ -35,7 +50,7 @@ function onKill(killer, target)
 		killer:setStorageValue(storageKey, kills)
 		local update = {
 			action = "update",
-			monster = AntigasBestiary.normalizeName(target:getName()),
+			monster = entry.monster,
 			kills = kills
 		}
 		if kills == AntigasBestiary.MAX_KILLS then

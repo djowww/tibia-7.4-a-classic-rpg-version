@@ -115,4 +115,35 @@ finally
     Directory.Delete(integratedRoot);
 }
 
+// An update removes the files of the DirectX client that is no longer shipped, and nothing else.
+var obsoleteRoot = Path.Combine(Path.GetTempPath(), "antigas-obsolete-test-" + Guid.NewGuid().ToString("N"));
+try
+{
+    var obsoleteStage = Path.Combine(obsoleteRoot, "stage");
+    var obsoleteInstall = Path.Combine(obsoleteRoot, "install");
+    Directory.CreateDirectory(obsoleteStage);
+    Directory.CreateDirectory(Path.Combine(obsoleteInstall, "data"));
+    File.WriteAllText(Path.Combine(obsoleteStage, "init.lua"), "APP_VERSION = 77\n");
+    File.WriteAllText(Path.Combine(obsoleteStage, "client.version"), "77\n");
+    File.WriteAllText(Path.Combine(obsoleteStage, "Antigas_gl.exe"), "INERT TEST FILE; NEVER EXECUTE");
+    File.WriteAllText(Path.Combine(obsoleteStage, "AntigasLauncher.exe"), "INERT TEST FILE; NEVER EXECUTE");
+    File.WriteAllText(Path.Combine(obsoleteStage, "libEGL.dll"), "still shipped in this test");
+    string[] removed = { "Antigas_dx.exe", "libGLESv2.dll", "d3dcompiler_46.dll" };
+    string[] kept = { "libEGL.dll", "my-notes.txt", Path.Combine("data", "Antigas_dx.exe") };
+    foreach (var name in removed.Concat(kept)) File.WriteAllText(Path.Combine(obsoleteInstall, name), "old " + name);
+    var obsoleteBackup = ClientPackage.ApplyStagedUpdate(obsoleteStage, obsoleteInstall, 77, new Progress<int>(), Path.Combine(obsoleteRoot, "backups"));
+    foreach (var name in removed)
+    {
+        if (File.Exists(Path.Combine(obsoleteInstall, name))) throw new InvalidOperationException("An obsolete client file was left behind: " + name);
+        if (File.ReadAllText(Path.Combine(obsoleteBackup, name)) != "old " + name) throw new InvalidOperationException("An obsolete client file was removed without a backup: " + name);
+    }
+    foreach (var name in kept)
+        if (!File.Exists(Path.Combine(obsoleteInstall, name))) throw new InvalidOperationException("The update removed a file it should keep: " + name);
+    if (File.ReadAllText(Path.Combine(obsoleteInstall, "libEGL.dll")) != "still shipped in this test") throw new InvalidOperationException("A shipped file was not updated.");
+}
+finally
+{
+    if (Directory.Exists(obsoleteRoot)) Directory.Delete(obsoleteRoot, true);
+}
+
 Console.WriteLine("Launcher bounded I/O, staging URL and snapshot overlay regression tests passed");

@@ -611,11 +611,6 @@ void LuaScriptInterface::pushString(lua_State* L, const std::string& value)
 	lua_pushlstring(L, value.c_str(), value.length());
 }
 
-void LuaScriptInterface::pushCallback(lua_State* L, int32_t callback)
-{
-	lua_rawgeti(L, LUA_REGISTRYINDEX, callback);
-}
-
 std::string LuaScriptInterface::popString(lua_State* L)
 {
 	if (lua_gettop(L) == 0) {
@@ -625,11 +620,6 @@ std::string LuaScriptInterface::popString(lua_State* L)
 	std::string str(getString(L, -1));
 	lua_pop(L, 1);
 	return str;
-}
-
-int32_t LuaScriptInterface::popCallback(lua_State* L)
-{
-	return luaL_ref(L, LUA_REGISTRYINDEX);
 }
 
 // Metatables

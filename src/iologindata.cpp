@@ -1041,13 +1041,6 @@ void IOLoginData::loadItems(ItemMap& itemMap, DBResult_ptr result)
 	} while (result->next());
 }
 
-void IOLoginData::increaseBankBalance(uint32_t guid, uint64_t bankBalance)
-{
-	std::ostringstream query;
-	query << "UPDATE `players` SET `balance` = `balance` + " << bankBalance << " WHERE `id` = " << guid;
-	Database::getInstance()->executeQuery(query.str());
-}
-
 bool IOLoginData::hasBiddedOnHouse(uint32_t guid)
 {
 	Database* db = Database::getInstance();

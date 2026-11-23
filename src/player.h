@@ -218,7 +218,6 @@ class Player final : public Creature, public Cylinder
 			guildRank = newGuildRank;
 		}
 
-		bool isGuildMate(const Player* player) const;
 
 		const std::string& getGuildNick() const {
 			return guildNick;
@@ -545,7 +544,6 @@ class Player final : public Creature, public Cylinder
 		bool isImmune(ConditionType_t type) const final;
 		bool hasShield() const;
 		bool isAttackable() const final;
-		static bool lastHitIsPlayer(Creature* lastHitCreature);
 
 		void changeHealth(int32_t healthChange, bool sendHealthChange = true) final;
 		void changeMana(int32_t manaChange) final;
@@ -636,7 +634,6 @@ class Player final : public Creature, public Cylinder
 		time_t getPlayerKillerEnd() const { return playerKillerEnd; }
 		void setPlayerKillerEnd(time_t ticks) { playerKillerEnd = ticks; }
 
-		bool hasAttacked(const Player* attacked) const;
 		void addAttacked(const Player* attacked);
 		void clearAttacked();
 		bool isAttackJustified(const Player* target) const;

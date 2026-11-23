@@ -8,7 +8,7 @@ on:
       tag:
         description: Release tag that holds Tibia74-Local-Client.zip
         required: true
-        default: local-test-v1
+        default: local-test-v2
 
 permissions:
   contents: write

@@ -31,7 +31,6 @@ class BehaviourDatabase;
 class Npcs
 {
 	public:
-		static void loadNpcs();
 		static void reload();
 };
 
@@ -80,7 +79,9 @@ class Npc final : public Creature
 
 		void doSay(const std::string& text);
 
-		void doMoveTo(const Position& pos);
+		void handleTradeRequest(Player* player, size_t index, int32_t count);
+		void closeTradeRequest(Player* player);
+
 
 		int32_t getMasterRadius() const {
 			return masterRadius;

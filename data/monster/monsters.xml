@@ -3,19 +3,8 @@
      
 	 
 	 
-	<!-- ARENA -->
 
-	<monster name="grimgor guteater" file="arena/ultimate/grimgorguteater.xml" />
-	<monster name="drasilla" file="arena/ultimate/drasilla.xml" />
-	<monster name="the dark dancer" file="arena/ultimate/thedarkdancer.xml" />
-	<monster name="spirit of fire" file="arena/ultimate/spiritoffire.xml" />
-	<monster name="tentacles" file="arena/ultimate/tentacles.xml" />
 
-	<monster name="orcus the cruel" file="arena/newbie/orcusthecruel.xml" />
-	<monster name="achad" file="arena/newbie/achad.xml" />
-	<monster name="rocky" file="arena/newbie/rocky.xml" />
-	<monster name="colerian the barbarian" file="arena/newbie/colerianthebarbarian.xml" />
-	<monster name="the hairy one" file="arena/newbie/thehairyone.xml" />
 
 	<monster name="amazon" file="amazon.xml" />
 	<monster name="ancient scarab" file="ancientscarab.xml" />

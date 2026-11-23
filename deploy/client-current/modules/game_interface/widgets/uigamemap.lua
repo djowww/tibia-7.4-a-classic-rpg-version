@@ -169,6 +169,14 @@ function UIGameMap:onMouseRelease(mousePosition, mouseButton)
     return
   end
 
+  -- The speech balloon beside an NPC greets it instead of walking there.
+  local balloon = modules.game_npcballoon
+  if mouseButton == MouseLeftButton and balloon and not g_keyboard.isCtrlPressed() and not g_keyboard.isShiftPressed()
+      and not g_keyboard.isAltPressed() and balloon.onMapClick(self, mousePosition) then
+    self.allowNextRelease = false
+    return true
+  end
+
   local ret = modules.game_interface.processMouseAction(mousePosition, mouseButton, autoWalkPos, lookThing, useThing, creatureThing, attackCreature, self.markingMouseRelease)
   if ret then
     self.allowNextRelease = false

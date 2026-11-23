@@ -4,13 +4,11 @@ worldType = "pvp"
 protectionLevel = 1
 pzLocked = 60000
 removeChargesFromRunes = true
-timeToDecreaseFrags = 6 * 60 * 60 * 1000
 stairJumpExhaustion = 0
 experienceByKillingPlayers = false
 expFromPlayersLevelRange = 75
 hotkeyAimbotEnabled = false
 
-banLength = 3 * 24 * 60 * 60
 whiteSkullTime = 15 * 60 * 1000
 redSkullTime = 30 * 24 * 60 * 60
 killsDayRedSkull = 3
@@ -63,7 +61,6 @@ mysqlPass = ""
 mysqlDatabase = "DATABASE_NAME"
 mysqlPort = 3306
 mysqlSock = ""
-passwordType = "sha1"
 
 allowChangeOutfit = true
 freePremium = false

@@ -19,6 +19,7 @@
 
 #include "otpch.h"
 #include "loot.h"
+#include "behaviourdatabase.h"
 #include "groundrarity.h"
 #include "hunt_supply.h"
 
@@ -51,20 +52,7 @@ extern Vocations g_vocations;
 extern GlobalEvents* g_globalEvents;
 extern Events* g_events;
 
-Game::Game() :
-	offlineTrainingWindow(std::numeric_limits<uint32_t>::max(), "Choose a Skill", "Please choose a skill:")
-{
-	offlineTrainingWindow.choices.emplace_back("Sword Fighting and Shielding", SKILL_SWORD);
-	offlineTrainingWindow.choices.emplace_back("Axe Fighting and Shielding", SKILL_AXE);
-	offlineTrainingWindow.choices.emplace_back("Club Fighting and Shielding", SKILL_CLUB);
-	offlineTrainingWindow.choices.emplace_back("Distance Fighting and Shielding", SKILL_DISTANCE);
-	offlineTrainingWindow.choices.emplace_back("Magic Level and Shielding", SKILL_MAGLEVEL);
-	offlineTrainingWindow.buttons.emplace_back("Okay", 1);
-	offlineTrainingWindow.buttons.emplace_back("Cancel", 0);
-	offlineTrainingWindow.defaultEnterButton = 1;
-	offlineTrainingWindow.defaultEscapeButton = 0;
-	offlineTrainingWindow.priority = true;
-}
+Game::Game() = default;
 
 Game::~Game()
 {
@@ -1718,17 +1706,6 @@ bool Game::playerBroadcastMessage(Player* player, const std::string& text) const
 	}
 
 	return true;
-}
-
-void Game::updateCreatureWalkthrough(const Creature* creature)
-{
-	//send to clients
-	SpectatorVec spectators;
-	map.getSpectators(spectators, creature->getPosition(), true, true);
-	for (Creature* spectator : spectators) {
-		Player* tmpPlayer = spectator->getPlayer();
-		tmpPlayer->sendCreatureWalkthrough(creature, tmpPlayer->canWalkthroughEx(creature));
-	}
 }
 
 void Game::playerCreatePrivateChannel(uint32_t playerId)
@@ -4650,6 +4627,10 @@ void Game::parsePlayerExtendedOpcode(uint32_t playerId, uint8_t opcode, const st
 		GroundRarity::handleRequest(*player, buffer);
 		return;
 	}
+	if (opcode == 130) {
+		NpcTrade::handleRequest(*player, buffer);
+		return;
+	}
 	if (opcode == 128) {
 		LootTracker::handleRequest(*player, buffer);
 		return;
@@ -4729,17 +4710,6 @@ void Game::forceRemoveCondition(uint32_t creatureId, ConditionType_t type)
 	creature->removeCondition(type, true);
 }
 
-void Game::sendOfflineTrainingDialog(Player* player)
-{
-	if (!player) {
-		return;
-	}
-
-	if (!player->hasModalWindowOpen(offlineTrainingWindow.id)) {
-		player->sendModalWindow(offlineTrainingWindow);
-	}
-}
-
 void Game::playerAnswerModalWindow(uint32_t playerId, uint32_t modalWindowId, uint8_t button, uint8_t choice)
 {
 	Player* player = getPlayerByID(playerId);
@@ -4753,25 +4723,8 @@ void Game::playerAnswerModalWindow(uint32_t playerId, uint32_t modalWindowId, ui
 
 	player->onModalWindowHandled(modalWindowId);
 
-	// offline training, hardcoded
-	if (modalWindowId == std::numeric_limits<uint32_t>::max()) {
-		if (button == 1) {
-			if (choice == SKILL_SWORD || choice == SKILL_AXE || choice == SKILL_CLUB || choice == SKILL_DISTANCE || choice == SKILL_MAGLEVEL) {
-				BedItem* bedItem = player->getBedItem();
-				if (bedItem && bedItem->sleep(player)) {
-					player->setOfflineTrainingSkill(choice);
-					return;
-				}
-			}
-		} else {
-			player->sendTextMessage(MESSAGE_EVENT_ADVANCE, "Offline training aborted.");
-		}
-
-		player->setBedItem(nullptr);
-	} else {
-		for (auto creatureEvent : player->getCreatureEvents(CREATURE_EVENT_MODALWINDOW)) {
-			creatureEvent->executeModalWindow(player, modalWindowId, button, choice);
-		}
+	for (auto creatureEvent : player->getCreatureEvents(CREATURE_EVENT_MODALWINDOW)) {
+		creatureEvent->executeModalWindow(player, modalWindowId, button, choice);
 	}
 }
 

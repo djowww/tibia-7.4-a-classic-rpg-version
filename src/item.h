@@ -451,7 +451,6 @@ class Item : virtual public Thing
 		bool completeRarityExtras();
 		uint8_t getRarityBonusCount() const;
 		bool getRarityBonus(uint8_t index, ItemRarityBonus_t& type, uint8_t& value, uint8_t& subtype) const;
-		uint32_t getRarityBonusSum(ItemRarityBonus_t type) const;
 		static uint8_t getRarityBonusCode(ItemRarityBonus_t type, uint8_t subtype);
 		static bool getRarityBonusFromCode(uint8_t code, ItemRarityBonus_t& type, uint8_t& subtype);
 		static bool isValidRarityExtras(uint32_t rarityData, uint32_t extras);

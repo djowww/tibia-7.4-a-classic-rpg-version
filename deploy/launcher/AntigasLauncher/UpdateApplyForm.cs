@@ -90,9 +90,7 @@ internal sealed class UpdateApplyForm : Form
     {
         try
         {
-            var gl = Path.Combine(Path.GetFullPath(_root), "Antigas_gl.exe");
-            var dx = Path.Combine(Path.GetFullPath(_root), "Antigas_dx.exe");
-            var exe = File.Exists(gl) ? gl : dx;
+            var exe = Path.Combine(Path.GetFullPath(_root), "Antigas_gl.exe");
             if (File.Exists(exe)) Process.Start(new ProcessStartInfo(exe) { UseShellExecute = true, WorkingDirectory = Path.GetFullPath(_root) });
             Close();
         }

@@ -965,13 +965,6 @@ bool Creature::setFollowCreature(Creature* creature)
 	return true;
 }
 
-double Creature::getDamageRatio(Creature* attacker) const
-{
-    const auto it = attacker ? damageMap.find(attacker->getID()) : damageMap.end();
-    if (it == damageMap.end() || legacyTotalDamage == 0) return 0;
-    return static_cast<double>(it->second.total) / legacyTotalDamage;
-}
-
 uint64_t Creature::getGainedExperience(Creature* attacker) const
 {
     return getLegacyExperienceShare(getLostExperience(), attacker);

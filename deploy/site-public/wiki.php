@@ -10,8 +10,9 @@ require __DIR__ . '/i18n.php';
 siteStartI18n('pt');
 function wikiEscape(string $value): string { return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); }
 $github = 'https://github.com/djowww/tibia-7.4-a-classic-rpg-version';
-$release = $github . '/releases/tag/local-test-v1';
-$download = $github . '/releases/download/local-test-v1/Tibia74-Local-Complete.zip';
+$discord = 'https://discord.gg/CVneyh53mZ';
+$release = $github . '/releases/tag/local-test-v2';
+$download = $github . '/releases/download/local-test-v2/Tibia74-Local-Complete.zip';
 $updates = json_decode(file_get_contents(__DIR__ . '/project-updates.json'), true, 512, JSON_THROW_ON_ERROR);
 function projectSourceUrl(string $url, string $repository): string {
     // Editorial links may only point to this project's HTTPS GitHub pages.
@@ -24,8 +25,10 @@ $sections = [
     'combat-pvp' => ['Combat and PvP', 'Attack, Balanced and Defense fighting modes change your physical weapon damage and protection trade-off. Use !frags to check kill counts and !pz to check your protection-zone lock. Follow the server rules when fighting other players.'],
     'spells-runes' => ['Spells and runes', 'Use the client spell list to search by name, vocation and required level. Instant spells consume mana; runes are created by casting a rune spell while carrying the required blank rune. Check your vocation and level before hunting for a spell.'],
     'quests-bestiary' => ['Quests and Bestiary', 'The Quest Log records supported chest discoveries and NPC missions for your character. Bestiary entries advance as you defeat creatures; completing an entry at 1,000 kills grants +0.2% permanent XP. The client shows progress and completed entries.'],
+    'npcs-trade' => ['NPCs and trading', 'Greet an NPC by right-clicking it or clicking the balloon above its head; right-click never attacks an NPC. NPCs have a blue health bar. After hi, say trade to open the trade window, pick an item in the grid, choose the amount and confirm. Prices and rules are the same as in the conversation.'],
+    'world-map' => ['World and minimap', 'The world follows the original 7.4 map, without trainers, horses, Yalahar or custom islands. The minimap shows markers for temples, banks, shops, quests and stairs. Drinking water restores +1 mana every 10 seconds for 1 hour.'],
     'market-coins' => ['Market and Coins', 'The Market supports player offers for items and coins. Review an offer before accepting, and collect completed trades through the Market. Website purchases are disabled.'],
-    'client-support' => ['Client and support', 'Download the client from the home page and extract it to a folder you can write to. Antigas_gl.exe is ready to connect to this server. The Help channel is the first place to ask other players for assistance; staff commands are reserved for staff.'],
+    'client-support' => ['Client and support', 'Download launcher v78 on the Create account page, extract it to a folder you can write to and open AntigasLauncher.exe: it installs the client and keeps it updated. The game runs on Antigas_gl.exe (OpenGL). Ask other players on the Help channel, and report bugs or ideas on our Discord.'],
     'faq' => ['Frequently asked questions', 'New characters start in Rookgaard. Download the client on the home page. Website purchases are disabled. Find spells in the client or in the Spells and runes section.'],
 ];
 ?>
@@ -50,7 +53,7 @@ $sections = [
       <p class="motto"><?= siteT('Open source project') ?></p>
     </header>
     <nav class="topnav" aria-label="<?= siteT('Main navigation') ?>">
-      <a href="/" aria-current="page"><?= siteT('Home') ?></a><a href="#novidades"><?= siteT('News') ?></a><a href="#changelog">Changelog</a><a href="#guia"><?= siteT('Player guide') ?></a><a href="#download"><?= siteT('Download') ?></a><a href="<?= wikiEscape($github) ?>">GitHub</a>
+      <a href="/" aria-current="page"><?= siteT('Home') ?></a><a href="#novidades"><?= siteT('News') ?></a><a href="#changelog">Changelog</a><a href="#guia"><?= siteT('Player guide') ?></a><a href="#download"><?= siteT('Download') ?></a><a href="<?= wikiEscape($github) ?>">GitHub</a><a href="<?= wikiEscape($discord) ?>">Discord</a>
     </nav>
     <?= siteLanguageSwitcher() ?>
   </div>
@@ -58,7 +61,7 @@ $sections = [
     <aside class="sidebar wiki-sidebar">
       <nav class="stone-menu" aria-label="<?= siteT('Project and wiki') ?>">
         <h2><?= siteT('The project') ?></h2>
-        <a href="#novidades"><?= siteT('News') ?></a><a href="#changelog">Changelog</a><a href="#download"><?= siteT('Download and test') ?></a><a href="<?= wikiEscape($github) ?>"><?= siteT('Source on GitHub') ?></a>
+        <a href="#novidades"><?= siteT('News') ?></a><a href="#changelog">Changelog</a><a href="#download"><?= siteT('Download and test') ?></a><a href="<?= wikiEscape($github) ?>"><?= siteT('Source on GitHub') ?></a><a href="<?= wikiEscape($discord) ?>">Discord</a>
         <div class="side-rule" aria-hidden="true"></div>
         <h2 class="wiki-menu-title"><?= siteT('Player guide') ?></h2>
         <?php foreach ($sections as $id => [$title, $body]): ?><a href="#<?= wikiEscape($id) ?>"><?= siteT($title) ?></a><?php endforeach; ?>
@@ -68,7 +71,7 @@ $sections = [
     </aside>
     <main class="paper wiki-paper" id="wiki-content" tabindex="-1">
       <section class="page-title project-title"><h1>Tibia 7.4</h1><p class="project-subtitle">A classic rpg version</p><p><?= siteT('The project website: news, changelog, downloads and the player wiki.') ?></p></section>
-      <div class="wiki-callout project-welcome"><div><p><?= siteT('A classic world, shared with the community.') ?></p><p class="project-small"><?= siteT('Explore the code, follow important releases or run your own world in localhost.') ?></p><div class="project-actions"><a class="button" href="<?= wikiEscape($download) ?>"><?= siteT('Download server + Windows client') ?></a><a class="project-github" href="<?= wikiEscape($github) ?>"><?= siteT('Source on GitHub') ?></a></div><p class="project-small"><?= siteT('Local test: account {account}, password {password}. Docker Desktop is required.', ['account'=>'1','password'=>'local123']) ?></p></div></div>
+      <div class="wiki-callout project-welcome"><div><p><?= siteT('A classic world, shared with the community.') ?></p><p class="project-small"><?= siteT('Explore the code, follow important releases or run your own world in localhost.') ?></p><p class="project-small"><?= siteT('The public server is online again with a new database: create a new account to play.') ?></p><div class="project-actions"><a class="button" href="/index.php?jogar=1#criar-conta"><?= siteT('Play online') ?></a><a class="button" href="<?= wikiEscape($download) ?>"><?= siteT('Download server + Windows client') ?></a><a class="project-github" href="<?= wikiEscape($discord) ?>"><?= siteT('Discord community') ?></a><a class="project-github" href="<?= wikiEscape($github) ?>"><?= siteT('Source on GitHub') ?></a></div><p class="project-small"><?= siteT('Local test: account {account}, password {password}. Docker Desktop is required.', ['account'=>'2','password'=>'local123']) ?></p></div></div>
       <section class="project-news" id="novidades" aria-labelledby="news-title">
         <h2 id="news-title"><?= siteT('Project news') ?></h2>
         <p class="project-small"><?= siteT('Important releases and game changes, selected from the repository.') ?></p>
@@ -88,7 +91,7 @@ $sections = [
         <h2 id="download-title"><?= siteT('Download and test') ?></h2><p><?= siteT('The complete localhost package includes the server and the Windows .exe client.') ?></p>
         <p class="project-actions"><a class="button" href="<?= wikiEscape($download) ?>"><?= siteT('Download complete package') ?></a><a href="<?= wikiEscape($release) ?>"><?= siteT('Release notes and checksums') ?></a></p>
         <ol><li><?= siteT('Open Docker Desktop in Linux container mode.') ?></li><li><?= siteT('Extract the package and run START-LOCAL.cmd. The first setup needs internet.') ?></li><li><?= siteT('Log in with the demo account below. Use STOP-LOCAL.cmd to stop without deleting progress.') ?></li></ol>
-        <div class="project-demo"><h3><?= siteT('Localhost demo account') ?></h3><dl><div><dt><?= siteT('Account number') ?></dt><dd>1</dd></div><div><dt><?= siteT('Password') ?></dt><dd>local123</dd></div><div><dt><?= siteT('Character') ?></dt><dd>Local Adventurer</dd></div></dl><p><?= siteT('Only for your local installation. This account has no GM privileges and does not access the public server.') ?></p></div>
+        <div class="project-demo"><h3><?= siteT('Localhost demo account') ?></h3><dl><div><dt><?= siteT('Account number') ?></dt><dd>2</dd></div><div><dt><?= siteT('Password') ?></dt><dd>local123</dd></div><div><dt><?= siteT('Character') ?></dt><dd>Local Adventurer</dd></div></dl><p><?= siteT('Only for your local installation. This account has no GM privileges and does not access the public server.') ?></p></div>
         <p class="project-small" id="criar-conta"><?= siteT('Prefer the public server? Use your own account and the online client.') ?> <a href="/index.php?jogar=1#download"><?= siteT('Online client and registration') ?></a> · <a href="/index.php?jogar=1#criar-conta"><?= siteT('Create account') ?></a></p>
       </section>
       <section class="wiki-entry project-guide-title" id="guia"><h2><?= siteT('Player guide') ?></h2><p><?= siteT('Use the wiki to learn about the world and its game systems.') ?></p></section>

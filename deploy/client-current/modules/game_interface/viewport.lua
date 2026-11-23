@@ -21,5 +21,7 @@ function AntigasViewport.calculate(width, height, mode)
 end
 
 function AntigasViewport.requestSize(dimension)
-  return math.max(16, dimension.width + 1), math.max(12, dimension.height + 1)
+  -- +3 keeps 2 tiles of map beyond each edge, so walking 2 steps ahead
+  -- of the server (prewalk) never shows unloaded black borders.
+  return math.max(18, dimension.width + 3), math.max(14, dimension.height + 3)
 end

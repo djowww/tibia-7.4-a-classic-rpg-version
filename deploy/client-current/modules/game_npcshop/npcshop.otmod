@@ -1,0 +1,11 @@
+Module
+  name: game_npcshop
+  description: NPC trade window opened by saying trade to a merchant
+  author: Antigas
+  sandboxed: true
+  autoload: true
+  autoload-priority: 1004
+  dependencies: [ game_interface ]
+  scripts: [ npcshop ]
+  @onLoad: init()
+  @onUnload: terminate()
