@@ -12,7 +12,7 @@ ADDRESS,"hi$",QuestValue(11)<>1,!			 -> *
 ADDRESS,"hello$",!       -> "Greetings, traveler %N!"
 ADDRESS,"hi$",!          -> *
 ADDRESS,!                -> Idle
-BUSY,"hello$",! 		 -> "Sorry, %N, you need to complete banshee quest to talk with me!.", Idle
+BUSY,"hello$",QuestValue(11)<>1,! 		 -> "Sorry, %N, you need to complete banshee quest to talk with me!.", Idle
 BUSY,"hello$",!          -> "Can't you see, I am talking to someone else!."
 BUSY,"hi$",!             -> *
 BUSY,!                   -> NOP

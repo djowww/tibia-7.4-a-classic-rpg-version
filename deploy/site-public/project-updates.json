@@ -46,7 +46,7 @@
     "summary": "Download the complete package to explore Rookgaard and test your own changes in a separate local world.",
     "changes": [
       "Server, test database and Windows .exe client in one package.",
-      "START-LOCAL.cmd prepares the world; STOP-LOCAL.cmd preserves its progress.",
+      "Tibia74-Local.exe prepares the world and opens the game; closing the game preserves its progress.",
       "Normal demo account: 2 / local123, character Local Adventurer."
     ],
     "paragraphs": [

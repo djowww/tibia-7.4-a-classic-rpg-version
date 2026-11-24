@@ -30,6 +30,5 @@ class DatabaseManager
 
 		static bool optimizeTables();
 
-		static bool getDatabaseConfig(const std::string& config, int32_t& value, bool* querySucceeded = nullptr);
 };
 #endif

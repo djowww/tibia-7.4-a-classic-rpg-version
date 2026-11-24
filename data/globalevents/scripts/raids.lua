@@ -53,31 +53,45 @@ local raids = {
 	}
 }
 
-function onThink(interval, lastExecution, thinkInterval)
-	local now = os.time()
-	local day, date = os.date('%A', now), os.date('%d/%m', now)
-	local today, clock = os.date('%Y-%m-%d', now), os.date('%H:%M', now)
+-- A raid may start up to RETRY_MINUTES after its time. The globalevent can skip a
+-- minute, and Game.startRaid refuses while another raid is still running.
+local RETRY_MINUTES = 30
 
-	local raidDays = {}
-	if raids[day] then
-		raidDays[#raidDays + 1] = raids[day]
+local schedule = {}
+for key, entries in pairs(raids) do
+	local list = {}
+	for clock, settings in pairs(entries) do
+		local hour, minute = clock:match('^(%d%d):(%d%d)$')
+		if hour then
+			settings.minute = tonumber(hour) * 60 + tonumber(minute)
+			list[#list + 1] = settings
+		else
+			print('[Warning - raids.lua] Invalid raid time ' .. tostring(clock) .. ' for ' .. tostring(key))
+		end
 	end
-	if raids[date] then
-		raidDays[#raidDays + 1] = raids[date]
-	end
+	schedule[key] = list
+end
 
-	if #raidDays == 0 then
-		return true
+local function startDue(list, today, minuteOfDay)
+	if not list then
+		return
 	end
-
-	for i = 1, #raidDays do
-		local settings = raidDays[i][clock]
-		if settings and settings.lastExecutedDate ~= today then
+	for i = 1, #list do
+		local settings = list[i]
+		local late = minuteOfDay - settings.minute
+		if late >= 0 and late <= RETRY_MINUTES and settings.lastExecutedDate ~= today then
 			if Game.startRaid(settings.raidName) then
 				settings.lastExecutedDate = today
 			end
 		end
 	end
+end
 
+function onThink(interval, lastExecution, thinkInterval)
+	local now = os.date('*t')
+	local today = string.format('%04d-%02d-%02d', now.year, now.month, now.day)
+	local minuteOfDay = now.hour * 60 + now.min
+	startDue(schedule[os.date('%A')], today, minuteOfDay)
+	startDue(schedule[string.format('%02d/%02d', now.day, now.month)], today, minuteOfDay)
 	return true
 end

@@ -128,7 +128,12 @@ function UIGameMap:onMouseRelease(mousePosition, mouseButton)
     return false 
   end
 
-  local localPlayerPos = g_game.getLocalPlayer():getPosition()
+  local localPlayer = g_game.getLocalPlayer()
+  local localPlayerPos = localPlayer and localPlayer:getPosition()
+  -- happens while logging in or teleporting, before the player is placed
+  if not localPlayerPos then
+    return false
+  end
   if autoWalkPos.z ~= localPlayerPos.z then
     local dz = autoWalkPos.z - localPlayerPos.z
     autoWalkPos.x = autoWalkPos.x + dz

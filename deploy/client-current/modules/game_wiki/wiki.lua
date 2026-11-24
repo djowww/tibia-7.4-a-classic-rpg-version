@@ -105,7 +105,7 @@ local function updateStatus()
 	if activeTab == 'bestiary' then
 		text = string.format('Completed %d / %d creatures. Each one grants +0.2%% permanent XP.', bestiaryCompletedCount, #monsters)
 	elseif activeTab == 'itempedia' then
-		text = #items .. ' items listed. Click a creature to open it in the Bestiary.'
+		text = #items .. ' items in the Itempedia. Click a creature to open it in the Bestiary.'
 	elseif activeTab == 'hunting' then
 		text = #hunts .. ' hunting places on the map.'
 	else
@@ -342,6 +342,8 @@ end
 
 -- Hunting Guide ---------------------------------------------------------
 
+local HUNT_LINE_CHARS = 46
+
 local function huntBand(hunt)
 	if huntMode == 'party' then return hunt.party end
 	return hunt[huntVocation]
@@ -388,7 +390,16 @@ local function refreshHunts()
 		card.tag:setColor(recommended and '#45D145' or '#929292')
 		local names = {}
 		for _, entry in ipairs(hunt.mon) do names[#names + 1] = entry[2] .. ' ' .. entry[1] end
-		card.creatures:setText(table.concat(names, ', '))
+		-- Keep the line clear of the Map button; the full list goes in the tooltip.
+		local shortText = names[1] or ''
+		for i = 2, #names do
+			local nextText = shortText .. ', ' .. names[i]
+			if #nextText > HUNT_LINE_CHARS then shortText = shortText .. ', ...' break end
+			shortText = nextText
+		end
+		card.creatures:setText(shortText)
+		card.creatures:setTooltip(table.concat(names, ', '))
+		card.creatures:setPhantom(false)
 		card.danger:setText(hunt.danger and ('Beware: ' .. table.concat(hunt.danger, ', ')) or '')
 		card:setHeight(hunt.danger and 82 or 64)
 		card.map.onClick = function() showOnMap(hunt.x, hunt.y, hunt.z, hunt.name .. ' hunt') end

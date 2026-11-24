@@ -65,7 +65,6 @@ Topic=2                                   -> *
 "white","raven" -> "I think that is the name both of the monastery and of the monks' order."
 "passage",QuestValue(62)=1 -> Price=20, "Since you have the abbot's permission I can sail you to the isle of the kings for %P gold. Is that ok for you?", Topic=1
 "passage",QuestValue(62)=2 -> Price=10, "Since you are my friend now I will sail you to the isle of the kings for %P gold. Is that okay for you?", Topic=1
-"passage" -> "You do not have the abbot's permission, and I won't risk angering the monks because of some guy I do not even know."
 
 ################################################# BUSY TRAVELS ##########################################################################
 #ISLAND

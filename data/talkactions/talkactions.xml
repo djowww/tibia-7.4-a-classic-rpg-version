@@ -39,6 +39,7 @@
 	
 	<!--Tutors -->
 	<talkaction words="/mute" separator=" " script="mute.lua" permission="account" minaccounttype="tutor" />
+	<talkaction words="/unmute" separator=" " script="mute.lua" permission="account" minaccounttype="tutor" />
 
 
 	<!-- player talkactions -->

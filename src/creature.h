@@ -162,13 +162,6 @@ class Creature : virtual public Thing
 			direction = dir;
 		}
 		
-		bool isMoveLocked() const {
-			return moveLocked;
-		}
-		void setMoveLocked(bool locked) {
-			moveLocked = locked;
-		}
-
 		int32_t getThrowRange() const final {
 			return 1;
 		}
@@ -248,12 +241,6 @@ class Creature : virtual public Thing
 		}
 		const Outfit_t getDefaultOutfit() const {
 			return defaultOutfit;
-		}
-		const bool isRidingMount() const {
-			return ridingMount;
-		}
-		void setRidingMount(bool isRiding) {
-			ridingMount = isRiding;
 		}
 		const int32_t getMountSpeed() const {
 			return (ridingMount ? mountSpeed : 0);
@@ -566,7 +553,6 @@ class Creature : virtual public Thing
 		bool cancelNextWalk = false;
 		bool hasFollowPath = false;
 		bool forceUpdateFollowPath = false;
-		bool moveLocked = false;
 
 		//creature script events
 		bool hasEventRegistered(CreatureEventType_t event) const {

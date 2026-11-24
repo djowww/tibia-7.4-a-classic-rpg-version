@@ -11,7 +11,7 @@ ADDRESS,"hi$",QuestValue(250)<>5,!			 -> *
 ADDRESS,"hello$",!       -> "Hello, %N! What can I do for you?"
 ADDRESS,"hi$",!          -> *
 ADDRESS,!                -> Idle
-BUSY,"hello$",! 		 -> "Sorry, %N, you need to complete postmans to talk with me!", Idle
+BUSY,"hello$",QuestValue(250)<>5,! 		 -> "Sorry, %N, you need to complete postmans to talk with me!", Idle
 BUSY,"hello$",!          -> "Can't you see, I am talking to someone else!"
 BUSY,"hi$",!             -> *
 BUSY,!                   -> NOP

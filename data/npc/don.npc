@@ -39,7 +39,6 @@ VANISH,!                 -> "?"
 "field"   -> "My fields are enchanted by the druids and the wheat grows very quickly."
 
 "city"             -> "The city is to the north."
-"crops"            -> "I take care of our crops"
 "mill"             -> "I somtimes have to bring the wheat there."
 "spooked"          -> "I dont know."
 "king"             -> "King Tibianus is our king."

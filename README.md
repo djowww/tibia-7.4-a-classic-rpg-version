@@ -13,7 +13,7 @@ Servidor MMORPG independente inspirado em Tibia 7.4, anteriormente conhecido com
 
 ## Jogar agora
 
-O servidor oficial está no ar. Crie sua conta no [site](https://tibia74.tech/index.php?jogar=1#criar-conta), baixe o [launcher](https://tibia74.tech/#download) e entre no jogo. O [guia do jogador](https://tibia74.tech/wiki.php#guia) explica os primeiros passos. O launcher (versão atual: **v78**) baixa o cliente, confere as assinaturas e mantém tudo atualizado sozinho.
+O servidor oficial está no ar. Crie sua conta no [site](https://tibia74.tech/index.php?jogar=1#criar-conta), baixe o [launcher](https://tibia74.tech/index.php?jogar=1#download) e entre no jogo. O [guia do jogador](https://tibia74.tech/wiki.php#guia) explica os primeiros passos. O launcher (versão atual: **v78**) baixa o cliente, confere as assinaturas e mantém tudo atualizado sozinho.
 
 ## Sobre esta versão
 
@@ -25,7 +25,9 @@ O objetivo é chegar o mais perto possível do Tibia 7.4 da época, nos sprites,
 - **Balão de conversa nos NPCs:** um balão aparece sobre os NPCs; clique direito (ou o balão) cumprimenta o NPC. Na lista de batalha, NPCs têm barra azul.
 - **Minimapa completo com marcações:** o mapa inteiro já vem explorado no cliente, com as marcações das cidades, templos, depots e lojas.
 - **Andar com ping alto:** pré-walk de 2 passos e margem extra no mapa, sem bordas pretas, para andar com fluidez mesmo com ping acima de 100 ms.
-- **Água regenera mana:** beber água dá uma regeneração leve de mana por uma hora.
+- **Água e comida por até 1 hora:** beber água dá uma regeneração leve de mana por uma hora, e a comida acumula até 60 minutos. O tempo restante das duas aparece na janela de Skills, nas linhas Food e Water.
+- **Trade avisa antes de faltar espaço:** a janela de trade mostra a capacidade e avisa quando a compra não cabe no peso ou na mochila, ou quando o troco vai cair no chão.
+- **Labirinto e alavanca do mapa original:** o labirinto do subsolo perto de 33073,32603 e a alavanca de 32862,32312 voltaram a funcionar como no 7.4.
 - **Cliente só OpenGL e wide screen:** o cliente agora usa apenas OpenGL (o launcher apaga os arquivos DirectX antigos), com tela larga e botão do Discord.
 - **Bônus de XP e skills** de volta, junto com os bônus de achievements e bestiary.
 - **Game Wiki (em desenvolvimento):** um livro dentro do cliente com Bestiary, Itempedia, Hunting Guide e Bosstiary.
@@ -38,18 +40,29 @@ Capturas feitas com o cliente do projeto.
 | --- | --- |
 | ![Caça em wide screen com o canal Loot colorido por raridade](docs/screenshots/01-widescreen-hunt.jpg) | ![Achievements com ranks, contadores e bônus](docs/screenshots/02-achievements.jpg) |
 | ![Bestiary com o progresso de abates por monstro](docs/screenshots/03-bestiary.jpg) | ![Itens com raridade e tooltip dos atributos](docs/screenshots/04-rarity-loot.jpg) |
-| ![Market com ofertas de compra e venda](docs/screenshots/05-market.jpg) | |
+| ![Market com ofertas de compra e venda](docs/screenshots/05-market.jpg) | ![Skills com o tempo restante de comida e de água](docs/screenshots/06-skills-food-water.jpg) |
+| ![Trade avisando que só parte da compra cabe no peso](docs/screenshots/07-trade-espaco.jpg) | ![Trade avisando que a mochila está cheia](docs/screenshots/08-trade-mochila-cheia.jpg) |
+| ![Trade avisando que o troco vai cair no chão](docs/screenshots/09-trade-troco.jpg) | |
+
+### Game Wiki
+
+Aberta pelo botão **Wiki**, ao lado do inventário. Cada criatura leva ao mapa e aos itens que dropa, e cada item leva de volta às criaturas e aos NPCs que o compram ou vendem.
+
+| | |
+| --- | --- |
+| ![Bestiary com abates, locais no mapa e loot](docs/screenshots/10-wiki-bestiary.jpg) | ![Itempedia com atributos, quem dropa e NPCs](docs/screenshots/11-wiki-itempedia.jpg) |
+| ![Hunting Guide filtrado por vocação, level e solo ou party](docs/screenshots/12-wiki-hunting-guide.jpg) | ![Bosstiary, ainda em desenvolvimento](docs/screenshots/13-wiki-bosstiary.jpg) |
 
 ## Testar no seu computador
 
-Baixe o [pacote local para Windows](https://github.com/djowww/tibia-7.4-a-classic-rpg-version/releases/tag/local-test-v2), extraia e abra **START-LOCAL.cmd**, com o Docker Desktop em execução. O pacote inclui o cliente; ao usar o repositório, o iniciador baixa e verifica o cliente automaticamente.
+Baixe o [pacote local para Windows](https://github.com/djowww/tibia-7.4-a-classic-rpg-version/releases/tag/local-test-v2), extraia e abra **Tibia74-Local.exe**, com o Docker Desktop instalado. O pacote inclui o cliente; ao usar o repositório, o iniciador baixa e verifica o cliente automaticamente.
 
 | Conta | Senha | Personagem |
 | --- | --- | --- |
 | `2` | `local123` | `Local Adventurer` |
 | `1` | `1` | `Dev` (GM, para testes) |
 
-Servidor e cliente usam **127.0.0.1**, nas portas **17173/17174**. Banco e chaves são preparados automaticamente, sem dados da produção. A primeira inicialização compila o servidor e pode demorar vários minutos; exige internet. Depois, use **STOP-LOCAL.cmd** para parar sem apagar o progresso.
+Servidor e cliente usam **127.0.0.1**, nas portas **17173/17174**. Banco e chaves são preparados automaticamente, sem dados da produção. A primeira inicialização compila o servidor e pode demorar vários minutos; exige internet. Ao fechar o jogo, o servidor local é parado sem apagar o progresso.
 
 Veja o [guia do ambiente local](local/README.md) para requisitos, persistência e diagnóstico. Não é necessário configurar o site ou os pagamentos para jogar localmente.
 
@@ -79,7 +92,6 @@ Consulte o [guia dos sistemas](docs/systems.md) para conhecer as regras e integr
 | `docs/` | Guias de compilação, sistemas e componentes complementares. |
 | `local/` e `compose.yaml` | Instalação local, banco vazio, contas de teste e iniciador do cliente. |
 | `config.example.lua` | Modelo de configuração para uma instalação própria. |
-| `unused-scripts/` | Scripts Lua da base que não são carregados por esta versão, guardados para consulta. Veja o [README da pasta](unused-scripts/README.md). |
 
 O servidor usa MySQL/MariaDB. O ambiente local inclui banco de demonstração e preparação por Docker Compose; o cliente completo é distribuído na release local. Os serviços privados do portal e de pagamentos ficam fora desse ambiente. O launcher de produção verifica assinaturas ECDSA e SHA-256. Consulte [compilação e configuração](docs/building.md) e [cliente, launcher e site](docs/client-and-web.md).
 

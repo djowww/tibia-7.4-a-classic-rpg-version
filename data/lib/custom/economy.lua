@@ -41,7 +41,7 @@ function Economy.inventory(player)
 end
 function Economy.run(player,work)
     if not player.marketTransaction then return false end
-    local ctx={player=player,bank=player:getBankBalance(),removed={},added={},storage={},attributes={}}
+    local ctx={player=player,bank=player:getBankBalance(),removed={},added={},attributes={}}
     function ctx:take(item,count,knownEntry)
         if not Economy.owned(self.player,item) or not Economy.integer(count,1,10000) then return false end
         if ItemType(item:getId()):isRetired() then return false end
@@ -61,18 +61,6 @@ function Economy.run(player,work)
         end
         return false
     end
-    function ctx:takeType(id,count)
-        local entries=Economy.inventory(self.player)
-        if not entries then return false end
-        for _,e in ipairs(entries) do
-            if count>0 and e.item:getId()==id and e.item:getActionId()==0 and e.item:getMovementId()==0 then
-                local n=math.min(count,e.item:getCount())
-                if not self:take(e.item,n,e) then return false end
-                count=count-n
-            end
-        end
-        return count==0
-    end
     function ctx:give(id,count)
         if not Economy.integer(count,1,10000) then return false end
         if ItemType(id):isRetired() then return false end
@@ -87,10 +75,6 @@ function Economy.run(player,work)
         end
         return true
     end
-    function ctx:setStorage(key,value)
-        if self.storage[key]==nil then self.storage[key]=self.player:getStorageValue(key) end
-        self.player:setStorageValue(key,value)
-    end
     function ctx:setAttribute(item,key,value)
         if not Economy.owned(player,item) then return false end
         self.attributes[#self.attributes+1]={item=item,key=key,exists=item:hasAttribute(key),value=item:getAttribute(key)}
@@ -103,7 +87,6 @@ function Economy.run(player,work)
             local a=ctx.attributes[i]
             if a.exists then a.item:setAttribute(a.key,a.value) else a.item:removeAttribute(a.key) end
         end
-        for key,value in pairs(ctx.storage) do player:setStorageValue(key,value) end
         for i=#ctx.removed,1,-1 do
             local e=ctx.removed[i]
             if e.partial then

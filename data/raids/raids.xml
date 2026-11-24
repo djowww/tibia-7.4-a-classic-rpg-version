@@ -48,6 +48,4 @@
 	<raid name="thaiscaverats" repeat="true" margin="0" interval2="86400" file="thaiscaverats.xml"/>
 	<raid name="thaislighthouseorcs" repeat="true" margin="0" interval2="604800" file="thaislighthouseorcs.xml"/>
 	<raid name="thaisorcinvasion" repeat="false" margin="0" interval2="15552000" file="thaisorcinvasion.xml"/>
-	<raid name="venoreelfinvasion" repeat="false" margin="0" interval2="15552000" file="venoreelfinvasion.xml"/>
-	<raid name="venoreswampelves" repeat="true" margin="0" interval2="1209600" file="venoreswampelves.xml"/>
 </raids>

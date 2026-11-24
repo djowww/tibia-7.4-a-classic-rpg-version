@@ -5,6 +5,9 @@ end
 
 function Game.removeItemsOnMap(position)
 	local tile = Tile(position)
+	if not tile then
+		return
+	end
 	local tileCount = tile:getThingCount()
 	local i = 0
 	while i < tileCount do
@@ -23,8 +26,8 @@ function Game.transformItemOnMap(position, itemId, toItemId, subtype)
 	end
 
 	local tile = Tile(position)
-	local item = tile:getItemById(itemId)
-	if item ~= nil then
+	local item = tile and tile:getItemById(itemId)
+	if item then
 		item:transform(toItemId, subtype)
 		item:decay()
 	end
@@ -37,18 +40,21 @@ function Game.removeItemOnMap(position, itemId, subtype)
 	end
 	
 	local tile = Tile(position)
-	local item = tile:getItemById(itemId, subtype)
-	item:remove()
+	local item = tile and tile:getItemById(itemId, subtype)
+	if item then
+		item:remove()
+	end
+	return item ~= nil
 end
 
 function Game.isItemThere(position, itemId)
 	local tile = Tile(position)
-	return tile:getItemById(itemId) ~= nil
+	return tile ~= nil and tile:getItemById(itemId) ~= nil
 end
 
 function Game.isPlayerThere(position)
 	local tile = Tile(position)
-	local creatures = tile:getCreatures()
+	local creatures = tile and tile:getCreatures() or {}
 	for _, creature in ipairs(creatures) do
 		if creature:isPlayer() then
 			return true

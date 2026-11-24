@@ -715,16 +715,6 @@ CombatType_t getCombatType(const std::string& strValue)
 	return COMBAT_NONE;
 }
 
-std::string getCombatName(CombatType_t combatType)
-{
-	for (size_t i = 0, size = sizeof(combatTypeNames) / sizeof(CombatTypeNames); i < size; ++i) {
-		if (combatTypeNames[i].combat == combatType) {
-			return combatTypeNames[i].name;
-		}
-	}
-	return "unknown";
-}
-
 Ammo_t getAmmoType(const std::string& strValue)
 {
 	for (size_t i = 0, size = sizeof(ammoTypeNames) / sizeof(AmmoTypeNames); i < size; ++i) {
@@ -800,34 +790,6 @@ std::string getSkillName(uint8_t skillid)
 	}
 }
 
-std::string ucfirst(std::string str)
-{
-	for (char& i : str) {
-		if (i != ' ') {
-			i = toupper(i);
-			break;
-		}
-	}
-	return str;
-}
-
-std::string ucwords(std::string str)
-{
-	size_t strLength = str.length();
-	if (strLength == 0) {
-		return str;
-	}
-
-	str[0] = toupper(str.front());
-	for (size_t i = 1; i < strLength; ++i) {
-		if (str[i - 1] == ' ') {
-			str[i] = toupper(str[i]);
-		}
-	}
-
-	return str;
-}
-
 bool booleanString(const std::string& str)
 {
 	if (str.empty()) {
@@ -836,19 +798,6 @@ bool booleanString(const std::string& str)
 
 	char ch = tolower(str.front());
 	return ch != 'f' && ch != 'n' && ch != '0';
-}
-
-std::string getWeaponName(WeaponType_t weaponType)
-{
-	switch (weaponType) {
-		case WEAPON_SWORD: return "sword";
-		case WEAPON_CLUB: return "club";
-		case WEAPON_AXE: return "axe";
-		case WEAPON_DISTANCE: return "distance";
-		case WEAPON_WAND: return "wand";
-		case WEAPON_AMMO: return "ammunition";
-		default: return std::string();
-	}
 }
 
 size_t combatTypeToIndex(CombatType_t combatType)
@@ -875,11 +824,6 @@ size_t combatTypeToIndex(CombatType_t combatType)
 		default:
 			return 0;
 	}
-}
-
-CombatType_t indexToCombatType(size_t v)
-{
-	return static_cast<CombatType_t>(1 << v);
 }
 
 itemAttrTypes stringToItemAttribute(const std::string& str)
@@ -930,19 +874,6 @@ itemAttrTypes stringToItemAttribute(const std::string& str)
 		return ITEM_ATTRIBUTE_DOORID;
 	}
 	return ITEM_ATTRIBUTE_NONE;
-}
-
-std::string getFirstLine(const std::string& str)
-{
-	std::string firstLine;
-	firstLine.reserve(str.length());
-	for (const char c : str) {
-		if (c == '\n') {
-			break;
-		}
-		firstLine.push_back(c);
-	}
-	return firstLine;
 }
 
 const char* getReturnMessage(ReturnValue value)
@@ -1125,26 +1056,5 @@ const char* getReturnMessage(ReturnValue value)
 
 		default: // RETURNVALUE_NOTPOSSIBLE, etc
 			return "Sorry, not possible.";
-	}
-}
-
-void getFilesInDirectory(const boost::filesystem::path& root, const std::string& ext, std::vector<boost::filesystem::path>& ret)
-{
-	if (!boost::filesystem::exists(root)) {
-		return;
-	}
-
-	if (boost::filesystem::is_directory(root))
-	{
-		boost::filesystem::recursive_directory_iterator it(root);
-		boost::filesystem::recursive_directory_iterator endit;
-		while (it != endit)
-		{
-			if (boost::filesystem::is_regular_file(*it) && it->path().extension() == ext)
-			{
-				ret.push_back(it->path().filename());
-			}
-			++it;
-		}
 	}
 }

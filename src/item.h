@@ -170,48 +170,6 @@ class ItemAttributes
 			return static_cast<uint16_t>(getIntAttr(ITEM_ATTRIBUTE_MOVEMENTID));
 		}
 
-		void setKeyNumber(uint16_t n) {
-			setIntAttr(ITEM_ATTRIBUTE_KEYNUMBER, n);
-		}
-		uint16_t getKeyNumber() const {
-			return static_cast<uint16_t>(getIntAttr(ITEM_ATTRIBUTE_KEYNUMBER));
-		}
-
-		void setKeyHoleNumber(uint16_t n) {
-			setIntAttr(ITEM_ATTRIBUTE_KEYHOLENUMBER, n);
-		}
-		uint16_t getKeyHoleNumber() const {
-			return static_cast<uint16_t>(getIntAttr(ITEM_ATTRIBUTE_KEYHOLENUMBER));
-		}
-
-		void setDoorQuestNumber(uint16_t n) {
-			setIntAttr(ITEM_ATTRIBUTE_DOORQUESTNUMBER, n);
-		}
-		uint16_t getDoorQuestNumber() const {
-			return static_cast<uint16_t>(getIntAttr(ITEM_ATTRIBUTE_DOORQUESTNUMBER));
-		}
-
-		void setDoorQuestValue(uint16_t n) {
-			setIntAttr(ITEM_ATTRIBUTE_DOORQUESTVALUE, n);
-		}
-		uint16_t getDoorQuestValue() const {
-			return static_cast<uint16_t>(getIntAttr(ITEM_ATTRIBUTE_DOORQUESTVALUE));
-		}
-
-		void setDoorLevel(uint16_t n) {
-			setIntAttr(ITEM_ATTRIBUTE_DOORLEVEL, n);
-		}
-		uint16_t getDoorLevel() const {
-			return static_cast<uint16_t>(getIntAttr(ITEM_ATTRIBUTE_DOORLEVEL));
-		}
-
-		void setChestQuestNumber(uint16_t n) {
-			setIntAttr(ITEM_ATTRIBUTE_CHESTQUESTNUMBER, n);
-		}
-		uint16_t getChestQuestNumber() const {
-			return static_cast<uint16_t>(getIntAttr(ITEM_ATTRIBUTE_CHESTQUESTNUMBER));
-		}
-
 		void setCharges(uint16_t n) {
 			setIntAttr(ITEM_ATTRIBUTE_CHARGES, n);
 		}
@@ -724,9 +682,6 @@ class Item : virtual public Thing
 		bool isDisguised() const {
 			return items[id].disguise;
 		}
-		bool isChangeUse() const {
-			return items[id].changeUse;
-		}
 		bool isChestQuest() const {
 			return items[id].isChest();
 		}
@@ -735,15 +690,6 @@ class Item : virtual public Thing
 		}
 		bool hasSeparationEvent() const {
 			return items[id].separationEvent;
-		}
-		bool hasUseEvent() const {
-			return items[id].useEvent;
-		}
-		bool hasMultiUseEvent() const {
-			return items[id].multiUseEvent;
-		}
-		bool canDistUse() const {
-			return items[id].distUse;
 		}
 
 		const std::string& getName() const {

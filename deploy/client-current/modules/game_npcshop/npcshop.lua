@@ -4,6 +4,7 @@ local MAX_AMOUNT = 100
 local window
 local npcId, npcName
 local money = 0
+local freeSlots -- empty hands + container slots, sent by the server (nil on old servers)
 local offers = {buy = {}, sell = {}}
 local mode = 'buy'
 local selected
@@ -29,16 +30,50 @@ local function formatWeight(weight)
   return string.format('%.2f oz', weight / 100)
 end
 
+local SMALL_WORDS = {['of'] = true, ['the'] = true, ['a'] = true, ['an'] = true}
+
 local function title(name)
-  return (name:gsub('(%a)([%w\']*)', function(first, rest) return first:upper() .. rest end))
+  local first = true
+  return (name:gsub('(%a)([%w\']*)', function(letter, rest)
+    local word = letter .. rest
+    if not first and SMALL_WORDS[word:lower()] then return word end
+    first = false
+    return letter:upper() .. rest
+  end))
+end
+
+-- Fluid containers (vials) share one item id: the subtype picks the fluid color.
+local function setOfferItem(widget, offer, count)
+  widget:setItemId(offer.itemId)
+  if offer.subType > 0 then
+    widget:setItemSubType(offer.subType)
+  elseif count and count > 1 then
+    widget:setItemCount(count)
+  end
+end
+
+local function sellAllSummary()
+  local units, total = 0, 0
+  for _, offer in ipairs(offers.sell) do
+    local lots = math.floor(offer.sellable / offer.amount)
+    units = units + lots * offer.amount
+    total = total + lots * offer.price
+  end
+  return units, total
 end
 
 local function freeCapacity()
   local player = g_game.getLocalPlayer()
   if player and player.getFreeCapacity then
-    return player:getFreeCapacity()
+    -- This protocol reports capacity in hundreds of oz (same * 100 as Skills and Inventory).
+    return player:getFreeCapacity() * 100
   end
   return nil
+end
+
+local function isStackable(itemId)
+  local ok, thing = pcall(function() return g_things.getThingType(itemId, ThingCategoryItem) end)
+  return ok and thing and thing:isStackable() or false
 end
 
 local function maxAmount(offer)
@@ -64,9 +99,9 @@ local function updateDetail()
   if not window then return end
   local detail = window.detail
   local offer = selected
-  window.money:setText('Money: ' .. formatNumber(money) .. ' gp')
+  window.money:setText(formatNumber(money) .. ' gp')
   local capacity = freeCapacity()
-  window.capacity:setText(capacity and string.format('Capacity: %.2f oz', capacity) or '')
+  window.capacity:setText(capacity and string.format('Cap: %.2f oz', capacity) or '')
 
   if not offer then
     detail:hide()
@@ -80,7 +115,7 @@ local function updateDetail()
   local name = title(offer.name)
   local article = offer.article ~= '' and (offer.article .. ' ') or ''
 
-  detail.icon:setItemId(offer.itemId)
+  setOfferItem(detail.icon, offer)
   detail.name:setText(name)
   detail.description:setText('You see ' .. article .. offer.name .. '. It weighs ' .. formatWeight(offer.weight) .. '.')
   detail.priceValue:setText(formatNumber(offer.price) .. ' gp')
@@ -102,9 +137,23 @@ local function updateDetail()
 
   local note = ''
   if not ok then
-    note = mode == 'buy' and 'You do not have enough gold.' or 'You have none of this item to sell.'
+    note = mode == 'buy' and 'You do not have enough gold.' or 'You have none of this item.'
   elseif mode == 'buy' and capacity and offer.weight * units / 100 > capacity then
     note = 'Too heavy: it would drop on the floor.'
+  elseif mode == 'buy' and freeSlots then
+    local needed = isStackable(offer.itemId) and math.ceil(units / 100) or units
+    if freeSlots < needed then
+      if freeSlots == 0 then
+        note = 'Backpack full: it drops on the floor.'
+      elseif needed == units then
+        note = 'Only ' .. freeSlots .. ' fit: the rest drops on the floor.'
+      else
+        note = 'Backpack full: it may drop on the floor.'
+      end
+    elseif freeSlots == needed and total > 0 then
+      -- Change coins need a slot too when no coin stack can take them.
+      note = 'No room left: change may drop on the floor.'
+    end
   end
   window.note:setText(note)
 end
@@ -133,8 +182,7 @@ local function refresh()
   for _, offer in ipairs(list) do
     local cell = g_ui.createWidget('NpcTradeCell', window.grid)
     cell.offer = offer
-    cell.item:setItemId(offer.itemId)
-    if offer.amount > 1 then cell.item:setItemCount(offer.amount) end
+    setOfferItem(cell.item, offer, offer.amount)
     cell.name:setText(title(offer.name))
     cell.price:setText(formatNumber(offer.price) .. ' gp')
     cell:setTooltip(title(offer.name) .. '\n' .. formatNumber(offer.price) .. ' gp, ' .. formatWeight(offer.weight))
@@ -147,6 +195,13 @@ local function refresh()
     cell.onClick = function() select(offer) end
     cells[#cells + 1] = cell
   end
+  local units, total = sellAllSummary()
+  window.sellAll:setVisible(mode == 'sell')
+  window.note:removeAnchor(AnchorRight)
+  window.note:addAnchor(AnchorRight, mode == 'sell' and 'sellAll' or 'close', AnchorLeft)
+  window.sellAll:setEnabled(units > 0)
+  window.sellAll:setTooltip(units > 0 and ('Sell ' .. units .. ' items for ' .. formatNumber(total) .. ' gp.\nEquipped items are kept.') or 'Nothing to sell (equipped items are kept).')
+
   window.emptyState:setText(#list == 0 and (mode == 'buy' and 'This NPC has nothing to sell.' or 'This NPC does not buy anything.') or '')
 
   -- Keep the same item selected after the server refreshes the list.
@@ -199,7 +254,28 @@ function trade()
   send(string.format('trade\t%d\t%d\t%d', npcId, selected.index, amount))
 end
 
+local sellAllBox
+
+function sellAll()
+  if not npcId or sellAllBox then return end
+  local units, total = sellAllSummary()
+  if units == 0 then return end
+  local id = npcId
+  local function close()
+    if sellAllBox then sellAllBox:destroy() end
+    sellAllBox = nil
+  end
+  local function accept()
+    close()
+    if npcId == id then send(string.format('sellall\t%d', id)) end
+  end
+  sellAllBox = displayGeneralBox('Sell all',
+    'Sell ' .. units .. (units == 1 and ' item' or ' items') .. ' to ' .. (npcName or 'the NPC') .. ' for ' .. formatNumber(total) .. ' gp?\nEquipped items and rare items are kept.',
+    {{text = 'Sell all', callback = accept}, {text = 'Cancel', callback = close}}, accept, close)
+end
+
 function hide(fromServer)
+  if sellAllBox then sellAllBox:destroy() sellAllBox = nil end
   if window and window:isVisible() then
     window:hide()
     if not fromServer and npcId then
@@ -217,6 +293,7 @@ local function open(lines)
   npcId = id
   npcName = header[3] or 'NPC'
   money = tonumber(header[4]) or 0
+  freeSlots = tonumber(header[5])
   offers = {buy = {}, sell = {}}
 
   for i = 2, #lines do
@@ -232,7 +309,9 @@ local function open(lines)
         max = tonumber(f[8]) or 1,
         have = tonumber(f[9]) or 0,
         article = f[10],
-        name = f[11]
+        name = f[11],
+        subType = tonumber(f[12]) or 0,
+        sellable = tonumber(f[13]) or 0
       }
       local list = f[1] == 'B' and offers.buy or offers.sell
       list[#list + 1] = offer
@@ -272,6 +351,7 @@ local function onOpcode(protocol, opcode, buffer)
 end
 
 local function onGameEnd()
+  if sellAllBox then sellAllBox:destroy() sellAllBox = nil end
   if window then window:hide() end
   npcId, npcName, selected = nil, nil, nil
   offers = {buy = {}, sell = {}}
@@ -281,6 +361,9 @@ end
 function init()
   window = g_ui.displayUI('npcshop')
   window:hide()
+  window.moneyIcon:setItemId(3031) -- gold coin, drawn as a small pile
+  window.moneyIcon:setItemCount(10)
+  window.moneyIcon:setShowCount(false)
   connect(g_game, {onGameEnd = onGameEnd})
   connect(LocalPlayer, {onFreeCapacityChange = updateDetail})
   ProtocolGame.registerExtendedOpcode(OPCODE, onOpcode, true)

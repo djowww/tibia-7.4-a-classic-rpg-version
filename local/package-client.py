@@ -5,11 +5,26 @@ import json
 from pathlib import Path
 import zipfile
 
+# Base-client files nothing loads here: modules without autoload that no
+# load-later list names (updater stays off because init.lua leaves
+# Services.updater empty; the launcher handles updates), unreferenced images
+# and sounds. Same list as deploy/launcher/build-release.ps1.
+SKIPPED = (('modules', 'updater'), ('modules', 'game_market'), ('modules', 'game_cooldown'),
+           ('data', 'images', 'rawtextures'), ('data', 'sounds', 'alarm.ogg'), ('data', 'sounds', 'magnum.ogg'))
+
+
+def skipped(relative):
+    parts = relative.parts
+    return relative.name.lower() == 'thumbs.db' or any(parts[:len(prefix)] == prefix for prefix in SKIPPED)
+
+
 def package(source, output):
     root = Path(__file__).resolve().parents[1]
     files = {}
     for directory in ('data', 'modules'):
         for p in (source / directory).rglob('*'):
+            if skipped(p.relative_to(source)):
+                continue
             if p.is_file() and p.suffix.lower() not in ('.log', '.key', '.pem', '.bak'):
                 files[p.relative_to(source).as_posix()] = p
     for name in ('Antigas_gl.exe',):
@@ -33,8 +48,10 @@ def package(source, output):
     # are deliberately absent. The starter installs a fresh local public key.
     with zipfile.ZipFile(output, 'x', zipfile.ZIP_DEFLATED, compresslevel=6) as z:
         for name, p in sorted(files.items()):
-            z.write(p, name)
-        z.writestr('LEIA-ME-LOCAL.txt', 'Use START-LOCAL.cmd from the server repository.\nAccount: 2 / local123\nDev account (GOD): 1 / 1\nThis client is configured only for 127.0.0.1:17173.\n')
+            # Empty files stay uncompressed: Expand-Archive on Windows PowerShell
+            # 5.1 writes the 2-byte deflate stream of an empty file as content.
+            z.write(p, name, zipfile.ZIP_STORED if p.stat().st_size == 0 else None)
+        z.writestr('LEIA-ME-LOCAL.txt', 'Use Tibia74-Local.exe from the server repository.\nAccount: 2 / local123\nDev account (GOD): 1 / 1\nThis client is configured only for 127.0.0.1:17173.\n')
         # Last archive member: interrupted extraction cannot leave an early
         # executable mistaken for a completed bundled installation.
         z.writestr('.local-client-complete', 'local-v1\n')

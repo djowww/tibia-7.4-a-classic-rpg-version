@@ -81,8 +81,6 @@ VANISH,!           -> "May enlightenment be your path."
 %1,1<%1,"ham"           -> Type=3582, Amount=%1, Price=15*%1, "Do you wanna buy %A ham for %P gold?", Topic=1
 %1,1<%1,"salmon"        -> Type=3579, Amount=%1, Price=7*%1,  "Do you want to buy %A salmon for %P gold?", Topic=1
 %1,1<%1,"fish"          -> Type=3578, Amount=%1, Price=6*%1,  "Do you want to buy %A fish for %P gold?", Topic=1
-"fruit"           -> "I have oranges, bananas, grapes, and melons. What do you want?"
-"vegetable"       -> "I have carrots and tomatoes. What do you want?"
 
 "orange" -> Type=3586, Amount=1, Price=9,  "Do you want to buy an orange for %P gold?", Topic=1
 "banana" -> Type=3587, Amount=1, Price=5,  "Do you want to buy a banana for %P gold?", Topic=1

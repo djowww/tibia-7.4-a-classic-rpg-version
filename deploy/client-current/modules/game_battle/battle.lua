@@ -173,17 +173,20 @@ function isSortDesc()
     return getSortOrder() == 'desc'
 end
 
+-- Filters start hidden; they only show after the player opens them with the
+-- toggle button. Uses 'showFilters' so an old saved 'hidingFilters' is ignored.
 function isHidingFilters()
   local settings = g_settings.getNode('BattleList')
   if not settings then
-    return false
+    return true
   end
-  return settings['hidingFilters']
+  local show = settings['showFilters']
+  return not (show == true or show == 'true')
 end
 
 function setHidingFilters(state)
   settings = {}
-  settings['hidingFilters'] = state
+  settings['showFilters'] = not state
   g_settings.mergeNode('BattleList', settings)
 end
 

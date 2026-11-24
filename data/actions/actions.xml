@@ -90,6 +90,7 @@
 	<action actionid="2202" script="main/2202.lua" />
 	<action actionid="2203" script="main/2203.lua" />
 	<action actionid="2204" script="main/2204.lua" />
+	<action actionid="2206" script="main/2206.lua" />
 	<action actionid="2207" script="main/2207.lua" />
 	<action actionid="2208" script="main/2208.lua" />
 	<action actionid="2209" script="main/2209.lua" />
@@ -236,14 +237,13 @@
 	<action itemid="2524" script="others/fluids.lua" />
 	<action itemid="2873" script="others/fluids.lua" />
 	<action itemid="2874" script="others/fluids.lua" />
+	<action itemid="2875" script="others/fluids.lua" />
 	<action itemid="2876" script="others/fluids.lua" />
 	<action itemid="2877" script="others/fluids.lua" />
 	<action itemid="2879" script="others/fluids.lua" />
 	<action itemid="2880" script="others/fluids.lua" />
 	<action itemid="2881" script="others/fluids.lua" />
 	<action itemid="2882" script="others/fluids.lua" />
-
-
 	<action itemid="2885" script="others/fluids.lua" />
 	<action itemid="2893" script="others/fluids.lua" />
 	<action itemid="2901" script="others/fluids.lua" />

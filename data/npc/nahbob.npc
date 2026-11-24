@@ -15,7 +15,7 @@ ADDRESS,"djanni'hah$",QuestValue(278)=2,!  -> *
 ADDRESS,!                                  -> Idle
 BUSY,"hello$",QuestValue(278)=2,!          -> "Whoa, %N! Easy! Old Bob is busy right now!", Queue
 BUSY,"hi$",QuestValue(278)=2,!             -> *
-ADDRESS,"greetings$",QuestValue(278)=2,!   -> *
+BUSY,"greetings$",QuestValue(278)=2,!      -> *
 BUSY,"djanni'hah$",QuestValue(278)=2,!     -> *
 BUSY,!                                     -> NOP
 VANISH                                     -> "Bye then."

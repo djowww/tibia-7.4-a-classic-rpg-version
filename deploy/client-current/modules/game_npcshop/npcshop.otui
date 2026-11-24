@@ -314,25 +314,44 @@ MainWindow
     text: Close
     @onClick: modules.game_npcshop.hide()
 
+  Button
+    id: sellAll
+    anchors.bottom: parent.bottom
+    anchors.right: close.left
+    margin-right: 6
+    width: 80
+    text: Sell all
+    visible: false
+    @onClick: modules.game_npcshop.sellAll()
+
+  UIItem
+    id: moneyIcon
+    anchors.verticalCenter: close.verticalCenter
+    anchors.left: parent.left
+    size: 32 32
+    virtual: true
+    phantom: true
+
   Label
     id: money
     anchors.verticalCenter: close.verticalCenter
-    anchors.left: parent.left
-    width: 150
+    anchors.left: moneyIcon.right
+    margin-left: 4
+    width: 110
     color: #F2C94C
 
   Label
     id: capacity
     anchors.verticalCenter: close.verticalCenter
     anchors.left: money.right
-    width: 150
+    width: 145
     color: #E0DCD2
 
   Label
     id: note
     anchors.verticalCenter: close.verticalCenter
     anchors.left: capacity.right
-    anchors.right: close.left
+    anchors.right: sellAll.left
     margin-right: 10
     text-align: right
     color: #FFA3A3

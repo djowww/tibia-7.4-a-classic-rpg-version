@@ -44,17 +44,21 @@ local messages = {
 }
 
 function onUse(player, item, fromPosition, target, toPosition)
-	local targetItemType = ItemType(target:getId())
+	if not target then
+		return false
+	end
+
+	-- Using a fluid on a creature: its id is not an item id.
+	local targetItemType = not target:isCreature() and ItemType(target:getId())
 	if targetItemType and targetItemType:isFluidContainer() then
-			if target:getFluidType() == 0 and item:getFluidType() ~= 0 then
+		if target:getFluidType() == 0 and item:getFluidType() ~= 0 then
 			target:transform(target:getId(), item:getFluidType())
 			item:transform(item:getId(), 0)
 			return true
-		elseif item:getFluidType() == 0 and target:getFluidType() ~= 0 then
-			return false
 		elseif target:getFluidType() ~= 0 and item:getFluidType() == 0 then
+			local fluid = target:getFluidType()
 			target:transform(target:getId(), 0)
-			item:transform(item:getId(), target:getFluidType())
+			item:transform(item:getId(), fluid)
 			return true
 		end
 	end
@@ -80,6 +84,7 @@ function onUse(player, item, fromPosition, target, toPosition)
 				player:addCondition(poison)
 			elseif self and item:getFluidType() == FLUID_WATER then
 				player:addCondition(hydration)
+				RegenStatus.send(player)
 			elseif item:getFluidType() == FLUID_MANAFLUID then
 				target:addMana(math.random(50, 150))
 				target:getPosition():sendMagicEffect(CONST_ME_MAGIC_BLUE)

@@ -69,7 +69,6 @@ Knight,"great","light"   -> String="Great Light", Price=500, "Do you want to buy
 Topic=3,"rune","spell"        -> "I sell 'Light Magic Missile', 'Heavy Magic Missile', 'Fireball' and 'Destroy Field'."
 Topic=3,"instant","spell"     -> "I sell healing spells, supply spells and support spells. Which of these interests you most?"
 Topic=3,"level"               -> "For which level would you like to learn a spell?", Topic=3
-Topic=3,"bye"                 -> "Daraman's blessings.", Idle
 
 Topic=3,"8$"  -> "For level 8 I have 'Find Person' and 'Light'.", Topic=3
 Topic=3,"9$"  -> "For level 9 I have 'Light Healing'.", Topic=3

@@ -8,7 +8,7 @@ ou progresso do servidor público acompanha o pacote.
 1. Instale e abra o **Docker Desktop**, no modo de containers Linux. Essa é a
    dependência necessária para executar o servidor Linux e o banco no Windows.
 2. Baixe e extraia o repositório, ou o pacote completo da release local.
-3. Dê dois cliques em **START-LOCAL.cmd**. Na primeira vez, aguarde o download das
+3. Dê dois cliques em **Tibia74-Local.exe**. Na primeira vez, aguarde o download das
    imagens e a compilação. As seguintes partidas aproveitam o cache.
 4. O cliente abre automaticamente. Entre com **conta `2`**, **senha `local123`**
    e o personagem **Local Adventurer**. Para testar como GOD, use a **conta `1`**,
@@ -30,8 +30,8 @@ pode ser iniciado em Linux com `docker compose up -d --build --wait`.
   ambiente de teste. Não use este perfil para hospedar um servidor público.
 - RSA: par novo por instalação, persistido no volume `local-keys`; apenas a parte
   pública é copiada para o cliente. Nunca se usa a chave do servidor público.
-- Progresso: persiste no volume `local-db`. **STOP-LOCAL.cmd** para os serviços
-  sem apagar os dados. Reiniciar o computador também não apaga esses volumes.
+- Progresso: persiste no volume `local-db`. Ao fechar o jogo, o Tibia74-Local.exe
+  para os serviços sem apagar os dados. Reiniciar o computador também não apaga esses volumes.
 
 O site de cadastro, pagamentos e o launcher de produção não são
 necessários nem iniciados neste modo. O cliente não consulta o atualizador de

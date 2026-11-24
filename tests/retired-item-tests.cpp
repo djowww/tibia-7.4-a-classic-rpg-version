@@ -254,16 +254,15 @@ static void corpseTests()
         "assert(type(recoveryCorpse.isRecoveryCorpse) == 'function')\n"
         "assert(recoveryCorpse:isRecoveryCorpse() and not ordinaryBag:isRecoveryCorpse())\n"
         "assert(not ItemType(2854):isCorpse())\n"
-        "local originalTile = Tile; local currentCorpse = recoveryCorpse\n"
-        "Tile = function() return {getTopDownItem=function() return currentCorpse end} end\n"
+        "local originalTile = Tile\n"
+        "Tile = function() return {getTopDownItem=function() return recoveryCorpse end} end\n"
         "local hits=0; local fake={checkAnalyzerLootItem=function(_,id,count) assert(id==3264 and count==1); hits=hits+1 end,"
         "addAnalyzerDrop=function(_,row) assert(row[3]==3264) end}\n"
-        "local moved=Game.createItem(3264); local source={getPosition=function() return Position(100,100,7) end}\n"
-        "assert(Player.onMoveItem(fake,moved,1,Position(100,100,7),{x=CONTAINER_POSITION},source,nil))\n"
+        "local moved=Game.createItem(3264); local inContainer={x=CONTAINER_POSITION}\n"
+        "assert(Player.onMoveItem(fake,moved,1,inContainer,inContainer,recoveryCorpse,nil))\n"
         "assert(hits==1, 'recovery corpse loot must reach Analyzer')\n"
-        "currentCorpse=ordinaryBag\n"
-        "assert(Player.onMoveItem(fake,moved,1,Position(100,100,7),{x=CONTAINER_POSITION},source,nil))\n"
-        "assert(hits==1, 'ordinary backpacks must not become corpses'); Tile=originalTile\n";
+        "assert(Player.onMoveItem(fake,moved,1,inContainer,inContainer,ordinaryBag,nil))\n"
+        "assert(hits==1, 'a backpack move on top of a corpse is not loot'); Tile=originalTile\n";
     runLuaFixture(analyzer, "Analyzer corpse checks failed");
     body->setParent(nullptr); // createLoot may start decay; this isolated owner does not enter the world.
     monsterType.info.lookcorpse = 4251;

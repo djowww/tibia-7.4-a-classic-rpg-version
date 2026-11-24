@@ -133,9 +133,6 @@ return {
 			{"Spider", 2},
 			{"Troll", 1},
 		}},
-	{name = "Wolf", area = "South of Rookgaard", x = 32149, y = 32437, z = 7, exp = 18, rook = true, K = {1, 8}, P = {1, 8}, S = {1, 8}, D = {1, 8}, mon = {
-			{"Wolf", 13},
-		}},
 	{name = "Wolf", area = "South of Thais", x = 32373, y = 32344, z = 7, exp = 18, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
 			{"Snake", 21},
 			{"Wolf", 19},
@@ -143,19 +140,15 @@ return {
 			{"Cyclops", 4},
 			{"Spider", 1},
 		}, danger = {"Cyclops"}},
-	{name = "Wolf", area = "South-east of Rookgaard", x = 32212, y = 32391, z = 7, exp = 18, rook = true, K = {1, 8}, P = {1, 8}, S = {1, 8}, D = {1, 8}, mon = {
-			{"Wolf", 10},
-			{"Snake", 3},
-		}},
 	{name = "Bug", area = "South-west of Ab'Dendriel", x = 32694, y = 31696, z = 7, exp = 18, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
 			{"Bug", 10},
 		}},
 	{name = "Wolf", area = "South-west of Kazordoon", x = 32590, y = 32004, z = 7, exp = 18, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
 			{"Wolf", 20},
 		}},
-	{name = "Wolf", area = "South-west of Thais", x = 32275, y = 32285, z = 7, exp = 18, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
-			{"Wolf", 9},
-			{"Snake", 5},
+	{name = "Wolf", area = "South-west of Thais", x = 32149, y = 32437, z = 7, exp = 18, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
+			{"Wolf", 32},
+			{"Snake", 8},
 			{"Spider", 3},
 		}},
 	{name = "Wolf", area = "West of Rookgaard", x = 31998, y = 32224, z = 7, exp = 18, rook = true, K = {1, 8}, P = {1, 8}, S = {1, 8}, D = {1, 8}, mon = {
@@ -533,14 +526,14 @@ return {
 			{"Ghoul", 1},
 			{"Skeleton", 1},
 		}},
-	{name = "Orc", area = "South-east of Rookgaard, floor -2", x = 32207, y = 32406, z = 9, exp = 25, rook = true, K = {1, 8}, P = {1, 8}, S = {1, 8}, D = {1, 8}, mon = {
-			{"Orc", 11},
-		}},
 	{name = "Swamp Troll", area = "South-east of Thais, floor -1", x = 32459, y = 32326, z = 8, exp = 25, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
 			{"Wasp", 7},
 			{"Troll", 2},
 			{"Swamp Troll", 2},
 			{"Rat", 1},
+		}},
+	{name = "Orc", area = "South-west of Thais, floor -2", x = 32207, y = 32406, z = 9, exp = 25, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
+			{"Orc", 11},
 		}},
 	{name = "Goblin", area = "West of Edron, floor -1", x = 33087, y = 31847, z = 8, exp = 25, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
 			{"Goblin", 126},
@@ -826,10 +819,6 @@ return {
 			{"Rotworm", 3},
 			{"Scorpion", 1},
 		}},
-	{name = "Rotworm", area = "South of Rookgaard, floor -2", x = 32145, y = 32356, z = 9, exp = 40, rook = true, K = {1, 8}, P = {1, 8}, S = {1, 8}, D = {1, 8}, mon = {
-			{"Rotworm", 80},
-			{"Demon Skeleton", 3},
-		}, danger = {"Demon Skeleton"}},
 	{name = "Rotworm", area = "South of Venore, floor -2", x = 32938, y = 32246, z = 9, exp = 40, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
 			{"Swamp Troll", 13},
 			{"Cave Rat", 9},
@@ -852,6 +841,10 @@ return {
 			{"Rotworm", 11},
 			{"Poison Spider", 2},
 		}},
+	{name = "Rotworm", area = "South-west of Thais, floor -2", x = 32145, y = 32356, z = 9, exp = 40, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
+			{"Rotworm", 69},
+			{"Demon Skeleton", 3},
+		}, danger = {"Demon Skeleton"}},
 	{name = "Rotworm", area = "South-west of Venore, floor -2", x = 32706, y = 32297, z = 9, exp = 40, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
 			{"Rotworm", 10},
 		}},
@@ -867,6 +860,9 @@ return {
 			{"Orc", 8},
 			{"Spider", 5},
 			{"Orc Spearman", 5},
+		}},
+	{name = "Rotworm", area = "West of Thais, floor -2", x = 32138, y = 32321, z = 9, exp = 40, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
+			{"Rotworm", 11},
 		}},
 	{name = "Rotworm", area = "West of Venore, floor -2", x = 32815, y = 32088, z = 9, exp = 40, K = {8, 26}, P = {8, 26}, S = {8, 26}, D = {8, 26}, mon = {
 			{"Rotworm", 13},
@@ -2017,7 +2013,7 @@ return {
 			{"Beholder", 2},
 			{"Banshee", 1},
 		}, danger = {"Banshee"}},
-	{name = "Beholder", area = "South of Rookgaard, floor -3", x = 32195, y = 32465, z = 10, exp = 170, rook = true, K = {1, 8}, P = {1, 8}, S = {1, 8}, D = {1, 8}, mon = {
+	{name = "Beholder", area = "South-west of Thais, floor -3", x = 32195, y = 32465, z = 10, exp = 170, K = {20, 46}, P = {20, 46}, S = {20, 46}, D = {20, 46}, party = {15, 60}, mon = {
 			{"Skeleton", 10},
 			{"Beholder", 5},
 			{"Minotaur Archer", 3},

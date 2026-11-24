@@ -10,7 +10,6 @@ Behaviour = {
 ADDRESS,"hello$",! -> "Salutations, %N. Welcome to the Ironhouse, warehouse of Abran Ironeye."
 ADDRESS,"hi$",!    -> *
 ADDRESS,"hello$",! -> *
-ADDRESS,"hi$",!    -> *
 ADDRESS,!          -> Idle 
 BUSY,"hello$",!    -> "One moment please, %N.", Queue 
 BUSY,"hi$",!       -> * 
@@ -33,7 +32,6 @@ VANISH,!           -> "How rude..."
 "monster"         -> "Monsters? Where! I'm horrified of monsters." 
 "thanks"          -> "You're welcome." 
 "thank","you"     -> * 
-"news"            -> "Don't buy from Xed. He is a thief. He steals my business all the time!"
 "offer"           -> "I sell armor, legs, helmets, and shields." 
 "do","you","sell" -> * 
 "do","you","have" -> * 

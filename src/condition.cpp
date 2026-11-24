@@ -1315,7 +1315,7 @@ bool ConditionLight::startCondition(Creature* creature)
 	}
 
 	internalLightTicks = 0;
-	lightChangeInterval = ticks / lightInfo.level;
+	lightChangeInterval = ticks / std::max<int32_t>(1, lightInfo.level); // level 0 would divide by zero
 	creature->setCreatureLight(lightInfo);
 	g_game.changeLight(creature);
 	return true;
@@ -1354,7 +1354,7 @@ void ConditionLight::addCondition(Creature* creature, const Condition* addCondit
 		const ConditionLight& conditionLight = static_cast<const ConditionLight&>(*addCondition);
 		lightInfo.level = conditionLight.lightInfo.level;
 		lightInfo.color = conditionLight.lightInfo.color;
-		lightChangeInterval = ticks / lightInfo.level;
+		lightChangeInterval = ticks / std::max<int32_t>(1, lightInfo.level); // level 0 would divide by zero
 		internalLightTicks = 0;
 		creature->setCreatureLight(lightInfo);
 		g_game.changeLight(creature);

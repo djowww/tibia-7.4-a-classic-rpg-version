@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RELEASE_VERSION = 76
+RELEASE_VERSION = 78
 
 
 class CoinPublicReleaseTests(unittest.TestCase):
@@ -17,7 +17,7 @@ class CoinPublicReleaseTests(unittest.TestCase):
 
         home = (ROOT / "deploy/site-public/index.php").read_text(encoding="utf-8")
         wiki = (ROOT / "deploy/site-public/wiki.php").read_text(encoding="utf-8")
-        self.assertRegex(home, rf"Antigas-7\.4-Launcher-v{RELEASE_VERSION}\.zip\?site=[^'\"]*v{RELEASE_VERSION}")
+        self.assertIn(f"https://tibia74.tech/Antigas-7.4-Launcher-v{RELEASE_VERSION}.zip", home)
         self.assertIn('href="/index.php?jogar=1#download"', wiki)
         self.assertNotRegex(wiki, r"Antigas-7\.4-Launcher-v[0-9]+\.zip")
 

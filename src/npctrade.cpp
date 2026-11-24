@@ -18,6 +18,7 @@ namespace {
 constexpr uint8_t NPC_TRADE_OPCODE = 130;
 constexpr int32_t MAX_TRADE_COUNT = 100;
 constexpr int64_t TRADE_INTERVAL = 200;
+constexpr int32_t MAX_SELL_ALL_STEPS = 500;
 
 enum TopicKind : int {
 	TOPIC_CONFLICT = -1,
@@ -110,7 +111,8 @@ std::string cleanField(std::string text)
 
 void sendTradeMessage(Player& player, const std::string& text)
 {
-	if (text.size() > 16384) {
+	// NetworkMessage::addString drops longer strings and would leave a malformed packet.
+	if (text.size() > 8192) {
 		return;
 	}
 
@@ -119,6 +121,51 @@ void sendTradeMessage(Player& player, const std::string& text)
 	message.addByte(NPC_TRADE_OPCODE);
 	message.addString(text);
 	player.sendNetworkMessage(message);
+}
+
+// Fluid containers share one item id, so the fluid decides the name ("vial of mana fluid").
+std::string offerName(const ItemType& it, int32_t data, std::string& article)
+{
+	article = it.article;
+	if (!it.isFluidContainer() || data < 0) {
+		return it.name;
+	}
+	if (data == 0) {
+		article = "an";
+		return "empty " + it.name;
+	}
+	if (data < 0xFFFF && Item::items[static_cast<uint16_t>(data)].id != 0) {
+		return it.name + " of " + Item::items[static_cast<uint16_t>(data)].name;
+	}
+	return it.name;
+}
+
+// What the client needs to draw the item: fluid color for fluid containers, 0 otherwise.
+int32_t clientSubType(const ItemType& it, int32_t data)
+{
+	if ((it.isFluidContainer() || it.isSplash()) && data >= 0 && data <= 0xFF) {
+		return getLiquidColor(static_cast<uint8_t>(data));
+	}
+	return 0;
+}
+
+// Items the player carries inside containers, leaving out what is equipped in a slot.
+uint32_t carriedCount(const Player* player, uint16_t itemId, int32_t subType)
+{
+	uint32_t count = 0;
+	for (int32_t slot = CONST_SLOT_FIRST; slot <= CONST_SLOT_LAST; ++slot) {
+		const Item* item = player->getInventoryItem(static_cast<slots_t>(slot));
+		const Container* container = item ? item->getContainer() : nullptr;
+		if (!container) {
+			continue;
+		}
+		for (ContainerIterator it = container->iterator(); it.hasNext(); it.advance()) {
+			if ((*it)->getID() == itemId && !(*it)->hasRarity()) {
+				count += Item::countByType(*it, subType);
+			}
+		}
+	}
+	return count;
 }
 
 } // namespace
@@ -132,6 +179,10 @@ void NpcTrade::handleRequest(Player& player, const std::string& request)
 	if (std::sscanf(request.c_str(), "trade\t%u\t%u\t%d", &npcId, &index, &count) == 3) {
 		if (Npc* npc = g_game.getNpcByID(npcId)) {
 			npc->handleTradeRequest(&player, index, count);
+		}
+	} else if (std::sscanf(request.c_str(), "sellall\t%u", &npcId) == 1) {
+		if (Npc* npc = g_game.getNpcByID(npcId)) {
+			npc->handleSellAllRequest(&player);
 		}
 	} else if (std::sscanf(request.c_str(), "close\t%u", &npcId) == 1) {
 		if (Npc* npc = g_game.getNpcByID(npcId)) {
@@ -323,10 +374,39 @@ bool BehaviourDatabase::tradeOfferAvailable(const NpcTradeOffer& offer, Player* 
 	return true;
 }
 
+// Free slots a bought item could go to: empty hands plus empty places in carried containers.
+static uint32_t freeInventorySlots(const Player* player)
+{
+	uint32_t slots = 0;
+	for (int32_t slot = CONST_SLOT_FIRST; slot <= CONST_SLOT_LAST; ++slot) {
+		const Item* item = player->getInventoryItem(static_cast<slots_t>(slot));
+		if (!item) {
+			if (slot == CONST_SLOT_LEFT || slot == CONST_SLOT_RIGHT) {
+				++slots;
+			}
+			continue;
+		}
+
+		const Container* container = item->getContainer();
+		if (!container) {
+			continue;
+		}
+
+		slots += container->capacity() - std::min<uint32_t>(container->capacity(), container->size());
+		for (ContainerIterator it = container->iterator(); it.hasNext(); it.advance()) {
+			if (const Container* sub = (*it)->getContainer()) {
+				slots += sub->capacity() - std::min<uint32_t>(sub->capacity(), sub->size());
+			}
+		}
+	}
+	return slots;
+}
+
 bool BehaviourDatabase::sendTrade(Player* player)
 {
 	std::ostringstream ss;
-	ss << "open\t" << npc->getID() << '\t' << cleanField(npc->getName()) << '\t' << player->getMoney() << '\n';
+	ss << "open\t" << npc->getID() << '\t' << cleanField(npc->getName()) << '\t' << player->getMoney()
+		<< '\t' << freeInventorySlots(player) << '\n';
 
 	std::set<std::tuple<uint16_t, int32_t, bool>> seen;
 	for (size_t i = 0; i < tradeOffers.size(); i++) {
@@ -343,11 +423,16 @@ bool BehaviourDatabase::sendTrade(Player* player)
 		const ItemType& it = Item::items[offer.itemId];
 		const int32_t countData = (it.stackable || !it.hasSubType()) ? -1 : offer.data;
 		const uint32_t have = player->getItemTypeCount(offer.itemId, countData, offer.sell);
+		// Sell all leaves equipped items and containers alone.
+		const uint32_t sellable = (offer.sell && !it.isContainer()) ? carriedCount(player, offer.itemId, countData) : 0;
 
+		std::string article;
+		const std::string name = offerName(it, offer.data, article);
 		ss << (offer.sell ? 'S' : 'B') << '\t' << i << '\t' << offer.itemId << '\t' << offer.data << '\t'
 			<< offer.amount << '\t' << offer.price << '\t' << it.weight << '\t'
 			<< (offer.counted ? MAX_TRADE_COUNT : 1) << '\t' << have << '\t'
-			<< cleanField(it.article) << '\t' << cleanField(it.name) << '\n';
+			<< cleanField(article) << '\t' << cleanField(name) << '\t'
+			<< clientSubType(it, offer.data) << '\t' << sellable << '\n';
 	}
 
 	if (seen.empty()) {
@@ -441,6 +526,98 @@ void BehaviourDatabase::handleTrade(Player* player, size_t index, int32_t count)
 
 	npc->lastTalkCreature = player->getID();
 	react(SITUATION_NONE, player, "yes");
+
+	if (npc->focusCreature == player->getID() && tradePlayer == player->getID()) {
+		sendTrade(player);
+	}
+}
+
+void BehaviourDatabase::handleSellAll(Player* player)
+{
+	if (!player) {
+		return;
+	}
+
+	if (npc->focusCreature != player->getID() || tradePlayer != player->getID()) {
+		std::ostringstream ss;
+		ss << "close\t" << npc->getID();
+		sendTradeMessage(*player, ss.str());
+		return;
+	}
+
+	if (!Position::areInRange<3, 3>(player->getPosition(), npc->getPosition())) {
+		return;
+	}
+
+	const int64_t now = OTSYS_TIME();
+	if (now - lastTradeTime < 1000) {
+		return;
+	}
+	lastTradeTime = now;
+
+	uint64_t earned = 0;
+	uint32_t sold = 0;
+	int32_t steps = 0;
+	std::set<std::pair<uint16_t, int32_t>> done;
+
+	muteSpeech = true;
+	for (const NpcTradeOffer& offer : tradeOffers) {
+		if (!offer.sell || !done.emplace(offer.itemId, offer.data).second) {
+			continue;
+		}
+
+		const ItemType& it = Item::items[offer.itemId];
+		if (it.isContainer() || !tradeOfferAvailable(offer, player)) {
+			continue;
+		}
+
+		const int32_t countData = (it.stackable || !it.hasSubType()) ? -1 : offer.data;
+		while (steps < MAX_SELL_ALL_STEPS && npc->focusCreature == player->getID()) {
+			const uint32_t before = carriedCount(player, offer.itemId, countData);
+			const int32_t units = static_cast<int32_t>(before / static_cast<uint32_t>(offer.amount));
+			if (units < 1) {
+				break;
+			}
+
+			const int32_t count = offer.counted ? std::min(units, MAX_TRADE_COUNT) : 1;
+			const NpcBehaviour* rule = count > 1 ? offer.counted : offer.unit;
+			const NpcBehaviourAction* priceAction = findAction(rule, BEHAVIOUR_TYPE_PRICE);
+			const NpcBehaviourAction* amountAction = findAction(rule, BEHAVIOUR_TYPE_AMOUNT);
+			bool ok = priceAction != nullptr;
+			const int64_t priceValue = ok ? staticValue(priceAction->expression, count, ok) : 0;
+			const int64_t amountValue = amountAction ? staticValue(amountAction->expression, count, ok) : 1;
+			if (!ok || priceValue < 0 || priceValue > std::numeric_limits<int32_t>::max() || amountValue < 1 ||
+				static_cast<uint64_t>(amountValue) > before) {
+				break;
+			}
+
+			type = offer.itemId;
+			data = offer.data;
+			amount = static_cast<int32_t>(amountValue);
+			price = static_cast<int32_t>(priceValue);
+			topic = offer.topic;
+
+			npc->lastTalkCreature = player->getID();
+			react(SITUATION_NONE, player, "yes");
+			++steps;
+
+			const uint32_t after = carriedCount(player, offer.itemId, countData);
+			if (after + static_cast<uint32_t>(amountValue) != before) {
+				break; // the NPC refused, stop instead of looping
+			}
+			earned += static_cast<uint64_t>(priceValue);
+			sold += static_cast<uint32_t>(amountValue);
+		}
+	}
+	muteSpeech = false;
+
+	if (sold == 0) {
+		npc->doSay("You have nothing I would buy.");
+	} else {
+		std::ostringstream ss;
+		ss << "Ok. I bought " << sold << (sold == 1 ? " item" : " items") << " for " << earned << " gold.";
+		npc->doSay(ss.str());
+	}
 
 	if (npc->focusCreature == player->getID() && tradePlayer == player->getID()) {
 		sendTrade(player);

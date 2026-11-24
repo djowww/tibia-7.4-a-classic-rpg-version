@@ -9,62 +9,6 @@
 class WalkMatrix {
 public:
 
-    void updatePosition(const Position& newPos)
-    {
-        int32_t xdiff = pos.x - newPos.x;
-        int32_t ydiff = pos.y - newPos.y;
-        if (pos.z != newPos.z || std::abs(xdiff) > 6 || std::abs(ydiff) > 6) {
-            pos = newPos;
-            return clear();
-        }
-        pos = newPos;
-
-        if (xdiff < 0) {
-            for (int x = 0; x < 7; ++x) {
-                for (int y = 0; y < 7; ++y) {
-                    if (x - xdiff > 6) {
-                        matrix[x][y] = 0;
-                    } else {
-                        matrix[x][y] = matrix[x - xdiff][y];
-                    }
-                }
-            }
-        }
-        if (xdiff > 0) {
-            for (int x = 6; x >= 0; --x) {
-                for (int y = 6; y >= 0; --y) {
-                    if (x - xdiff < 0) {
-                        matrix[x][y] = 0;
-                    } else {
-                        matrix[x][y] = matrix[x - xdiff][y];
-                    }
-                }
-            }
-        }
-        if (ydiff < 0) {
-            for (int x = 0; x < 7; ++x) {
-                for (int y = 0; y < 7; ++y) {
-                    if (y - ydiff > 6) {
-                        matrix[x][y] = 0;
-                    } else {
-                        matrix[x][y] = matrix[x][y - ydiff];
-                    }
-                }
-            }
-        }
-        if (ydiff > 0) {
-            for (int x = 6; x >= 0; --x) {
-                for (int y = 6; y >= 0; --y) {
-                    if (y - ydiff < 0) {
-                        matrix[x][y] = 0;
-                    } else {
-                        matrix[x][y] = matrix[x][y - ydiff];
-                    }
-                }
-            }
-        }
-    }
-
     bool inRange(const Position& pos2)
     {
         if (pos.z != pos2.z) return false;
@@ -119,18 +63,6 @@ public:
             }
         }
         return value;
-    }
-
-    std::string dump()
-    {
-        std::stringstream ss;
-        for (int y = 0; y < 7; ++y) {
-            for (int x = 0; x < 7; ++x) {
-                ss << matrix[x][y] << "\t";
-            }
-            ss << "\n";
-        }
-        return ss.str();
     }
 
 private:

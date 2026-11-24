@@ -46,7 +46,7 @@ ctest --test-dir build --output-on-failure
 
 O teste C++ usa o núcleo real, `items.srv`, vocações e uma definição de NPC; não inicia mundo, banco ou listeners. Abrange atributos persistidos, refino, ausência de efeitos numéricos da raridade sobre dano/resistência/evolução, chamadas Lua, loot e os caminhos de equipar/retirar/transformar anéis com efeitos nativos.
 
-As suítes [`rarity-ui-tests.lua`](../tests/rarity-ui-tests.lua) e [`rarity-economy-tests.lua`](../tests/rarity-economy-tests.lua) exercitam os scripts com objetos simulados. [`rarity-ui-runner.py`](../tests/rarity-ui-runner.py) executa os cenários Lua 5.2 e LuaJIT via Lupa.
+As suítes [`rarity-ui-tests.lua`](../tests/rarity-ui-tests.lua) e [`rarity-economy-tests.lua`](../tests/rarity-economy-tests.lua) exercitam os scripts com objetos simulados.
 
 ## Compatibilidade dos dados
 

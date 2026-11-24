@@ -393,6 +393,8 @@
 	<movevent event="AddItem" movementid="238" tileitem="1" script="main/238.lua" />
 	<movevent event="StepIn" movementid="239" script="main/teleport.lua" />
 	<movevent event="AddItem" movementid="239" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="249" script="main/249.lua" />
+	<movevent event="StepIn" movementid="250" script="main/250.lua" />
 	<movevent event="StepIn" movementid="1100" script="main/1100.lua" />
 	<movevent event="StepIn" movementid="1101" script="main/1101.lua" />
 	<movevent event="StepIn" movementid="1102" script="main/1102.lua" />

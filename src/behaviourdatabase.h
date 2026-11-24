@@ -275,6 +275,7 @@ class BehaviourDatabase
 		void buildTradeOffers();
 		bool openTrade(Player* player);
 		void handleTrade(Player* player, size_t index, int32_t count);
+		void handleSellAll(Player* player);
 		void closeTrade(bool notify = true);
 
 		static bool compareBehaviour(const NpcBehaviour* left, const NpcBehaviour* right) {
@@ -298,6 +299,25 @@ class BehaviourDatabase
 		void idle();
 		void reset();
 
+		struct DialogueState
+		{
+			int32_t topic = 0;
+			int32_t data = -1;
+			int32_t type = 0;
+			int32_t price = 0;
+			int32_t amount = 0;
+			int32_t delay = 1000;
+			std::string string;
+			bool fullDigit = false;
+		};
+
+		DialogueState saveDialogue() const;
+		void loadDialogue(const DialogueState& state);
+		void reactBehaviours(BehaviourSituation_t situation, Player* player, const std::string& message);
+
+		std::map<uint32_t, DialogueState> busyDialogues;
+		bool bystander = false;
+
 		int32_t topic;
 		int32_t data;
 		int32_t type;
@@ -320,6 +340,7 @@ class BehaviourDatabase
 		uint32_t tradePlayer = 0;
 		int64_t lastTradeTime = 0;
 		bool tradeKeyword = false;
+		bool muteSpeech = false; // sell all answers once at the end
 
 		Npc* npc = nullptr;
 		NpcBehaviour* previousBehaviour = nullptr;

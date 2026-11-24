@@ -1,5 +1,5 @@
 function onLogin(player)
-	local loginStr = "Welcome to Antigas 7.4\nOfficial client: Antigas 7.4 - https://tibia74.tech/#download"
+	local loginStr = "Welcome to Antigas 7.4\nOfficial client: Antigas 7.4 - https://tibia74.tech/?jogar=1#download"
 	if player:getLastLoginSaved() <= 0 then
 		player:sendOutfitWindow()
 	else
@@ -75,7 +75,7 @@ function onLogin(player)
 11. Report tutor misconduct to a superior with a screenshot.
 
 - Commands -
-Mute Player: /mute nick, 90. (90 seconds)
+Mute Player: /mute nick, 90 (90 minutes).
 Unmute Player: /unmute nick.
 - Commands -]]
         player:popupFYI(msg)
@@ -87,10 +87,10 @@ Unmute Player: /unmute nick.
 	player:registerEvent("Market")
 	player:registerEvent("Spell")
 	player:registerEvent('KillDeathCount')
-	player:registerEvent("Reward")
 	player:registerEvent("Bestiary")
 	player:registerEvent("ItemRaritySync")
 	player:registerEvent("QuestLog")
+	player:registerEvent("RegenStatus")
 	player:registerEvent("BestiaryKill")
 	player:registerEvent("AchievementsKill")
 	player:registerEvent("AchievementsDeath")

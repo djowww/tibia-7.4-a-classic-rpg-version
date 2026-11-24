@@ -37,7 +37,6 @@ VANISH,!                   -> "Good bye."
 "time"           -> "I think it's about %T. If you'd bought a watch you'd know for sure."
 "food"           -> "Sorry, visit the Jolly Axeman Tavern for that."
 
-"goods"             -> "Let me see ... we have shovels, picks, scythes, bags, ropes, backpacks, scrolls, watches, some lightsources, fishing rods, sixpacks of worms and other stuff."
 "stuff"           -> "Oh, things like crowbars, water hoses, presents, buckets, bottles, and the like."
 "do","you","sell" -> *
 "do","you","have" -> *

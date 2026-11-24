@@ -628,7 +628,57 @@ NpcBehaviourNode* BehaviourDatabase::readFactor(ScriptReader& script, NpcBehavio
 	return nextNode;
 }
 
+BehaviourDatabase::DialogueState BehaviourDatabase::saveDialogue() const
+{
+	DialogueState state;
+	state.topic = topic;
+	state.data = data;
+	state.type = type;
+	state.price = price;
+	state.amount = amount;
+	state.delay = delay;
+	state.string = string;
+	state.fullDigit = full_digit;
+	return state;
+}
+
+void BehaviourDatabase::loadDialogue(const DialogueState& state)
+{
+	topic = state.topic;
+	data = state.data;
+	type = state.type;
+	price = state.price;
+	amount = state.amount;
+	delay = state.delay;
+	string = state.string;
+	full_digit = state.fullDigit;
+}
+
 void BehaviourDatabase::react(BehaviourSituation_t situation, Player* player, const std::string& message)
+{
+	if (situation != SITUATION_BUSY || player->getID() == npc->focusCreature) {
+		reactBehaviours(situation, player, message);
+		return;
+	}
+
+	// A bystander talking to a busy NPC gets its own Topic/Price/Amount, so lines such as
+	// BUSY,"instant",... cannot overwrite the offer the focused customer is answering.
+	const DialogueState focusState = saveDialogue();
+	auto it = busyDialogues.find(player->getID());
+	loadDialogue(it != busyDialogues.end() ? it->second : DialogueState());
+	bystander = true;
+	reactBehaviours(situation, player, message);
+	bystander = false;
+	if (npc->focusCreature != player->getID()) {
+		if (busyDialogues.size() >= 64) {
+			busyDialogues.clear();
+		}
+		busyDialogues[player->getID()] = saveDialogue();
+		loadDialogue(focusState);
+	}
+}
+
+void BehaviourDatabase::reactBehaviours(BehaviourSituation_t situation, Player* player, const std::string& message)
 {
 	for (NpcBehaviour* behaviour : behaviourEntries) {
 		bool fulfilled = true;
@@ -690,11 +740,17 @@ void BehaviourDatabase::react(BehaviourSituation_t situation, Player* player, co
 		
 		bool has_full_digit = full_digit;
 
-		if (player->getID() == npc->focusCreature) {
+		if (bystander) {
+			// Keep the focused customer's pending replies; the bystander's answer starts fresh.
 			topic = 0;
-		}
+			delay = 1000;
+		} else {
+			if (player->getID() == npc->focusCreature) {
+				topic = 0;
+			}
 
-		reset();
+			reset();
+		}
 
 		if (situation == SITUATION_ADDRESS || npc->focusCreature == player->getID()) {
 			attendCustomer(player->getID());
@@ -819,6 +875,9 @@ void BehaviourDatabase::checkAction(const NpcBehaviourAction* action, Player* pl
 	switch (action->type) {
 	case BEHAVIOUR_TYPE_NOP: break;
 	case BEHAVIOUR_TYPE_STRING: {
+		if (muteSpeech) {
+			break;
+		}
 		const std::string response = parseResponse(player, action->string);
 		const CallbackGeneration::Snapshot generation = delayedSayGeneration.snapshot();
 		delayedEvents.push_back(g_scheduler.addEvent(createSchedulerTask(
@@ -831,7 +890,10 @@ void BehaviourDatabase::checkAction(const NpcBehaviourAction* action, Player* pl
 		full_digit = true;
 		break;
 	case BEHAVIOUR_TYPE_IDLE:
-		idle();
+		// "Idle" on a BUSY line must not end the conversation of the customer being served.
+		if (!bystander) {
+			idle();
+		}
 		break;
 	case BEHAVIOUR_TYPE_QUEUE:
 		queueCustomer(player->getID(), message);
@@ -1362,6 +1424,7 @@ void BehaviourDatabase::idle()
 	std::lock_guard<std::recursive_mutex> lock(mutex);
 
 	closeTrade();
+	busyDialogues.clear();
 
 	if (queueList.empty()) {
 		if (OTSYS_TIME() - npc->conversationStartTime <= 3000) {

@@ -43,7 +43,6 @@ Topic=7,female,"may","gods","bless","us" -> "I ask thee %N, will you honor your 
 Topic=8,male,"yes"    -> "So by the powers of the gods your soul is now bound to your bride. Bride, step forward and tell me to whom your heart belongs!", EffectOpp(1), idle
 Topic=8,"i$","will$"  -> *
 Topic=8,female,"yes"  -> "So by the powers of the gods your soul is now bound to your groom. Groom, step forward and tell me to whom your heart belongs!", EffectOpp(1), idle
-Topic=8,"i$","will$"  -> *
 Topic=9,"yes"         -> "So by the powers of the gods your souls are now bound together for eternity. May the gods watch with grace over your further life as married couple! Go now and celebrate your marriage!", EffectOpp(1), EffectMe(7), Idle
 Topic=9,"i$","will$"  -> *
 Topic=9,"no"          -> "Your neglection of love hurts my heart. Leave now!", idle
@@ -62,7 +61,6 @@ Topic=9,"no"          -> "Your neglection of love hurts my heart. Leave now!", i
 "donation"       -> *
 "fight"          -> "It is MY mission to teach, it is YOUR mission to fight!"
 "slay"           -> *
-"mission"        -> *
 "heal$",HP<40     -> "You are hurt, my child. I will heal your wounds.", HP=40, EffectOpp(13)
 "heal$",Poison>0  -> "You are poisoned, my child. I will help you.", Poison(0,0), EffectOpp(14)
 "heal$",Burning>0 -> "You are burning, my child. I will help you.", Burning(0,0), EffectOpp(15)

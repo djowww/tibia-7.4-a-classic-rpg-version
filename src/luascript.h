@@ -764,8 +764,6 @@ class LuaScriptInterface
 
 		static int luaCreatureCanSee(lua_State* L);
 		static int luaCreatureCanSeeCreature(lua_State* L);
-		static int luaCreatureCanSeeGhostMode(lua_State* L);
-		static int luaCreatureCanSeeInvisibility(lua_State* L);
 
 		static int luaCreatureGetParent(lua_State* L);
 
@@ -873,14 +871,8 @@ class LuaScriptInterface
 		static int luaPlayerGetSkillTries(lua_State* L);
 		static int luaPlayerAddSkillTries(lua_State* L);
 		
-		static int luaPlayerAddOfflineTrainingTime(lua_State* L);
-		static int luaPlayerGetOfflineTrainingTime(lua_State* L);
-		static int luaPlayerRemoveOfflineTrainingTime(lua_State* L);
 
-		static int luaPlayerAddOfflineTrainingTries(lua_State* L);
 
-		static int luaPlayerGetOfflineTrainingSkill(lua_State* L);
-		static int luaPlayerSetOfflineTrainingSkill(lua_State* L);
 
 		static int luaPlayerGetItemCount(lua_State* L);
 		static int luaPlayerGetItemById(lua_State* L);

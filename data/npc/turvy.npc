@@ -62,7 +62,6 @@ Topic=3           -> "Go on! I can't wait to hear more!"
 "offer"           -> "My offers are weapons, armors, helmets, legs, and shields."
 "do","you","sell" -> *
 "do","you","have" -> *
-"weapon"          -> "I have hand axes, axes, spears, maces, battle hammers, swords, rapiers, daggers, and sabres. What's your choice?"
 "helmet"          -> "I am selling leather helmets and chain helmets. What do you want?"
 "armor"           -> "I am selling leather, chain, and brass armor. What do you need?"
 "shield"          -> "I am selling wooden shields and steel shields. What do you want?"

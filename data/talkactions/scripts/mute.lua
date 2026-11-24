@@ -17,15 +17,20 @@ function onSay(cid, words, param)
 			return false
 		end
 
-		local target = Player(mute[1])
-		local time = tonumber(mute[2])
-		local condition = Condition(CONDITION_CHANNELMUTEDTICKS, CONDITIONID_DEFAULT)
-		condition:setParameter(CONDITION_PARAM_SUBID, CHANNEL_HELP)
-		condition:setParameter(CONDITION_PARAM_TICKS, time*60*1000)
-
 		if player:getAccountType() < ACCOUNT_TYPE_TUTOR then
 			return false
 		end
+
+		local target = Player(mute[1])
+		local time = tonumber(mute[2])
+		if not time or time < 1 or time > 10080 then
+			player:sendCancelMessage("Invalid time specified (1 to 10080 minutes).")
+			return false
+		end
+
+		local condition = Condition(CONDITION_CHANNELMUTEDTICKS, CONDITIONID_DEFAULT)
+		condition:setParameter(CONDITION_PARAM_SUBID, CHANNEL_HELP)
+		condition:setParameter(CONDITION_PARAM_TICKS, math.floor(time) * 60 * 1000)
 
 		if target == nil then
 			player:sendCancelMessage("A player with that name is not online.")
@@ -33,7 +38,7 @@ function onSay(cid, words, param)
 		end
 
 		if target:getAccountType() >= ACCOUNT_TYPE_TUTOR then
-			player:sendCancelMessage("Only player can be mutated")
+			player:sendCancelMessage("Only players can be muted.")
 			return false
 		end
 
@@ -65,7 +70,7 @@ function onSay(cid, words, param)
 			sendChannelMessage(CHANNEL_HELP, TALKTYPE_CHANNEL_R1, remove:getName() .. " has been unmuted by " .. player:getName() .. ".")
 			remove:setStorageValue(storage, -1)
 		else
-			player:sendCancelMessage("A player " .. remove:getName() .. "is not mutated")
+			player:sendCancelMessage("A player " .. remove:getName() .. " is not muted.")
 		end
 	end
 

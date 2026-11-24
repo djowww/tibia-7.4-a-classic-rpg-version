@@ -13,7 +13,6 @@ ADDRESS,"salutations$","queen",! -> "HAIL TO THE QUEEN!"
 ADDRESS,"hi$",!                  -> "MIND YOUR MANNERS COMMONER! To address the queen greet with her title!", Idle
 ADDRESS,"hello$",!               -> *
 ADDRESS,"hi$",!                  -> "MIND YOUR MANNERS COMMONER! To address the queen greet with her title!", Idle
-ADDRESS,"hello$",!               -> *
 ADDRESS,!                        -> Idle
 BUSY,"hello$","queen",!          -> "Wait for your audience %N!"
 BUSY,"hail$","queen",!           -> "Wait for your audience %N!"      

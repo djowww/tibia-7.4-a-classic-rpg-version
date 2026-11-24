@@ -22,7 +22,7 @@ EXPECTED_POLICIES = {
     "/addatk": ("access", "god"), "/resetatk": ("access", "god"),
     "/mccheck": ("access", "god"), "/ghost": ("access", "gamemaster"),
     "/clean": ("access", "god"), "/storagevalue": ("access", None),
-    "/globalboost": ("access", "god"), "/mute": ("account", "tutor"),
+    "/globalboost": ("access", "god"), "/mute": ("account", "tutor"), "/unmute": ("account", "tutor"),
     "!buyhouse": ("public", None), "!leavehouse": ("public", None),
     "!frags": ("public", None), "!share": ("public", None),
     "!uptime": ("public", None), "!serverinfo": ("public", None),

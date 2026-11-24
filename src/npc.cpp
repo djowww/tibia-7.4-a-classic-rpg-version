@@ -314,6 +314,13 @@ void Npc::handleTradeRequest(Player* player, size_t index, int32_t count)
 	}
 }
 
+void Npc::handleSellAllRequest(Player* player)
+{
+	if (behaviourDatabase) {
+		behaviourDatabase->handleSellAll(player);
+	}
+}
+
 void Npc::closeTradeRequest(Player* player)
 {
 	if (behaviourDatabase && player && focusCreature == player->getID()) {

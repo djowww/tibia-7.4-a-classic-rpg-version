@@ -6,10 +6,14 @@ function onStepIn(creature, item, position, fromPosition)
 	local player = Player(creature)
 	local lookPosition = player:getPosition()
 	lookPosition:getNextPosition(player:getDirection())
-	local depotItem = Tile(lookPosition):getItemByType(ITEM_TYPE_DEPOT)
-	if depotItem ~= nil then
-		local depotItems = player:getDepotChest(getDepotId(depotItem:getUniqueId()), true):getItemHoldingCount()
-		player:sendTextMessage(MESSAGE_STATUS_DEFAULT, "Your depot contains " .. depotItems .. " item" .. (depotItems > 1 and "s." or "."))
+	local lookTile = Tile(lookPosition)
+	local depotItem = lookTile and lookTile:getItemByType(ITEM_TYPE_DEPOT)
+	if depotItem then
+		local depotChest = player:getDepotChest(getDepotId(depotItem:getUniqueId()), true)
+		if depotChest then
+			local depotItems = depotChest:getItemHoldingCount()
+			player:sendTextMessage(MESSAGE_STATUS_DEFAULT, "Your depot contains " .. depotItems .. " item" .. (depotItems ~= 1 and "s." or "."))
+		end
 	end
 	
 	if item:getId() == 431 then

@@ -81,13 +81,23 @@ def read_towns(root):
             towns.append((name.decode("ascii"), x, y, z))
 
 
+# Rookgaard is an island: places across the water belong to the main continent.
+ROOKGAARD_AREA = (31880, 32020, 32220, 32310)
+
+
+def in_rookgaard(x, y):
+    left, top, right, bottom = ROOKGAARD_AREA
+    return left <= x <= right and top <= y <= bottom
+
+
 class Places:
     def __init__(self, towns):
         self.towns = towns
 
     def town(self, x, y):
         near = [town for town in self.towns
-                if town[0] not in SMALL_TOWNS or math.hypot(town[1] - x, town[2] - y) < SMALL_TOWN_REACH]
+                if (town[0] not in SMALL_TOWNS or math.hypot(town[1] - x, town[2] - y) < SMALL_TOWN_REACH)
+                and (town[0] != "Rookgaard" or in_rookgaard(x, y))]
         return min(near, key=lambda town: (town[1] - x) ** 2 + (town[2] - y) ** 2)
 
     def region(self, x, y):

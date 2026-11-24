@@ -269,9 +269,6 @@ class ConditionDamage final : public Condition
 		bool setParam(ConditionParam_t param, int32_t value) final;
 
 		bool addDamage(int32_t rounds, int32_t time, int32_t value);
-		bool doForceUpdate() const {
-			return forceUpdate;
-		}
 		int32_t getTotalDamage() const;
 		void setLegacyForce(int32_t force) {
 			force = std::max<int32_t>(0, force);

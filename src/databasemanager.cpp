@@ -87,23 +87,3 @@ bool DatabaseManager::isDatabaseSetup(bool* querySucceeded)
 	return result != nullptr;
 }
 
-bool DatabaseManager::getDatabaseConfig(const std::string& config, int32_t& value, bool* querySucceeded)
-{
-	if (querySucceeded) *querySucceeded = false;
-	Database* db = Database::getInstance();
-	std::string escapedConfig;
-	if (!db->escapeString(config, escapedConfig)) return false;
-	std::ostringstream query;
-	query << "SELECT `value` FROM `server_config` WHERE `config` = " << escapedConfig;
-
-	bool succeeded = false;
-	DBResult_ptr result = db->storeQuery(query.str(), &succeeded);
-	if (querySucceeded) *querySucceeded = succeeded;
-	if (!result) {
-		return false;
-	}
-
-	value = result->getNumber<int32_t>("value");
-	return true;
-}
-

@@ -14956,9 +14956,6 @@
 	<spawn centerx="32080" centery="32201" centerz="8" radius="1">
 		<monster name="rat" x="-1" y="0" z="8" spawntime="90" />
 	</spawn>
-	<spawn centerx="33209" centery="32201" centerz="8" radius="1">
-		<monster name="dragon" x="-1" y="0" z="8" spawntime="90" />
-	</spawn>
 	<spawn centerx="32069" centery="32203" centerz="8" radius="1">
 		<monster name="rat" x="0" y="1" z="8" spawntime="90" />
 	</spawn>
@@ -14979,17 +14976,8 @@
 		<monster name="swamp troll" x="-1" y="1" z="8" spawntime="90" />
 		<monster name="swamp troll" x="2" y="2" z="8" spawntime="90" />
 	</spawn>
-	<spawn centerx="33218" centery="32203" centerz="8" radius="1">
-		<monster name="dragon" x="0" y="0" z="8" spawntime="90" />
-	</spawn>
-	<spawn centerx="33235" centery="32203" centerz="8" radius="1">
-		<monster name="dragon" x="0" y="0" z="8" spawntime="90" />
-	</spawn>
 	<spawn centerx="32085" centery="32204" centerz="8" radius="1">
 		<monster name="rat" x="-1" y="0" z="8" spawntime="90" />
-	</spawn>
-	<spawn centerx="33202" centery="32204" centerz="8" radius="1">
-		<monster name="dragon" x="-1" y="-1" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="32141" centery="32205" centerz="8" radius="1">
 		<monster name="bear" x="0" y="0" z="8" spawntime="90" />
@@ -15085,12 +15073,6 @@
 		<monster name="rat" x="-2" y="1" z="8" spawntime="90" />
 		<monster name="rat" x="1" y="1" z="8" spawntime="90" />
 	</spawn>
-	<spawn centerx="33203" centery="32214" centerz="8" radius="1">
-		<monster name="dragon" x="0" y="0" z="8" spawntime="90" />
-	</spawn>
-	<spawn centerx="33238" centery="32214" centerz="8" radius="1">
-		<monster name="dragon" x="0" y="0" z="8" spawntime="90" />
-	</spawn>
 	<spawn centerx="31996" centery="32215" centerz="8" radius="4">
 		<monster name="wolf" x="0" y="-1" z="8" spawntime="90" />
 		<monster name="wolf" x="0" y="1" z="8" spawntime="90" />
@@ -15118,9 +15100,6 @@
 	</spawn>
 	<spawn centerx="32625" centery="32218" centerz="8" radius="1">
 		<monster name="rat" x="0" y="0" z="8" spawntime="90" />
-	</spawn>
-	<spawn centerx="33207" centery="32218" centerz="8" radius="1">
-		<monster name="dragon" x="-1" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="31945" centery="32219" centerz="8" radius="3">
 		<monster name="troll" x="-1" y="0" z="8" spawntime="90" />
@@ -15152,9 +15131,6 @@
 	</spawn>
 	<spawn centerx="32089" centery="32221" centerz="8" radius="1">
 		<monster name="rat" x="0" y="0" z="8" spawntime="90" />
-	</spawn>
-	<spawn centerx="33220" centery="32221" centerz="8" radius="1">
-		<monster name="dragon" x="0" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="32927" centery="32223" centerz="8" radius="3">
 		<monster name="swamp troll" x="0" y="0" z="8" spawntime="90" />
@@ -15263,9 +15239,6 @@
 		<monster name="rotworm" x="-1" y="-1" z="8" spawntime="90" />
 		<monster name="rotworm" x="0" y="0" z="8" spawntime="90" />
 		<monster name="rotworm" x="3" y="0" z="8" spawntime="90" />
-	</spawn>
-	<spawn centerx="33210" centery="32235" centerz="8" radius="1">
-		<monster name="dragon" x="-1" y="0" z="8" spawntime="90" />
 	</spawn>
 	<spawn centerx="32779" centery="32236" centerz="8" radius="3">
 		<monster name="minotaur" x="2" y="-2" z="8" spawntime="90" />

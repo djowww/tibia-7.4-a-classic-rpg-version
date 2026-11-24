@@ -20,7 +20,6 @@ VANISH,!                  -> "Good bye."
 "bye", male       -> "Good bye, Sir.", Idle
 "farewell", male  -> *
 "bye", female     -> "Good bye, Mam.", Idle
-"farewell", male  -> *
 "how","are","you" -> "I am fine, thank you."
 "sell"            -> "We're selling many things. Please have a look at the blackboards downstairs to see a list of our inventory."
 "job"             -> "I'm helping my grandfather Obi with this shop. Do you want to buy or sell anything?"

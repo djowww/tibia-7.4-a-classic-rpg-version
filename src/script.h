@@ -211,16 +211,6 @@ public:
 		z = this->CoordZ;
 	}
 
-	int readSpecial()
-	{
-		nextToken();
-		if (this->Token != SPECIAL)
-			error("special-char expected");
-		if (this->Token != SPECIAL)
-			error("special-char expected");
-		return this->Special;
-	}
-
 	void readSymbol(char Symbol)
 	{
 		nextToken();
@@ -250,22 +240,6 @@ public:
 		if (this->Token != STRING)
 			error("string expected");
 		return this->String;
-	}
-
-	uint8_t* getBytesequence()
-	{
-		if (this->Token != BYTES)
-			error("byte-sequence expected");
-		return this->Bytes;
-	}
-
-	void getcoordinate(int32_t& x, int32_t& y, int32_t& z)
-	{
-		if (this->Token != COORDINATE)
-			error("coordinates expected");
-		x = this->CoordX;
-		y = this->CoordY;
-		z = this->CoordZ;
 	}
 
 	int getSpecial()

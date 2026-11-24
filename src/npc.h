@@ -80,6 +80,7 @@ class Npc final : public Creature
 		void doSay(const std::string& text);
 
 		void handleTradeRequest(Player* player, size_t index, int32_t count);
+		void handleSellAllRequest(Player* player);
 		void closeTradeRequest(Player* player);
 
 

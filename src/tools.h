@@ -64,7 +64,6 @@ Direction getDirection(const std::string& string);
 Position getNextPosition(Direction direction, Position pos);
 Direction getDirectionTo(const Position& from, const Position& to);
 
-std::string getFirstLine(const std::string& str);
 
 std::string formatDate(time_t time);
 std::string formatDateShort(time_t time);
@@ -79,24 +78,18 @@ WeaponAction_t getWeaponAction(const std::string& strValue);
 CombatType_t getCombatType(const std::string& strValue);
 Skulls_t getSkullType(const std::string& strValue);
 FluidTypes_t getFluidType(const std::string& strValue);
-std::string getCombatName(CombatType_t combatType);
 
 std::string getSkillName(uint8_t skillid);
 
-std::string ucfirst(std::string str);
-std::string ucwords(std::string str);
 bool booleanString(const std::string& str);
 
-std::string getWeaponName(WeaponType_t weaponType);
 
 size_t combatTypeToIndex(CombatType_t combatType);
-CombatType_t indexToCombatType(size_t v);
 
 itemAttrTypes stringToItemAttribute(const std::string& str);
 
 const char* getReturnMessage(ReturnValue value);
 
-void getFilesInDirectory(const boost::filesystem::path& root, const std::string& ext, std::vector<boost::filesystem::path>& ret);
 
 inline int64_t OTSYS_TIME()
 {

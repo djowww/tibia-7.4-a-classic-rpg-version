@@ -85,10 +85,11 @@ function Player:onLookInTrade(partner, item, distance)
 end
 
 function Player:onMoveItem(item, count, fromPosition, toPosition, fromCylinder, toCylinder)
-	-- Only a move into a container can be loot, so the tile is looked up just then.
-	local t = toPosition.x == CONTAINER_POSITION and fromCylinder and Tile(fromCylinder:getPosition())
-	local corpse = t and t:getTopDownItem()
-	
+	-- Loot is an item taken out of an opened corpse into a container. Checking the
+	-- source container itself keeps backpack moves on top of a corpse from counting.
+	local corpse = toPosition.x == CONTAINER_POSITION and fromPosition.x == CONTAINER_POSITION
+		and fromCylinder and fromCylinder:isItem() and fromCylinder or nil
+
 	if corpse then
 		local itemType = corpse:getType()
 		if itemType:isCorpse() or corpse:isRecoveryCorpse() then
@@ -206,11 +207,8 @@ function Player:onGainSkillTries(skill, tries)
 end
 
 function Player:onUseItem(item, target)
-    -- Consumption is reported by the engine after the actual item/charge change.
-    -- This hook remains available for permission checks, never for counting clicks.
+    -- Disabled in events.xml (it only returned true); enable it there before
+    -- adding permission checks here. Never use it to count clicks.
     return true
 end
 
-function Player:onRemoveCount(item, count)
-    return true
-end

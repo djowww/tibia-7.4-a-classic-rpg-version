@@ -12,6 +12,7 @@ dofile('data/lib/custom/economy.lua')
 
 -- Persistent online bonus and fixed-point fractional gain accounting.
 dofile('data/lib/custom/onlineBonus.lua')
+dofile('data/lib/custom/regenStatus.lua')
 
 -- Persistent per-character Bestiary kill progress.
 dofile('data/lib/custom/antigasBestiary.lua')

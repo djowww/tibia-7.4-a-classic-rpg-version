@@ -12,7 +12,6 @@ ADDRESS,Sorcerer,"hi$",!    -> *
 ADDRESS,Sorcerer,"hiho$",!  -> *
 ADDRESS,"hello$",!          -> "Hiho, %N. <cough>"
 ADDRESS,"hi$",!             -> *
-ADDRESS,"hi$",!             -> *
 ADDRESS,!                   -> Idle
 BUSY,"hello$",!             -> "Patient, young %N! Wait for your turn.", Queue
 BUSY,"hi$",!                -> *

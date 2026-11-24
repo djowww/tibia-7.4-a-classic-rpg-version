@@ -14,7 +14,6 @@ ADDRESS,"hello$",! -> "You not should be here! You go! You go!", Idle
 ADDRESS,"hi$",!    -> *
 
 ADDRESS,"hello$",! -> "Be greeted, friend of the apes."
-ADDRESS,"hi$",!    -> *
 
 ADDRESS,!          -> Idle
 

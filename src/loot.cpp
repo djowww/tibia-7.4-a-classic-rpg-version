@@ -286,11 +286,17 @@ void LootTracker::sync(Player& player, bool force)
 		lastPrune = now;
 	}
 	std::map<uint64_t, std::string> visible;
+	const uint32_t guid = player.getGUID();
 	for (const auto& pair : corpses()) {
 		const Container& corpse = *pair.first;
 		const TrackedCorpse& tracked = pair.second;
+		// Runs every second for each player over every tracked corpse: test the
+		// cheap recipient list first, without a second lookup of this same entry.
+		if (std::find(tracked.recipients.begin(), tracked.recipients.end(), guid) == tracked.recipients.end()) {
+			continue;
+		}
 		const Tile* tile = dynamic_cast<const Tile*>(corpse.getParent());
-		if (!tile || !eligible(&corpse, player.getGUID()) || !player.canSee(corpse.getPosition()) || tile->getStackposOfItem(&player, &corpse) < 0) {
+		if (!tile || !player.canSee(tile->getPosition()) || tile->getStackposOfItem(&player, &corpse) < 0) {
 			continue;
 		}
 		visible.emplace(tracked.id, identity(corpse, tracked, player));
