@@ -22,7 +22,7 @@ O executável gerado fica em `build/tfs`; a pasta `build/` é ignorada pelo Git.
 
 ## Pré-requisitos para executar
 
-Para uma instalação local automatizada, use [START-LOCAL.cmd e o guia local](../local/README.md). O Compose fornece MariaDB, schema vazio, personagem de demonstração e chave RSA nova; não requer importar dados de produção. O restante desta seção trata da instalação manual.
+Para uma instalação local automatizada, use [Tibia74-Local.exe e o guia local](../local/README.md). O Compose fornece MariaDB, schema vazio, personagem de demonstração e chave RSA nova; não requer importar dados de produção. O restante desta seção trata da instalação manual.
 
 Copie o [exemplo de configuração](../config.example.lua) e ajuste banco, rede e regras para seu ambiente:
 

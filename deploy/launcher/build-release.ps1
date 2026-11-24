@@ -29,6 +29,13 @@ foreach ($name in @('Antigas_dx.exe', 'libEGL.dll', 'libGLESv2.dll')) {
     Remove-Item -LiteralPath (Join-Path $stage $name) -Force -ErrorAction SilentlyContinue
 }
 Get-ChildItem -LiteralPath $stage -Filter 'd3dcompiler_*.dll' -File | Remove-Item -Force
+# Base-client files nothing loads here: modules without autoload that no load-later
+# list names (updater stays off because Services.updater is empty), unreferenced
+# images and sounds, and Windows thumbnail caches.
+foreach ($relative in @('modules\updater', 'modules\game_market', 'modules\game_cooldown', 'data\images\rawtextures', 'data\sounds\alarm.ogg', 'data\sounds\magnum.ogg')) {
+    Remove-Item -LiteralPath (Join-Path $stage $relative) -Recurse -Force -ErrorAction SilentlyContinue
+}
+Get-ChildItem -LiteralPath $stage -Filter 'Thumbs.db' -File -Recurse -Force | Remove-Item -Force
 
 $initPath = Join-Path $stage 'init.lua'
 $init = [System.IO.File]::ReadAllText($initPath)

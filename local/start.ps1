@@ -1,4 +1,4 @@
-param([switch]$NoClient)
+param([switch]$NoClient, [switch]$NoLaunch)
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 $root = Split-Path -Parent $PSScriptRoot
@@ -7,12 +7,62 @@ function Invoke-LocalCompose {
     & docker compose @args
     if ($LASTEXITCODE -ne 0) { throw 'Docker failed. Check the message above. Saved data was not deleted.' }
 }
+function Confirm-DevAccount {
+    # Databases created before the dev account existed keep their old rows:
+    # the schema only runs on an empty volume. Never changes a password.
+    $ErrorActionPreference = 'Continue'
+    $sql = @'
+DELIMITER //
+BEGIN NOT ATOMIC
+  IF NOT EXISTS (SELECT 1 FROM accounts WHERE id = 1) THEN
+    INSERT INTO accounts (id,password,type,premdays) VALUES (1,SHA1('1'),5,0);
+  END IF;
+  IF EXISTS (SELECT 1 FROM accounts WHERE id = 1 AND password = SHA1('1')) THEN
+    UPDATE accounts SET type = 5 WHERE id = 1;
+    IF EXISTS (SELECT 1 FROM players WHERE name = 'Dev') THEN
+      UPDATE players SET account_id = 1, group_id = 3 WHERE name = 'Dev';
+    ELSE
+      INSERT INTO players (name,account_id,group_id,town_id,posx,posy,posz,cap,conditions,comment,sex,looktype)
+      VALUES ('Dev',1,3,1,32369,32241,7,400,X'','Local developer character',1,75);
+    END IF;
+    SELECT 'dev-ok';
+  ELSE
+    SELECT 'dev-other-password';
+  END IF;
+END//
+'@
+    $result = $sql | & docker compose exec -T db mariadb -N -B -ulocalgame -plocalgame tibia_local 2>&1 | Out-String
+    if ($result -match 'dev-ok') { return }
+    if ($result -match 'dev-other-password') {
+        Write-Host 'Warning: account 1 already exists with another password in this saved world; the Dev account (1 / 1) was not created.' -ForegroundColor Yellow
+    } else {
+        Write-Host ('Warning: could not check the Dev account (1 / 1). ' + $result.Trim()) -ForegroundColor Yellow
+    }
+}
+function Test-Docker {
+    $ErrorActionPreference = 'Continue'
+    & docker info *> $null
+    return ($LASTEXITCODE -eq 0)
+}
 try {
     if (-not (Get-Command docker -ErrorAction SilentlyContinue)) { throw 'Install and open Docker Desktop (Linux containers) first.' }
-    & docker info *> $null
-    if ($LASTEXITCODE -ne 0) { throw 'Open Docker Desktop and wait for it to finish starting.' }
+    if (-not (Test-Docker)) {
+        $cli = Split-Path -Parent (Get-Command docker).Source
+        $desktop = @(
+            (Join-Path $env:ProgramFiles 'Docker\Docker\Docker Desktop.exe'),
+            (Join-Path $env:LOCALAPPDATA 'Programs\DockerDesktop\Docker Desktop.exe'),
+            (Join-Path $cli '..\..\Docker Desktop.exe')
+        ) | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+        if ($desktop) {
+            Write-Host 'Opening Docker Desktop...'
+            Start-Process -FilePath $desktop
+            for ($i = 0; $i -lt 90 -and -not (Test-Docker); $i++) { Start-Sleep -Seconds 2 }
+        }
+        if (-not (Test-Docker)) { throw 'Open Docker Desktop and wait for it to finish starting.' }
+    }
     Write-Host 'Starting local database and server. The first build takes several minutes.'
     Invoke-LocalCompose up -d --build --wait --wait-timeout 600
+    Confirm-DevAccount
     if ($NoClient) { Write-Host 'Server ready. Account: 2 / local123 | Dev (GOD): 1 / 1'; exit 0 }
     $client = Join-Path $PSScriptRoot 'client'
     if (-not (Test-Path -LiteralPath (Join-Path $client '.local-client-complete'))) {
@@ -44,6 +94,7 @@ try {
     $text = [regex]::Replace($text, 'ANTIGAS_RSA_PUBLIC_KEY = "[^"]+"', ('ANTIGAS_RSA_PUBLIC_KEY = "' + $modulus + '"'))
     [IO.File]::WriteAllText($init, $text, (New-Object Text.UTF8Encoding($false)))
     Write-Host 'Ready! Account: 2 | Password: local123 | Character: Local Adventurer. Dev (GOD): account 1 | password 1 | character Dev'
+    if ($NoLaunch) { exit 0 }
     Start-Process -FilePath (Join-Path $client 'Antigas_gl.exe') -WorkingDirectory $client
 } catch {
     Write-Host $_.Exception.Message -ForegroundColor Red

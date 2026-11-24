@@ -61,7 +61,6 @@ void Events::clear()
 	playerOnGainSkillTries = -1;
 	playerOnReportBug = -1;
 	playerOnReportRuleViolation = -1;
-	playerOnRemoveCount = -1;
 	playerOnUseItem = -1;
 
 }
@@ -142,8 +141,6 @@ bool Events::load()
 				playerOnLoseExperience = event;
 			} else if (methodName == "onGainSkillTries") {
 				playerOnGainSkillTries = event;
-			} else if (methodName == "onRemoveCount") {
-				playerOnRemoveCount = event;
 			} else if (methodName == "onUseItem") {
 				playerOnUseItem = event;
 			} else {
@@ -798,41 +795,6 @@ void Events::eventPlayerOnGainSkillTries(Player* player, skills_t skill, uint64_
 	}
 
 	scriptInterface.resetScriptEnv();
-}
-
-bool Events::eventPlayerOnRemoveCount(Player* player, Item* item, uint16_t count)
-{
-	// Player:onMove()
-	if (playerOnRemoveCount == -1) {
-		return true;
-	}
-
-	if (!scriptInterface.reserveScriptEnv()) {
-		std::cout << "[Error - Events::eventPlayerOnMove"
-				<< " Player "
-				<< player->getName()
-				<< " item "
-				<< item->getName()
-				<< "] Call stack overflow. Too many lua script calls being nested."
-				<< std::endl;
-		return false;
-	}
-
-	ScriptEnvironment* env = scriptInterface.getScriptEnv();
-	env->setScriptId(playerOnRemoveCount, &scriptInterface);
-
-	lua_State* L = scriptInterface.getLuaState();
-	scriptInterface.pushFunction(playerOnRemoveCount);
-
-	LuaScriptInterface::pushUserdata<Player>(L, player);
-	LuaScriptInterface::setMetatable(L, -1, "Player");
-
-	LuaScriptInterface::pushUserdata<Item>(L, item);
-	LuaScriptInterface::setItemMetatable(L, -1, item);
-	
-	lua_pushnumber(L, count);
-	
-	return scriptInterface.callFunction(3);
 }
 
 bool Events::eventPlayerOnUseItem(Player* player, Item* item, Thing* target)

@@ -63,16 +63,17 @@ water=4597;pz=true;onUse(p,rod,{},t,{});expect(credits==1,'PZ no training')
 pz=false;bait=0;onUse(p,rod,{},t,{});expect(credits==1,'no bait no training')
 bait=1;rolls={79,51};onUse(p,rod,{},t,{})
 expect(credits==2 and fish==1 and removed==1,'failed fishing credits before roll, retains bait')
--- Real food action: exact1200 inclusive.
+-- Real food action: stacks up to exactly 3600 seconds (60 minutes), inclusive.
 CONDITION_REGENERATION=20;CONDITIONID_DEFAULT=0;MESSAGE_STATUS_SMALL=1
+RegenStatus={send=function()end}
 ItemType=function()return {getNutrition=function()return 15 end}end
 local fed,taken=0,0
 local fooditem={getId=function()return 3577 end,remove=function()taken=taken+1 end}
-local reserve=1020
+local reserve=3420
 local hungry={getCondition=function()return {getTicks=function()return reserve*1000 end}end,feed=function(_,n)fed=fed+n end,sendTextMessage=function()end}
 dofile('data/actions/scripts/others/food.lua');onUse(hungry,fooditem)
-expect(fed==180 and taken==1,'1200 inclusive food')
-reserve=1021;onUse(hungry,fooditem);expect(fed==180 and taken==1,'1201 rejected without consuming')
+expect(fed==180 and taken==1,'3600 inclusive food')
+reserve=3421;onUse(hungry,fooditem);expect(fed==180 and taken==1,'3601 rejected without consuming')
 -- Active custom reward flags cannot alter production numerical callbacks.
 SKILL_MAGLEVEL=99;Player={};CONDITION_SOUL=21;CONDITION_PARAM_TICKS=22;CONDITION_PARAM_SOULGAIN=23
 Condition=function()return {setParameter=function()end,setTicks=function()end,addDamage=function()end}end

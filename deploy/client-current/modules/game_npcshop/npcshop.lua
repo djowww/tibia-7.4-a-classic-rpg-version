@@ -4,6 +4,7 @@ local MAX_AMOUNT = 100
 local window
 local npcId, npcName
 local money = 0
+local freeSlots -- empty hands + container slots, sent by the server (nil on old servers)
 local offers = {buy = {}, sell = {}}
 local mode = 'buy'
 local selected
@@ -36,9 +37,15 @@ end
 local function freeCapacity()
   local player = g_game.getLocalPlayer()
   if player and player.getFreeCapacity then
-    return player:getFreeCapacity()
+    -- This protocol reports capacity in hundreds of oz (same * 100 as Skills and Inventory).
+    return player:getFreeCapacity() * 100
   end
   return nil
+end
+
+local function isStackable(itemId)
+  local ok, thing = pcall(function() return g_things.getThingType(itemId, ThingCategoryItem) end)
+  return ok and thing and thing:isStackable() or false
 end
 
 local function maxAmount(offer)
@@ -105,6 +112,20 @@ local function updateDetail()
     note = mode == 'buy' and 'You do not have enough gold.' or 'You have none of this item to sell.'
   elseif mode == 'buy' and capacity and offer.weight * units / 100 > capacity then
     note = 'Too heavy: it would drop on the floor.'
+  elseif mode == 'buy' and freeSlots then
+    local needed = isStackable(offer.itemId) and math.ceil(units / 100) or units
+    if freeSlots < needed then
+      if freeSlots == 0 then
+        note = 'Backpack full: it drops on the floor.'
+      elseif needed == units then
+        note = 'Only ' .. freeSlots .. ' fit: the rest drops on the floor.'
+      else
+        note = 'Backpack full: it may drop on the floor.'
+      end
+    elseif freeSlots == needed and total > 0 then
+      -- Change coins need a slot too when no coin stack can take them.
+      note = 'No room left: change may drop on the floor.'
+    end
   end
   window.note:setText(note)
 end
@@ -217,6 +238,7 @@ local function open(lines)
   npcId = id
   npcName = header[3] or 'NPC'
   money = tonumber(header[4]) or 0
+  freeSlots = tonumber(header[5])
   offers = {buy = {}, sell = {}}
 
   for i = 2, #lines do

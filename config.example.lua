@@ -27,7 +27,7 @@ maxPlayers = 2000
 -- 0 selects maxPlayers + 256 (or 4096 when maxPlayers is unlimited).
 maxConnections = 0
 maxConnectionsPerIP = 128
-motd = "Tibia 7.4 - Local test. Use START-LOCAL.cmd for automatic setup."
+motd = "Tibia 7.4 - Local test. Use Tibia74-Local.exe for automatic setup."
 onePlayerOnlinePerAccount = true
 allowClones = false
 serverName = "Tibia 7.4 - A classic rpg version"

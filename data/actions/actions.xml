@@ -90,6 +90,7 @@
 	<action actionid="2202" script="main/2202.lua" />
 	<action actionid="2203" script="main/2203.lua" />
 	<action actionid="2204" script="main/2204.lua" />
+	<action actionid="2206" script="main/2206.lua" />
 	<action actionid="2207" script="main/2207.lua" />
 	<action actionid="2208" script="main/2208.lua" />
 	<action actionid="2209" script="main/2209.lua" />

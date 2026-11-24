@@ -1,7 +1,7 @@
 -- CONFIG
 APP_NAME = "Tibia 7.4 Local"
 g_app.setName("Tibia 7.4 Local")
-APP_VERSION = 76        -- Antigas 7.4 client release
+APP_VERSION = 78        -- Antigas 7.4 client release
 SERVER_VERSION = 772
 -- Keep mount fields enabled for protocol compatibility, but hide mount UI/actions.
 MOUNTS_ENABLED = false

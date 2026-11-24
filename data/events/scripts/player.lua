@@ -206,11 +206,8 @@ function Player:onGainSkillTries(skill, tries)
 end
 
 function Player:onUseItem(item, target)
-    -- Consumption is reported by the engine after the actual item/charge change.
-    -- This hook remains available for permission checks, never for counting clicks.
+    -- Disabled in events.xml (it only returned true); enable it there before
+    -- adding permission checks here. Never use it to count clicks.
     return true
 end
 
-function Player:onRemoveCount(item, count)
-    return true
-end

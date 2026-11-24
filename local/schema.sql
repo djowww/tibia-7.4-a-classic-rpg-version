@@ -310,7 +310,8 @@ CREATE TABLE `market_requests` (
 
 CREATE TABLE `player_containers` (
   `player_id` int(12) NOT NULL,
-  `index` int(12) NOT NULL
+  `index` int(12) NOT NULL,
+  KEY `player_id` (`player_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 CREATE TABLE `player_deaths` (
@@ -357,8 +358,9 @@ CREATE TABLE `player_murders` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `player_id` int(11) NOT NULL,
   `date` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  PRIMARY KEY (`id`),
+  KEY `player_id` (`player_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 CREATE TABLE `player_namelocks` (
   `player_id` int(11) NOT NULL,
@@ -395,6 +397,18 @@ CREATE TABLE `server_config` (
   `config` varchar(50) NOT NULL,
   `value` varchar(256) NOT NULL DEFAULT '',
   PRIMARY KEY (`config`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+CREATE TABLE `shop_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account` int(11) NOT NULL,
+  `player` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `cost` int(11) NOT NULL,
+  `details` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `account` (`account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 CREATE TABLE `tile_store` (

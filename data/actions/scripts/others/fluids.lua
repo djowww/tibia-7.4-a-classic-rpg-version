@@ -80,6 +80,7 @@ function onUse(player, item, fromPosition, target, toPosition)
 				player:addCondition(poison)
 			elseif self and item:getFluidType() == FLUID_WATER then
 				player:addCondition(hydration)
+				RegenStatus.send(player)
 			elseif item:getFluidType() == FLUID_MANAFLUID then
 				target:addMana(math.random(50, 150))
 				target:getPosition():sendMagicEffect(CONST_ME_MAGIC_BLUE)

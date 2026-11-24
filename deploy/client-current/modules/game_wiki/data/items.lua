@@ -23,7 +23,7 @@ return {
 			{"Behemoth", 3},
 		}, npc = {
 			{"sells", "Ashtamor", "Venore", 4, 1},
-			{"sells", "Eddy", "Rookgaard", 4, 1},
+			{"sells", "Eddy", "Thais", 4, 1},
 			{"sells", "Edvard", "Edron", 4, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 4, 1},
 			{"sells", "Gamon", "Thais", 4, 1},
@@ -104,7 +104,7 @@ return {
 			{"sells", "Perod", "Port Hope", 2, 1},
 			{"sells", "Willard", "Edron", 2, 1},
 			{"sells", "Xed", "Venore", 2, 1},
-			{"sells", "Timur", "Rookgaard", 3, 1},
+			{"sells", "Timur", "Thais", 3, 1},
 		}},
 	{id = 3161, name = "Avalanche Rune Rune", cat = "Runes", lines = {
 			{"Charges", "2"},
@@ -396,7 +396,7 @@ return {
 	{id = 2394, name = "Blue Pillow", cat = "Other", lines = {
 			{"Weight", "16.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -427,7 +427,7 @@ return {
 		}, drops = {
 			{"Marid", 2},
 		}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -464,7 +464,7 @@ return {
 			{"sells", "Perod", "Port Hope", 3, 1},
 			{"sells", "Willard", "Edron", 3, 1},
 			{"sells", "Xed", "Venore", 3, 1},
-			{"sells", "Timur", "Rookgaard", 4, 1},
+			{"sells", "Timur", "Thais", 4, 1},
 			{"sells", "Talphion", "Kazordoon", 5, 1},
 		}},
 	{id = 3115, name = "Bone", cat = "Other", lines = {
@@ -563,7 +563,7 @@ return {
 			{"sells", "Perod", "Port Hope", 400, 1},
 			{"sells", "Willard", "Edron", 400, 1},
 			{"sells", "Xed", "Venore", 400, 1},
-			{"buys", "Timur", "Rookgaard", 130, 1},
+			{"buys", "Timur", "Thais", 130, 1},
 		}},
 	{id = 2902, name = "Bowl", cat = "Other", lines = {
 			{"Weight", "3.80 oz"},
@@ -577,7 +577,7 @@ return {
 			{"Weight", "35.00 oz"},
 		}, drops = {}, npc = {
 			{"sells", "Borkas", "Venore", 10, 1},
-			{"sells", "Eddy", "Rookgaard", 10, 1},
+			{"sells", "Eddy", "Thais", 10, 1},
 			{"sells", "Edvard", "Edron", 10, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 10, 1},
 			{"sells", "Gamon", "Thais", 10, 1},
@@ -1038,7 +1038,7 @@ return {
 			{"Weight", "120.00 oz"},
 		}, drops = {}, npc = {
 			{"sells", "Borkas", "Venore", 10, 1},
-			{"sells", "Eddy", "Rookgaard", 10, 1},
+			{"sells", "Eddy", "Thais", 10, 1},
 			{"sells", "Edvard", "Edron", 10, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 10, 1},
 			{"sells", "Gamon", "Thais", 10, 1},
@@ -1189,7 +1189,7 @@ return {
 			{"Weight", "80.00 oz"},
 		}, drops = {}, npc = {
 			{"sells", "Borkas", "Venore", 10, 1},
-			{"sells", "Eddy", "Rookgaard", 10, 1},
+			{"sells", "Eddy", "Thais", 10, 1},
 			{"sells", "Edvard", "Edron", 10, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 10, 1},
 			{"sells", "Gamon", "Thais", 10, 1},
@@ -1219,7 +1219,7 @@ return {
 			{"sells", "Willard", "Edron", 500, 1},
 			{"sells", "Xed", "Venore", 500, 1},
 			{"sells", "Talphion", "Kazordoon", 1150, 1},
-			{"buys", "Timur", "Rookgaard", 160, 1},
+			{"buys", "Timur", "Thais", 160, 1},
 		}},
 	{id = 3304, name = "Crowbar", cat = "Weapons", lines = {
 			{"Type", "Club, one-handed"},
@@ -1311,7 +1311,7 @@ return {
 			{"Duration", "10 min"},
 			{"Weight", "8.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 40, 1},
+			{"sells", "Eddy", "Thais", 40, 1},
 			{"sells", "Edvard", "Edron", 40, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 40, 1},
 			{"sells", "Gamon", "Thais", 40, 1},
@@ -1550,7 +1550,7 @@ return {
 			{"sells", "Sarina", "Carlin", 12, 1},
 			{"sells", "Shiantis", "Venore", 12, 1},
 			{"sells", "Thomas", "Edron", 12, 1},
-			{"sells", "Timur", "Rookgaard", 12, 1},
+			{"sells", "Timur", "Thais", 12, 1},
 		}},
 	{id = 2991, name = "Doll", cat = "Other", lines = {
 			{"Weight", "6.50 oz"},
@@ -1885,14 +1885,14 @@ return {
 			{"sells", "Obi", "Rookgaard", 150, 1},
 			{"sells", "Perod", "Port Hope", 150, 1},
 			{"sells", "Sarina", "Carlin", 150, 1},
-			{"sells", "Timur", "Rookgaard", 170, 1},
+			{"sells", "Timur", "Thais", 170, 1},
 			{"sells", "Lubo", "Thais", 175, 1},
 			{"buys", "Beatrice", "Edron", 40, 1},
 		}},
 	{id = 2983, name = "Flower Bowl", cat = "Other", lines = {
 			{"Weight", "11.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 6, 1},
+			{"sells", "Eddy", "Thais", 6, 1},
 			{"sells", "Edvard", "Edron", 6, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 6, 1},
 			{"sells", "Gamon", "Thais", 6, 1},
@@ -1954,7 +1954,7 @@ return {
 	{id = 2981, name = "God Flowers", cat = "Other", lines = {
 			{"Weight", "11.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 5, 1},
+			{"sells", "Eddy", "Thais", 5, 1},
 			{"sells", "Edvard", "Edron", 5, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 5, 1},
 			{"sells", "Gamon", "Thais", 5, 1},
@@ -2192,7 +2192,7 @@ return {
 	{id = 2396, name = "Green Pillow", cat = "Other", lines = {
 			{"Weight", "16.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -2215,7 +2215,7 @@ return {
 		}, drops = {
 			{"Efreet", 2},
 		}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -2381,12 +2381,12 @@ return {
 			{"buys", "Dixi", "Rookgaard", 25, 1},
 			{"buys", "Norma", "Rookgaard", 25, 1},
 			{"buys", "Obi", "Rookgaard", 25, 1},
-			{"buys", "Timur", "Rookgaard", 25, 1},
+			{"buys", "Timur", "Thais", 25, 1},
 		}},
 	{id = 2393, name = "Heart Pillow", cat = "Other", lines = {
 			{"Weight", "17.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 30, 1},
+			{"sells", "Eddy", "Thais", 30, 1},
 			{"sells", "Edvard", "Edron", 30, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 30, 1},
 			{"sells", "Gamon", "Thais", 30, 1},
@@ -2432,7 +2432,7 @@ return {
 	{id = 2984, name = "Honey Flower", cat = "Other", lines = {
 			{"Weight", "10.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 5, 1},
+			{"sells", "Eddy", "Thais", 5, 1},
 			{"sells", "Edvard", "Edron", 5, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 5, 1},
 			{"sells", "Gamon", "Thais", 5, 1},
@@ -2846,7 +2846,7 @@ return {
 			{"buys", "Obi", "Rookgaard", 30, 1},
 			{"buys", "Romella", "Venore", 30, 1},
 			{"buys", "Sam", "Thais", 30, 1},
-			{"buys", "Timur", "Rookgaard", 30, 1},
+			{"buys", "Timur", "Thais", 30, 1},
 			{"buys", "Turvy", "Thais", 30, 1},
 			{"buys", "Willard", "Edron", 30, 1},
 			{"buys", "Habdel", "Darashia", 23, 1},
@@ -3157,7 +3157,7 @@ return {
 	{id = 2653, name = "Orange Tapestry", cat = "Other", lines = {
 			{"Weight", "10.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -3217,7 +3217,7 @@ return {
 			{"sells", "Sarina", "Carlin", 8, 1},
 			{"sells", "Shiantis", "Venore", 8, 1},
 			{"sells", "Thomas", "Edron", 8, 1},
-			{"sells", "Timur", "Rookgaard", 8, 1},
+			{"sells", "Timur", "Thais", 8, 1},
 		}},
 	{id = 3550, name = "Patched Boots", cat = "Armor", lines = {
 			{"Type", "Boots"},
@@ -3268,7 +3268,7 @@ return {
 	{id = 2639, name = "Picture", cat = "Other", lines = {
 			{"Weight", "10.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 50, 1},
+			{"sells", "Eddy", "Thais", 50, 1},
 			{"sells", "Edvard", "Edron", 50, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 50, 1},
 			{"sells", "Gamon", "Thais", 50, 1},
@@ -3430,7 +3430,7 @@ return {
 	{id = 2985, name = "Potted Flower", cat = "Other", lines = {
 			{"Weight", "23.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 5, 1},
+			{"sells", "Eddy", "Thais", 5, 1},
 			{"sells", "Edvard", "Edron", 5, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 5, 1},
 			{"sells", "Gamon", "Thais", 5, 1},
@@ -3518,7 +3518,7 @@ return {
 	{id = 2644, name = "Purple Tapestry", cat = "Other", lines = {
 			{"Weight", "10.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -3619,7 +3619,7 @@ return {
 	{id = 2395, name = "Red Pillow", cat = "Other", lines = {
 			{"Weight", "16.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -3648,7 +3648,7 @@ return {
 	{id = 2656, name = "Red Tapestry", cat = "Other", lines = {
 			{"Weight", "10.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -3733,7 +3733,7 @@ return {
 			{"sells", "Perod", "Port Hope", 50, 1},
 			{"sells", "Sarina", "Carlin", 50, 1},
 			{"sells", "Lubo", "Thais", 60, 1},
-			{"sells", "Timur", "Rookgaard", 65, 1},
+			{"sells", "Timur", "Thais", 65, 1},
 			{"buys", "Beatrice", "Edron", 15, 1},
 			{"buys", "Ahmet", "Ankrahmun", 8, 1},
 			{"buys", "Bashira", "Ab'Dendriel", 8, 1},
@@ -3754,7 +3754,7 @@ return {
 	{id = 2398, name = "Round Blue Pillow", cat = "Other", lines = {
 			{"Weight", "15.50 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -3769,7 +3769,7 @@ return {
 	{id = 2400, name = "Round Purple Pillow", cat = "Other", lines = {
 			{"Weight", "15.50 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -3784,7 +3784,7 @@ return {
 	{id = 2399, name = "Round Red Pillow", cat = "Other", lines = {
 			{"Weight", "15.50 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -3799,7 +3799,7 @@ return {
 	{id = 2401, name = "Round Turquoise Pillow", cat = "Other", lines = {
 			{"Weight", "15.50 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -3976,7 +3976,7 @@ return {
 			{"sells", "Sarina", "Carlin", 5, 1},
 			{"sells", "Shiantis", "Venore", 5, 1},
 			{"sells", "Thomas", "Edron", 5, 1},
-			{"sells", "Timur", "Rookgaard", 10, 1},
+			{"sells", "Timur", "Thais", 10, 1},
 		}},
 	{id = 3453, name = "Scythe", cat = "Weapons", lines = {
 			{"Type", "Club, two-handed"},
@@ -4207,7 +4207,7 @@ return {
 	{id = 2389, name = "Small Blue Pillow", cat = "Other", lines = {
 			{"Weight", "15.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 20, 1},
+			{"sells", "Eddy", "Thais", 20, 1},
 			{"sells", "Edvard", "Edron", 20, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 20, 1},
 			{"sells", "Gamon", "Thais", 20, 1},
@@ -4275,7 +4275,7 @@ return {
 	{id = 2387, name = "Small Green Pillow", cat = "Other", lines = {
 			{"Weight", "15.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 20, 1},
+			{"sells", "Eddy", "Thais", 20, 1},
 			{"sells", "Edvard", "Edron", 20, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 20, 1},
 			{"sells", "Gamon", "Thais", 20, 1},
@@ -4298,7 +4298,7 @@ return {
 	{id = 2390, name = "Small Orange Pillow", cat = "Other", lines = {
 			{"Weight", "15.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 20, 1},
+			{"sells", "Eddy", "Thais", 20, 1},
 			{"sells", "Edvard", "Edron", 20, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 20, 1},
 			{"sells", "Gamon", "Thais", 20, 1},
@@ -4313,7 +4313,7 @@ return {
 	{id = 2386, name = "Small Purple Pillow", cat = "Other", lines = {
 			{"Weight", "15.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 20, 1},
+			{"sells", "Eddy", "Thais", 20, 1},
 			{"sells", "Edvard", "Edron", 20, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 20, 1},
 			{"sells", "Gamon", "Thais", 20, 1},
@@ -4328,7 +4328,7 @@ return {
 	{id = 2388, name = "Small Red Pillow", cat = "Other", lines = {
 			{"Weight", "15.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 20, 1},
+			{"sells", "Eddy", "Thais", 20, 1},
 			{"sells", "Edvard", "Edron", 20, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 20, 1},
 			{"sells", "Gamon", "Thais", 20, 1},
@@ -4404,7 +4404,7 @@ return {
 	{id = 2391, name = "Small Turquoise Pillow", cat = "Other", lines = {
 			{"Weight", "15.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 20, 1},
+			{"sells", "Eddy", "Thais", 20, 1},
 			{"sells", "Edvard", "Edron", 20, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 20, 1},
 			{"sells", "Gamon", "Thais", 20, 1},
@@ -4419,7 +4419,7 @@ return {
 	{id = 2392, name = "Small White Pillow", cat = "Other", lines = {
 			{"Weight", "15.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 20, 1},
+			{"sells", "Eddy", "Thais", 20, 1},
 			{"sells", "Edvard", "Edron", 20, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 20, 1},
 			{"sells", "Gamon", "Thais", 20, 1},
@@ -4916,7 +4916,7 @@ return {
 			{"sells", "Sarina", "Carlin", 2, 1},
 			{"sells", "Shiantis", "Venore", 2, 1},
 			{"sells", "Lubo", "Thais", 3, 1},
-			{"sells", "Timur", "Rookgaard", 3, 1},
+			{"sells", "Timur", "Thais", 3, 1},
 		}},
 	{id = 3428, name = "Tower Shield", cat = "Shields", lines = {
 			{"Defense", "32"},
@@ -4988,7 +4988,7 @@ return {
 			{"Weight", "9.40 oz"},
 		}, drops = {}, npc = {
 			{"sells", "Ashtamor", "Venore", 3, 1},
-			{"sells", "Eddy", "Rookgaard", 3, 1},
+			{"sells", "Eddy", "Thais", 3, 1},
 			{"sells", "Edvard", "Edron", 3, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 3, 1},
 			{"sells", "Gamon", "Thais", 3, 1},
@@ -5009,13 +5009,13 @@ return {
 		}, npc = {
 			{"sells", "Azil", "Darashia", 265, 1},
 			{"sells", "Cornelia", "Carlin", 265, 1},
-			{"sells", "Timur", "Rookgaard", 265, 1},
+			{"sells", "Timur", "Thais", 265, 1},
 			{"buys", "Azil", "Darashia", 66, 1},
 			{"buys", "Cornelia", "Carlin", 66, 1},
 			{"buys", "Hardek", "Thais", 66, 1},
 			{"buys", "Kroox", "Kazordoon", 66, 1},
 			{"buys", "Shanar", "Ab'Dendriel", 66, 1},
-			{"buys", "Timur", "Rookgaard", 66, 1},
+			{"buys", "Timur", "Thais", 66, 1},
 		}},
 	{id = 3431, name = "Viking Shield", cat = "Shields", lines = {
 			{"Defense", "22"},
@@ -5027,7 +5027,7 @@ return {
 	{id = 2632, name = "Wall Mirror", cat = "Other", desc = "You look fine today", lines = {
 			{"Weight", "10.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 40, 1},
+			{"sells", "Eddy", "Thais", 40, 1},
 			{"sells", "Edvard", "Edron", 40, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 40, 1},
 			{"sells", "Gamon", "Thais", 40, 1},
@@ -5105,7 +5105,7 @@ return {
 	{id = 2974, name = "Water Pipe", cat = "Other", lines = {
 			{"Weight", "65.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 40, 1},
+			{"sells", "Eddy", "Thais", 40, 1},
 			{"sells", "Edvard", "Edron", 40, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 40, 1},
 			{"sells", "Gamon", "Thais", 40, 1},
@@ -5180,7 +5180,7 @@ return {
 	{id = 2667, name = "White Tapestry", cat = "Other", lines = {
 			{"Weight", "10.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -5285,7 +5285,7 @@ return {
 	{id = 2397, name = "Yellow Pillow", cat = "Other", lines = {
 			{"Weight", "16.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},
@@ -5306,7 +5306,7 @@ return {
 	{id = 2650, name = "Yellow Tapestry", cat = "Other", lines = {
 			{"Weight", "10.00 oz"},
 		}, drops = {}, npc = {
-			{"sells", "Eddy", "Rookgaard", 25, 1},
+			{"sells", "Eddy", "Thais", 25, 1},
 			{"sells", "Edvard", "Edron", 25, 1},
 			{"sells", "Feizuhl", "Ankrahmun", 25, 1},
 			{"sells", "Gamon", "Thais", 25, 1},

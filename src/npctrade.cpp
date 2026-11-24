@@ -110,7 +110,8 @@ std::string cleanField(std::string text)
 
 void sendTradeMessage(Player& player, const std::string& text)
 {
-	if (text.size() > 16384) {
+	// NetworkMessage::addString drops longer strings and would leave a malformed packet.
+	if (text.size() > 8192) {
 		return;
 	}
 
@@ -323,10 +324,39 @@ bool BehaviourDatabase::tradeOfferAvailable(const NpcTradeOffer& offer, Player* 
 	return true;
 }
 
+// Free slots a bought item could go to: empty hands plus empty places in carried containers.
+static uint32_t freeInventorySlots(const Player* player)
+{
+	uint32_t slots = 0;
+	for (int32_t slot = CONST_SLOT_FIRST; slot <= CONST_SLOT_LAST; ++slot) {
+		const Item* item = player->getInventoryItem(static_cast<slots_t>(slot));
+		if (!item) {
+			if (slot == CONST_SLOT_LEFT || slot == CONST_SLOT_RIGHT) {
+				++slots;
+			}
+			continue;
+		}
+
+		const Container* container = item->getContainer();
+		if (!container) {
+			continue;
+		}
+
+		slots += container->capacity() - std::min<uint32_t>(container->capacity(), container->size());
+		for (ContainerIterator it = container->iterator(); it.hasNext(); it.advance()) {
+			if (const Container* sub = (*it)->getContainer()) {
+				slots += sub->capacity() - std::min<uint32_t>(sub->capacity(), sub->size());
+			}
+		}
+	}
+	return slots;
+}
+
 bool BehaviourDatabase::sendTrade(Player* player)
 {
 	std::ostringstream ss;
-	ss << "open\t" << npc->getID() << '\t' << cleanField(npc->getName()) << '\t' << player->getMoney() << '\n';
+	ss << "open\t" << npc->getID() << '\t' << cleanField(npc->getName()) << '\t' << player->getMoney()
+		<< '\t' << freeInventorySlots(player) << '\n';
 
 	std::set<std::tuple<uint16_t, int32_t, bool>> seen;
 	for (size_t i = 0; i < tradeOffers.size(); i++) {

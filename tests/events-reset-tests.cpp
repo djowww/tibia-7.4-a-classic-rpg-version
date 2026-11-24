@@ -42,8 +42,7 @@ int main()
 		boost::filesystem::create_directories(scratch / "data/events/scripts");
 		{
 			std::ofstream script((scratch / "data/events/scripts/player.lua").string());
-			script << "function Player:onUseItem(item, target) return false end\n"
-			       << "function Player:onRemoveCount(item, count) return false end\n";
+			script << "function Player:onUseItem(item, target) return false end\n";
 		}
 		{
 			std::ofstream script((scratch / "data/events/scripts/party.lua").string());
@@ -54,12 +53,10 @@ int main()
 			{
 				std::ofstream xml("data/events/events.xml");
 				xml << "<events><event class=\"Player\" method=\"onUseItem\" enabled=\"1\"/>"
-				    << "<event class=\"Player\" method=\"onRemoveCount\" enabled=\"1\"/>"
 				    << "<event class=\"Party\" method=\"onShareExperience\" enabled=\"1\"/></events>";
 			}
 			require(events.load(), "enabled callbacks must load");
 			require(!events.eventPlayerOnUseItem(&player, item.get(), nullptr), "enabled use callback must run");
-			require(!events.eventPlayerOnRemoveCount(&player, item.get(), 1), "enabled removal callback must run");
 			uint64_t exp = 10;
 			events.eventPartyOnShareExperience(nullptr, exp);
 			require(exp == 17, "enabled party callback must run");
@@ -67,12 +64,10 @@ int main()
 			{
 				std::ofstream xml("data/events/events.xml");
 				xml << "<events><event class=\"Player\" method=\"onUseItem\" enabled=\"0\"/>"
-				    << "<event class=\"Player\" method=\"onRemoveCount\" enabled=\"0\"/>"
 				    << "<event class=\"Party\" method=\"onShareExperience\" enabled=\"0\"/></events>";
 			}
 			require(events.load(), "disabled event configuration must load");
 			require(events.eventPlayerOnUseItem(&player, item.get(), nullptr), "disabled use callback must not survive clear");
-			require(events.eventPlayerOnRemoveCount(&player, item.get(), 1), "disabled removal callback must not survive clear");
 			events.eventPartyOnShareExperience(nullptr, exp);
 			require(exp == 17, "disabled party callback must not survive clear");
 		}

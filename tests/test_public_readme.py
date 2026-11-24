@@ -26,7 +26,7 @@ class PublicReadmeTests(unittest.TestCase):
         required = (
             "https://tibia74.tech/",
             "https://tibia74.tech/index.php?jogar=1#criar-conta",
-            "https://tibia74.tech/#download",
+            "https://tibia74.tech/index.php?jogar=1#download",
             "https://tibia74.tech/wiki.php",
             "https://discord.gg/CVneyh53mZ",
             "docs/building.md",
@@ -35,7 +35,7 @@ class PublicReadmeTests(unittest.TestCase):
             "cliente completo",
             "serviços privados",
             "local/README.md",
-            "START-LOCAL.cmd",
+            "Tibia74-Local.exe",
             "SHA-256",
         )
         for link_or_phrase in required:

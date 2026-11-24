@@ -53,10 +53,6 @@ function MT:setTitle(title)
     self.title = tostring(title)
 end
 
-function MT:setMessage(message)
-    self.message = tostring(message)
-end
-
 local buttonOrder = {
     [4] = {3, 4, 2, 1},
     [3] = {2, 3, 1},
