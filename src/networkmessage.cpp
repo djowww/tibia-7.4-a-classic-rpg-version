@@ -50,8 +50,11 @@ Position NetworkMessage::getPosition()
 
 void NetworkMessage::addString(const std::string& value)
 {
-	size_t stringLen = value.length();
-	if (!canAdd(stringLen + 2) || stringLen > 8192) {
+	// Longer texts (a long death list, a big text dialog) are cut instead of
+	// dropped: skipping the string left the packet without the field the client
+	// expects, so the client read garbage and dropped the connection.
+	size_t stringLen = std::min<size_t>(value.length(), 8192);
+	if (!canAdd(stringLen + 2)) {
 		return;
 	}
 

@@ -3,8 +3,8 @@
 	<!-- main Map Based Movements -->
 
 
-	<movevent event="StepIn" movementid="1000" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1001" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="1000" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1001" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="1" script="main/1.lua" />
 	<movevent event="StepOut" movementid="1" script="main/1.lua" />
 	<movevent event="StepIn" movementid="2" script="main/2.lua" />
@@ -12,27 +12,27 @@
 	<movevent event="StepIn" movementid="3" script="main/3.lua" />
 	<movevent event="StepOut" movementid="3" script="main/3.lua" />
 	<movevent event="StepIn" movementid="4" script="main/4.lua" />
-	<movevent event="StepIn" movementid="5" script="main/storage_flag.lua" />
+	<movevent event="StepIn" movementid="5" script="custom/storage_flag.lua" />
 	<movevent event="StepIn" movementid="6" script="main/6.lua" />
 	<movevent event="StepIn" movementid="7" script="main/7.lua" />
 	<movevent event="StepIn" movementid="8" script="main/8.lua" />
-	<movevent event="StepIn" movementid="9" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="9" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="10" script="main/10.lua" />
 	<movevent event="StepIn" movementid="11" script="main/11.lua" />
-	<movevent event="StepIn" movementid="12" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="13" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="14" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="15" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="12" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="13" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="14" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="15" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="16" script="main/16.lua" />
 	<movevent event="StepIn" movementid="17" script="main/17.lua" />
 	<movevent event="StepIn" movementid="18" script="main/18.lua" />
 	<movevent event="StepIn" movementid="19" script="main/19.lua" />
 	<movevent event="StepIn" movementid="20" script="main/20.lua" />
 	<movevent event="StepIn" movementid="21" script="main/21.lua" />
-	<movevent event="StepIn" movementid="22" tileitem="1" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="22" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="23" tileitem="1" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="23" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="22" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="22" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="23" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="23" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="AddItem" movementid="24" tileitem="1" script="main/24.lua" />
 	<movevent event="StepIn" movementid="25" script="main/25.lua" />
 	<movevent event="StepOut" movementid="25" script="main/25.lua" />
@@ -73,22 +73,22 @@
 	<movevent event="StepIn" movementid="45" script="main/45.lua" />
 	<movevent event="StepOut" movementid="45" script="main/45.lua" />
 	<movevent event="StepIn" movementid="46" script="main/46.lua" />
-	<movevent event="StepIn" movementid="47" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="48" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="49" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="50" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="51" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="52" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="53" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="54" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="55" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="56" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="57" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="58" script="main/storage_flag.lua" />
+	<movevent event="StepIn" movementid="47" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="48" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="49" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="50" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="51" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="52" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="53" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="54" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="55" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="56" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="57" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="58" script="custom/storage_flag.lua" />
 	<movevent event="AddItem" movementid="59" tileitem="1" script="main/59.lua" />
 	<movevent event="RemoveItem" movementid="59" tileitem="1" script="main/59.lua" />
 	<movevent event="StepIn" movementid="60" script="main/60.lua" />
-	<movevent event="StepIn" movementid="61" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="61" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="62" script="main/62.lua" />
 	<movevent event="AddItem" movementid="62" tileitem="1" script="main/62.lua" />
 	<movevent event="StepIn" movementid="63" script="main/63.lua" />
@@ -107,165 +107,165 @@
 	<movevent event="AddItem" movementid="74" tileitem="1" script="main/74.lua" />
 	<movevent event="StepIn" movementid="75" script="main/75.lua" />
 	<movevent event="AddItem" movementid="75" tileitem="1" script="main/75.lua" />
-	<movevent event="StepIn" movementid="76" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="76" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="77" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="77" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="78" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="78" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="79" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="79" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="80" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="80" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="81" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="81" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="76" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="76" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="77" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="77" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="78" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="78" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="79" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="79" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="80" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="80" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="81" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="81" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="82" script="main/82.lua" />
 	<movevent event="AddItem" movementid="82" tileitem="1" script="main/82.lua" />
-	<movevent event="StepIn" movementid="83" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="83" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="84" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="84" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="85" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="85" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="86" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="86" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="87" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="87" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="88" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="88" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="89" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="89" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="90" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="90" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="91" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="91" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="92" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="92" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="93" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="93" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="94" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="94" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="95" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="95" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="96" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="96" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="97" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="97" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="98" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="98" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="99" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="99" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="83" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="83" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="84" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="84" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="85" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="85" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="86" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="86" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="87" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="87" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="88" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="88" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="89" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="89" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="90" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="90" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="91" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="91" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="92" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="92" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="93" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="93" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="94" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="94" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="95" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="95" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="96" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="96" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="97" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="97" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="98" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="98" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="99" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="99" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="100" script="main/100.lua" />
 	<movevent event="AddItem" movementid="100" tileitem="1" script="main/100.lua" />
-	<movevent event="StepIn" movementid="101" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="101" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="102" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="102" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="101" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="101" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="102" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="102" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="103" script="main/103.lua" />
 	<movevent event="AddItem" movementid="103" tileitem="1" script="main/103.lua" />
-	<movevent event="StepIn" movementid="104" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="104" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="105" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="105" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="106" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="106" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="107" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="107" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="104" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="104" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="105" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="105" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="106" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="106" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="107" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="107" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="108" script="main/108.lua" />
 	<movevent event="AddItem" movementid="108" tileitem="1" script="main/108.lua" />
 	<movevent event="StepIn" movementid="109" script="main/109.lua" />
 	<movevent event="AddItem" movementid="109" tileitem="1" script="main/109.lua" />
-	<movevent event="StepIn" movementid="110" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="110" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="110" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="110" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="111" script="main/111.lua" />
 	<movevent event="AddItem" movementid="111" tileitem="1" script="main/111.lua" />
-	<movevent event="StepIn" movementid="112" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="112" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="113" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="113" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="114" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="114" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="115" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="115" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="112" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="112" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="113" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="113" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="114" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="114" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="115" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="115" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="116" script="main/116.lua" />
 	<movevent event="AddItem" movementid="116" tileitem="1" script="main/116.lua" />
-	<movevent event="StepIn" movementid="117" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="117" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="118" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="118" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="119" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="119" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="120" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="120" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="121" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="121" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="122" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="122" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="117" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="117" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="118" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="118" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="119" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="119" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="120" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="120" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="121" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="121" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="122" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="122" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="123" script="main/123.lua" />
 	<movevent event="AddItem" movementid="123" tileitem="1" script="main/123.lua" />
-	<movevent event="StepIn" movementid="124" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="124" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="124" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="124" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="125" script="main/125.lua" />
 	<movevent event="AddItem" movementid="125" tileitem="1" script="main/125.lua" />
-	<movevent event="StepIn" movementid="126" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="126" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="126" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="126" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="127" script="main/127.lua" />
 	<movevent event="AddItem" movementid="127" tileitem="1" script="main/127.lua" />
-	<movevent event="StepIn" movementid="128" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="128" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="128" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="128" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="129" script="main/129.lua" />
 	<movevent event="AddItem" movementid="129" tileitem="1" script="main/129.lua" />
 	<movevent event="StepIn" movementid="130" script="main/130.lua" />
 	<movevent event="AddItem" movementid="130" tileitem="1" script="main/130.lua" />
-	<movevent event="StepIn" movementid="131" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="131" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="132" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="132" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="133" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="133" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="134" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="135" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="136" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="136" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="137" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="138" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="139" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="140" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="141" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="141" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="142" script="main/storage_flag.lua" />
-	<movevent event="StepIn" movementid="143" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="143" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="144" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="144" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="145" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="145" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="146" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="146" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="147" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="147" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="148" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="148" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="149" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="149" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="131" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="131" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="132" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="132" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="133" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="133" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="134" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="135" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="136" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="136" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="137" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="138" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="139" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="140" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="141" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="141" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="142" script="custom/storage_flag.lua" />
+	<movevent event="StepIn" movementid="143" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="143" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="144" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="144" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="145" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="145" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="146" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="146" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="147" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="147" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="148" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="148" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="149" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="149" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="150" script="main/150.lua" />
-	<movevent event="StepIn" movementid="151" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="151" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="152" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="152" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="151" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="151" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="152" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="152" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="153" script="main/153.lua" />
-	<movevent event="StepIn" movementid="154" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="154" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="155" script="main/155.lua" />
 	<movevent event="AddItem" movementid="155" tileitem="1" script="main/155.lua" />
-	<movevent event="StepIn" movementid="156" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="156" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="157" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="157" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="156" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="156" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="157" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="157" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="158" script="main/158.lua" />
 	<movevent event="AddItem" movementid="158" tileitem="1" script="main/158.lua" />
-	<movevent event="StepIn" movementid="159" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="160" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="160" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="159" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="160" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="160" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="161" script="main/161.lua" />
 	<movevent event="AddItem" movementid="161" tileitem="1" script="main/161.lua" />
 	<movevent event="StepIn" movementid="162" script="main/162.lua" />
@@ -274,33 +274,33 @@
 	<movevent event="AddItem" movementid="163" tileitem="1" script="main/163.lua" />
 	<movevent event="StepIn" movementid="164" script="main/164.lua" />
 	<movevent event="AddItem" movementid="164" tileitem="1" script="main/164.lua" />
-	<movevent event="StepIn" movementid="165" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="165" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="165" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="165" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="166" script="main/166.lua" />
 	<movevent event="AddItem" movementid="166" tileitem="1" script="main/166.lua" />
-	<movevent event="StepIn" movementid="167" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="167" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="168" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="168" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="167" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="167" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="168" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="168" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="169" script="main/169.lua" />
 	<movevent event="AddItem" movementid="169" tileitem="1" script="main/169.lua" />
-	<movevent event="StepIn" movementid="170" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="170" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="170" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="170" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="171" script="main/171.lua" />
-	<movevent event="StepIn" movementid="173" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="174" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="175" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="176" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="177" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="178" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="179" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="180" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="181" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="173" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="174" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="175" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="176" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="177" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="178" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="179" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="180" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="181" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="182" script="main/182.lua" />
-	<movevent event="StepIn" movementid="183" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="183" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="184" script="main/184.lua" />
 	<movevent event="AddItem" movementid="184" tileitem="1" script="main/184.lua" />
-	<movevent event="StepIn" movementid="185" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="185" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="186" script="main/186.lua" />
 	<movevent event="AddItem" movementid="186" tileitem="1" script="main/186.lua" />
 	<movevent event="StepIn" movementid="187" script="main/187.lua" />
@@ -311,12 +311,12 @@
 	<movevent event="StepIn" movementid="192" script="main/192.lua" />
 	<movevent event="StepIn" movementid="193" script="main/193.lua" />
 	<movevent event="AddItem" movementid="193" tileitem="1" script="main/193.lua" />
-	<movevent event="StepIn" movementid="194" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="195" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="194" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="195" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="196" script="main/196.lua" />
 	<movevent event="AddItem" movementid="196" tileitem="1" script="main/196.lua" />
-	<movevent event="StepIn" movementid="197" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="197" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="197" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="197" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="198" script="main/198.lua" />
 	<movevent event="AddItem" movementid="198" tileitem="1" script="main/198.lua" />
 	<movevent event="StepIn" movementid="199" script="main/199.lua" />
@@ -335,64 +335,64 @@
 	<movevent event="AddItem" movementid="206" tileitem="1" script="main/206.lua" />
 	<movevent event="StepIn" movementid="207" script="main/207.lua" />
 	<movevent event="AddItem" movementid="207" tileitem="1" script="main/207.lua" />
-	<movevent event="StepIn" movementid="208" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="208" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="209" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="210" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="211" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="211" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="212" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="212" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="213" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="213" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="214" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="214" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="208" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="208" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="209" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="210" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="211" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="211" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="212" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="212" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="213" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="213" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="214" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="214" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="215" script="main/215.lua" />
 	<movevent event="AddItem" movementid="215" tileitem="1" script="main/215.lua" />
 	<movevent event="StepIn" movementid="216" script="main/216.lua" />
 	<movevent event="AddItem" movementid="216" tileitem="1" script="main/216.lua" />
-	<movevent event="StepIn" movementid="217" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="217" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="217" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="217" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="218" script="main/218.lua" />
 	<movevent event="AddItem" movementid="218" tileitem="1" script="main/218.lua" />
-	<movevent event="StepIn" movementid="219" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="219" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="220" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="220" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="221" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="221" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="222" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="222" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="223" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="223" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="224" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="224" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="225" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="225" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="226" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="226" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="219" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="219" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="220" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="220" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="221" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="221" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="222" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="222" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="223" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="223" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="224" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="224" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="225" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="225" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="226" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="226" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="227" script="main/227.lua" />
 	<movevent event="AddItem" movementid="227" tileitem="1" script="main/227.lua" />
-	<movevent event="StepIn" movementid="228" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="228" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="229" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="229" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="228" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="228" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="229" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="229" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="230" script="main/230.lua" />
 	<movevent event="StepOut" movementid="230" script="main/230.lua" />
-	<movevent event="StepIn" movementid="231" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="231" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="232" script="main/232.lua" />
 	<movevent event="StepOut" movementid="232" script="main/232.lua" />
 	<movevent event="StepIn" movementid="233" script="main/233.lua" />
 	<movevent event="StepOut" movementid="233" script="main/233.lua" />
 	<movevent event="RemoveItem" movementid="234" tileitem="1" script="main/234.lua" />
-	<movevent event="StepIn" movementid="236" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="236" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="236" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="236" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="237" script="main/237.lua" />
 	<movevent event="AddItem" movementid="237" tileitem="1" script="main/237.lua" />
 	<movevent event="StepIn" movementid="238" script="main/238.lua" />
 	<movevent event="AddItem" movementid="238" tileitem="1" script="main/238.lua" />
-	<movevent event="StepIn" movementid="239" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="239" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="239" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="239" tileitem="1" script="custom/teleport.lua" />
 	<movevent event="StepIn" movementid="249" script="main/249.lua" />
 	<movevent event="StepIn" movementid="250" script="main/250.lua" />
 	<movevent event="StepIn" movementid="1100" script="main/1100.lua" />
@@ -401,40 +401,40 @@
 	<movevent event="StepIn" movementid="1103" script="main/1103.lua" />
 	<movevent event="StepIn" movementid="1104" script="main/1104.lua" />
 	<movevent event="StepOut" movementid="1104" script="main/1104.lua" />
-	<movevent event="StepIn" movementid="1105" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1105" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1106" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1106" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1107" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1107" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1108" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1108" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1109" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1109" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1110" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1110" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1111" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1111" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1112" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1112" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1113" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1113" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1114" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1114" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1115" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1115" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1116" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1116" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1117" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1117" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1118" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1118" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1119" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1119" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1120" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1120" tileitem="1" script="main/teleport.lua" />
-	<movevent event="StepIn" movementid="1121" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="1121" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="1105" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1105" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1106" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1106" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1107" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1107" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1108" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1108" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1109" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1109" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1110" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1110" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1111" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1111" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1112" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1112" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1113" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1113" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1114" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1114" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1115" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1115" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1116" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1116" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1117" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1117" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1118" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1118" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1119" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1119" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1120" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1120" tileitem="1" script="custom/teleport.lua" />
+	<movevent event="StepIn" movementid="1121" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="1121" tileitem="1" script="custom/teleport.lua" />
 
 
 
@@ -442,11 +442,11 @@
 
 
 
-	<movevent event="StepIn" movementid="2011" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="2011" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="2011" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="2011" tileitem="1" script="custom/teleport.lua" />
 
-	<movevent event="StepIn" movementid="2012" script="main/teleport.lua" />
-	<movevent event="AddItem" movementid="2012" tileitem="1" script="main/teleport.lua" />
+	<movevent event="StepIn" movementid="2012" script="custom/teleport.lua" />
+	<movevent event="AddItem" movementid="2012" tileitem="1" script="custom/teleport.lua" />
 
 	<!-- main Default Movements -->
 

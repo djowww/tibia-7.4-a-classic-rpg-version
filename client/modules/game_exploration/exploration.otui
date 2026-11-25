@@ -1,0 +1,171 @@
+ExplorationOption < UIWidget
+  height: 46
+  background-color: #2e2e2e
+  border: 1 #1c1c1c
+  focusable: false
+
+  $hover:
+    border: 1 #8a857b
+
+  $on:
+    background-color: #4a4334
+    border: 1 #c9a03c
+
+  UIWidget
+    id: dot
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 8
+    size: 10 10
+    background-color: #555555
+    border: 1 #111111
+    phantom: true
+
+  Item
+    id: icon
+    anchors.left: dot.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 8
+    size: 34 34
+    virtual: true
+    phantom: true
+
+  Label
+    id: title
+    anchors.top: icon.top
+    anchors.left: icon.right
+    anchors.right: parent.right
+    margin-left: 10
+    margin-top: 2
+    height: 14
+    font: verdana-11px-rounded
+    phantom: true
+
+  Label
+    id: detail
+    anchors.top: title.bottom
+    anchors.left: title.left
+    anchors.right: parent.right
+    margin-top: 2
+    height: 14
+    color: #B4B4B4
+    phantom: true
+
+MainWindow
+  id: explorationWindow
+  text: Treasure Chest
+  size: 420 400
+  @onEscape: modules.game_exploration.close()
+
+  FlatPanel
+    id: header
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    height: 82
+
+    Item
+      id: chest
+      anchors.left: parent.left
+      anchors.verticalCenter: parent.verticalCenter
+      margin-left: 8
+      size: 64 64
+      virtual: true
+      phantom: true
+
+    Label
+      id: regionName
+      anchors.top: parent.top
+      anchors.left: chest.right
+      anchors.right: parent.right
+      margin: 12 8 0 12
+      height: 16
+      color: #F0C860
+      font: verdana-11px-rounded
+
+    Label
+      id: intro
+      anchors.top: regionName.bottom
+      anchors.left: regionName.left
+      anchors.right: parent.right
+      margin: 4 8 0 0
+      height: 32
+      text-wrap: true
+      color: #C8C8C8
+      text: You found a forgotten treasure. Choose one reward. It stays with your character forever.
+
+  ExplorationOption
+    id: gold
+    anchors.top: header.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 10
+    @onClick: modules.game_exploration.pick('gold')
+
+  ExplorationOption
+    id: mana
+    anchors.top: gold.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 6
+    @onClick: modules.game_exploration.pick('mana')
+
+  ExplorationOption
+    id: life
+    anchors.top: mana.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 6
+    @onClick: modules.game_exploration.pick('life')
+
+  Label
+    id: exploredLabel
+    anchors.top: life.bottom
+    anchors.left: parent.left
+    margin-top: 12
+    text: Regions explored
+    text-auto-resize: true
+    color: #B4B4B4
+
+  Label
+    id: exploredValue
+    anchors.top: exploredLabel.top
+    anchors.right: parent.right
+    text-auto-resize: true
+    color: #B4B4B4
+
+  ProgressBar
+    id: exploredBar
+    anchors.top: exploredLabel.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 4
+    height: 4
+    image-source: /modules/game_skills/skillbar
+    image-border: 0
+    background-color: #C9A03C
+    phantom: true
+
+  HorizontalSeparator
+    id: separator
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: claimButton.top
+    margin-bottom: 8
+
+  Button
+    id: claimButton
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    width: 86
+    text: Claim
+    @onClick: modules.game_exploration.claim()
+
+  Button
+    id: closeButton
+    anchors.right: claimButton.left
+    anchors.bottom: parent.bottom
+    margin-right: 6
+    width: 86
+    text: Close
+    @onClick: modules.game_exploration.close()

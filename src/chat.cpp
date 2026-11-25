@@ -451,6 +451,16 @@ bool Chat::talkToChannel(const Player& player, SpeakClasses type, const std::str
 		return false;
 	}
 
+	// Red channel text is reserved for staff. The client can send any speak
+	// class, and the channel scripts only filter R1, so anonymous red (R2)
+	// reached every public channel (and private, party or guild ones) unfiltered.
+	if (player.getAccountType() < ACCOUNT_TYPE_GAMEMASTER) {
+		if ((type == TALKTYPE_CHANNEL_R1 && !player.hasFlag(PlayerFlag_CanTalkRedChannel)) ||
+		        (type == TALKTYPE_CHANNEL_R2 && !player.hasFlag(PlayerFlag_CanTalkRedChannelAnonymous))) {
+			type = TALKTYPE_CHANNEL_Y;
+		}
+	}
+
 	if (channelId == CHANNEL_GUILD) {
 		const GuildRank* rank = player.getGuildRank();
 		if (rank && rank->level > 1) {

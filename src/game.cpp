@@ -702,6 +702,13 @@ void Game::playerMoveCreature(Player* player, Creature* movingCreature, const Po
 	//check throw distance
 	const Position& movingCreaturePos = movingCreature->getPosition();
 	const Position& toPos = toTile->getPosition();
+
+	// The range check above uses the position the client clicked; the creature
+	// may have walked (or changed floor) since, so check where it is now (TFS #3989).
+	if (!Position::areInRange<1, 1, 0>(movingCreaturePos, player->getPosition())) {
+		player->sendCancelMessage(RETURNVALUE_NOTPOSSIBLE);
+		return;
+	}
 	if ((Position::getDistanceX(movingCreaturePos, toPos) > movingCreature->getThrowRange()) || (Position::getDistanceY(movingCreaturePos, toPos) > movingCreature->getThrowRange()) || (Position::getDistanceZ(movingCreaturePos, toPos) * 4 > movingCreature->getThrowRange())) {
 		player->sendCancelMessage(RETURNVALUE_DESTINATIONOUTOFREACH);
 		return;
@@ -2332,7 +2339,7 @@ void Game::playerSeekInContainer(uint32_t playerId, uint8_t containerId, uint16_
 		return;
 	}
 
-	if ((index % container->capacity()) != 0 || index >= container->size()) {
+	if (container->capacity() == 0 || (index % container->capacity()) != 0 || index >= container->size()) {
 		return;
 	}
 
@@ -3215,6 +3222,12 @@ bool Game::playerSpeakTo(Player* player, SpeakClasses type, const std::string& r
 	}
 
 	if (type == TALKTYPE_PRIVATE_RED && (!player->hasFlag(PlayerFlag_CanTalkRedPrivate) || player->getAccountType() < ACCOUNT_TYPE_GAMEMASTER)) {
+		type = TALKTYPE_PRIVATE;
+	}
+
+	// A rule violation answer is shown without a sender name; only staff may
+	// send it, otherwise any player could whisper as an anonymous gamemaster.
+	if (type == TALKTYPE_RVR_ANSWER && player->getAccountType() < ACCOUNT_TYPE_GAMEMASTER) {
 		type = TALKTYPE_PRIVATE;
 	}
 

@@ -146,13 +146,13 @@ jobs:
           done < <(git ls-files -z -- '*.php')
 
       - name: Test safe translated HTML
-        run: php tests/site-html-safety-tests.php
+        run: php tests/php/site-html-safety-tests.php
 
       - name: Test public payment privacy boundary
-        run: php tests/coin-page-tests.php
+        run: php tests/php/coin-page-tests.php
 
       - name: Test wiki project homepage without private services
-        run: php tests/project-home-tests.php
+        run: php tests/php/project-home-tests.php
 
       - name: Parse tracked Lua scripts and persisted data
         shell: bash
@@ -173,67 +173,67 @@ jobs:
         run: python3 tools/check_lua_lint.py
 
       - name: Run map tile teleport and quest flag tests
-        run: luajit tests/map-tiles-tests.lua
+        run: luajit tests/lua/map-tiles-tests.lua
 
       - name: Run minimap guide mark tests
-        run: luajit tests/minimap-guide-marks-tests.lua
+        run: luajit tests/lua/minimap-guide-marks-tests.lua
 
       - name: Run player bar UI regression tests
-        run: luajit tests/playerbars-ui-tests.lua
+        run: luajit tests/lua/playerbars-ui-tests.lua
 
       - name: Run classic item hotkey regression tests
-        run: luajit tests/classic-hotkeys-tests.lua
+        run: luajit tests/lua/classic-hotkeys-tests.lua
 
       - name: Run viewport rendering policy regression tests
-        run: luajit tests/viewport-policy.lua deploy/client-current/modules/game_interface/viewport.lua
+        run: luajit tests/lua/viewport-policy.lua client/modules/game_interface/viewport.lua
 
       - name: Run Economy inventory regression tests
-        run: luajit tests/economy-inventory-tests.lua
+        run: luajit tests/lua/economy-inventory-tests.lua
 
       - name: Run Coin redemption and database heartbeat regression tests
         run: |
-          luajit tests/coin-redemption-tests.lua
-          luajit tests/database-keepalive-tests.lua
+          luajit tests/lua/coin-redemption-tests.lua
+          luajit tests/lua/database-keepalive-tests.lua
 
       - name: Run persisted lamp-state parser regression tests
-        run: luajit tests/lamp-state-parser-tests.lua
+        run: luajit tests/lua/lamp-state-parser-tests.lua
 
       - name: Run lamp-state action regression tests
-        run: luajit tests/lamp-state-action-tests.lua
+        run: luajit tests/lua/lamp-state-action-tests.lua
 
       - name: Run IP-ban authorization and persistence tests
-        run: luajit tests/ipban-security-tests.lua
+        run: luajit tests/lua/ipban-security-tests.lua
 
       - name: Run account-type persistence tests
-        run: luajit tests/account-type-persistence-tests.lua
+        run: luajit tests/lua/account-type-persistence-tests.lua
 
       - name: Run rarity, Market inventory and economy regression tests
-        run: luajit tests/rarity-economy-tests.lua
+        run: luajit tests/lua/rarity-economy-tests.lua
 
       - name: Run retired item provider regression tests
-        run: luajit tests/retired-provider-tests.lua
+        run: luajit tests/lua/retired-provider-tests.lua
 
       - name: Run Achievements UI regression tests
-        run: luajit tests/achievements-ui-tests.lua
+        run: luajit tests/lua/achievements-ui-tests.lua
 
       - name: Run rarity visuals regression tests
-        run: luajit tests/rarity-visuals-tests.lua
+        run: luajit tests/lua/rarity-visuals-tests.lua
 
       - name: Run inventory rarity UI regression tests
-        run: luajit tests/rarity-ui-tests.lua
+        run: luajit tests/lua/rarity-ui-tests.lua
 
       - name: Run ground rarity bolt regression tests
-        run: luajit tests/ground-rarity-bolt-tests.lua
+        run: luajit tests/lua/ground-rarity-bolt-tests.lua
 
       - name: Run gameplay system regression tests
         run: |
           for suite in achievements bestiary killdeathcount loot-channel market-rate-limit online-bonus questlog; do
-            luajit "tests/${suite}-tests.lua"
+            luajit "tests/lua/${suite}-tests.lua"
           done
 
       - name: Run safe Python regression tests
         env:
-          PYTHONPATH: tests
+          PYTHONPATH: tests/python
         run: python3 -m unittest test_database_task_thread_affinity test_container_house_removal test_scheduler_lifetime test_raid_callback_lifetime test_spawn_callback_lifetime test_global_event_callback_lifetime test_npc_callback_lifetime test_report_bug_path test_coin_page_cache test_restore_client_coin_assets test_coin_public_release test_public_readme test_dispatcher_shutdown_order test_connection_shutdown_serialization test_connection_admission test_lamp_state_parser test_validation_preconditions test_connection_output_queue test_sql_identifier test_database_escape test_queue_metrics test_workflow_checkout_credentials test_script_filename test_talkaction_authorization test_account_type_persistence test_staff_ban_commands test_remote_log_rate_limiter test_database_keepalive test_events_reset test_retired_item_generator test_retired_item_providers test_cppcheck_gate -v
 
       - name: Parse tracked Python files
@@ -307,22 +307,22 @@ jobs:
           persist-credentials: false
 
       - name: Build launcher
-        run: dotnet build deploy/launcher/AntigasLauncher/AntigasLauncher.csproj --configuration Release
+        run: dotnet build launcher/AntigasLauncher/AntigasLauncher.csproj --configuration Release
 
       - name: Build release signer
         run: dotnet build tools/ReleaseSigner/ReleaseSigner.csproj --configuration Release
 
       - name: Test bounded launcher manifest reads
-        run: dotnet run --project tests/LauncherSafetyTests.csproj --configuration Release
+        run: dotnet run --project tests/launcher/LauncherSafetyTests.csproj --configuration Release
 
       - name: Test client release packaging without signing
-        run: ./tests/launcher-release-tests.ps1
+        run: ./tests/launcher/launcher-release-tests.ps1
 
       - name: Check official client login endpoint
-        run: ./tests/client-official-login-tests.ps1
+        run: ./tests/launcher/client-official-login-tests.ps1
 
       - name: Test updater window lifecycle
-        run: dotnet run --project tests/LauncherFormLifecycle/LauncherFormLifecycle.csproj --configuration Release
+        run: dotnet run --project tests/launcher/LauncherFormLifecycle/LauncherFormLifecycle.csproj --configuration Release
 
       - name: Build opt-in signed launcher integration harness
-        run: dotnet build tests/LauncherIntegration/LauncherIntegration.csproj --configuration Release
+        run: dotnet build tests/launcher/LauncherIntegration/LauncherIntegration.csproj --configuration Release

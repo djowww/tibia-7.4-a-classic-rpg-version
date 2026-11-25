@@ -1,0 +1,11 @@
+Module
+  name: game_exploration
+  description: Treasure chest window of the hidden exploration chests
+  author: Antigas
+  sandboxed: true
+  autoload: true
+  autoload-priority: 1005
+  dependencies: [ game_interface ]
+  scripts: [ exploration ]
+  @onLoad: init()
+  @onUnload: terminate()

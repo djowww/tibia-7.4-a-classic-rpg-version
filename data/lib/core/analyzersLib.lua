@@ -56,8 +56,6 @@ function Player.checkAnalyzerLootItem(self, itemId, amount, type)
 		else
 			self:addAnalyzerLoot(itemWorth[itemId].value * amount)
 		end
-	else
-		-- Item not registrered on the loot table
 	end
 end
 

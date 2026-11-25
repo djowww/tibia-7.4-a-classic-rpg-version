@@ -106,6 +106,9 @@
 	<!-- Tibia 7.4 CIP-327:  -->
 	<!-- Tibia 7.4 CIP-327:  -->
 
+	<!-- Exploration chests: one action id per region -->
+	<action fromaid="47101" toaid="47110" script="custom/exploration_chest.lua" />
+
 	<!-- Instruments -->
 	<action fromid="2948" toid="2950" script="others/instruments.lua" />
 	<action itemid="2952" script="others/instruments.lua" />

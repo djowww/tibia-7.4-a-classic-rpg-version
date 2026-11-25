@@ -219,7 +219,7 @@ def build(root, out_path):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--root", type=Path, default=ROOT)
-    parser.add_argument("--out", type=Path, default=ROOT / "deploy/client-current/data/minimap-markers.txt")
+    parser.add_argument("--out", type=Path, default=ROOT / "client/data/minimap-markers.txt")
     args = parser.parse_args()
     names = {ICON_UP: "subidas", ICON_DOWN: "descidas", ICON_MAGIC: "lojas de magia", ICON_MELEE: "armas e armaduras",
              ICON_AMMO: "arcos e flechas", ICON_BANK: "bancos", ICON_TEMPLE: "templos", ICON_QUEST: "quests"}

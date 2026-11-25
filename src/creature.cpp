@@ -43,8 +43,14 @@ Creature::~Creature()
 		summon->decrementReferenceCounter();
 	}
 
+	// End every condition before deleting any: endCondition can look at the
+	// remaining conditions (e.g. invisibility checks), which would read freed
+	// memory if they were deleted in the same loop (TFS #4726).
 	for (Condition* condition : conditions) {
 		condition->endCondition(this);
+	}
+
+	for (Condition* condition : conditions) {
 		delete condition;
 	}
 }

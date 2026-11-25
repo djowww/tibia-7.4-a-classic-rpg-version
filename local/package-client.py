@@ -8,7 +8,7 @@ import zipfile
 # Base-client files nothing loads here: modules without autoload that no
 # load-later list names (updater stays off because init.lua leaves
 # Services.updater empty; the launcher handles updates), unreferenced images
-# and sounds. Same list as deploy/launcher/build-release.ps1.
+# and sounds. Same list as launcher/build-release.ps1.
 SKIPPED = (('modules', 'updater'), ('modules', 'game_market'), ('modules', 'game_cooldown'),
            ('data', 'images', 'rawtextures'), ('data', 'sounds', 'alarm.ogg'), ('data', 'sounds', 'magnum.ogg'))
 
@@ -34,15 +34,15 @@ def package(source, output):
         files[name] = p
     if not any(k.endswith('.spr') for k in files) or not any(k.endswith('.dat') for k in files):
         raise ValueError('The supplied client must contain its DAT and SPR assets')
-    for p in (root / 'deploy/client-current/modules').rglob('*'):
+    for p in (root / 'client/modules').rglob('*'):
         if p.is_file():
-            files['modules/' + p.relative_to(root / 'deploy/client-current/modules').as_posix()] = p
-    files['init.lua'] = root / 'deploy/client-current/init.lua'
+            files['modules/' + p.relative_to(root / 'client/modules').as_posix()] = p
+    files['init.lua'] = root / 'client/init.lua'
     # Fully explored minimap built by tools/generate-minimap.py. The client
     # loads data/minimap.otmm before the player's own minimap file.
-    files['data/minimap.otmm'] = root / 'deploy/client-current/data/minimap.otmm'
+    files['data/minimap.otmm'] = root / 'client/data/minimap.otmm'
     # Marks every player starts with, built by tools/generate-minimap-markers.py.
-    files['data/minimap-markers.txt'] = root / 'deploy/client-current/data/minimap-markers.txt'
+    files['data/minimap-markers.txt'] = root / 'client/data/minimap-markers.txt'
     files['NOTICE.md'] = root / 'NOTICE.md'
     # Root config.otml, remembered passwords, logs, updater and production launcher
     # are deliberately absent. The starter installs a fresh local public key.

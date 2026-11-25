@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <creaturescripts>
 	<event type="login" name="PlayerLogin" script="login.lua"/>
-	<event type="kill" name="BestiaryKill" script="bestiary.lua"/>
-	<event type="extendedopcode" name="Bestiary" script="bestiary.lua"/>
-	<event type="extendedopcode" name="ItemRaritySync" script="rarity.lua"/>
-	<event type="extendedopcode" name="QuestLog" script="questlog.lua"/>
-	<event type="extendedopcode" name="RegenStatus" script="regenstatus.lua"/>
-	<event type="kill" name="AchievementsKill" script="achievements.lua"/>
-	<event type="death" name="AchievementsDeath" script="achievements.lua"/>
-	<event type="advance" name="AchievementsAdvance" script="achievements.lua"/>
-	<event type="extendedopcode" name="AchievementsOpcode" script="achievements.lua"/>
+	<event type="kill" name="BestiaryKill" script="custom/bestiary.lua"/>
+	<event type="extendedopcode" name="Bestiary" script="custom/bestiary.lua"/>
+	<event type="extendedopcode" name="ItemRaritySync" script="custom/rarity.lua"/>
+	<event type="extendedopcode" name="QuestLog" script="custom/questlog.lua"/>
+	<event type="extendedopcode" name="RegenStatus" script="custom/regenstatus.lua"/>
+	<event type="extendedopcode" name="GhostWalk" script="custom/ghostwalk.lua"/>
+	<event type="extendedopcode" name="GmCommands" script="custom/gmcommands.lua"/>
+	<event type="advance" name="ExplorationAdvance" script="custom/exploration.lua"/>
+	<event type="extendedopcode" name="ExplorationOpcode" script="custom/exploration.lua"/>
+	<event type="kill" name="AchievementsKill" script="custom/achievements.lua"/>
+	<event type="death" name="AchievementsDeath" script="custom/achievements.lua"/>
+	<event type="advance" name="AchievementsAdvance" script="custom/achievements.lua"/>
+	<event type="extendedopcode" name="AchievementsOpcode" script="custom/achievements.lua"/>
 	<event type="login" name="FirstItems" script="firstitems.lua"/>
 	<event type="death" name="PlayerDeath" script="playerdeath.lua"/>
     <event type="death" name="death_animation_fireelemental" script="fireelemental.lua"/>
     <event type="death" name="death_animation_slime" script="slime.lua"/>
-	<event type="extendedopcode" name="Shop" script="shop.lua" />
-	<event type="extendedopcode" name="Market" script="market.lua" />
+	<event type="extendedopcode" name="Shop" script="custom/shop.lua" />
+	<event type="extendedopcode" name="Market" script="custom/market.lua" />
 	<event type="advance" name="Spell" script="spell.lua" />
 	
 	
@@ -25,7 +29,7 @@
 	
 	<event type="death" name="KillDeathCount" script="killdeathcount.lua"/>
 	
-	<event type="login" name="OnlineBonus" script="others/onlineBonus.lua" />
-	<event type="logout" name="OnlineBonusLogout" script="others/onlineBonus.lua" />
+	<event type="login" name="OnlineBonus" script="custom/onlineBonus.lua" />
+	<event type="logout" name="OnlineBonusLogout" script="custom/onlineBonus.lua" />
 	
 </creaturescripts>

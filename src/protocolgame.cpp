@@ -21,6 +21,7 @@
 
 #include <boost/range/adaptor/reversed.hpp>
 
+#include "botdetector.h"
 #include "protocolgame.h"
 #include "loot.h"
 #include "groundrarity.h"
@@ -453,7 +454,9 @@ void ProtocolGame::parsePacket(NetworkMessage& msg)
 			return;
 		}
 	}
-	
+
+	BotDetector::instance().onPacket(player->getID(), recvbyte);
+
 	switch (recvbyte) {
 		case 0x14: g_dispatcher.addTask(createTask(std::bind(&ProtocolGame::logout, getThis(), true, false))); break;
 		case 0x1D: addGameTask(&Game::playerReceivePingBack, player->getID()); break;
@@ -1266,6 +1269,7 @@ void ProtocolGame::sendRuleViolationsChannel(uint16_t channelId)
 
 void ProtocolGame::sendStats()
 {
+	BotDetector::instance().onStats(player->getID(), player->getHealth());
 	NetworkMessage msg;
 	AddPlayerStats(msg);
 	writeToOutputBuffer(msg);

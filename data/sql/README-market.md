@@ -28,7 +28,7 @@ The server intentionally rejects containers, fluid containers, doors, fields, sp
 ## Integration checklist
 
 1. Apply the appropriate migration sequence above to the game database before deploying the updated Market Lua files.
-2. Deploy `data/creaturescripts/scripts/market.lua`, `data/creaturescripts/creaturescripts.xml`, and `data/creaturescripts/scripts/login.lua`.
-3. Integrate the [custom Market module](../../deploy/client-current/modules/game_market_antigas/) from `deploy/client-current/modules/game_market_antigas` into a compatible client. The stock `game_market` module uses the native Tibia Market protocol, which this server base does not implement.
+2. Deploy `data/creaturescripts/scripts/custom/market.lua`, `data/creaturescripts/creaturescripts.xml`, and `data/creaturescripts/scripts/login.lua`.
+3. Integrate the [custom Market module](../../client/modules/game_market_antigas/) from `client/modules/game_market_antigas` into a compatible client. The stock `game_market` module uses the native Tibia Market protocol, which this server base does not implement.
 4. Restart the game server and distribute the updated client.
 5. Verify listing creation, partial fills, cancellation, both currencies, offline claims, Gold collection into the bank, and item/Antigas Coin collection into the town depot with two test characters before enabling for players.

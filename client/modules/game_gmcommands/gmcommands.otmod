@@ -1,0 +1,11 @@
+Module
+  name: game_gmcommands
+  description: F1 window with the staff commands (GM and GOD only)
+  author: Antigas
+  sandboxed: true
+  autoload: true
+  autoload-priority: 1006
+  dependencies: [ game_interface ]
+  scripts: [ gmcommands ]
+  @onLoad: init()
+  @onUnload: terminate()

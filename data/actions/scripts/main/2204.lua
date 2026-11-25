@@ -11,7 +11,6 @@ function onUse(player, item, fromPosition, target, toPosition)
 		item:decay()
 		Game.createItem(1791, 1, {x = 32852, y = 32333, z = 12})
 		Game.createItem(1791, 1, {x = 32851, y = 32333, z = 12})
-	elseif item:getId() == 2772 then	
 	end
 	return true
-end
+end

@@ -36,6 +36,7 @@ MIN_HUNT_CREATURES = 8
 GROUND_FLOOR = 7
 FLUIDS = {10: "Mana Fluid", 11: "Life Fluid"}
 VIAL = 2874
+GOLD = {3031: 1, 3035: 100, 3043: 10000}  # gold, platinum and crystal coins
 COMPASS = ["east", "south-east", "south", "south-west", "west", "north-west", "north", "north-east"]
 TRAPS = {"flamethrower", "magicthrower", "plaguethrower", "shredderthrower", "deathslicer", "mimic", "illusion"}
 
@@ -355,6 +356,20 @@ def level_bands(monster, rook):
     return bands, party
 
 
+def gold_per_kill(monster, items, trades):
+    """Average gold a kill leaves: coins plus what the NPCs pay for the rest."""
+    total = 0.0
+    for item_id, chance, count in monster["loot"]:
+        if item_id not in items:
+            continue
+        value = GOLD.get(item_id)
+        if value is None:
+            offers = [price / amount for kind, _, _, price, amount in trades.get((item_id, 0), ()) if kind == "buys"]
+            value = max(offers) if offers else 0
+        total += min(chance, 1000) / 1000 * (1 + count) / 2 * value
+    return total
+
+
 def build(root):
     towns = read_towns(root)
     places = Places(towns)
@@ -475,11 +490,14 @@ def build(root):
         rook = places.town(hunt["x"], hunt["y"])[0] == "Rookgaard"
         bands, party = level_bands(monster, rook)
         ordered = sorted(hunt["found"].items(), key=lambda pair: -len(pair[1]))
-        danger = [monsters[key]["name"] for key, positions in ordered
+        # Stronger neighbours, each with the level from which it stops being a threat.
+        danger = [[monsters[key]["name"], level_bands(monsters[key], False)[0]["K"][0]] for key, positions in ordered
                   if monsters[key]["exp"] >= max(100, monster["exp"] * 2.5)]
+        count = sum(len(positions) for positions in hunt["found"].values())
+        gold = sum(gold_per_kill(monsters[key], items, trades) * len(positions) for key, positions in hunt["found"].items()) / count
         hunts.append({
             "name": monster["name"], "area": places.name(hunt["x"], hunt["y"], hunt["z"]), "x": hunt["x"], "y": hunt["y"], "z": hunt["z"],
-            "exp": monster["exp"], "rook": rook or None, "K": bands["K"], "P": bands["P"], "S": bands["S"], "D": bands["D"],
+            "exp": monster["exp"], "gp": round(gold), "n": len(hunt["found"][hunt["main"]]), "rook": rook or None, "K": bands["K"], "P": bands["P"], "S": bands["S"], "D": bands["D"],
             "party": party, "mon": [[monsters[key]["name"], len(positions)] for key, positions in ordered[:5]],
             "danger": danger[:3] or None,
         })
@@ -496,7 +514,7 @@ if __name__ == "__main__":
     parser.add_argument("--root", type=Path, default=ROOT)
     args = parser.parse_args()
     bestiary, bosses, itempedia, hunts = build(args.root)
-    out = args.root / "deploy/client-current/modules/game_wiki/data"
+    out = args.root / "client/modules/game_wiki/data"
     out.mkdir(parents=True, exist_ok=True)
     write(out / "monsters.lua", "Bestiary and Bosstiary entries.", {"monsters": bestiary, "bosses": bosses})
     write(out / "items.lua", "Itempedia entries.", itempedia)

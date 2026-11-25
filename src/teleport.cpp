@@ -72,16 +72,23 @@ void Teleport::addThing(Thing* thing)
 
 bool Teleport::checkInfinityLoop(Tile* destTile)
 {
-	if (!destTile) {
-		return false;
-	}
+	// Follow the chain of teleports iteratively. The old recursive version only
+	// stopped when the chain came back to this teleport, so a loop between two
+	// other teleports (A -> B -> C -> B) recursed until the stack overflowed (TFS #3576).
+	std::vector<Position> visited = { getPosition() };
+	while (destTile) {
+		Teleport* teleport = destTile->getTeleportItem();
+		if (!teleport) {
+			return false;
+		}
 
-	if (Teleport* teleport = destTile->getTeleportItem()) {
 		const Position& nextDestPos = teleport->getDestPos();
-		if (getPosition() == nextDestPos) {
+		if (std::find(visited.begin(), visited.end(), nextDestPos) != visited.end()) {
 			return true;
 		}
-		return checkInfinityLoop(g_game.map.getTile(nextDestPos));
+
+		visited.push_back(nextDestPos);
+		destTile = g_game.map.getTile(nextDestPos);
 	}
 	return false;
 }

@@ -26,16 +26,21 @@ function onUse(player, item, fromPosition, target, toPosition)
         player:teleportTo(target:getPosition():moveRel(0, 1, -1))
         return true
     elseif table.contains(holeSpots, target:getId()) or target:getId() == 435 then
-        local tile = Tile(target:getPosition():moveRel(0, 0, 1))
-        if not tile then
+        local below = Tile(target:getPosition():moveRel(0, 0, 1))
+        if not below then
             return false
         end
-       
-        local thing = tile:getTopCreature()
-        if not thing then
-            thing = tile:getTopVisibleThing()
+
+        -- Nothing is pulled out of a house through a hole above it.
+        if below:getHouse() then
+            return true
         end
-       
+
+        local thing = below:getTopCreature() or below:getTopVisibleThing()
+        if not thing then
+            return true
+        end
+
         if thing:isCreature() then
             thing:teleportTo(target:getPosition():moveRel(0, 1, 0), false)
             return true
@@ -47,4 +52,4 @@ function onUse(player, item, fromPosition, target, toPosition)
         return true
     end
     return false
-end
+end

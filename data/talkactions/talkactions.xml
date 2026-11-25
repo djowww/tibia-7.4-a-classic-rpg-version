@@ -1,45 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talkactions>
 	<!-- commands -->
-	<talkaction words="/storage" separator=" " script="playerstorage.lua" permission="access" />
-	<talkaction words="/ban" separator=" " script="ban.lua" permission="access" />
-	<talkaction words="/ipban" separator=" " script="ipban.lua" permission="access" />
-	<talkaction words="/unban" separator=" " script="unban.lua" permission="access" />
-	<talkaction words="/up" script="up.lua" permission="access" />
-	<talkaction words="/down" script="down.lua" permission="access" />
-	<talkaction words="/c" separator=" " script="teleport_creature_here.lua" permission="access" />
-	<talkaction words="/goto" separator=" " script="teleport_to_creature.lua" permission="access" />
-	<talkaction words="/gotopos" separator=" " script="teleport_to_pos.lua" permission="access" />
-	<talkaction words="/owner" separator=" " script="owner.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/t" script="teleport_home.lua" permission="access" />
-	<talkaction words="/town" separator=" " script="teleport_to_town.lua" permission="access" />
-	<talkaction words="/a" separator=" " script="teleport_ntiles.lua" permission="access" />
-	<talkaction words="/pos" separator=" " script="position.lua" permission="public" />
-	<talkaction words="/r" separator=" " script="removething.lua" permission="access" />
-	<talkaction words="/kick" separator=" " script="kick.lua" permission="access" />
-	<talkaction words="/openserver" script="openserver.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/closeserver" separator=" " script="closeserver.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/B" separator=" " script="broadcast.lua" permission="broadcast" />
-	<talkaction words="/m" separator=" " script="place_monster.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/i" separator=" " script="create_item.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/s" separator=" " script="place_npc.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/addtutor" separator=" " script="add_tutor.lua" permission="account" minaccounttype="senior-tutor" />
-	<talkaction words="/removetutor" separator=" " script="remove_tutor.lua" permission="account" minaccounttype="senior-tutor" />
-	<talkaction words="/looktype" separator=" " script="looktype.lua" permission="access" />
-	<talkaction words="/summon" separator=" " script="place_summon.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/chameleon" separator=" " script="chameleon.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/addskill" separator=" " script="add_skill.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/addatk" separator=" " script="add_attack.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/resetatk" script="add_attack.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/mccheck" script="mccheck.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/ghost" script="ghost.lua" permission="access" minaccounttype="gamemaster" />
-	<talkaction words="/clean" script="clean.lua" permission="access" minaccounttype="god" />
-	<talkaction words="/storagevalue" separator=" " script="storagevalue.lua" permission="access" />
-	<talkaction words="/globalboost" separator=" " script="global_rate_boost.lua" permission="access" minaccounttype="god" />
+	<talkaction words="/storage" separator=" " script="playerstorage.lua" permission="access" usage="/storage name, key[, value]" help="Reads a storage of an online player, or sets it when a value is given." />
+	<talkaction words="/ban" separator=" " script="ban.lua" permission="access" usage="/ban name, reason, days" help="Bans the account of a player for some days." />
+	<talkaction words="/ipban" separator=" " script="ipban.lua" permission="access" usage="/ipban name" help="Bans the last IP of a player." />
+	<talkaction words="/unban" separator=" " script="unban.lua" permission="access" usage="/unban name" help="Removes the account and IP bans of a player." />
+	<talkaction words="/up" script="up.lua" permission="access" usage="/up" help="Moves you one floor up." />
+	<talkaction words="/down" script="down.lua" permission="access" usage="/down" help="Moves you one floor down." />
+	<talkaction words="/c" separator=" " script="teleport_creature_here.lua" permission="access" usage="/c name" help="Brings a creature or player to you." />
+	<talkaction words="/goto" separator=" " script="teleport_to_creature.lua" permission="access" usage="/goto name" help="Teleports you to a creature or player." />
+	<talkaction words="/gotopos" separator=" " script="teleport_to_pos.lua" permission="access" usage="/gotopos x, y, z" help="Teleports you to a map position." />
+	<talkaction words="/owner" separator=" " script="owner.lua" permission="access" minaccounttype="god" usage="/owner name" help="Sets the owner of the house you are in. Use &quot;none&quot; to clear it." />
+	<talkaction words="/t" script="teleport_home.lua" permission="access" usage="/t" help="Teleports you to the temple of your town." />
+	<talkaction words="/town" separator=" " script="teleport_to_town.lua" permission="access" usage="/town name" help="Teleports you to the temple of a town." />
+	<talkaction words="/a" separator=" " script="teleport_ntiles.lua" permission="access" usage="/a tiles" help="Jumps that many tiles in the direction you are facing." />
+	<talkaction words="/pos" separator=" " script="position.lua" permission="public" usage="/pos [x, y, z]" help="Shows your position. Staff can give a position to teleport there." />
+	<talkaction words="/r" separator=" " script="removething.lua" permission="access" usage="/r" help="Removes the creature or top item in front of you." />
+	<talkaction words="/kick" separator=" " script="kick.lua" permission="access" usage="/kick name" help="Disconnects a player." />
+	<talkaction words="/openserver" script="openserver.lua" permission="access" minaccounttype="god" usage="/openserver" help="Opens the server for players." />
+	<talkaction words="/closeserver" separator=" " script="closeserver.lua" permission="access" minaccounttype="god" usage="/closeserver [shutdown]" help="Closes the server for players, or shuts it down." />
+	<talkaction words="/B" separator=" " script="broadcast.lua" permission="broadcast" usage="/B message" help="Broadcasts a message to every player online." />
+	<talkaction words="/m" separator=" " script="place_monster.lua" permission="access" minaccounttype="god" usage="/m monster" help="Creates a monster next to you." />
+	<talkaction words="/i" separator=" " script="create_item.lua" permission="access" minaccounttype="god" usage="/i item[, count]" help="Creates an item by name or id." />
+	<talkaction words="/s" separator=" " script="place_npc.lua" permission="access" minaccounttype="god" usage="/s npc" help="Creates an NPC next to you." />
+	<talkaction words="/addtutor" separator=" " script="add_tutor.lua" permission="account" minaccounttype="senior-tutor" usage="/addtutor name" help="Promotes a normal player to tutor." />
+	<talkaction words="/removetutor" separator=" " script="remove_tutor.lua" permission="account" minaccounttype="senior-tutor" usage="/removetutor name" help="Demotes a tutor back to a normal player." />
+	<talkaction words="/looktype" separator=" " script="looktype.lua" permission="access" usage="/looktype id" help="Changes your outfit to a look type." />
+	<talkaction words="/summon" separator=" " script="place_summon.lua" permission="access" minaccounttype="god" usage="/summon monster" help="Creates a monster as your summon." />
+	<talkaction words="/chameleon" separator=" " script="chameleon.lua" permission="access" minaccounttype="god" usage="/chameleon item" help="Disguises you as an item." />
+	<talkaction words="/addskill" separator=" " script="add_skill.lua" permission="access" minaccounttype="god" usage="/addskill name, skill[, count]" help="Adds levels to a skill of a player (level, magic, sword, shielding...)." />
+	<talkaction words="/addatk" separator=" " script="custom/add_attack.lua" permission="access" minaccounttype="god" usage="/addatk amount" help="Raises the attack of the weapon in your hand." />
+	<talkaction words="/resetatk" script="custom/add_attack.lua" permission="access" minaccounttype="god" usage="/resetatk" help="Restores the normal attack of the weapon in your hand." />
+	<talkaction words="/mccheck" script="mccheck.lua" permission="access" minaccounttype="god" usage="/mccheck" help="Lists players logged in from the same IP." />
+	<talkaction words="/ghost" script="ghost.lua" permission="access" minaccounttype="gamemaster" usage="/ghost" help="Turns invisibility on or off. Invisible GODs also walk through walls." />
+	<talkaction words="/clean" script="clean.lua" permission="access" minaccounttype="god" usage="/clean" help="Removes loose items from the map." />
+	<talkaction words="/chests" script="custom/exploration_chests.lua" permission="access" usage="/chests" help="Shows where each exploration chest is this boot, with a /gotopos." />
+	<talkaction words="/storagevalue" separator=" " script="storagevalue.lua" permission="access" usage="/storagevalue key, value" help="Sets a storage value on your own character." />
+	<talkaction words="/globalboost" separator=" " script="global_rate_boost.lua" permission="access" minaccounttype="god" usage="/globalboost exp|skill|magic, percent, hours" help="Boosts a rate for every player for some hours." />
+	<!-- bot detector: alerts only (data/lib/custom/botDetector.lua) -->
+	<talkaction words="/suspects" script="custom/botdetector.lua" permission="access" minaccounttype="gamemaster" usage="/suspects" help="Lists the players the bot detector flagged." />
+	<talkaction words="/botinfo" separator=" " script="custom/botdetector.lua" permission="access" minaccounttype="gamemaster" usage="/botinfo name" help="Shows the bot detector data of a player." />
+	<talkaction words="/botcheck" separator=" " script="custom/botdetector.lua" permission="access" minaccounttype="gamemaster" usage="/botcheck name" help="Sends a human check to a player. The answer is reported back to you." />
+	<talkaction words="/botclear" separator=" " script="custom/botdetector.lua" permission="access" minaccounttype="gamemaster" usage="/botclear name" help="Marks a player as verified for 2 hours." />
 	
 	<!--Tutors -->
-	<talkaction words="/mute" separator=" " script="mute.lua" permission="account" minaccounttype="tutor" />
-	<talkaction words="/unmute" separator=" " script="mute.lua" permission="account" minaccounttype="tutor" />
+	<talkaction words="/mute" separator=" " script="mute.lua" permission="account" minaccounttype="tutor" usage="/mute name, minutes" help="Mutes a player for 1 to 10080 minutes." />
+	<talkaction words="/unmute" separator=" " script="mute.lua" permission="account" minaccounttype="tutor" usage="/unmute name" help="Removes the mute of a player." />
 
 
 	<!-- player talkactions -->
@@ -49,16 +55,18 @@
 	<talkaction words="!share" script="experienceshare.lua" permission="public" />
 	<talkaction words="!uptime" script="uptime.lua" permission="public" />
 	<talkaction words="!serverinfo" script="serverinfo.lua" permission="public" />
-	<talkaction words="!online" script="online.lua" permission="access" />
+	<talkaction words="!online" script="online.lua" permission="access" usage="!online" help="Lists the players online." />
 	<talkaction words="!spells" separator=" " script="emote.lua" permission="public" />
 	<talkaction words="!deathlist" script="deathlist.lua" permission="public" />
 	
 	<talkaction words="!pz" script="pz.lua" permission="public" />
+	<talkaction words="!human" separator=" " script="custom/botdetector.lua" permission="public" />
+	<talkaction words="!humano" separator=" " script="custom/botdetector.lua" permission="public" />
 	
 
 	<!-- test talkactions -->
-	<talkaction words="!z" separator=" " script="magiceffect.lua" permission="access" />
-	<talkaction words="!x" separator=" " script="animationeffect.lua" permission="access" />
+	<talkaction words="!z" separator=" " script="magiceffect.lua" permission="access" usage="!z effect" help="Shows a magic effect on your position." />
+	<talkaction words="!x" separator=" " script="animationeffect.lua" permission="access" usage="!x effect" help="Shows a distance effect around you." />
 	<!-- Legacy auction has no database schema and unsafe withdrawals. Keep offline. -->
 	<!-- Legacy war command requires absent guild balance/payment columns. -->
 </talkactions>

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Dúvidas e conversa no Discord
+    url: https://discord.gg/CVneyh53mZ
+    about: Para tirar dúvidas, sugerir ideias ou conversar com a comunidade.
+  - name: Relatar uma vulnerabilidade
+    url: https://github.com/djowww/tibia-7.4-a-classic-rpg-version/security/advisories/new
+    about: Falhas de segurança vão por este canal privado, não em issues públicas.

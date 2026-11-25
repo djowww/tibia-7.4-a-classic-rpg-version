@@ -57,6 +57,7 @@ function onLogin(player)
 	
 	if (player:getGroup():getId() >= 3) then
         player:setGhostMode(true)
+        player:sendExtendedOpcode(133, "1") -- cliente libera andar por paredes em /ghost
     end
 	
 	if (player:getAccountType() == ACCOUNT_TYPE_TUTOR) then
@@ -91,11 +92,16 @@ Unmute Player: /unmute nick.
 	player:registerEvent("ItemRaritySync")
 	player:registerEvent("QuestLog")
 	player:registerEvent("RegenStatus")
+	player:registerEvent("GhostWalk")
+	player:registerEvent("GmCommands")
 	player:registerEvent("BestiaryKill")
 	player:registerEvent("AchievementsKill")
 	player:registerEvent("AchievementsDeath")
 	player:registerEvent("AchievementsAdvance")
 	player:registerEvent("AchievementsOpcode")
 	AntigasAchievements.applySpeed(player)
+	player:registerEvent("ExplorationAdvance")
+	player:registerEvent("ExplorationOpcode")
+	ExplorationChests.apply(player)
 	return true
 end

@@ -11,6 +11,8 @@ function onSay(player, words, param)
 	local isGhost = not player:isInGhostMode()
 
 	player:setGhostMode(isGhost)
+	-- avisa o cliente para deixar o GOD andar por paredes e agua (game_walking)
+	player:sendExtendedOpcode(133, isGhost and "1" or "0")
 	if isGhost then
 		player:sendTextMessage(MESSAGE_INFO_DESCR, "You are now invisible.")
 		position:sendMagicEffect(CONST_ME_POFF)

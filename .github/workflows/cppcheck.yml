@@ -49,7 +49,7 @@ jobs:
 
       - name: Reject new diagnostics and incomplete analysis
         run: |
-          python3 tests/cppcheck_gate.py \
+          python3 tests/python/cppcheck_gate.py \
             --report build/cppcheck-results/results.xml \
             --baseline tests/cppcheck-baseline.json \
             --commands build/compile_commands.json \

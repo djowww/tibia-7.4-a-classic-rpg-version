@@ -1,0 +1,54 @@
+name: Bug no jogo
+description: Algo no servidor, no cliente ou no site não funciona como deveria.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por relatar. Não inclua senhas nem dados de conta. Para falhas de segurança, use o canal privado descrito em SECURITY.md.
+  - type: dropdown
+    id: onde
+    attributes:
+      label: Onde aconteceu
+      options:
+        - Servidor oficial (tibia74.tech)
+        - Pacote localhost (Tibia74-Local.exe)
+        - Site
+        - Launcher
+    validations:
+      required: true
+  - type: input
+    id: personagem
+    attributes:
+      label: Personagem
+      description: Nome do personagem afetado, se houver.
+  - type: input
+    id: posicao
+    attributes:
+      label: Lugar no mapa
+      description: Cidade ou região e andar, ou as coordenadas (x, y, z) se souber.
+  - type: input
+    id: quando
+    attributes:
+      label: Quando aconteceu
+      description: "Data e hora aproximadas, com o fuso (ex.: 25/11 18:40, horário de Brasília)."
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que você esperava
+    validations:
+      required: true
+  - type: textarea
+    id: aconteceu
+    attributes:
+      label: O que aconteceu
+      description: Se puder, anexe um print.
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Como reproduzir
+      placeholder: |
+        1. Vá até...
+        2. Clique em...

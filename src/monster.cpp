@@ -856,11 +856,17 @@ void Monster::doAttacking(uint32_t interval)
 	bool resetTicks = interval != 0;
 	attackTicks += interval;
 
-	const Position& myPos = getPosition();
-	const Position& targetPos = attackedCreature->getPosition();
+	const Position myPos = getPosition();
+	const Position targetPos = attackedCreature->getPosition();
 
 	for (const spellBlock_t& spellBlock : mType->info.attackSpells) {
 		bool inRange = false;
+
+		// A previous spell of this loop can make the monster drop its target
+		// (TFS #2582); casting on a null target crashes.
+		if (!attackedCreature) {
+			break;
+		}
 
 		if (canUseSpell(myPos, targetPos, spellBlock, interval, inRange, resetTicks)) {
 			if (spellBlock.legacyChanceDivisor ? uniform_random(0, spellBlock.legacyChanceDivisor - 1) == 0 : uniform_random(0, spellBlock.chance) == 0) {

@@ -5,11 +5,10 @@ function onSay(player, words, param)
 	end
 	
 	local today = os.time()
-	local skullTicks = player:getPlayerKillerEnd()
 	local lastDay = 0
 	local lastWeek = 0
 	local lastMonth = 0
-	local egibleMurders = 0
+	local egibleMurders
 	local dayTimestamp = today - (24 * 60 * 60)
 	local weekTimestamp = today - (7 * 24 * 60 * 60)
 	local monthTimestamp = today - (30 * 24 * 60 * 60)

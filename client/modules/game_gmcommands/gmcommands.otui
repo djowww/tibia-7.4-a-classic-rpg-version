@@ -1,0 +1,133 @@
+GmCommandEntry < UIWidget
+  height: 38
+  background-color: #2e2e2e
+  border: 1 #1c1c1c
+  focusable: false
+
+  $hover:
+    border: 1 #8a857b
+
+  Label
+    id: usage
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: level.left
+    margin: 4 8 0 8
+    height: 14
+    color: #F0C860
+    font: verdana-11px-rounded
+    text-align: left
+    phantom: true
+
+  Label
+    id: level
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin: 4 8 0 0
+    width: 80
+    height: 14
+    color: #8A857B
+    text-align: right
+    phantom: true
+
+  Label
+    id: help
+    anchors.top: usage.bottom
+    anchors.left: usage.left
+    anchors.right: parent.right
+    margin: 3 8 0 0
+    height: 14
+    color: #C8C8C8
+    text-align: left
+    phantom: true
+
+MainWindow
+  id: gmCommandsWindow
+  text: Staff Commands
+  size: 600 500
+  @onEscape: modules.game_gmcommands.hide()
+
+  FlatPanel
+    id: header
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    height: 54
+
+    Label
+      id: title
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin: 8 10 0 10
+      height: 16
+      color: #F0C860
+      font: verdana-11px-rounded
+      text: Staff commands
+
+    Label
+      id: intro
+      anchors.top: title.bottom
+      anchors.left: title.left
+      anchors.right: parent.right
+      margin: 4 10 0 0
+      height: 14
+      color: #B4B4B4
+      text: Type them in the chat. Arguments in [ ] are optional. Press F1 to close.
+
+  TextEdit
+    id: search
+    anchors.top: header.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 8
+    height: 20
+    placeholder: Search command...
+    @onTextChange: modules.game_gmcommands.filter()
+
+  ScrollablePanel
+    id: entries
+    anchors.top: search.bottom
+    anchors.left: parent.left
+    anchors.right: entriesScroll.left
+    anchors.bottom: separator.top
+    margin-top: 8
+    margin-right: 3
+    margin-bottom: 8
+    vertical-scrollbar: entriesScroll
+    layout:
+      type: verticalBox
+      spacing: 4
+      fit-children: false
+
+  VerticalScrollBar
+    id: entriesScroll
+    anchors.top: search.bottom
+    anchors.right: parent.right
+    anchors.bottom: separator.top
+    margin-top: 8
+    margin-bottom: 8
+    step: 42
+    pixels-scroll: true
+
+  HorizontalSeparator
+    id: separator
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: closeButton.top
+    margin-bottom: 8
+
+  Label
+    id: count
+    anchors.left: parent.left
+    anchors.verticalCenter: closeButton.verticalCenter
+    text-auto-resize: true
+    color: #B4B4B4
+
+  Button
+    id: closeButton
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    width: 86
+    text: Close
+    @onClick: modules.game_gmcommands.hide()

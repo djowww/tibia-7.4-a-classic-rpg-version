@@ -24,6 +24,7 @@
 
 #include "luascript.h"
 #include "luacallwatchdog.h"
+#include "botdetector.h"
 #include "chat.h"
 #include "player.h"
 #include "game.h"
@@ -885,6 +886,7 @@ void LuaScriptInterface::pushOutfit(lua_State* L, const Outfit_t& outfit)
 
 void LuaScriptInterface::registerFunctions()
 {
+	BotDetector::registerLua(luaState);
 	//getPlayerFlagValue(cid, flag)
 	lua_register(luaState, "getPlayerFlagValue", LuaScriptInterface::luaGetPlayerFlagValue);
 
@@ -6375,12 +6377,12 @@ int LuaScriptInterface::luaContainerGetEmptySlots(lua_State* L)
 		return 1;
 	}
 
-	uint32_t slots = container->capacity() - container->size();
+	uint32_t slots = container->capacity() - std::min<uint32_t>(container->capacity(), container->size());
 	bool recursive = getBoolean(L, 2, false);
 	if (recursive) {
 		for (ContainerIterator it = container->iterator(); it.hasNext(); it.advance()) {
 			if (Container* tmpContainer = (*it)->getContainer()) {
-				slots += tmpContainer->capacity() - tmpContainer->size();
+				slots += tmpContainer->capacity() - std::min<uint32_t>(tmpContainer->capacity(), tmpContainer->size());
 			}
 		}
 	}
@@ -6698,6 +6700,11 @@ int LuaScriptInterface::luaCreatureCanSeeCreature(lua_State* L)
 	const Creature* creature = getUserdata<const Creature>(L, 1);
 	if (creature) {
 		const Creature* otherCreature = getCreature(L, 2);
+		if (!otherCreature) {
+			reportErrorFunc(getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
+			pushBoolean(L, false);
+			return 1;
+		}
 		pushBoolean(L, creature->canSeeCreature(otherCreature));
 	} else {
 		lua_pushnil(L);
@@ -9326,6 +9333,11 @@ int LuaScriptInterface::luaMonsterIsTarget(lua_State* L)
 	Monster* monster = getUserdata<Monster>(L, 1);
 	if (monster) {
 		const Creature* creature = getCreature(L, 2);
+		if (!creature) {
+			reportErrorFunc(getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
+			pushBoolean(L, false);
+			return 1;
+		}
 		pushBoolean(L, monster->isTarget(creature));
 	} else {
 		lua_pushnil(L);
@@ -9339,6 +9351,11 @@ int LuaScriptInterface::luaMonsterIsOpponent(lua_State* L)
 	Monster* monster = getUserdata<Monster>(L, 1);
 	if (monster) {
 		const Creature* creature = getCreature(L, 2);
+		if (!creature) {
+			reportErrorFunc(getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
+			pushBoolean(L, false);
+			return 1;
+		}
 		pushBoolean(L, monster->isOpponent(creature));
 	} else {
 		lua_pushnil(L);
@@ -9352,6 +9369,11 @@ int LuaScriptInterface::luaMonsterIsFriend(lua_State* L)
 	Monster* monster = getUserdata<Monster>(L, 1);
 	if (monster) {
 		const Creature* creature = getCreature(L, 2);
+		if (!creature) {
+			reportErrorFunc(getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
+			pushBoolean(L, false);
+			return 1;
+		}
 		pushBoolean(L, monster->isFriend(creature));
 	} else {
 		lua_pushnil(L);
@@ -9365,6 +9387,11 @@ int LuaScriptInterface::luaMonsterAddFriend(lua_State* L)
 	Monster* monster = getUserdata<Monster>(L, 1);
 	if (monster) {
 		Creature* creature = getCreature(L, 2);
+		if (!creature) {
+			reportErrorFunc(getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
+			pushBoolean(L, false);
+			return 1;
+		}
 		monster->addFriend(creature);
 		pushBoolean(L, true);
 	} else {
@@ -9379,6 +9406,11 @@ int LuaScriptInterface::luaMonsterRemoveFriend(lua_State* L)
 	Monster* monster = getUserdata<Monster>(L, 1);
 	if (monster) {
 		Creature* creature = getCreature(L, 2);
+		if (!creature) {
+			reportErrorFunc(getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
+			pushBoolean(L, false);
+			return 1;
+		}
 		monster->removeFriend(creature);
 		pushBoolean(L, true);
 	} else {
@@ -9430,6 +9462,11 @@ int LuaScriptInterface::luaMonsterAddTarget(lua_State* L)
 	}
 
 	Creature* creature = getCreature(L, 2);
+	if (!creature) {
+		reportErrorFunc(getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
+		pushBoolean(L, false);
+		return 1;
+	}
 	bool pushFront = getBoolean(L, 3, false);
 	monster->addTarget(creature, pushFront);
 	pushBoolean(L, true);
@@ -9445,7 +9482,14 @@ int LuaScriptInterface::luaMonsterRemoveTarget(lua_State* L)
 		return 1;
 	}
 
-	monster->removeTarget(getCreature(L, 2));
+	Creature* creature = getCreature(L, 2);
+	if (!creature) {
+		reportErrorFunc(getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
+		pushBoolean(L, false);
+		return 1;
+	}
+
+	monster->removeTarget(creature);
 	pushBoolean(L, true);
 	return 1;
 }
@@ -9489,6 +9533,11 @@ int LuaScriptInterface::luaMonsterSelectTarget(lua_State* L)
 	Monster* monster = getUserdata<Monster>(L, 1);
 	if (monster) {
 		Creature* creature = getCreature(L, 2);
+		if (!creature) {
+			reportErrorFunc(getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
+			pushBoolean(L, false);
+			return 1;
+		}
 		pushBoolean(L, monster->selectTarget(creature));
 	} else {
 		lua_pushnil(L);

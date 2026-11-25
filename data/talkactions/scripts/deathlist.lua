@@ -18,7 +18,20 @@ local function getMonthString(m)
 	return os.date("%B", os.time{year = 1970, month = m, day = 1})
 end
 
+-- Any player can ask for any name, so keep it cheap: the latest deaths only
+-- and one request every few seconds per player.
+local MAX_DEATHS = 25
+local INTERVAL = 3
+local lastRequest = {}
+
 function onSay(player, words, param)
+	local now, guid = os.time(), player:getGuid()
+	if lastRequest[guid] and now - lastRequest[guid] < INTERVAL then
+		player:sendCancelMessage("Please wait a moment before asking again.")
+		return false
+	end
+	lastRequest[guid] = now
+
 	local resultId = db.storeQuery("SELECT `id`, `name` FROM `players` WHERE `name` = " .. db.escapeString(param))
 	if resultId ~= false then
 		local targetGUID = result.getDataInt(resultId, "id")
@@ -27,7 +40,7 @@ function onSay(player, words, param)
 		local str = ""
 		local breakline = ""
 
-		local resultId = db.storeQuery("SELECT `time`, `level`, `killed_by`, `is_player` FROM `player_deaths` WHERE `player_id` = " .. targetGUID .. " ORDER BY `time` DESC")
+		resultId = db.storeQuery("SELECT `time`, `level`, `killed_by`, `is_player` FROM `player_deaths` WHERE `player_id` = " .. targetGUID .. " ORDER BY `time` DESC LIMIT " .. MAX_DEATHS)
 		if resultId ~= false then
 			repeat
 				if str ~= "" then

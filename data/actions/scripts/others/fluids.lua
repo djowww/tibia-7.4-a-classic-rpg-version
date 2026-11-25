@@ -63,7 +63,7 @@ function onUse(player, item, fromPosition, target, toPosition)
 		end
 	end
 	
-	if target:isCreature() and target == player then
+	if target == player then
 		if item:getFluidType() == FLUID_NONE then
 			player:sendCancelMessage("It is empty.")
 		else
@@ -77,42 +77,26 @@ function onUse(player, item, fromPosition, target, toPosition)
                 exhaustion:setParameter(CONDITION_PARAM_TICKS, 1000)
                 player:addCondition(exhaustion)
             end
-			local self = target == player
-			if self and item:getFluidType() == FLUID_BEER or item:getFluidType() == FLUID_WINE then
+			local fluid = item:getFluidType()
+			if fluid == FLUID_BEER or fluid == FLUID_WINE then
 				player:addCondition(drunk)
-			elseif self and item:getFluidType() == FLUID_SLIME then
+			elseif fluid == FLUID_SLIME then
 				player:addCondition(poison)
-			elseif self and item:getFluidType() == FLUID_WATER then
+			elseif fluid == FLUID_WATER then
 				player:addCondition(hydration)
 				RegenStatus.send(player)
-			elseif item:getFluidType() == FLUID_MANAFLUID then
-				target:addMana(math.random(50, 150))
-				target:getPosition():sendMagicEffect(CONST_ME_MAGIC_BLUE)
-			elseif item:getFluidType() == FLUID_LIFEFLUID then
-				local healed = math.random(25, 75)
-                if target:getHealth() > 0 then
-                    target:addHealth(healed)
-                    target:removeCondition(CONDITION_PARALYZE)
-                end
-				target:getPosition():sendMagicEffect(CONST_ME_MAGIC_BLUE)
-			end
-			
-			if not self then
-				if item:getFluidType() ~= FLUID_MANAFLUID and item:getFluidType() ~= FLUID_LIFEFLUID then
-					if toPosition.x == CONTAINER_POSITION then
-						toPosition = player:getPosition()
-					end
-					Game.createItem(2886, item:getFluidType(), toPosition):decay()
-					return true
+			elseif fluid == FLUID_MANAFLUID then
+				player:addMana(math.random(50, 150))
+				player:getPosition():sendMagicEffect(CONST_ME_MAGIC_BLUE)
+			elseif fluid == FLUID_LIFEFLUID then
+				if player:getHealth() > 0 then
+					player:addHealth(math.random(25, 75))
+					player:removeCondition(CONDITION_PARALYZE)
 				end
+				player:getPosition():sendMagicEffect(CONST_ME_MAGIC_BLUE)
 			end
-			
-			local message = messages[item:getFluidType()]
-			if message then
-				target:say(message, TALKTYPE_SAY)
-			else
-				target:say("Gulp.", TALKTYPE_SAY)
-			end
+
+			player:say(messages[fluid] or "Gulp.", TALKTYPE_SAY)
 			item:transform(item:getId(), FLUID_NONE)
 		end
 	else
@@ -136,9 +120,9 @@ function onUse(player, item, fromPosition, target, toPosition)
 			player:sendTextMessage(MESSAGE_STATUS_SMALL, "It is empty.")
 		else
 
-			Game.createItem(2886, item.type, toPosition):decay()
-				item:transform(item:getId(), FLUID_NONE)
+			Game.createItem(2886, item:getFluidType(), toPosition):decay()
+			item:transform(item:getId(), FLUID_NONE)
 		end
 	end
 	return true
-end
+end

@@ -1,0 +1,1156 @@
+WikiTab < Button
+  size: 112 22
+  color: #C3C3BC
+
+  $on:
+    image-clip: 0 46 22 23
+    color: #FFFFFF
+
+WikiChoice < Button
+  height: 20
+  color: #C3C3BC
+
+  $on:
+    image-clip: 0 46 22 23
+    color: #FFFFFF
+
+WikiHeading < Label
+  height: 14
+  color: #A8A8A8
+  phantom: true
+
+WikiInset < UIWidget
+  background-color: #262626
+  border: 1 #1A1A1A
+
+WikiMonsterRow < UIWidget
+  height: 38
+  background-color: alpha
+  focusable: false
+
+  $hover:
+    background-color: #FFFFFF14
+
+  $on:
+    background-color: #606060
+
+  UICreature
+    id: creature
+    size: 32 32
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 4
+    old-scaling: true
+    outfit-center: true
+    animate: false
+    phantom: true
+
+  Label
+    id: info
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-right: 6
+    width: 66
+    text-align: right
+    color: #929292
+    phantom: true
+
+  Label
+    id: name
+    anchors.left: creature.right
+    anchors.right: info.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 8
+    color: #CFCFCF
+    phantom: true
+
+WikiItemRow < UIWidget
+  height: 38
+  background-color: alpha
+  focusable: false
+
+  $hover:
+    background-color: #FFFFFF14
+
+  $on:
+    background-color: #606060
+
+  UIItem
+    id: item
+    size: 32 32
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 4
+    virtual: true
+    phantom: true
+
+  Label
+    id: info
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-right: 6
+    width: 76
+    text-align: right
+    color: #929292
+    phantom: true
+
+  Label
+    id: name
+    anchors.left: item.right
+    anchors.right: info.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 8
+    color: #CFCFCF
+    phantom: true
+
+WikiLine < UIWidget
+  height: 16
+
+  Label
+    id: value
+    anchors.right: parent.right
+    anchors.top: parent.top
+    width: 150
+    text-align: right
+    color: #CFCFCF
+    phantom: true
+
+  Label
+    id: label
+    anchors.left: parent.left
+    anchors.right: value.left
+    anchors.top: parent.top
+    color: #929292
+    phantom: true
+
+WikiMonsterCell < UIWidget
+  background-color: #262626
+  border: 1 #1A1A1A
+  focusable: false
+
+  $hover:
+    border: 1 #8A8A8A
+
+  $on:
+    border: 1 #F0C040
+
+  UICreature
+    id: creature
+    size: 32 32
+    anchors.centerIn: parent
+    margin-bottom: 6
+    old-scaling: true
+    outfit-center: true
+    animate: false
+    phantom: true
+
+  UIWidget
+    id: track
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin: 0 3 3 3
+    height: 4
+    background-color: #111111
+    phantom: true
+
+    UIWidget
+      id: bar
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      width: 0
+      background-color: #2FA32F
+      phantom: true
+
+WikiStat < UIWidget
+  size: 96 14
+
+  UIWidget
+    id: icon
+    size: 12 12
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    image-source: /images/ui/icons-for-wiki
+    phantom: true
+
+  Label
+    id: value
+    anchors.left: icon.right
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 5
+    color: #FFFFFF
+    phantom: true
+
+WikiLootCell < UIWidget
+  background-color: #262626
+  border: 1 #6E6E6E
+  focusable: false
+
+  $hover:
+    background-color: #404040
+
+  UIItem
+    id: item
+    size: 32 32
+    anchors.centerIn: parent
+    virtual: true
+    phantom: true
+
+WikiMapDot < UIWidget
+  size: 9 9
+  background-color: #E03030
+  border: 1 #FFFFFF
+  focusable: false
+
+  $hover:
+    background-color: #F0C040
+
+WikiPips < UIWidget
+  size: 26 6
+  phantom: true
+
+  UIWidget
+    id: p1
+    size: 6 6
+    anchors.left: parent.left
+    anchors.top: parent.top
+    background-color: #4A4A4A
+    phantom: true
+
+  UIWidget
+    id: p2
+    size: 6 6
+    anchors.left: prev.right
+    anchors.top: parent.top
+    margin-left: 3
+    background-color: #4A4A4A
+    phantom: true
+
+  UIWidget
+    id: p3
+    size: 6 6
+    anchors.left: prev.right
+    anchors.top: parent.top
+    margin-left: 3
+    background-color: #4A4A4A
+    phantom: true
+
+WikiTradeRow < UIWidget
+  height: 18
+  phantom: true
+
+  Label
+    id: price
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    margin-right: 6
+    width: 80
+    text-align: right
+    color: #F0C040
+    phantom: true
+
+  Label
+    id: text
+    anchors.left: parent.left
+    anchors.right: price.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 4
+    color: #CFCFCF
+    phantom: true
+
+WikiHuntCard < UIWidget
+  background-color: #262626
+  border: 1 #555555
+  focusable: false
+
+  $hover:
+    border: 1 #8A8A8A
+
+  WikiInset
+    id: frame
+    size: 40 40
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 7
+    phantom: true
+
+    UICreature
+      id: creature
+      size: 32 32
+      anchors.centerIn: parent
+      old-scaling: true
+      outfit-center: true
+      animate: false
+      phantom: true
+
+  Button
+    id: map
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-right: 7
+    margin-bottom: 7
+    size: 36 20
+    text: Map
+    tooltip: Show this place on the minimap.
+
+  Label
+    id: level
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-top: 7
+    margin-right: 8
+    width: 62
+    text-align: right
+    color: #F0C040
+    phantom: true
+
+  Label
+    id: title
+    anchors.top: parent.top
+    anchors.left: frame.right
+    anchors.right: level.left
+    margin-top: 7
+    margin-left: 8
+    color: #FFFFFF
+    phantom: true
+
+  Label
+    id: place
+    anchors.top: title.bottom
+    anchors.left: title.left
+    anchors.right: parent.right
+    margin-top: 3
+    margin-right: 8
+    color: #929292
+    phantom: true
+
+  Label
+    id: xpLabel
+    anchors.top: place.bottom
+    anchors.left: title.left
+    margin-top: 4
+    width: 17
+    text: XP
+    color: #CFCFCF
+    phantom: true
+
+  WikiPips
+    id: xp
+    anchors.left: xpLabel.right
+    anchors.verticalCenter: xpLabel.verticalCenter
+    margin-left: 3
+
+  Label
+    id: lootLabel
+    anchors.top: xpLabel.top
+    anchors.left: xp.right
+    margin-left: 8
+    width: 27
+    text: Loot
+    color: #CFCFCF
+    phantom: true
+
+  WikiPips
+    id: loot
+    anchors.left: lootLabel.right
+    anchors.verticalCenter: lootLabel.verticalCenter
+    margin-left: 3
+
+  UIWidget
+    id: riskDot
+    size: 7 7
+    anchors.left: loot.right
+    anchors.verticalCenter: lootLabel.verticalCenter
+    margin-left: 8
+    background-color: #45D145
+    phantom: true
+
+  Label
+    id: risk
+    anchors.top: xpLabel.top
+    anchors.left: riskDot.right
+    anchors.right: map.left
+    margin-left: 4
+    margin-right: 4
+    color: #45D145
+    phantom: true
+
+WikiBossCell < UIWidget
+  background-color: #262626
+  border: 1 #555555
+  focusable: false
+
+  UIWidget
+    id: frame
+    size: 68 68
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-top: 6
+    phantom: true
+
+    UICreature
+      id: creature
+      size: 64 64
+      anchors.centerIn: parent
+      old-scaling: true
+      outfit-center: true
+      animate: false
+      phantom: true
+
+  Label
+    id: name
+    anchors.top: frame.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 2
+    text-align: center
+    color: #CFCFCF
+    phantom: true
+
+  Label
+    id: info
+    anchors.top: name.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 2
+    text-align: center
+    color: #929292
+    phantom: true
+
+MainWindow
+  id: wikiWindow
+  visible: false
+  !text: tr('Game Wiki')
+  size: 740 530
+  @onEscape: modules.game_wiki.hide()
+
+  WikiTab
+    id: tab_bestiary
+    anchors.top: parent.top
+    anchors.left: parent.left
+    text: Bestiary
+    on: true
+    @onClick: modules.game_wiki.setTab('bestiary')
+
+  WikiTab
+    id: tab_itempedia
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-left: 4
+    text: Itempedia
+    @onClick: modules.game_wiki.setTab('itempedia')
+
+  WikiTab
+    id: tab_hunting
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-left: 4
+    text: Hunting Guide
+    @onClick: modules.game_wiki.setTab('hunting')
+
+  WikiTab
+    id: tab_bosstiary
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-left: 4
+    text: Bosstiary (WIP)
+    @onClick: modules.game_wiki.setTab('bosstiary')
+
+  Label
+    id: xpBonus
+    anchors.right: parent.right
+    anchors.verticalCenter: tab_bestiary.verticalCenter
+    width: 90
+    text: XP +0.0%
+    text-align: right
+    color: #F0C040
+    tooltip: Permanent XP bonus. Each Bestiary entry completed with 1000 kills grants +0.2%.
+
+  Button
+    id: buttonClose
+    !text: tr('Close')
+    width: 64
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    @onClick: modules.game_wiki.hide()
+
+  Label
+    id: status
+    anchors.left: parent.left
+    anchors.right: buttonClose.left
+    anchors.verticalCenter: buttonClose.verticalCenter
+    margin-right: 10
+    color: #929292
+
+  Panel
+    id: bestiaryPanel
+    anchors.top: tab_bestiary.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: buttonClose.top
+    margin-top: 8
+    margin-bottom: 8
+
+    TextEdit
+      id: bestiarySearch
+      anchors.top: parent.top
+      anchors.left: parent.left
+      width: 250
+      height: 20
+      placeholder: Search creature...
+
+    WikiChoice
+      id: filter_all
+      anchors.top: bestiarySearch.bottom
+      anchors.left: parent.left
+      margin-top: 4
+      width: 60
+      text: All
+      on: true
+      tooltip: Every creature, including those not yet hunted.
+      @onClick: modules.game_wiki.setProgressFilter('all')
+
+    WikiChoice
+      id: filter_progress
+      anchors.top: prev.top
+      anchors.left: prev.right
+      margin-left: 4
+      width: 91
+      text: In progress
+      tooltip: Creatures with 1 to 999 kills.
+      @onClick: modules.game_wiki.setProgressFilter('progress')
+
+    WikiChoice
+      id: filter_completed
+      anchors.top: prev.top
+      anchors.left: prev.right
+      margin-left: 4
+      width: 91
+      text: Completed
+      tooltip: Creatures with 1000 kills.
+      @onClick: modules.game_wiki.setProgressFilter('completed')
+
+    WikiInset
+      id: bestiaryListFrame
+      anchors.top: filter_all.bottom
+      anchors.left: parent.left
+      anchors.bottom: parent.bottom
+      margin-top: 4
+      width: 250
+
+      ScrollablePanel
+        id: bestiaryList
+        anchors.fill: parent
+        margin: 4 14 4 5
+        vertical-scrollbar: bestiaryScroll
+        layout:
+          type: grid
+          cell-size: 44 46
+          cell-spacing: 2
+          flow: true
+
+      VerticalScrollBar
+        id: bestiaryScroll
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        margin: 1
+        pixels-scroll: true
+        step: 48
+
+      Label
+        id: bestiaryEmpty
+        anchors.fill: bestiaryList
+        text: No creature matches.
+        text-align: center
+        color: #929292
+        visible: false
+        phantom: true
+
+    FlatPanel
+      id: bestiaryDetail
+      anchors.top: parent.top
+      anchors.left: bestiaryListFrame.right
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      margin-left: 8
+      padding: 10
+
+      WikiInset
+        id: previewFrame
+        size: 72 72
+        anchors.top: parent.top
+        anchors.left: parent.left
+
+        UICreature
+          id: preview
+          size: 64 64
+          anchors.centerIn: parent
+          old-scaling: true
+          outfit-center: true
+          animate: false
+          phantom: true
+
+      Label
+        id: monsterName
+        anchors.top: parent.top
+        anchors.left: previewFrame.right
+        anchors.right: parent.right
+        margin-left: 10
+        margin-top: 12
+        height: 16
+        color: #FFFFFF
+
+      WikiStat
+        id: healthStat
+        anchors.top: monsterName.bottom
+        anchors.left: monsterName.left
+        margin-top: 8
+        tooltip: Health
+
+      WikiStat
+        id: expStat
+        anchors.top: healthStat.top
+        anchors.left: healthStat.right
+        tooltip: Experience
+
+      WikiStat
+        id: summonStat
+        anchors.top: healthStat.top
+        anchors.left: expStat.right
+        width: 110
+
+      Label
+        id: killBonus
+        anchors.top: previewFrame.bottom
+        anchors.right: parent.right
+        margin-top: 8
+        width: 68
+        height: 14
+        text-align: right
+        color: #F0C040
+        text: +0.2% XP
+
+      WikiInset
+        id: killTrack
+        anchors.top: killBonus.top
+        anchors.left: parent.left
+        anchors.right: killBonus.left
+        margin-right: 4
+        height: 14
+
+        UIProgressBar
+          id: killProgressBar
+          anchors.fill: parent
+          margin: 1
+          background-color: #2FA32F
+          phantom: true
+
+        Label
+          id: killText
+          anchors.fill: parent
+          text-align: center
+          color: #FFFFFF
+          phantom: true
+
+      WikiHeading
+        id: spotsHeading
+        anchors.top: killTrack.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 10
+        text: WHERE
+
+      WikiInset
+        id: spotsFrame
+        anchors.top: spotsHeading.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: lootLegend4.top
+        margin-top: 3
+        margin-bottom: 8
+
+        UIMinimap
+          id: spotMap
+          anchors.fill: parent
+          margin: 1
+          draggable: true
+          focusable: false
+          autowalk: false
+          color: black
+
+      Label
+        id: lootLegend4
+        anchors.bottom: lootFrame.top
+        anchors.right: parent.right
+        margin-bottom: 3
+        height: 14
+        text-auto-resize: true
+        color: #F0C040
+        text: very rare
+
+      Label
+        id: lootLegend3
+        anchors.top: prev.top
+        anchors.right: prev.left
+        margin-right: 8
+        height: 14
+        text-auto-resize: true
+        color: #B070E0
+        text: rare
+
+      Label
+        id: lootLegend2
+        anchors.top: prev.top
+        anchors.right: prev.left
+        margin-right: 8
+        height: 14
+        text-auto-resize: true
+        color: #5AA0E6
+        text: uncommon
+
+      Label
+        id: lootLegend1
+        anchors.top: prev.top
+        anchors.right: prev.left
+        margin-right: 8
+        height: 14
+        text-auto-resize: true
+        color: #929292
+        text: common
+
+      WikiHeading
+        id: lootHeading
+        anchors.top: lootLegend4.top
+        anchors.left: parent.left
+        anchors.right: lootLegend1.left
+        text: LOOT
+
+      WikiInset
+        id: lootFrame
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: 85
+
+        ScrollablePanel
+          id: loot
+          anchors.fill: parent
+          margin: 4 14 4 4
+          vertical-scrollbar: lootScroll
+          layout:
+            type: grid
+            cell-size: 36 36
+            cell-spacing: 3
+            flow: true
+
+        VerticalScrollBar
+          id: lootScroll
+          anchors.top: parent.top
+          anchors.bottom: parent.bottom
+          anchors.right: parent.right
+          margin: 1
+          pixels-scroll: true
+          step: 39
+
+        Label
+          id: lootEmpty
+          anchors.fill: loot
+          text: No loot.
+          text-align: center
+          color: #929292
+          visible: false
+          phantom: true
+
+  Panel
+    id: itempediaPanel
+    anchors.fill: bestiaryPanel
+    visible: false
+
+    TextEdit
+      id: itemSearch
+      anchors.top: parent.top
+      anchors.left: parent.left
+      width: 250
+      height: 20
+      placeholder: Search item...
+
+    ComboBox
+      id: itemCategory
+      anchors.top: itemSearch.bottom
+      anchors.left: parent.left
+      margin-top: 4
+      width: 250
+
+    WikiInset
+      id: itemListFrame
+      anchors.top: itemCategory.bottom
+      anchors.left: parent.left
+      anchors.bottom: parent.bottom
+      margin-top: 4
+      width: 250
+
+      ScrollablePanel
+        id: itemList
+        anchors.fill: parent
+        margin: 1 14 1 1
+        vertical-scrollbar: itemScroll
+        layout:
+          type: verticalBox
+
+      VerticalScrollBar
+        id: itemScroll
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        margin: 1
+        pixels-scroll: true
+        step: 38
+
+      Label
+        id: itemEmpty
+        anchors.fill: itemList
+        text: No item matches.
+        text-align: center
+        color: #929292
+        visible: false
+        phantom: true
+
+    FlatPanel
+      id: itemDetail
+      anchors.top: parent.top
+      anchors.left: itemListFrame.right
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      margin-left: 8
+      padding: 10
+
+      WikiInset
+        id: itemFrame
+        size: 72 72
+        anchors.top: parent.top
+        anchors.left: parent.left
+
+        UIItem
+          id: itemIcon
+          size: 64 64
+          anchors.centerIn: parent
+          virtual: true
+          phantom: true
+
+      Label
+        id: itemName
+        anchors.top: parent.top
+        anchors.left: itemFrame.right
+        anchors.right: parent.right
+        margin-left: 10
+        height: 16
+        color: #FFFFFF
+
+      Label
+        id: itemKind
+        anchors.top: itemName.bottom
+        anchors.left: itemName.left
+        anchors.right: parent.right
+        margin-top: 4
+        height: 14
+        color: #929292
+
+      Label
+        id: itemDescription
+        anchors.top: itemKind.bottom
+        anchors.left: itemName.left
+        anchors.right: parent.right
+        margin-top: 4
+        height: 30
+        text-wrap: true
+        text-align: topLeft
+        color: #8FE08F
+
+      Panel
+        id: itemLines
+        anchors.top: itemFrame.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 8
+        height: 16
+        layout:
+          type: verticalBox
+
+      WikiHeading
+        id: dropsHeading
+        anchors.top: itemLines.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 8
+        text: DROPPED BY
+
+      WikiInset
+        id: dropsFrame
+        anchors.top: dropsHeading.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 3
+        height: 118
+
+        ScrollablePanel
+          id: drops
+          anchors.fill: parent
+          margin: 1 14 1 1
+          vertical-scrollbar: dropsScroll
+          layout:
+            type: verticalBox
+
+        VerticalScrollBar
+          id: dropsScroll
+          anchors.top: parent.top
+          anchors.bottom: parent.bottom
+          anchors.right: parent.right
+          margin: 1
+          pixels-scroll: true
+          step: 38
+
+        Label
+          id: dropsEmpty
+          anchors.fill: drops
+          text: No creature drops this item.
+          text-align: center
+          color: #929292
+          visible: false
+          phantom: true
+
+      WikiHeading
+        id: tradeHeading
+        anchors.top: dropsFrame.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        margin-top: 8
+        text: NPC TRADE
+
+      WikiInset
+        id: tradeFrame
+        anchors.top: tradeHeading.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        margin-top: 3
+
+        ScrollablePanel
+          id: trades
+          anchors.fill: parent
+          margin: 1 14 1 1
+          vertical-scrollbar: tradeScroll
+          layout:
+            type: verticalBox
+
+        VerticalScrollBar
+          id: tradeScroll
+          anchors.top: parent.top
+          anchors.bottom: parent.bottom
+          anchors.right: parent.right
+          margin: 1
+          pixels-scroll: true
+          step: 18
+
+        Label
+          id: tradeEmpty
+          anchors.fill: trades
+          text: No NPC trades this item.
+          text-align: center
+          color: #929292
+          visible: false
+          phantom: true
+
+  Panel
+    id: huntingPanel
+    anchors.fill: bestiaryPanel
+    visible: false
+
+    WikiChoice
+      id: voc_K
+      anchors.top: parent.top
+      anchors.left: parent.left
+      width: 62
+      text: Knight
+      @onClick: modules.game_wiki.setHuntVocation('K')
+
+    WikiChoice
+      id: voc_P
+      anchors.top: parent.top
+      anchors.left: prev.right
+      margin-left: 4
+      width: 62
+      text: Paladin
+      @onClick: modules.game_wiki.setHuntVocation('P')
+
+    WikiChoice
+      id: voc_S
+      anchors.top: parent.top
+      anchors.left: prev.right
+      margin-left: 4
+      width: 62
+      text: Sorcerer
+      @onClick: modules.game_wiki.setHuntVocation('S')
+
+    WikiChoice
+      id: voc_D
+      anchors.top: parent.top
+      anchors.left: prev.right
+      margin-left: 4
+      width: 62
+      text: Druid
+      @onClick: modules.game_wiki.setHuntVocation('D')
+
+    Label
+      id: levelLabel
+      anchors.left: voc_D.right
+      anchors.verticalCenter: voc_D.verticalCenter
+      margin-left: 12
+      width: 62
+      color: #FFFFFF
+      text: Level 20
+
+    HorizontalScrollBar
+      id: huntLevel
+      anchors.left: levelLabel.right
+      anchors.verticalCenter: voc_D.verticalCenter
+      width: 120
+      minimum: 1
+      maximum: 150
+      step: 1
+
+    WikiChoice
+      id: mode_solo
+      anchors.top: parent.top
+      anchors.left: huntLevel.right
+      margin-left: 12
+      width: 46
+      text: Solo
+      @onClick: modules.game_wiki.setHuntMode('solo')
+
+    WikiChoice
+      id: mode_party
+      anchors.top: parent.top
+      anchors.left: prev.right
+      margin-left: 4
+      width: 46
+      text: Party
+      @onClick: modules.game_wiki.setHuntMode('party')
+
+    Button
+      id: huntMine
+      anchors.top: parent.top
+      anchors.right: parent.right
+      width: 100
+      height: 20
+      text: My character
+      tooltip: Use the vocation and level of the character you are playing.
+      @onClick: modules.game_wiki.useMyCharacter()
+
+    Button
+      id: huntMore
+      anchors.left: parent.left
+      anchors.bottom: parent.bottom
+      width: 100
+      height: 20
+      text: Show more
+      @onClick: modules.game_wiki.showMoreHunts()
+
+    Label
+      id: huntHint
+      anchors.left: huntMore.right
+      anchors.right: parent.right
+      anchors.verticalCenter: huntMore.verticalCenter
+      margin-left: 10
+      color: #929292
+      text: One place per creature. Hover a card to see who else lives there.
+
+    WikiInset
+      id: huntFrame
+      anchors.top: voc_K.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: huntMore.top
+      margin-top: 8
+      margin-bottom: 6
+
+      ScrollablePanel
+        id: huntList
+        anchors.fill: parent
+        margin: 5 18 5 5
+        vertical-scrollbar: huntScroll
+        layout:
+          type: grid
+          cell-size: 334 68
+          cell-spacing: 4
+          flow: true
+
+      VerticalScrollBar
+        id: huntScroll
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        margin: 1
+        pixels-scroll: true
+        step: 72
+
+      Label
+        id: huntEmpty
+        anchors.fill: huntList
+        text: No hunt fits this choice. Try another level, or switch between solo and party.
+        text-wrap: true
+        text-align: center
+        color: #929292
+        visible: false
+        phantom: true
+
+  Panel
+    id: bosstiaryPanel
+    anchors.fill: bestiaryPanel
+    visible: false
+
+    FlatPanel
+      id: bossNote
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      height: 44
+      padding: 8
+
+      Label
+        id: bossNoteText
+        anchors.fill: parent
+        text-wrap: true
+        text-align: left
+        color: #F0C040
+        text: Work in progress. The great bosses of these lands are listed here; their lairs, loot and kill records open in a future update.
+
+    WikiInset
+      id: bossFrame
+      anchors.top: bossNote.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      margin-top: 6
+
+      ScrollablePanel
+        id: bossList
+        anchors.fill: parent
+        margin: 5 18 5 5
+        vertical-scrollbar: bossScroll
+        layout:
+          type: grid
+          cell-size: 168 112
+          cell-spacing: 4
+          flow: true
+
+      VerticalScrollBar
+        id: bossScroll
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        margin: 1
+        pixels-scroll: true
+        step: 58

@@ -10,7 +10,7 @@ Preserve os cabeçalhos de copyright e licença e os demais créditos existentes
 
 ## Biblioteca JSON Lua
 
-[data/lib/core/json.lua](data/lib/core/json.lua) inclui copyright de **rxi, 2018** e o aviso de licença **MIT**. [deploy/client-current/modules/corelib/json.lua](deploy/client-current/modules/corelib/json.lua) inclui copyright de **rxi, 2019** e o mesmo aviso MIT. Os textos completos estão nos arquivos e precisam acompanhar cópias ou partes substanciais dessas bibliotecas.
+[data/lib/core/json.lua](data/lib/core/json.lua) inclui copyright de **rxi, 2018** e o aviso de licença **MIT**. [client/modules/corelib/json.lua](client/modules/corelib/json.lua) inclui copyright de **rxi, 2019** e o mesmo aviso MIT. Os textos completos estão nos arquivos e precisam acompanhar cópias ou partes substanciais dessas bibliotecas.
 
 ## Cliente, conteúdo do jogo e assets
 

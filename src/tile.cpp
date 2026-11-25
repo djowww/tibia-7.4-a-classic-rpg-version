@@ -472,6 +472,15 @@ ReturnValue Tile::queryAdd(int32_t, const Thing& thing, uint32_t, uint32_t flags
 			return RETURNVALUE_NOERROR;
 		}
 
+		// staff em /ghost atravessa paredes, agua e itens bloqueantes (precisa de chao)
+		if (ground) {
+			if (const Player* ghostPlayer = creature->getPlayer()) {
+				if (ghostPlayer->isInGhostMode() && ghostPlayer->isAccessPlayer()) {
+					return RETURNVALUE_NOERROR;
+				}
+			}
+		}
+
 		if (hasBitSet(FLAG_PATHFINDING, flags) && hasFlag(TILESTATE_IMMOVABLENOFIELDBLOCKPATH)) {
 			return RETURNVALUE_NOTPOSSIBLE;
 		}

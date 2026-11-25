@@ -11010,19 +11010,23 @@ Attributes  = {BedDirection=WEST,BedFree=2490}
 
 TypeID      = 2503
 Name        = "a bed"
-Flags       = {Unpass,Unmove,Unlay,Height}
+Flags       = {Unpass,Unmove,Unlay,Height,Disguise}
+Attributes  = {DisguiseTarget=2487}
 
 TypeID      = 2504
 Name        = "a bed"
-Flags       = {Unmove,Unlay,Height}
+Flags       = {Unmove,Unlay,Height,Disguise}
+Attributes  = {DisguiseTarget=2488}
 
 TypeID      = 2505
 Name        = "a cot"
-Flags       = {Unpass,Unmove,Unlay,Height}
+Flags       = {Unpass,Unmove,Unlay,Height,Disguise}
+Attributes  = {DisguiseTarget=2489}
 
 TypeID      = 2506
 Name        = "a cot"
-Flags       = {Unpass,Unmove,Unlay,Height}
+Flags       = {Unpass,Unmove,Unlay,Height,Disguise}
+Attributes  = {DisguiseTarget=2490}
 
 TypeID      = 2507
 Name        = "a hammock"
@@ -12965,7 +12969,7 @@ Attributes  = {ChangeTarget=2921,Weight=500,Brightness=0,LightColor=215}
 TypeID      = 2921
 Name        = "a lit torch"
 Flags       = {ChangeUse,Take,Expire}
-Attributes  = {ChangeTarget=2920,Weight=500,Brightness=7,LightColor=206,ExpireTarget=2923,TotalExpireTime=600}
+Attributes  = {ChangeTarget=2920,Weight=500,Brightness=7,LightColor=206,ExpireTarget=2923,TotalExpireTime=1200}
 
 TypeID      = 2922
 Name        = "a torch"
@@ -12975,7 +12979,7 @@ Attributes  = {ChangeTarget=2923,Weight=450,Brightness=0,LightColor=215}
 TypeID      = 2923
 Name        = "a lit torch"
 Flags       = {ChangeUse,Take,Expire}
-Attributes  = {ChangeTarget=2922,Weight=450,Brightness=6,LightColor=206,ExpireTarget=2925,TotalExpireTime=300}
+Attributes  = {ChangeTarget=2922,Weight=450,Brightness=6,LightColor=206,ExpireTarget=2925,TotalExpireTime=600}
 
 TypeID      = 2924
 Name        = "a torch"
@@ -12985,7 +12989,7 @@ Attributes  = {ChangeTarget=2925,Weight=400,Brightness=0,LightColor=215}
 TypeID      = 2925
 Name        = "a lit torch"
 Flags       = {ChangeUse,Take,Expire}
-Attributes  = {ChangeTarget=2924,Weight=400,Brightness=5,LightColor=206,ExpireTarget=2926,TotalExpireTime=300}
+Attributes  = {ChangeTarget=2924,Weight=400,Brightness=5,LightColor=206,ExpireTarget=2926,TotalExpireTime=600}
 
 TypeID      = 2926
 Name        = "a burnt down torch"
