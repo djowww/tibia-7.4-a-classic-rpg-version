@@ -56,6 +56,8 @@ class Mailbox final : public Item, public Cylinder
 		void postAddNotification(Thing* thing, const Cylinder* oldParent, int32_t index, cylinderlink_t link = LINK_OWNER) final;
 		void postRemoveNotification(Thing* thing, const Cylinder* newParent, int32_t index, cylinderlink_t link = LINK_OWNER) final;
 
+		bool canDeliver(const Item* item) const;
+
 	private:
 		bool getDestination(Item* item, std::string& name, std::string& town) const;
 		bool sendItem(Item* item) const;

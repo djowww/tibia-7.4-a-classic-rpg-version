@@ -73,11 +73,7 @@ function onExtendedOpcode(player, opcode, buffer)
 		return false
 	end
 
-	local decoded, request = pcall(function() return json.decode(buffer) end)
-	if not decoded or type(request) ~= "table" or request.action ~= "getProgress" or type(request.monsters) ~= "table" then
-		return false
-	end
-
+	-- Rate limit before decoding, so a flood of large requests costs nothing.
 	local guid = player:getGuid()
 	local now = os.time()
 	local lastRequest = requestTimes[guid]
@@ -85,6 +81,11 @@ function onExtendedOpcode(player, opcode, buffer)
 		return true
 	end
 	requestTimes[guid] = now
+
+	local decoded, request = pcall(function() return json.decode(buffer) end)
+	if not decoded or type(request) ~= "table" or request.action ~= "getProgress" or type(request.monsters) ~= "table" then
+		return false
+	end
 	if now - lastRequestCleanup >= 60 then
 		lastRequestCleanup = now
 		for playerGuid, timestamp in pairs(requestTimes) do

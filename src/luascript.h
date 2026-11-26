@@ -444,6 +444,7 @@ class LuaScriptInterface
 
 		static int luaGetWorldTime(lua_State* L);
 		static int luaGetWorldLight(lua_State* L);
+		static int luaSetWorldTime(lua_State* L);
 		static int luaGetWorldUpTime(lua_State* L);
 
 		//type validation
@@ -482,6 +483,7 @@ class LuaScriptInterface
 		static int luaStopEvent(lua_State* L);
 
 		static int luaSaveServer(lua_State* L);
+		static int luaSaveHouses(lua_State* L);
 		static int luaCleanMap(lua_State* L);
 
 		static int luaIsInWar(lua_State* L);

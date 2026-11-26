@@ -291,7 +291,20 @@ local function parse_literal(str, i)
 end
 
 
+-- Client requests are decoded on the game thread: thousands of nested
+-- brackets in one packet are cheap to send and slow to parse.
+local MAX_DEPTH = 32
+local depth = 0
+
+local function enter(str, i)
+  depth = depth + 1
+  if depth > MAX_DEPTH then
+    error("json too deeply nested")
+  end
+end
+
 local function parse_array(str, i)
+  enter(str, i)
   local res = {}
   local n = 1
   i = i + 1
@@ -314,11 +327,13 @@ local function parse_array(str, i)
     if chr == "]" then break end
     if chr ~= "," then decode_error(str, i, "expected ']' or ','") end
   end
+  depth = depth - 1
   return res, i
 end
 
 
 local function parse_object(str, i)
+  enter(str, i)
   local res = {}
   i = i + 1
   while 1 do
@@ -351,6 +366,7 @@ local function parse_object(str, i)
     if chr == "}" then break end
     if chr ~= "," then decode_error(str, i, "expected '}' or ','") end
   end
+  depth = depth - 1
   return res, i
 end
 
@@ -390,6 +406,7 @@ function json.decode(str)
   if type(str) ~= "string" then
     error("expected argument of type string, got " .. type(str))
   end
+  depth = 0 -- a failed decode leaves the counter where the error was raised
   local res, idx = parse(str, next_char(str, 1, space_chars, true))
   idx = next_char(str, idx, space_chars, true)
   if idx <= #str then

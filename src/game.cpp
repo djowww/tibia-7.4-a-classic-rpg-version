@@ -33,6 +33,7 @@
 #include "game.h"
 #include "actions.h"
 #include "iologindata.h"
+#include "mailbox.h"
 #include "talkaction.h"
 #include "spells.h"
 #include "configmanager.h"
@@ -65,6 +66,7 @@ void Game::start(ServiceManager* manager)
 {
 	serviceManager = manager;
 
+	updateWorldLight(false);
 	g_scheduler.addEvent(createSchedulerTask(EVENT_LIGHTINTERVAL, std::bind(&Game::checkLight, this)));
 	g_scheduler.addEvent(createSchedulerTask(EVENT_CREATURE_THINK_INTERVAL, std::bind(&Game::checkCreatures, this, 0)));
 	g_scheduler.addEvent(createSchedulerTask(EVENT_DECAYINTERVAL, std::bind(&Game::checkDecay, this)));
@@ -1020,11 +1022,29 @@ void Game::playerMoveItem(Player* player, const Position& fromPos,
 		}
 	}
 
+	// A parcel or letter dropped on a mailbox is saved into the receiver's depot
+	// at once; save the sender too, so a crash cannot leave the item with both.
+	const Tile* toTile = toCylinder->getTile();
+	const bool toMailbox = (item->getID() == ITEM_PARCEL || item->getID() == ITEM_LETTER) &&
+		toTile && toTile->hasFlag(TILESTATE_MAILBOX);
+	if (toMailbox) {
+		// Without a valid label the item would just lie on the mailbox, block it
+		// for everyone and vanish on restart: keep it with the sender instead.
+		const Mailbox* mailbox = toTile->getMailbox();
+		if (mailbox && !mailbox->canDeliver(item)) {
+			player->sendCancelMessage(RETURNVALUE_NOTPOSSIBLE);
+			return;
+		}
+	}
+
 	ReturnValue ret = internalMoveItem(fromCylinder, toCylinder, toIndex, item, count, nullptr, 0, player);
 	if (ret != RETURNVALUE_NOERROR) {
 		player->sendCancelMessage(ret);
 	} else {
 		g_events->eventPlayerOnItemMoved(player, item, count, fromPos, toPos, fromCylinder, toCylinder);
+		if (toMailbox) {
+			IOLoginData::savePlayer(player);
+		}
 	}
 }
 
@@ -1566,7 +1586,7 @@ Item* Game::transformItem(Item* item, uint16_t newId, int32_t newCount /*= -1*/)
 					newItemId = curType.decayTo;
 				}
 
-				if (newItemId < 0) {
+				if (newItemId <= 0) {
 					internalRemoveItem(item);
 					return nullptr;
 				} else if (newItemId != newId) {
@@ -2533,6 +2553,11 @@ void Game::playerAcceptTrade(uint32_t playerId)
 		return;
 	}
 
+	// Both sides must have offered an item before either can accept.
+	if (!player->tradeItem || !tradePartner->tradeItem) {
+		return;
+	}
+
 	if (!canThrowObjectTo(tradePartner->getPosition(), player->getPosition())) {
 		player->sendCancelMessage(RETURNVALUE_CREATUREISNOTREACHABLE);
 		return;
@@ -2615,6 +2640,14 @@ void Game::playerAcceptTrade(uint32_t playerId)
 		tradePartner->tradeItem = nullptr;
 		tradePartner->tradePartner = nullptr;
 		tradePartner->sendTradeClose();
+
+		// Persist both sides at once. Otherwise a partner who logs out is saved
+		// with the item while the other is only saved later, and a hard crash in
+		// between leaves the item with both of them.
+		if (isSuccess) {
+			IOLoginData::savePlayer(player);
+			IOLoginData::savePlayer(tradePartner);
+		}
 	}
 }
 
@@ -4008,54 +4041,48 @@ void Game::checkDecay()
 void Game::checkLight()
 {
 	g_scheduler.addEvent(createSchedulerTask(EVENT_LIGHTINTERVAL, std::bind(&Game::checkLight, this)));
+	updateWorldLight(false);
+}
 
-	lightHour += lightHourDelta;
-
-	if (lightHour > 1440) {
-		lightHour -= 1440;
+void Game::setLightHour(int32_t minute)
+{
+	minute %= DayNight::MINUTES_PER_DAY;
+	if (minute < 0) {
+		minute += DayNight::MINUTES_PER_DAY;
 	}
+	lightHourOffset = minute - DayNight::worldMinute(time(nullptr));
+	updateWorldLight(true);
+}
 
-	if (std::abs(lightHour - SUNRISE) < 2 * lightHourDelta) {
-		lightState = LIGHT_STATE_SUNRISE;
-	} else if (std::abs(lightHour - SUNSET) < 2 * lightHourDelta) {
-		lightState = LIGHT_STATE_SUNSET;
-	}
+void Game::updateWorldLight(bool forceSend)
+{
+	lightHour = DayNight::worldMinute(time(nullptr), lightHourOffset);
 
-	int32_t newLightLevel = lightLevel;
-	bool lightChange = false;
-
-	switch (lightState) {
-		case LIGHT_STATE_SUNRISE: {
-			newLightLevel += (LIGHT_LEVEL_DAY - LIGHT_LEVEL_NIGHT) / 30;
-			lightChange = true;
+	switch (DayNight::phaseAt(lightHour)) {
+		case DayNight::Phase::Day:
+			lightState = LIGHT_STATE_DAY;
 			break;
-		}
-		case LIGHT_STATE_SUNSET: {
-			newLightLevel -= (LIGHT_LEVEL_DAY - LIGHT_LEVEL_NIGHT) / 30;
-			lightChange = true;
+		case DayNight::Phase::Night:
+			lightState = LIGHT_STATE_NIGHT;
 			break;
-		}
-		default:
+		case DayNight::Phase::Sunrise:
+			lightState = LIGHT_STATE_SUNRISE;
+			break;
+		case DayNight::Phase::Sunset:
+			lightState = LIGHT_STATE_SUNSET;
 			break;
 	}
 
-	if (newLightLevel <= LIGHT_LEVEL_NIGHT) {
-		lightLevel = LIGHT_LEVEL_NIGHT;
-		lightState = LIGHT_STATE_NIGHT;
-	} else if (newLightLevel >= LIGHT_LEVEL_DAY) {
-		lightLevel = LIGHT_LEVEL_DAY;
-		lightState = LIGHT_STATE_DAY;
-	} else {
-		lightLevel = newLightLevel;
+	const uint8_t newLightLevel = static_cast<uint8_t>(DayNight::lightLevelAt(lightHour));
+	if (newLightLevel == lightLevel && !forceSend) {
+		return;
 	}
+	lightLevel = newLightLevel;
 
-	if (lightChange) {
-		LightInfo lightInfo;
-		getWorldLightInfo(lightInfo);
-
-		for (const auto& it : players) {
-			it.second->sendWorldLight(lightInfo);
-		}
+	LightInfo lightInfo;
+	getWorldLightInfo(lightInfo);
+	for (const auto& it : players) {
+		it.second->sendWorldLight(lightInfo);
 	}
 }
 
@@ -4513,6 +4540,11 @@ void Game::playerCloseRuleViolationReport(uint32_t playerId, const std::string& 
 {
 	Player* player = getPlayerByID(playerId);
 	if (!player) {
+		return;
+	}
+
+	// Only staff may close another player's report.
+	if (player->getAccountType() < ACCOUNT_TYPE_GAMEMASTER) {
 		return;
 	}
 

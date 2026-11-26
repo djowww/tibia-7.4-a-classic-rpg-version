@@ -52,22 +52,22 @@ function onSay(player, words, param)
 	message = message .. "\n"
 	
 	message = message .. "Last murders within 24 hours " .. lastDay .. "\n"
-	message = message .. "Last murders within a week " .. lastDay .. "\n"
-	message = message .. "Last murders within a month " .. lastDay .. "\n"
+	message = message .. "Last murders within a week " .. lastWeek .. "\n"
+	message = message .. "Last murders within a month " .. lastMonth .. "\n"
 	
 	message = message .. "\n"
 	
 	message = message .. "Players you may kill for a red skull:\n"
 	message = message .. "- Within 24 hours " .. killsDayRedSkull - lastDay .. " murders.\n"
 	message = message .. "- Within a week " .. killsWeekRedSkull - lastWeek .. " murders.\n"
-	message = message .. "- Within a month " .. killsMonthRedSkull - lastDay .. " murders.\n"
+	message = message .. "- Within a month " .. killsMonthRedSkull - lastMonth .. " murders.\n"
 		
 	message = message .. "\n"
 	
 	message = message .. "Players you may kill for a banishment:\n"
 	message = message .. "- Within 24 hours " .. killsDayBanishment - lastDay .. " murders.\n"
 	message = message .. "- Within a week " .. killsWeekBanishment - lastWeek .. " murders.\n"
-	message = message .. "- Within a month " .. killsMonthBanishment - lastDay .. " murders.\n"
+	message = message .. "- Within a month " .. killsMonthBanishment - lastMonth .. " murders.\n"
 			
 	player:showTextDialog(1998, message, false)
 	return false

@@ -30,10 +30,32 @@ extern Game g_game;
 ReturnValue Mailbox::queryAdd(int32_t, const Thing& thing, uint32_t, uint32_t, Creature*) const
 {
 	const Item* item = thing.getItem();
-	if (item && Mailbox::canSend(item)) {
-		return RETURNVALUE_NOERROR;
+	if (!item || !canDeliver(item)) {
+		return RETURNVALUE_NOTPOSSIBLE;
 	}
-	return RETURNVALUE_NOTPOSSIBLE;
+	return RETURNVALUE_NOERROR;
+}
+
+// A parcel or letter is deliverable only with a label naming an existing
+// character and town. Game::playerMoveItem refuses the drop otherwise, so the
+// item stays with the sender instead of sitting on (and blocking) the mailbox.
+bool Mailbox::canDeliver(const Item* item) const
+{
+	if (!item || !Mailbox::canSend(item)) {
+		return false;
+	}
+
+	std::string receiver;
+	std::string townName;
+	if (!getDestination(const_cast<Item*>(item), receiver, townName) || receiver.empty() || townName.empty()) {
+		return false;
+	}
+
+	if (!g_game.map.towns.getTown(townName)) {
+		return false;
+	}
+
+	return g_game.getPlayerByName(receiver) || IOLoginData::getGuidByName(receiver) != 0;
 }
 
 ReturnValue Mailbox::queryMaxCount(int32_t, const Thing&, uint32_t count, uint32_t& maxQueryCount, uint32_t) const

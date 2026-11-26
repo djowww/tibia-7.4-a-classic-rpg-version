@@ -287,9 +287,35 @@ ReturnValue Container::queryAdd(int32_t index, const Thing& thing, uint32_t coun
 
 	const Cylinder* cylinder = getParent();
 	if (!hasBitSet(FLAG_NOLIMIT, flags)) {
+		// Saving, loading and destroying containers recurse once per nesting
+		// level, so a container may not be stored deeper than this.
+		const uint32_t maxNestingDepth = 100;
+		// The moved container brings its own levels along: itself plus the
+		// deepest chain of containers inside it.
+		const Container* movedContainer = item->getContainer();
+		uint32_t depth = 0;
+		if (movedContainer) {
+			depth = 1;
+			std::vector<std::pair<const Container*, uint32_t>> pending {{movedContainer, 1}};
+			while (!pending.empty() && depth <= maxNestingDepth) {
+				const std::pair<const Container*, uint32_t> entry = pending.back();
+				pending.pop_back();
+				depth = std::max<uint32_t>(depth, entry.second);
+				for (const Item* child : entry.first->getItemList()) {
+					if (const Container* childContainer = child->getContainer()) {
+						pending.emplace_back(childContainer, entry.second + 1);
+					}
+				}
+			}
+		}
+
 		while (cylinder) {
 			if (cylinder == &thing) {
 				return RETURNVALUE_THISISIMPOSSIBLE;
+			}
+
+			if (++depth > maxNestingDepth && movedContainer) {
+				return RETURNVALUE_CONTAINERNOTENOUGHROOM;
 			}
 
 			cylinder = cylinder->getParent();

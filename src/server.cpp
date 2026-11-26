@@ -162,6 +162,27 @@ void ServicePort::onAccept(Connection_ptr connection, const boost::system::error
 		// failed/cancelled accept so it cannot remain retained by ConnectionManager.
 		connection->close(Connection::FORCE_CLOSE);
 
+		// Out of file descriptors or socket buffers (a connection flood): keep the
+		// port listening and retry shortly. Closing it for 15 s, as below, refused
+		// every new login during that time (seen in the 500-bot flood test).
+		const bool outOfResources = error == boost::asio::error::no_descriptors ||
+			error == boost::system::errc::too_many_files_open_in_system ||
+			error == boost::asio::error::no_buffer_space || error == boost::asio::error::no_memory;
+		if (outOfResources && acceptor && acceptor->is_open()) {
+			static uint32_t retries = 0;
+			if (retries++ % 200 == 0) {
+				std::cout << "[ServicePort::onAccept] " << error.message() << ", retrying accept in 100 ms" << std::endl;
+			}
+			auto timer = std::make_shared<boost::asio::deadline_timer>(io_service, boost::posix_time::milliseconds(100));
+			auto self = shared_from_this();
+			timer->async_wait([self, timer](const boost::system::error_code& ec) {
+				if (!ec) {
+					self->accept();
+				}
+			});
+			return;
+		}
+
 		if (error != boost::asio::error::operation_aborted && !pendingStart) {
 			close();
 			pendingStart = true;

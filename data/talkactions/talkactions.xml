@@ -5,6 +5,7 @@
 	<talkaction words="/ban" separator=" " script="ban.lua" permission="access" usage="/ban name, reason, days" help="Bans the account of a player for some days." />
 	<talkaction words="/ipban" separator=" " script="ipban.lua" permission="access" usage="/ipban name" help="Bans the last IP of a player." />
 	<talkaction words="/unban" separator=" " script="unban.lua" permission="access" usage="/unban name" help="Removes the account and IP bans of a player." />
+	<talkaction words="/worldtime" separator=" " script="worldtime.lua" permission="access" usage="/worldtime [HH:MM]" help="Shows the game time, or sets it to test the day and night cycle." />
 	<talkaction words="/up" script="up.lua" permission="access" usage="/up" help="Moves you one floor up." />
 	<talkaction words="/down" script="down.lua" permission="access" usage="/down" help="Moves you one floor down." />
 	<talkaction words="/c" separator=" " script="teleport_creature_here.lua" permission="access" usage="/c name" help="Brings a creature or player to you." />
@@ -54,6 +55,7 @@
 	<talkaction words="!frags" script="kills.lua" permission="public" />
 	<talkaction words="!share" script="experienceshare.lua" permission="public" />
 	<talkaction words="!uptime" script="uptime.lua" permission="public" />
+	<talkaction words="!time" script="worldtime.lua" permission="public" />
 	<talkaction words="!serverinfo" script="serverinfo.lua" permission="public" />
 	<talkaction words="!online" script="online.lua" permission="access" usage="!online" help="Lists the players online." />
 	<talkaction words="!spells" separator=" " script="emote.lua" permission="public" />

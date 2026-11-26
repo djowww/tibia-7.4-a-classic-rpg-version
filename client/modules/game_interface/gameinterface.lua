@@ -137,20 +137,39 @@ end
 -- With the wide view on, the first frame would still be the classic 15x11
 -- map with empty sides. Ask for the wide map at once and only show the game
 -- when the server has answered (or after a short safety timeout).
+-- The server enables GameChangeMapAwareRange a few milliseconds after
+-- onGameStart, so wait for it briefly instead of showing the classic view.
 function showWhenViewportReady()
   removeEvent(deferredShowEvent)
   deferredShowEvent = nil
   deferredShow = false
-  if modules.client_options.getOption('gameView') == 2 and g_settings.getBoolean('classicView')
-      and g_game.getFeature(GameChangeMapAwareRange) then
-    deferredShow = true
-    updateMapViewport()
-    if viewportEvent then
-      deferredShowEvent = scheduleEvent(finishDeferredShow, 700)
-      return
-    end
+  if modules.client_options.getOption('gameView') ~= 2 or not g_settings.getBoolean('classicView') then
+    return finishDeferredShow(true)
   end
-  finishDeferredShow(true)
+  deferredShow = true
+  -- Keep the background on screen while waiting (client_background hides it
+  -- on onGameStart, after this handler), instead of a black window.
+  addEvent(function()
+    if deferredShow and modules.client_background then modules.client_background.show() end
+  end)
+  local started = g_clock.millis()
+  local function waitFeature()
+    deferredShowEvent = nil
+    if not deferredShow or not g_game.isOnline() then return end
+    if g_game.getFeature(GameChangeMapAwareRange) then
+      updateMapViewport()
+      if viewportEvent then
+        deferredShowEvent = scheduleEvent(finishDeferredShow, 700)
+        return
+      end
+      return finishDeferredShow(true)
+    end
+    if g_clock.millis() - started >= 300 then
+      return finishDeferredShow(true)
+    end
+    deferredShowEvent = scheduleEvent(waitFeature, 10)
+  end
+  waitFeature()
 end
 
 function finishDeferredShow(force)

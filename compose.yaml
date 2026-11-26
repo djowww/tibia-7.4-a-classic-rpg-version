@@ -2,6 +2,7 @@ name: tibia74-local
 services:
   db:
     image: mariadb:11.4
+    restart: unless-stopped
     environment:
       MARIADB_ROOT_PASSWORD: localroot
       MARIADB_DATABASE: tibia_local
@@ -19,6 +20,8 @@ services:
     build:
       context: .
       dockerfile: local/Dockerfile
+    # The server shuts itself down at the daily server save and must come back.
+    restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy

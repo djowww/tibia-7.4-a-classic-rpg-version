@@ -941,6 +941,9 @@ void LuaScriptInterface::registerFunctions()
 	//getWorldLight()
 	lua_register(luaState, "getWorldLight", LuaScriptInterface::luaGetWorldLight);
 
+	//setWorldTime(minutes)
+	lua_register(luaState, "setWorldTime", LuaScriptInterface::luaSetWorldTime);
+
 	//getWorldUpTime()
 	lua_register(luaState, "getWorldUpTime", LuaScriptInterface::luaGetWorldUpTime);
 
@@ -994,6 +997,9 @@ void LuaScriptInterface::registerFunctions()
 
 	//saveServer()
 	lua_register(luaState, "saveServer", LuaScriptInterface::luaSaveServer);
+
+	//saveHouses()
+	lua_register(luaState, "saveHouses", LuaScriptInterface::luaSaveHouses);
 
 	//cleanMap()
 	lua_register(luaState, "cleanMap", LuaScriptInterface::luaCleanMap);
@@ -2801,6 +2807,14 @@ int LuaScriptInterface::luaGetWorldTime(lua_State* L)
 	return 1;
 }
 
+int LuaScriptInterface::luaSetWorldTime(lua_State* L)
+{
+	//setWorldTime(minutes)
+	g_game.setLightHour(getNumber<int32_t>(L, 1));
+	lua_pushboolean(L, true);
+	return 1;
+}
+
 int LuaScriptInterface::luaGetWorldLight(lua_State* L)
 {
 	//getWorldLight()
@@ -3529,6 +3543,14 @@ int LuaScriptInterface::luaSaveServer(lua_State* L)
 {
 	g_game.saveGameState();
 	pushBoolean(L, true);
+	return 1;
+}
+
+int LuaScriptInterface::luaSaveHouses(lua_State* L)
+{
+	// saveHouses(): house owners and house items only, without the player
+	// loop of saveServer(), so the periodic autosave can spread player saves.
+	pushBoolean(L, Map::save());
 	return 1;
 }
 

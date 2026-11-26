@@ -1190,9 +1190,7 @@ function onCloseChannel(channelId)
     if tab then
       consoleTabBar:removeTab(tab)
     end
-    for k, v in pairs(channels) do
-      if (k == tab.channelId) then channels[k] = nil end
-    end
+    channels[channelId] = nil
   end
 end
 

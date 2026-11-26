@@ -1227,7 +1227,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance,
 	} else if (it.charges > 0) {
 		uint32_t charges = (item == nullptr ? it.charges : item->getCharges());
 		if (charges > 1) {
-			s << " that has " << static_cast<int>(charges) << " charges left.";
+			s << " that has " << static_cast<int>(charges) << " charges left";
 		} else {
 			s << " that has 1 charge left.";
 		}

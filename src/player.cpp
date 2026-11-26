@@ -1114,6 +1114,9 @@ void Player::onRemoveCreature(Creature* creature, bool isLogout)
 			party->leaveParty(this);
 		}
 
+		// The report is keyed by this login's creature id and would never be reachable again.
+		g_game.cancelRuleViolationReport(this);
+
 		g_chat->removeUserFromAllChannels(*this);
 
 		std::cout << getName() << " has logged out." << std::endl;

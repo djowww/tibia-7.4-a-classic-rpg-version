@@ -4,6 +4,7 @@
 	<globalevent type="record" name="PlayerRecord" script="record.lua"/>
 	<globalevent name="DatabaseKeepalive" interval="60000" script="custom/database_keepalive.lua"/>
 	<globalevent name="Server Save" time="06:00:00" script="serversave.lua"/>
+	<globalevent name="AutoSave" interval="10000" script="custom/autosave.lua"/>
 
 
     <globalevent type="startup" name="lamp_states" script="load_states.lua"/>

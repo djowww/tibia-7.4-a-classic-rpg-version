@@ -21,6 +21,7 @@
 #define FS_GAME_H_3EC96D67DD024E6093B3BAC29B7A6D7F
 
 #include "account.h"
+#include "daynight.h"
 #include "combat.h"
 #include "commands.h"
 #include "groups.h"
@@ -465,6 +466,8 @@ class Game
 		int32_t getLightHour() const {
 			return lightHour;
 		}
+		// Ajusta a hora do jogo (minuto 0-1439) e manda a luz nova na hora; usado por /worldtime.
+		void setLightHour(int32_t minute);
 
 		bool loadExperienceStages();
 		uint64_t getExperienceStage(uint32_t level);
@@ -544,19 +547,16 @@ class Game
 
 		Commands commands;
 
-		static constexpr int32_t LIGHT_LEVEL_DAY = 250;
-		static constexpr int32_t LIGHT_LEVEL_NIGHT = 40;
-		static constexpr int32_t SUNSET = 1305;
-		static constexpr int32_t SUNRISE = 430;
 
 		GameState_t gameState = GAME_STATE_NORMAL;
 		WorldType_t worldType = WORLD_TYPE_PVP;
 
+		// Ciclo de dia e noite (daynight.h): a hora vem do relogio real, entao nao muda em restart.
 		LightState_t lightState = LIGHT_STATE_DAY;
-		uint8_t lightLevel = LIGHT_LEVEL_DAY;
-		int32_t lightHour = SUNRISE + (SUNSET - SUNRISE) / 2;
-		// (1440 minutes/day)/(3600 seconds/day)*10 seconds event interval
-		int32_t lightHourDelta = 1400 * 10 / 3600;
+		uint8_t lightLevel = DayNight::LIGHT_DAY;
+		int32_t lightHour = DayNight::SUNRISE + (DayNight::SUNSET - DayNight::SUNRISE) / 2;
+		int32_t lightHourOffset = 0;
+		void updateWorldLight(bool forceSend);
 
 		ServiceManager* serviceManager = nullptr;
 
