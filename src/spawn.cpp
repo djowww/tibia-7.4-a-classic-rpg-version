@@ -229,18 +229,31 @@ bool Spawn::spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& p
 	return true;
 }
 
-uint32_t Spawn::getInterval() const
+// Respawn do Antigas: ate 10 jogadores online o tempo e o normal; dali ate 150
+// online ele cai aos poucos ate a metade. Na noite de caca fica mais 25% rapido.
+static uint32_t respawnPercent()
 {
-	uint32_t newInterval = interval;
-	size_t playersOnline = g_game.getPlayersOnline();
-	if (playersOnline <= 800) {
-		if (playersOnline > 200) {
-			newInterval = 200 * interval / (playersOnline / 2 + 100);
-		}
-	} else {
-		newInterval = 2 * interval / 5;
+	constexpr int64_t QUIET_PLAYERS = 10;
+	constexpr int64_t FULL_PLAYERS = 150;
+	constexpr int64_t FULL_PERCENT = 50;
+
+	int64_t online = static_cast<int64_t>(g_game.getPlayersOnline());
+	int64_t percent = 100;
+	if (online >= FULL_PLAYERS) {
+		percent = FULL_PERCENT;
+	} else if (online > QUIET_PLAYERS) {
+		percent = 100 - (100 - FULL_PERCENT) * (online - QUIET_PLAYERS) / (FULL_PLAYERS - QUIET_PLAYERS);
 	}
 
+	if (g_game.isHuntNight()) {
+		percent = percent * DayNight::NIGHT_RESPAWN_PERCENT / 100;
+	}
+	return static_cast<uint32_t>(percent);
+}
+
+uint32_t Spawn::getInterval() const
+{
+	uint32_t newInterval = static_cast<uint32_t>(static_cast<uint64_t>(interval) * respawnPercent() / 100);
 	return normal_random(newInterval / 2, newInterval);
 }
 
@@ -271,7 +284,7 @@ void Spawn::checkSpawn(uint64_t generation)
 		}
 
 		spawnBlock_t& sb = it.second;
-		if (OTSYS_TIME() >= sb.lastSpawn + sb.interval) {
+		if (OTSYS_TIME() >= sb.lastSpawn + static_cast<int64_t>(sb.interval) * respawnPercent() / 100) {
 			if (findPlayer(sb.pos)) {
 				sb.lastSpawn = OTSYS_TIME();
 				continue;

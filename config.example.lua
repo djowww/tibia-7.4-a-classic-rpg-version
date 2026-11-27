@@ -36,7 +36,7 @@ replaceKickOnLogin = true
 maxPacketsPerSecond = 50
 autoStackCumulatives = true
 uhTrap = true
-moneyRate = 2
+moneyRate = 1
 
 -- Custom Configs
 blockLogin = false
@@ -44,9 +44,10 @@ blockLoginText = "Server launch: COMING SOON."
 
 deathLosePercent = 10
 
--- The later bank-backed rent path stays disabled until a documented pre-bank
--- collection policy is available. Never remove owners to enforce a guessed rule.
-houseRentPeriod = "never"
+-- Weekly rent is charged from the owner's bank at startup (daily restart) and
+-- costs a quarter of the monthly rent in houses.xml. After 7 unpaid warnings the
+-- house is freed and its items go to the owner's depot.
+houseRentPeriod = "weekly"
 onlyInvitedCanMoveHouseItems = true
 
 timeBetweenActions = 200

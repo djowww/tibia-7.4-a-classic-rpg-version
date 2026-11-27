@@ -2471,6 +2471,7 @@ void ProtocolGame::parseNewPing(NetworkMessage& msg)
 		return;
 	}
 
+	BotDetector::instance().onNewPing(player->getID(), localPing, fps);
 	addGameTask(msg, &Game::playerReceiveNewPing, player->getID(), localPing, fps);
 	g_dispatcher.addTask(createTask(std::bind(&ProtocolGame::sendNewPing, getThis(), pingId)));
 }

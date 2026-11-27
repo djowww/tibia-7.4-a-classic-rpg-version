@@ -384,14 +384,6 @@ function online()
   for name in pairs(bindings) do syncPanel(name) end
 end
 
-function getCheckedButtons(button)
-	if button:isChecked() then
-		return 1
-	else
-		return nil
-	end
-end
-
 function onMiniWindowClose()
   playerBarsWindow:open()
 end

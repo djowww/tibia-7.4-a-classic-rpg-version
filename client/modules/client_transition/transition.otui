@@ -1,0 +1,122 @@
+TransitionOverlay < UIWidget
+  anchors.fill: parent
+  background-color: #00000000
+  phantom: false
+  focusable: true
+  visible: false
+
+  UIWidget
+    id: curtain
+    anchors.fill: parent
+    background-color: #000000
+    phantom: true
+
+  UIWidget
+    id: loading
+    size: 320 180
+    anchors.centerIn: parent
+    phantom: true
+    visible: false
+
+    UICreature
+      id: hero
+      size: 64 64
+      anchors.top: parent.top
+      anchors.horizontalCenter: parent.horizontalCenter
+      old-scaling: true
+      outfit-center: true
+      animate: true
+      phantom: true
+
+    UILabel
+      id: name
+      anchors.top: hero.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 10
+      color: #e2bd55
+      text-auto-resize: true
+      background-color: alpha
+      phantom: true
+
+    UILabel
+      id: status
+      anchors.top: name.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 6
+      color: #8f8a7c
+      text-auto-resize: true
+      background-color: alpha
+      phantom: true
+
+    UIWidget
+      id: bar
+      size: 240 6
+      anchors.top: status.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 14
+      background-color: #16130f
+      border-width: 1
+      border-color: #8a7030
+      phantom: true
+
+      UIWidget
+        id: fill
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        margin: 1
+        width: 0
+        background-color: #e2bd55
+        phantom: true
+
+    UILabel
+      id: hint
+      anchors.top: bar.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 10
+      color: #5a564c
+      text: Esc to cancel
+      text-auto-resize: true
+      background-color: alpha
+      phantom: true
+
+  UIWidget
+    id: irisHole
+    anchors.top: parent.top
+    anchors.left: parent.left
+    image-source: /images/charselect/fx/iris
+    image-smooth: false
+    phantom: true
+    visible: false
+
+  UIWidget
+    id: irisTop
+    anchors.top: parent.top
+    anchors.left: parent.left
+    background-color: #000000
+    phantom: true
+    visible: false
+
+  UIWidget
+    id: irisBottom
+    anchors.top: parent.top
+    anchors.left: parent.left
+    background-color: #000000
+    phantom: true
+    visible: false
+
+  UIWidget
+    id: irisLeft
+    anchors.top: parent.top
+    anchors.left: parent.left
+    background-color: #000000
+    phantom: true
+    visible: false
+
+  UIWidget
+    id: irisRight
+    anchors.top: parent.top
+    anchors.left: parent.left
+    background-color: #000000
+    phantom: true
+    visible: false

@@ -51,17 +51,19 @@ foreach (['pt' => 'pt-BR', 'en' => 'en', 'es' => 'es', 'pl' => 'pl'] as $languag
 $fixture = sys_get_temp_dir() . '/project-home-test-' . bin2hex(random_bytes(6));
 mkdir($fixture, 0700);
 try {
-    foreach (['wiki.php', 'i18n.php', 'i18n-extra.php'] as $name) copy($site . '/' . $name, $fixture . '/' . $name);
+    foreach (['wiki.php', 'i18n.php', 'i18n-extra.php', 'visit-counter.php'] as $name) copy($site . '/' . $name, $fixture . '/' . $name);
     $updates = json_decode(file_get_contents($site . '/project-updates.json'), true, 512, JSON_THROW_ON_ERROR);
     $updates[0]['title'] = '<img src=x onerror=alert(1)>';
     $updates[0]['summary'] = '<script>alert(1)</script>';
     $updates[0]['changes'] = ['<b onclick="alert(1)">test</b>'];
     $updates[0]['url'] = 'javascript:alert(1)';
+    $updates[0]['groups'] = [['title' => '<i onmouseover="alert(2)">group</i>', 'changes' => ['<u onclick="alert(3)">item</u>']]];
     file_put_contents($fixture . '/project-updates.json', json_encode($updates, JSON_THROW_ON_ERROR));
     $html = renderProjectHome('pt', 'wiki.php', $fixture);
     checkHome(str_contains($html, '&lt;img src=x'), 'News titles must be escaped.');
     checkHome(!str_contains($html, '<script>') && !str_contains($html, '<b onclick='), 'News body markup was executed.');
     checkHome(!str_contains($html, 'href="javascript:'), 'Unsafe project source URL was rendered.');
+    checkHome(str_contains($html, '&lt;i onmouseover=') && !str_contains($html, '<u onclick='), 'News group text must be escaped.');
     echo 'PASS editorial text escaping and source URL restriction' . PHP_EOL;
 } finally {
     foreach (glob($fixture . '/*') as $file) unlink($file);

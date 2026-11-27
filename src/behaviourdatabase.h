@@ -332,6 +332,7 @@ class BehaviourDatabase
 		bool excludedRarityFromCount = false;
 		bool raritySaleFailed = false;
 		uint64_t pendingSaleMoney = 0;
+		uint64_t lastSalePaid = 0; // gold really paid by the last sale (dynamic price)
 
 		bool sendTrade(Player* player);
 		bool tradeOfferAvailable(const NpcTradeOffer& offer, Player* player);

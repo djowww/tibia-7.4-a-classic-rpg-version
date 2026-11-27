@@ -251,7 +251,24 @@ function canChangeFloorUp(pos)
   return toTile and toTile:isWalkable()
 end
 
+-- Com ping alto o proximo passo costuma ficar parado esperando a confirmacao do
+-- servidor (limite de pre-walk). Quando a confirmacao chega, tenta o passo
+-- pendente na hora, sem esperar a proxima repeticao da tecla (20-50 ms).
+local pendingWalkRetry = nil
+function retryPendingWalk()
+  if nextWalkDir == nil or pendingWalkRetry then
+    return
+  end
+  pendingWalkRetry = addEvent(function()
+    pendingWalkRetry = nil
+    if nextWalkDir ~= nil and lastManualWalk + 300 > g_clock.millis() then
+      walk(nextWalkDir, 0)
+    end
+  end, false)
+end
+
 function onPositionChange(player, newPos, oldPos)
+  retryPendingWalk()
 end
 
 function onWalk(player, newPos, oldPos)

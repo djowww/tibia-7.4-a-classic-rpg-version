@@ -1,6 +1,6 @@
 Module
   name: game_wiki
-  description: Game Wiki - bestiary with kill progress, items, hunting places and bosses
+  description: Game Wiki - bestiary with kill progress, items and hunting places
   author: bowt
   reloadable: true
   sandboxed: true

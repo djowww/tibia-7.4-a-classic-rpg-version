@@ -1,7 +1,7 @@
 -- Tile snapshots arrive directly after the native map update they describe.
 -- Bind immediately to actual Item objects; sprite IDs alone are not identity.
 local OPCODE, MAX_TILES, CHECK_MS = 129, 256, 150
-local MAX_BOLTS, MAX_ACTIVE_BOLTS, BOLT_PERIOD_MS, BOLT_BURST_MS = 24, 6, 4200, 600
+local MAX_HALOS, HALO_PERIOD_MS = 24, 3000
 local fallbackTints = {'#BDD3C3', '#B9CADD', '#CCBFDA', '#DED1AB', '#DBBAB5'}
 local tiles, tileCount, sequence = {}, 0, 0
 local checkEvent, helloEvent, ready, helloAttempts, lastSnapshotRequest
@@ -49,9 +49,9 @@ local function containsItem(tile, entry, position)
   return false
 end
 
-local function clearBolt(entry)
-  local widget, tile = entry.boltWidget, entry.boltTile
-  entry.boltWidget, entry.boltTile, entry.boltItem = nil, nil, nil
+local function clearHalo(entry)
+  local widget, tile = entry.haloWidget, entry.haloTile
+  entry.haloWidget, entry.haloTile, entry.haloItem = nil, nil, nil
   if not widget then return end
   if widget:isDestroyed() then
     if tile:getWidget() == widget then tile:setWidget(nil) end
@@ -62,8 +62,8 @@ local function clearBolt(entry)
   else widget:destroy() end
 end
 
-local function boltMark(tile, entry)
-  -- One bolt belongs to the topmost rare item, never a loot corpse marker.
+local function haloMark(tile, entry)
+  -- One halo belongs to the topmost rare item, never a loot corpse marker.
   local things = tile:getThings()
   -- Native ordinary items are ordered from the top of the stack downward.
   for index = 1, #things do
@@ -73,47 +73,40 @@ local function boltMark(tile, entry)
   end
 end
 
-local function updateBolts(candidates, now)
+local function updateHalos(candidates, now)
   local visuals = modules.game_rarityvisuals
   local selected, chosen = {}, {}
   table.sort(candidates, function(a, b) return a.key < b.key end)
   -- Rotate the bounded set once per cycle so dense scenes do not starve items.
   local count = #candidates
-  local offset = count > MAX_BOLTS and (math.floor(now / BOLT_PERIOD_MS) * MAX_BOLTS) % count or 0
-  for index = 1, math.min(count, MAX_BOLTS) do
+  local offset = count > MAX_HALOS and (math.floor(now / HALO_PERIOD_MS) * MAX_HALOS) % count or 0
+  for index = 1, math.min(count, MAX_HALOS) do
     local candidate = candidates[(offset + index - 1) % count + 1]
     selected[candidate.entry], chosen[#chosen + 1] = true, candidate
   end
   for _, entry in pairs(tiles) do
-    if not selected[entry] then clearBolt(entry) end
+    if not selected[entry] then clearHalo(entry) end
   end
-  local active = 0
-  local activeOffset = #chosen > 0 and (math.floor(now / BOLT_PERIOD_MS) * MAX_ACTIVE_BOLTS) % #chosen or 0
   for index = 1, #chosen do
-    local candidate = chosen[(activeOffset + index - 1) % #chosen + 1]
+    local candidate = chosen[index]
     local entry, tile, mark = candidate.entry, candidate.tile, candidate.mark
-    local widget = entry.boltWidget
-    if widget and (widget:isDestroyed() or entry.boltTile ~= tile
-        or entry.boltItem ~= mark.item or tile:getWidget() ~= widget) then
-      clearBolt(entry)
+    local widget = entry.haloWidget
+    if widget and (widget:isDestroyed() or entry.haloTile ~= tile
+        or entry.haloItem ~= mark.item or tile:getWidget() ~= widget) then
+      clearHalo(entry)
       widget = nil
     end
     if not widget and not tile:getWidget() then
-      widget = visuals.createGroundBolt()
+      widget = visuals.createGroundHalo()
       if widget then
-        entry.boltWidget, entry.boltTile, entry.boltItem = widget, tile, mark.item
+        entry.haloWidget, entry.haloTile, entry.haloItem = widget, tile, mark.item
         tile:setWidget(widget)
       end
     end
     if widget then
-      local phase = (now + mark.seed) % BOLT_PERIOD_MS
-      local opacity = 0
-      if phase < BOLT_BURST_MS and active < MAX_ACTIVE_BOLTS then
-        opacity = math.sin(math.pi * phase / BOLT_BURST_MS) * 0.75
-        if opacity > 0 then active = active + 1 end
-      end
-      -- Tile draws its root directly; opacity also suppresses the quiet phase.
-      visuals.paintGroundBolt(widget, mark.tier, now, mark.seed, opacity)
+      -- A slow, steady breath; the halo never disappears completely.
+      local wave = (1 - math.cos((now + mark.seed) % HALO_PERIOD_MS / HALO_PERIOD_MS * math.pi * 2)) * 0.5
+      visuals.paintGroundHalo(widget, mark.tier, 0.45 + wave * 0.30)
     end
   end
 end
@@ -128,7 +121,7 @@ local function removeTile(key)
   local entry = tiles[key]
   if not entry then return end
   tiles[key], tileCount = nil, tileCount - 1
-  clearBolt(entry)
+  clearHalo(entry)
   for _, item in ipairs(entry.items) do clearMark(item) end
 end
 
@@ -172,7 +165,7 @@ function updateMarks()
   local missingNativeItem = false
   local candidates = {}
   local visuals = modules.game_rarityvisuals
-  local boltsEnabled = visuals and visuals.createGroundBolt and visuals.paintGroundBolt
+  local halosEnabled = visuals and visuals.createGroundHalo and visuals.paintGroundHalo
   local player = g_game.getLocalPlayer and g_game.getLocalPlayer()
   local playerPosition = player and player:getPosition()
   for key, entry in pairs(tiles) do
@@ -188,12 +181,12 @@ function updateMarks()
       end
     end
     if #entry.items == 0 then removeTile(key)
-    elseif boltsEnabled and (not playerPosition or playerPosition.z == entry.position.z) then
-      local mark = boltMark(tile, entry)
+    elseif halosEnabled and (not playerPosition or playerPosition.z == entry.position.z) then
+      local mark = haloMark(tile, entry)
       if mark then candidates[#candidates + 1] = {entry=entry, tile=tile, mark=mark, key=key} end
     end
   end
-  updateBolts(candidates, now)
+  updateHalos(candidates, now)
   if missingNativeItem then requestSnapshot() end
   -- One timer for the whole viewport, regardless of the number of rare items.
   if tileCount > 0 then checkEvent = scheduleEvent(updateMarks, CHECK_MS) end

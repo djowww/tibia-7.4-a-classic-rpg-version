@@ -191,6 +191,7 @@ function Player:onGainExperience(source, exp, rawExp)
  end
  -- Online bonus and completed bestiaries add their percentage to monster kills.
  if source and not source:isPlayer() then
+  exp = self:applyHuntRules(exp, source)
   exp = exp + self:applyOnlineStayBonus(exp, ONLINE_STAY_BONUS_XP_REMAINDER_STORAGE) + self:applyBestiaryExperienceBonus(exp)
  end
  self:addAnalyzerExp(exp, math.max(0, getExpForLevel(self:getLevel() + 1) - self:getExperience() - exp))

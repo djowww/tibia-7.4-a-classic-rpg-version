@@ -56,6 +56,8 @@
 	<talkaction words="!share" script="experienceshare.lua" permission="public" />
 	<talkaction words="!uptime" script="uptime.lua" permission="public" />
 	<talkaction words="!time" script="worldtime.lua" permission="public" />
+	<talkaction words="!bounty" script="custom/bounty.lua" permission="public" />
+	<talkaction words="!fatigue" script="custom/fatigue.lua" permission="public" />
 	<talkaction words="!serverinfo" script="serverinfo.lua" permission="public" />
 	<talkaction words="!online" script="online.lua" permission="access" usage="!online" help="Lists the players online." />
 	<talkaction words="!spells" separator=" " script="emote.lua" permission="public" />

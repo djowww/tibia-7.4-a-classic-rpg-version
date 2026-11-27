@@ -1,0 +1,11 @@
+Module
+  name: game_botinspect
+  description: Inspect bot window for GM and GOD (right click on a player)
+  author: Antigas
+  sandboxed: true
+  autoload: true
+  autoload-priority: 1007
+  dependencies: [ game_interface ]
+  scripts: [ botinspect ]
+  @onLoad: init()
+  @onUnload: terminate()

@@ -43,6 +43,18 @@ def package(source, output):
     files['data/minimap.otmm'] = root / 'client/data/minimap.otmm'
     # Marks every player starts with, built by tools/generate-minimap-markers.py.
     files['data/minimap-markers.txt'] = root / 'client/data/minimap-markers.txt'
+    # Character screen sceneries built by tools/generate-charselect-scenes.py.
+    for p in sorted((root / 'client/data/images/charselect').glob('*.png')):
+        files['data/images/charselect/' + p.name] = p
+    # Loading screen pictures built by tools/generate-loading-images.py.
+    for p in sorted((root / 'client/data/images/charselect/fx').glob('*.png')):
+        files['data/images/charselect/fx/' + p.name] = p
+    # Achievements trophy hall built by tools/generate-achievement-hall.py.
+    for p in sorted((root / 'client/data/images/achievements').glob('*.png')):
+        files['data/images/achievements/' + p.name] = p
+    # Shop counter of the NPC trade window built by tools/generate-npcshop-counter.py.
+    for p in sorted((root / 'client/data/images/npcshop').glob('*.png')):
+        files['data/images/npcshop/' + p.name] = p
     files['NOTICE.md'] = root / 'NOTICE.md'
     # Root config.otml, remembered passwords, logs, updater and production launcher
     # are deliberately absent. The starter installs a fresh local public key.

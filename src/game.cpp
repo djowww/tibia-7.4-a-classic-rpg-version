@@ -3696,6 +3696,14 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 		}
 		damage.value = std::abs(damage.value);
 
+		// Noite de caca: monstros selvagens batem mais forte em jogadores.
+		if (attacker && attacker->getMonster() && target->getPlayer() && isHuntNight()) {
+			const Creature* master = attacker->getMaster();
+			if (!master || !master->getPlayer()) {
+				damage.value = static_cast<int32_t>(static_cast<int64_t>(damage.value) * DayNight::NIGHT_DAMAGE_PERCENT / 100);
+			}
+		}
+
 		int32_t healthChange = damage.value;
 		if (healthChange == 0) {
 			return true;

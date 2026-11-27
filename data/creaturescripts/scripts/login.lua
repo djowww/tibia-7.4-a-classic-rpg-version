@@ -84,6 +84,7 @@ Unmute Player: /unmute nick.
 	
 	-- Events
 	player:registerEvent("PlayerDeath")
+	player:registerEvent("Bounty")
 	player:registerEvent("Shop")
 	player:registerEvent("Market")
 	player:registerEvent("Spell")
@@ -94,6 +95,9 @@ Unmute Player: /unmute nick.
 	player:registerEvent("RegenStatus")
 	player:registerEvent("GhostWalk")
 	player:registerEvent("GmCommands")
+	player:registerEvent("BotInspect")
+	player:registerEvent("Guardian")
+	Guardian.onLogin(player)
 	player:registerEvent("BestiaryKill")
 	player:registerEvent("AchievementsKill")
 	player:registerEvent("AchievementsDeath")

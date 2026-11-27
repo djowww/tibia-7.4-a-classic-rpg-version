@@ -146,4 +146,101 @@ finally
     if (Directory.Exists(obsoleteRoot)) Directory.Delete(obsoleteRoot, true);
 }
 
-Console.WriteLine("Launcher bounded I/O, staging URL and snapshot overlay regression tests passed");
+// Guardian: signed client file list, bot tool names, server address and news headlines.
+var guardianRoot = Path.Combine(Path.GetTempPath(), "antigas-guardian-" + Guid.NewGuid().ToString("N"));
+try
+{
+    var client = Path.Combine(guardianRoot, "client");
+    var settings = Path.Combine(guardianRoot, "settings");
+    Directory.CreateDirectory(Path.Combine(client, "modules", "game_x"));
+    Directory.CreateDirectory(settings);
+    File.WriteAllText(Path.Combine(client, "init.lua"),
+        "g_app.setName(\"Tibia 7.4 Test\")\nAPP_VERSION = 90\nServers = {\n--  Old = \"old.example.org:7171:772\",\n Main = \"play.example.org:7172:772\"\n}\n");
+    File.WriteAllText(Path.Combine(client, "modules", "game_x", "x.lua"), "print('x')");
+    File.WriteAllText(Path.Combine(client, "Antigas_gl.exe"), "INERT TEST FILE; NEVER EXECUTE");
+    File.WriteAllText(Path.Combine(settings, "config.otml"), "settings");
+    using var guardianKey = System.Security.Cryptography.ECDsa.Create(System.Security.Cryptography.ECCurve.NamedCurves.nistP256);
+    var guardianPublic = Convert.ToBase64String(guardianKey.ExportSubjectPublicKeyInfo());
+    void SignFiles(int version, System.Security.Cryptography.ECDsa key)
+    {
+        var entries = Directory.EnumerateFiles(client, "*", SearchOption.AllDirectories)
+            .Select(path => (Path: path, Relative: Path.GetRelativePath(client, path).Replace(Path.DirectorySeparatorChar, '/')))
+            .Where(file => !ClientIntegrity.IsUnlisted(file.Relative))
+            .Select(file => new ClientFileEntry
+            {
+                Path = file.Relative, Size = new FileInfo(file.Path).Length,
+                Sha256 = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(file.Path))).ToLowerInvariant(),
+            }).ToList();
+        var signature = key.SignData(System.Text.Encoding.UTF8.GetBytes(ClientIntegrity.Canonical(version, entries)),
+            System.Security.Cryptography.HashAlgorithmName.SHA256, System.Security.Cryptography.DSASignatureFormat.IeeeP1363FixedFieldConcatenation);
+        File.WriteAllText(Path.Combine(client, ClientIntegrity.ManifestName), System.Text.Json.JsonSerializer.Serialize(new ClientFilesManifest
+        {
+            Version = version, SignatureAlgorithm = "ECDSA-P256-SHA256-P1363", Files = entries, Signature = Convert.ToBase64String(signature),
+        }));
+    }
+    IntegrityResult Check() => ClientIntegrity.Verify(client, 90, settings, null, CancellationToken.None, guardianPublic);
+    void Expect(IntegrityState state, string? problem, string scenario)
+    {
+        var result = Check();
+        if (result.State != state || (problem is not null && !result.Problems.Contains(problem)))
+            throw new InvalidOperationException($"Guardian file check, {scenario}: got {result.State} [{string.Join(", ", result.Problems)}].");
+    }
+
+    Expect(IntegrityState.NoManifest, null, "install without a file list");
+    SignFiles(90, guardianKey);
+    Expect(IntegrityState.Verified, null, "untouched client");
+    if (Check().FileCount != 3) throw new InvalidOperationException("The signed file list should name the three shipped files.");
+
+    // Files the player or the launcher creates do not count.
+    Directory.CreateDirectory(Path.Combine(client, "userdata"));
+    File.WriteAllText(Path.Combine(client, "userdata", "notes.lua"), "-- mine");
+    File.WriteAllText(Path.Combine(client, "notes.txt"), "mine");
+    File.WriteAllText(Path.Combine(client, ClientIntegrity.SessionFileName), new string('a', 32));
+    File.WriteAllText(Path.Combine(client, "AntigasLauncher.exe"), "INERT TEST FILE; NEVER EXECUTE");
+    Expect(IntegrityState.Verified, null, "player and launcher files");
+
+    File.WriteAllText(Path.Combine(client, "modules", "game_x", "x.lua"), "print('y')");
+    Expect(IntegrityState.Modified, "modules/game_x/x.lua", "edited script of the same size");
+    File.WriteAllText(Path.Combine(client, "modules", "game_x", "x.lua"), "print('x')");
+
+    Directory.CreateDirectory(Path.Combine(client, "modules", "game_bot"));
+    File.WriteAllText(Path.Combine(client, "modules", "game_bot", "bot.lua"), "-- bot");
+    Expect(IntegrityState.Modified, "+modules/game_bot/bot.lua", "script added to the client");
+    Directory.Delete(Path.Combine(client, "modules", "game_bot"), true);
+
+    Directory.CreateDirectory(Path.Combine(settings, "modules", "game_x"));
+    File.WriteAllText(Path.Combine(settings, "modules", "game_x", "x.lua"), "-- override");
+    Expect(IntegrityState.Modified, "+settings/modules/game_x/x.lua", "script overriding from the settings folder");
+    Directory.Delete(Path.Combine(settings, "modules"), true);
+    Expect(IntegrityState.Verified, null, "client restored");
+
+    if (ClientIntegrity.Verify(client, 91, settings, null, CancellationToken.None, guardianPublic).State != IntegrityState.Modified)
+        throw new InvalidOperationException("A file list of another client version was accepted.");
+    using (var otherKey = System.Security.Cryptography.ECDsa.Create(System.Security.Cryptography.ECCurve.NamedCurves.nistP256))
+    {
+        SignFiles(90, otherKey);
+        Expect(IntegrityState.Modified, ClientIntegrity.ManifestName + " (signature)", "file list signed with another key");
+    }
+
+    var endpoint = GuardianClient.ReadEndpoint(client);
+    if (endpoint is not { Host: "play.example.org", Port: 7172 }) throw new InvalidOperationException("The launcher read the wrong game server from init.lua.");
+    if (GuardianClient.ReadClientName(client) != "Tibia 7.4 Test") throw new InvalidOperationException("The launcher read the wrong client name from init.lua.");
+
+    foreach (var name in new[] { "ElfBot NG", "BBot", "WindBot_x64", "cheatengine-x86_64" })
+        if (ProcessScanner.BotName(name) is null) throw new InvalidOperationException("A known bot was not recognized: " + name);
+    foreach (var name in new[] { "AutoHotkeyU64", "TinyTask" })
+        if (ProcessScanner.MacroName(name) is null || ProcessScanner.BotName(name) is not null) throw new InvalidOperationException("A macro tool was not recognized as such: " + name);
+    foreach (var name in new[] { "chrome", "Discord", "Rabbot", "Antigas_gl", "explorer", "ibottle" })
+        if (ProcessScanner.BotName(name) is not null || ProcessScanner.MacroName(name) is not null) throw new InvalidOperationException("An ordinary program was flagged: " + name);
+
+    var headlines = NewsService.Parse(System.Text.Encoding.UTF8.GetBytes(
+        "[{\"id\":\"a\",\"date\":\"2026-11-27\",\"title\":\"Day and night.\",\"changes\":[]},{\"date\":\"bad\",\"title\":\"  \"},{\"date\":\"2026-11-24\",\"title\":\"Game Wiki\"}]"));
+    if (headlines.Count != 2 || headlines[0] is not { Date: "27 November 2026", Title: "Day and night" } || headlines[1].Title != "Game Wiki")
+        throw new InvalidOperationException("The news headlines were not read as expected.");
+}
+finally
+{
+    if (Directory.Exists(guardianRoot)) Directory.Delete(guardianRoot, true);
+}
+
+Console.WriteLine("Launcher bounded I/O, staging URL, snapshot overlay and Guardian regression tests passed");

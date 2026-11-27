@@ -142,6 +142,12 @@ void ServicePort::onAccept(Connection_ptr connection, const boost::system::error
 			return;
 		}
 
+		// Small game packets (steps, turns, attacks) must leave at once instead of
+		// waiting for Nagle to merge them; set it on the accepted socket itself
+		// rather than relying on the listening socket's option being inherited.
+		boost::system::error_code noDelayError;
+		connection->getSocket().set_option(boost::asio::ip::tcp::no_delay(true), noDelayError);
+
 		auto remote_ip = connection->getIP();
 		// Do not consume per-IP limiter state for a socket rejected by the active-connection caps.
 		if (remote_ip != 0 && ConnectionManager::getInstance().tryAdmitConnection(connection, remote_ip) &&

@@ -1,32 +1,18 @@
 NpcTradeTab < Button
-  size: 120 22
+  size: 96 20
   color: #C3C3BC
 
   $on:
     image-clip: 0 46 22 23
-    color: #F2C94C
-
-NpcTradeSmallButton < Button
-  height: 20
+    color: #FFFFFF
 
 NpcTradeCell < UIWidget
-  background-color: #2f2d29
-  border: 1 #3a3732
   focusable: false
-
-  $hover:
-    border: 1 #8a857b
-
-  $on:
-    background-color: #5a4f33
-    border: 1 #d1a43a
 
   Item
     id: item
     anchors.top: parent.top
     anchors.horizontalCenter: parent.horizontalCenter
-    margin-top: 5
-    size: 34 34
     virtual: true
     phantom: true
 
@@ -36,268 +22,149 @@ NpcTradeCell < UIWidget
     anchors.bottom: item.bottom
     margin-right: 2
     margin-bottom: 1
+    font: verdana-11px-rounded
     text-auto-resize: true
-    color: #ffffff
-    phantom: true
-
-  Label
-    id: name
-    anchors.top: item.bottom
-    anchors.left: parent.left
-    anchors.right: parent.right
-    margin: 3 2 0 2
-    height: 26
-    text-wrap: true
-    text-align: center
-    color: #E8E4DA
+    color: #FFFFFF
     phantom: true
 
   Label
     id: price
-    anchors.bottom: parent.bottom
+    anchors.top: item.bottom
     anchors.left: parent.left
     anchors.right: parent.right
-    margin-bottom: 4
+    margin-top: 1
     height: 14
     text-align: center
-    color: #F2C94C
+    color: #E2BD55
     phantom: true
 
 MainWindow
   id: npcShopWindow
   text: Trade
-  size: 690 470
+  size: 546 503
   @onEscape: modules.game_npcshop.hide()
 
-  NpcTradeTab
-    id: buyTab
+  UIWidget
+    id: scene
     anchors.top: parent.top
     anchors.left: parent.left
-    text: Buy
-    @onClick: modules.game_npcshop.setMode('buy')
+    size: 512 208
+    image-source: /images/npcshop/counter
+    border: 1 #000000
 
-  NpcTradeTab
-    id: sellTab
-    anchors.top: parent.top
-    anchors.left: buyTab.right
-    margin-left: 4
-    text: Sell
-    @onClick: modules.game_npcshop.setMode('sell')
-
-  FlatPanel
-    id: detail
-    anchors.top: buyTab.bottom
-    anchors.right: parent.right
-    anchors.bottom: money.top
-    margin-top: 6
-    margin-bottom: 8
-    width: 232
-    padding: 10
-
-    Item
-      id: icon
+    UICreature
+      id: npc
       anchors.top: parent.top
       anchors.left: parent.left
+      margin-top: 56
+      margin-left: 208
+      size: 64 64
+      phantom: true
+
+    UIItem
+      id: item
+      anchors.top: parent.top
+      anchors.left: parent.left
+      margin-top: 108
+      margin-left: 208
+      size: 64 64
+      virtual: true
+      phantom: true
+
+    UIItem
+      id: coins
+      anchors.top: parent.top
+      anchors.left: parent.left
+      margin-top: 110
+      margin-left: 286
       size: 64 64
       virtual: true
       phantom: true
 
     Label
-      id: name
-      anchors.top: parent.top
-      anchors.left: icon.right
-      anchors.right: parent.right
-      margin-left: 10
-      height: 16
-      color: #FFFFFF
-      text-align: left
-
-    Label
-      id: description
-      anchors.top: name.bottom
-      anchors.left: name.left
-      anchors.right: parent.right
-      margin-top: 4
-      height: 44
-      text-wrap: true
-      text-align: topLeft
-      color: #8FE08F
-
-    Label
-      id: priceLabel
-      anchors.top: icon.bottom
-      anchors.left: parent.left
-      margin-top: 12
-      width: 100
-      text: Price each:
-      color: #D6D2C8
-
-    Label
-      id: priceValue
-      anchors.top: priceLabel.top
-      anchors.left: priceLabel.right
-      anchors.right: parent.right
-      text-align: right
-      color: #F2C94C
-
-    Label
-      id: weightLabel
-      anchors.top: priceLabel.bottom
-      anchors.left: parent.left
-      margin-top: 5
-      width: 100
-      text: Weight each:
-      color: #D6D2C8
-
-    Label
-      id: weightValue
-      anchors.top: weightLabel.top
-      anchors.left: weightLabel.right
-      anchors.right: parent.right
-      text-align: right
-      color: #E0DCD2
-
-    Label
-      id: haveLabel
-      anchors.top: weightLabel.bottom
-      anchors.left: parent.left
-      margin-top: 5
-      width: 100
-      text: You have:
-      color: #D6D2C8
-
-    Label
-      id: haveValue
-      anchors.top: haveLabel.top
-      anchors.left: haveLabel.right
-      anchors.right: parent.right
-      text-align: right
-      color: #E0DCD2
-
-    Label
-      id: amountLabel
-      anchors.top: haveLabel.bottom
-      anchors.left: parent.left
-      margin-top: 14
-      width: 100
-      text: Amount:
-      color: #D6D2C8
-
-    NpcTradeSmallButton
-      id: minus
-      anchors.top: amountLabel.bottom
-      anchors.left: parent.left
-      margin-top: 5
-      width: 28
-      text: -
-      @onClick: modules.game_npcshop.changeAmount(-1)
-
-    NpcTradeSmallButton
-      id: plus
-      anchors.top: minus.top
-      anchors.right: parent.right
-      width: 28
-      text: +
-      @onClick: modules.game_npcshop.changeAmount(1)
-
-    Label
-      id: amount
-      anchors.top: minus.top
-      anchors.bottom: minus.bottom
-      anchors.left: minus.right
-      anchors.right: plus.left
-      margin-left: 4
-      margin-right: 4
-      text: 1
-      text-align: center
-      color: #FFFFFF
-      background-color: #24221f
-      border: 1 #151412
-
-    NpcTradeSmallButton
-      id: one
-      anchors.top: minus.bottom
-      anchors.left: parent.left
-      margin-top: 5
-      width: 66
-      text: 1
-      @onClick: modules.game_npcshop.setAmount(1)
-
-    NpcTradeSmallButton
-      id: ten
-      anchors.top: one.top
-      anchors.left: one.right
-      margin-left: 7
-      width: 66
-      text: 10
-      @onClick: modules.game_npcshop.setAmount(10)
-
-    NpcTradeSmallButton
-      id: max
-      anchors.top: one.top
-      anchors.left: ten.right
-      anchors.right: parent.right
-      margin-left: 7
-      text: Max
-      @onClick: modules.game_npcshop.setAmount(100)
-
-    Button
-      id: action
-      anchors.bottom: parent.bottom
-      anchors.left: parent.left
-      anchors.right: parent.right
-      height: 26
-      text: Buy
-      @onClick: modules.game_npcshop.trade()
-
-    Label
-      id: totalValue
-      anchors.bottom: action.top
-      anchors.right: parent.right
-      margin-bottom: 8
-      width: 130
-      text-align: right
-      color: #F2C94C
-
-    Label
-      id: totalLabel
-      anchors.bottom: totalValue.bottom
-      anchors.left: parent.left
-      anchors.right: totalValue.left
-      text: Total:
-      color: #FFFFFF
-
-    HorizontalSeparator
-      id: totalSeparator
-      anchors.bottom: totalValue.top
-      anchors.left: parent.left
-      anchors.right: parent.right
-      margin-bottom: 6
+      id: total
+      anchors.verticalCenter: coins.verticalCenter
+      anchors.left: coins.right
+      margin-left: 2
+      font: verdana-11px-rounded
+      text-auto-resize: true
+      color: #E2BD55
       phantom: true
+
+    Label
+      id: say
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin: 6 20 0 20
+      height: 42
+      font: verdana-11px-rounded
+      text-wrap: true
+      text-align: center
+      color: #F7F700
+      phantom: true
+
+  NpcTradeTab
+    id: buyTab
+    anchors.top: scene.bottom
+    anchors.left: parent.left
+    margin-top: 6
+    text: Buy
+    @onClick: modules.game_npcshop.setMode('buy')
+
+  NpcTradeTab
+    id: sellTab
+    anchors.top: buyTab.top
+    anchors.left: buyTab.right
+    margin-left: 2
+    text: Sell
+    @onClick: modules.game_npcshop.setMode('sell')
+
+  Label
+    id: capacity
+    anchors.verticalCenter: buyTab.verticalCenter
+    anchors.right: parent.right
+    text-auto-resize: true
+    color: #DDD8C6
+
+  Label
+    id: money
+    anchors.verticalCenter: buyTab.verticalCenter
+    anchors.right: capacity.left
+    margin-right: 12
+    text-auto-resize: true
+    color: #E2BD55
+
+  UIItem
+    id: moneyIcon
+    anchors.verticalCenter: buyTab.verticalCenter
+    anchors.right: money.left
+    margin-right: 2
+    size: 32 32
+    virtual: true
+    phantom: true
 
   VerticalScrollBar
     id: gridScroll
-    anchors.top: detail.top
-    anchors.bottom: detail.bottom
-    anchors.right: detail.left
-    margin-right: 8
+    anchors.top: buyTab.bottom
+    anchors.right: parent.right
+    margin-top: 6
+    height: 159
     pixels-scroll: true
-    step: 44
+    step: 53
 
   ScrollablePanel
     id: grid
-    anchors.top: detail.top
-    anchors.bottom: detail.bottom
+    anchors.top: gridScroll.top
+    anchors.bottom: gridScroll.bottom
     anchors.left: parent.left
-    anchors.right: gridScroll.left
-    margin-right: 4
+    width: 500
     vertical-scrollbar: gridScroll
     layout:
       type: grid
-      align-center: false
-      cell-size: 78 86
-      cell-spacing: 4
-      num-columns: 5
+      cell-size: 50 53
+      cell-spacing: 0
+      num-columns: 10
 
   Label
     id: emptyState
@@ -306,52 +173,66 @@ MainWindow
     color: #C4C0B6
     phantom: true
 
+  Label
+    id: note
+    anchors.top: grid.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 4
+    height: 14
+    text-align: center
+    color: #00EB00
+
+  HorizontalSeparator
+    id: separator
+    anchors.top: note.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 6
+
   Button
     id: close
-    anchors.bottom: parent.bottom
+    anchors.top: separator.bottom
     anchors.right: parent.right
-    width: 80
+    margin-top: 6
+    width: 64
     text: Close
     @onClick: modules.game_npcshop.hide()
 
   Button
     id: sellAll
-    anchors.bottom: parent.bottom
+    anchors.top: close.top
     anchors.right: close.left
-    margin-right: 6
-    width: 80
+    margin-right: 4
+    width: 64
     text: Sell all
     visible: false
     @onClick: modules.game_npcshop.sellAll()
 
-  UIItem
-    id: moneyIcon
+  Button
+    id: action
+    anchors.top: close.top
+    anchors.right: close.left
+    margin-right: 4
+    width: 64
+    text: Buy
+    @onClick: modules.game_npcshop.trade()
+
+  Label
+    id: amount
+    anchors.verticalCenter: close.verticalCenter
+    anchors.right: action.left
+    margin-right: 10
+    width: 26
+    text-align: right
+    color: #FFFFFF
+
+  HorizontalScrollBar
+    id: amountBar
     anchors.verticalCenter: close.verticalCenter
     anchors.left: parent.left
-    size: 32 32
-    virtual: true
-    phantom: true
-
-  Label
-    id: money
-    anchors.verticalCenter: close.verticalCenter
-    anchors.left: moneyIcon.right
-    margin-left: 4
-    width: 110
-    color: #F2C94C
-
-  Label
-    id: capacity
-    anchors.verticalCenter: close.verticalCenter
-    anchors.left: money.right
-    width: 145
-    color: #E0DCD2
-
-  Label
-    id: note
-    anchors.verticalCenter: close.verticalCenter
-    anchors.left: capacity.right
-    anchors.right: sellAll.left
-    margin-right: 10
-    text-align: right
-    color: #FFA3A3
+    anchors.right: amount.left
+    margin-right: 4
+    step: 1
+    minimum: 1
+    maximum: 1

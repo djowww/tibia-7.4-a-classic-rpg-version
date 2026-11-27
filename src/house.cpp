@@ -603,7 +603,11 @@ void Houses::payHouses(RentPeriod_t rentPeriod) const
 			continue;
 		}
 
-		const uint32_t rent = house->getRent();
+		// O rent do houses.xml e mensal (como no Tibia); no aluguel semanal cobra um quarto.
+		uint32_t rent = house->getRent();
+		if (rentPeriod == RENTPERIOD_WEEKLY && rent > 0) {
+			rent = std::max<uint32_t>(1, rent / 4);
+		}
 		if (rent == 0 || house->getPaidUntil() > currentTime) {
 			continue;
 		}
@@ -643,6 +647,9 @@ void Houses::payHouses(RentPeriod_t rentPeriod) const
 			}
 
 			house->setPaidUntil(paidUntil);
+			// Pagou: zera os avisos. Sem isso, faltas antigas somavam com as novas
+			// e a casa era perdida antes de 7 faltas seguidas.
+			house->setPayRentWarnings(0);
 		} else {
 			if (house->getPayRentWarnings() < 7) {
 				int32_t daysLeft = 7 - house->getPayRentWarnings();
@@ -672,10 +679,13 @@ void Houses::payHouses(RentPeriod_t rentPeriod) const
 				}
 
 				std::ostringstream ss;
-				ss << "Warning! \nThe " << period << " rent of " << house->getRent() << " gold for your house \"" << house->getName() << "\" is payable. Have it within " << daysLeft << " days or you will lose this house.";
+				ss << "Warning! \nThe " << period << " rent of " << rent << " gold for your house \"" << house->getName() << "\" is payable. Have it within " << daysLeft << " days or you will lose this house.";
 				letter->setText(ss.str());
 				g_game.internalAddItem(player.getDepotLocker(house->getTownId(), true), letter, INDEX_WHEREEVER, FLAG_NOLIMIT);
 				house->setPayRentWarnings(house->getPayRentWarnings() + 1);
+				// Um aviso por dia: sem isso cada restart extra (queda, deploy) contava
+				// como mais um dia de atraso. 23 h para o restart diario seguinte cobrar.
+				house->setPaidUntil(currentTime + 23 * 60 * 60);
 			} else {
 				house->setOwner(0, true, &player);
 			}

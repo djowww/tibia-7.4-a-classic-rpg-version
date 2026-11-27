@@ -8,14 +8,15 @@ internal sealed class UpdateApplyForm : Form
 {
     private readonly string _package, _manifestPath, _stage, _root;
     private readonly int _version, _parentPid;
+    private readonly bool _repair;
     private readonly Label _status = new(), _detail = new();
     private readonly ClassicProgressBar _progress = new();
     private readonly Button _playOld = new ClassicButton(true), _close = new ClassicButton();
     private bool _updateInProgress = true;
 
-    public UpdateApplyForm(string package, string manifestPath, string stage, string root, int version, int parentPid)
+    public UpdateApplyForm(string package, string manifestPath, string stage, string root, int version, int parentPid, bool repair = false)
     {
-        _package = package; _manifestPath = manifestPath; _stage = stage; _root = root; _version = version; _parentPid = parentPid;
+        _package = package; _manifestPath = manifestPath; _stage = stage; _root = root; _version = version; _parentPid = parentPid; _repair = repair;
         Text = "Antigas 7.4 — Atualização"; StartPosition = FormStartPosition.CenterScreen;
         MaximizeBox = false;
         _status.Text = "Aguardando o cliente fechar para trocar os arquivos…";
@@ -46,7 +47,8 @@ internal sealed class UpdateApplyForm : Form
             ClientPackage.ValidateStagedPackage(_package, _stage, _version, requireLauncher: true);
             _status.Text = "Finalizando o cliente anterior…";
             await WaitForParentAsync(_parentPid);
-            if (ClientPackage.ReadInstalledVersion(_root) >= _version)
+            var installed = ClientPackage.ReadInstalledVersion(_root);
+            if (_repair ? installed > _version : installed >= _version)
                 throw new InvalidOperationException("A versão instalada mudou; a atualização foi cancelada.");
             _status.Text = $"Instalando cliente v{_version}…";
             await Task.Run(() => ClientPackage.ApplyStagedUpdate(_stage, _root, _version, new Progress<int>(_ => { })));

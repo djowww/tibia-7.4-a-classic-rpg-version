@@ -242,7 +242,10 @@ check('retired achievement reward preserves qualification, skills and bonuses',f
  local entries={}
  subject.sendExtendedOpcode=function(_,_,payload) for _,entry in ipairs(json.decode(payload).entries) do entries[entry.id]=entry end end
  assert(AntigasAchievements.sendProgress(subject))
- assert(entries.level_1.ready==false and entries.level_1.reward=='Item reward retired','catalog must not advertise an unavailable claim')
+ assert(entries.level_1.ready==false and entries.level_1.reward=='Rank progress','catalog must not advertise an unavailable claim')
+ assert(entries.level_1.completed and entries.level_5.completed and entries.skill_2_5.completed and entries.skill_7_5.completed,
+  'a retired reward cannot keep a reached milestone out of the rank')
+ assert(entries.level_5.progress==200 and entries.skill_2_5.progress==120)
  assert(saved[17821]==2 and saved[17804]==7,'progress reads must preserve historical qualification and bonuses')
 end)
 check('retired conjure target cannot consume a classic reagent or mana',function()

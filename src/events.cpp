@@ -58,7 +58,6 @@ void Events::clear()
 	playerOnLoseExperience = -1;
 	playerOnGainSkillTries = -1;
 	playerOnReportBug = -1;
-	playerOnReportRuleViolation = -1;
 	playerOnUseItem = -1;
 
 }

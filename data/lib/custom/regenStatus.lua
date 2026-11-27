@@ -1,6 +1,6 @@
--- Food and water time left, plus where health and mana regeneration come from,
+-- Food time left, plus where health and mana regeneration come from,
 -- shown in the client's Skills window (opcode 131).
-RegenStatus = {OPCODE = 131, WATER_SUBID = 17870, SYNC_INTERVAL = 5, WATER_MANA_SECONDS = 10}
+RegenStatus = {OPCODE = 131, SYNC_INTERVAL = 5}
 
 local function secondsLeft(condition)
 	if not condition then
@@ -26,7 +26,6 @@ end
 function RegenStatus.sources(player)
 	local status = {
 		food = {hp = {0, 0}, mana = {0, 0}},
-		water = {mana = {1, RegenStatus.WATER_MANA_SECONDS}},
 		chests = {hp = {0, 0}, mana = {0, 0}},
 	}
 	local vocation = regenVocation(player)
@@ -49,7 +48,6 @@ function RegenStatus.send(player)
 		return
 	end
 	local food = secondsLeft(player:getCondition(CONDITION_REGENERATION, CONDITIONID_DEFAULT))
-	local water = secondsLeft(player:getCondition(CONDITION_REGENERATION, CONDITIONID_COMBAT, RegenStatus.WATER_SUBID))
-	player:sendExtendedOpcode(RegenStatus.OPCODE, json.encode({action = 'status', food = food, water = water,
+	player:sendExtendedOpcode(RegenStatus.OPCODE, json.encode({action = 'status', food = food,
 		regen = RegenStatus.sources(player)}))
 end

@@ -27,7 +27,7 @@ maxPlayers = 2000
 -- 0 selects maxPlayers + 256 (or 4096 when maxPlayers is unlimited).
 maxConnections = 0
 maxConnectionsPerIP = 128
-motd = "Local test server. Account: 2 / local123. Dev (GOD): 1 / 1"
+motd = "Local test server. Account: 2 / local123. Gamemaster on Antigas (GOD): 1 / 1"
 onePlayerOnlinePerAccount = true
 allowClones = false
 serverName = "Tibia 7.4 - Local"
@@ -36,7 +36,7 @@ replaceKickOnLogin = true
 maxPacketsPerSecond = 50
 autoStackCumulatives = true
 uhTrap = true
-moneyRate = 2
+moneyRate = 1
 
 -- Custom Configs
 blockLogin = false
@@ -44,9 +44,10 @@ blockLoginText = "Server launch: COMING SOON."
 
 deathLosePercent = 10
 
--- The later bank-backed rent path stays disabled until a documented pre-bank
--- collection policy is available. Never remove owners to enforce a guessed rule.
-houseRentPeriod = "never"
+-- Weekly rent is charged from the owner's bank at startup (daily restart) and
+-- costs a quarter of the monthly rent in houses.xml. After 7 unpaid warnings the
+-- house is freed and its items go to the owner's depot.
+houseRentPeriod = "weekly"
 onlyInvitedCanMoveHouseItems = true
 
 timeBetweenActions = 200

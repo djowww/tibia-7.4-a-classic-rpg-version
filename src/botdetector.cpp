@@ -44,7 +44,7 @@ BotDetector::Category BotDetector::categorize(uint8_t recvbyte)
 void BotDetector::onPacket(uint32_t playerId, uint8_t recvbyte)
 {
 	const Category category = categorize(recvbyte);
-	if (category == CAT_NONE) {
+	if (category == CAT_NONE && recvbyte != 0x32) {
 		return;
 	}
 
@@ -58,6 +58,16 @@ void BotDetector::onPacket(uint32_t playerId, uint8_t recvbyte)
 	if (record.firstSeenAt == 0) {
 		record.firstSeenAt = now;
 	}
+
+	if (recvbyte == 0x32) {
+		++record.extOpcodes;
+		return;
+	} else if (recvbyte == 0x45) {
+		++record.newSteps;
+	} else if (category == CAT_WALK) {
+		++record.oldSteps;
+	}
+
 	++record.packets;
 	record.lastActionAt = now;
 
@@ -89,6 +99,21 @@ void BotDetector::onPacket(uint32_t playerId, uint8_t recvbyte)
 			record.reactions.push(static_cast<int32_t>(reaction));
 		}
 		record.damagedAt = 0;
+	}
+}
+
+void BotDetector::onNewPing(uint32_t playerId, uint16_t localPing, uint16_t fps)
+{
+	const int64_t now = OTSYS_TIME();
+	std::lock_guard<std::mutex> guard(lock);
+	Record& record = records[playerId];
+	if (record.firstSeenAt == 0) {
+		record.firstSeenAt = now;
+	}
+	++record.newPings;
+	record.fpsMax = std::max<uint32_t>(record.fpsMax, fps);
+	if (localPing > 0 && localPing < 5000) {
+		record.localPings.push(localPing);
 	}
 }
 
@@ -206,7 +231,7 @@ int BotDetector::luaGetStats(lua_State* L)
 	}
 
 	const Record& record = it->second;
-	lua_createtable(L, 0, CAT_COUNT + 6);
+	lua_createtable(L, 0, CAT_COUNT + 12);
 	for (size_t i = 0; i < CAT_COUNT; ++i) {
 		pushRing(L, record.intervals[i]);
 		lua_setfield(L, -2, categoryNames[i]);
@@ -217,6 +242,18 @@ int BotDetector::luaGetStats(lua_State* L)
 	setField(L, "bursts", record.bursts);
 	setField(L, "idle", record.lastActionAt == 0 ? -1 : static_cast<double>(now - record.lastActionAt));
 	setField(L, "tracked", static_cast<double>(now - record.firstSeenAt));
+	setField(L, "newPings", record.newPings);
+	setField(L, "fpsMax", record.fpsMax);
+	setField(L, "extOpcodes", record.extOpcodes);
+	setField(L, "oldSteps", record.oldSteps);
+	setField(L, "newSteps", record.newSteps);
+	{
+		// median of the pings the client reported, -1 when it never did
+		const size_t n = record.localPings.size();
+		std::vector<int32_t> pings(record.localPings.values.begin(), record.localPings.values.begin() + n);
+		std::sort(pings.begin(), pings.end());
+		setField(L, "ping", n == 0 ? -1 : static_cast<double>(pings[n / 2]));
+	}
 	return 1;
 }
 

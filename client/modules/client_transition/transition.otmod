@@ -1,0 +1,10 @@
+Module
+  name: client_transition
+  description: Fades between the client screens (opening, login, character list, game)
+  author: Antigas
+  sandboxed: false
+  autoload: true
+  autoload-priority: 450
+  scripts: [ transition ]
+  @onLoad: Transition.init()
+  @onUnload: Transition.terminate()

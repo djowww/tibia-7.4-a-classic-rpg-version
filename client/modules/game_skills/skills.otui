@@ -118,13 +118,6 @@ MiniWindow
       SkillValueLabel
 
     SkillButton
-      id: water
-      height: 15
-      SkillNameLabel
-        !text: tr('Water')
-      SkillValueLabel
-
-    SkillButton
       id: hpRegen
       height: 15
       SkillNameLabel

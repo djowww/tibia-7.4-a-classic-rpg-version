@@ -1,4 +1,9 @@
 function onUse(player, item, fromPosition, target, toPosition, isHotkey)
+    if CityLights and CityLights.blocksUse(player, item) then
+        player:sendCancelMessage("The city lights stay lit until dawn.")
+        return true
+    end
+
     local tile = Tile(toPosition)
     local house = tile and tile:getHouse()
 

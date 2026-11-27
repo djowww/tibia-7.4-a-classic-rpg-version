@@ -81,7 +81,7 @@ getExpForLevel=function()return 100000 end
 getGlobalStorageValue=function()error('custom event read in strict math')end
 configManager={getNumber=function()error('rate read in strict math')end}
 local strict={getVocation=function()return {getMaxSoul=function()return 100 end}end,getSoul=function()return 100 end,getLevel=function()return 20 end,getExperience=function()return 500 end,addAnalyzerExp=function()end,
- applyOnlineStayBonus=function()return 0 end,applyBestiaryExperienceBonus=function()return 0 end}
+ applyOnlineStayBonus=function()return 0 end,applyBestiaryExperienceBonus=function()return 0 end,applyHuntRules=function(_,exp)return exp end}
 dofile('data/events/scripts/player.lua')
 ONLINE_STAY_BONUS_XP_REMAINDER_STORAGE=17600;ONLINE_STAY_BONUS_SKILL_REMAINDER_BASE=17601
 expect(Player.onGainExperience(strict,{isPlayer=function()return false end},101,101)==101,'XP ignores all custom rates/rewards')

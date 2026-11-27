@@ -3,12 +3,12 @@
 local function findTarget(player, param)
 	local name = param and param:match("^%s*(.-)%s*$") or ""
 	if name == "" then
-		player:sendTextMessage(MESSAGE_INFO_DESCR, "Informe o nome do personagem.")
+		player:sendTextMessage(MESSAGE_INFO_DESCR, BotDetector.latin1("Informe o nome do personagem."))
 		return nil
 	end
 	local target = Player(name)
 	if not target then
-		player:sendTextMessage(MESSAGE_INFO_DESCR, "Personagem " .. name .. " não está online.")
+		player:sendTextMessage(MESSAGE_INFO_DESCR, BotDetector.latin1("Personagem " .. name .. " não está online."))
 	end
 	return target
 end
@@ -27,7 +27,8 @@ local function suspects(player)
 
 	local lines = { "Suspeitos online (pontos: 2 = atenção, 3+ = suspeito):" }
 	for _, state in ipairs(rows) do
-		lines[#lines + 1] = string.format("%s - %d: %s", state.name, state.score, table.concat(state.reasons, "; "))
+		lines[#lines + 1] = string.format("%s - %d (%d%%): %s", state.name, state.score,
+			BotDetector.percent(state.score, state, nil), table.concat(state.reasons, "; "))
 	end
 	if #rows == 0 then
 		lines[#lines + 1] = "nenhum."
@@ -41,7 +42,7 @@ local function suspects(player)
 			lines[#lines + 1] = string.format("%s %s (%d)", os.date("%d/%m %H:%M", alert.time), alert.name, alert.score)
 		end
 	end
-	player:showTextDialog(1998, table.concat(lines, "\n"), false)
+	player:showTextDialog(1998, BotDetector.latin1(table.concat(lines, "\n")), false)
 end
 
 function onSay(player, words, param)
@@ -60,13 +61,13 @@ function onSay(player, words, param)
 	elseif words == "/botinfo" then
 		local target = findTarget(player, param)
 		if target then
-			player:showTextDialog(1998, BotDetector.describe(target), false)
+			player:showTextDialog(1998, BotDetector.latin1(BotDetector.describe(target)), false)
 		end
 	elseif words == "/botcheck" then
 		local target = findTarget(player, param)
 		if target then
 			BotDetector.sendCheck(target, player:getName())
-			player:sendTextMessage(MESSAGE_INFO_DESCR, "Verificação enviada para " .. target:getName() .. ". Você será avisado do resultado.")
+			player:sendTextMessage(MESSAGE_INFO_DESCR, BotDetector.latin1("Verificação enviada para " .. target:getName() .. ". Você será avisado do resultado."))
 		end
 	elseif words == "/botclear" then
 		local target = findTarget(player, param)

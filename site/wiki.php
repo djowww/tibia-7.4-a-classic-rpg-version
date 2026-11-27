@@ -7,6 +7,7 @@ header('X-Frame-Options: DENY');
 header('Referrer-Policy: strict-origin-when-cross-origin');
 header("Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
 require __DIR__ . '/i18n.php';
+require __DIR__ . '/visit-counter.php';
 siteStartI18n('pt');
 function wikiEscape(string $value): string { return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); }
 $github = 'https://github.com/djowww/tibia-7.4-a-classic-rpg-version';
@@ -26,7 +27,7 @@ $sections = [
     'spells-runes' => ['Spells and runes', 'Use the client spell list to search by name, vocation and required level. Instant spells consume mana; runes are created by casting a rune spell while carrying the required blank rune. Check your vocation and level before hunting for a spell.'],
     'quests-bestiary' => ['Quests and Bestiary', 'The Quest Log records supported chest discoveries and NPC missions for your character. Bestiary entries advance as you defeat creatures; completing an entry at 1,000 kills grants +0.2% permanent XP. The client shows progress and completed entries.'],
     'npcs-trade' => ['NPCs and trading', 'Greet an NPC by right-clicking it or clicking the balloon above its head; right-click never attacks an NPC. NPCs have a blue health bar. After hi, say trade to open the trade window, pick an item in the grid, choose the amount and confirm. Prices and rules are the same as in the conversation.'],
-    'world-map' => ['World and minimap', 'The world follows the original 7.4 map, without trainers, horses, Yalahar or custom islands. The minimap shows markers for temples, banks, shops, quests and stairs. Drinking water restores +1 mana every 10 seconds for 1 hour.'],
+    'world-map' => ['World and minimap', 'The world follows the original 7.4 map, without trainers, horses, Yalahar or custom islands. The minimap shows markers for temples, banks, shops, quests and stairs.'],
     'market-coins' => ['Market and Coins', 'The Market supports player offers for items and coins. Review an offer before accepting, and collect completed trades through the Market. Website purchases are disabled.'],
     'client-support' => ['Client and support', 'Download launcher v78 on the Create account page, extract it to a folder you can write to and open AntigasLauncher.exe: it installs the client and keeps it updated. The game runs on Antigas_gl.exe (OpenGL). Ask other players on the Help channel, and report bugs or ideas on our Discord.'],
     'faq' => ['Frequently asked questions', 'New characters start in Rookgaard. Download the client on the home page. Website purchases are disabled. Find spells in the client or in the Spells and runes section.'],
@@ -42,7 +43,7 @@ $sections = [
   <title>Tibia 7.4 — A classic rpg version</title>
   <link rel="stylesheet" href="/classic-2004.css?v=20260924-1">
   <link rel="stylesheet" href="/language.css?v=security-20260928">
-  <link rel="stylesheet" href="/classic-refinement.css?v=classic-20261003-1">
+  <link rel="stylesheet" href="/classic-refinement.css?v=classic-20261127-2">
   <link rel="stylesheet" href="/wiki.css?v=project-home-20261023-1">
 </head>
 <body class="wiki-page project-home">
@@ -53,7 +54,7 @@ $sections = [
       <p class="motto"><?= siteT('Open source project') ?></p>
     </header>
     <nav class="topnav" aria-label="<?= siteT('Main navigation') ?>">
-      <a href="/" aria-current="page"><?= siteT('Home') ?></a><a href="#novidades"><?= siteT('News') ?></a><a href="#changelog">Changelog</a><a href="#guia"><?= siteT('Player guide') ?></a><a href="#download"><?= siteT('Download') ?></a><a href="<?= wikiEscape($github) ?>">GitHub</a><a href="<?= wikiEscape($discord) ?>">Discord</a>
+      <a href="/" aria-current="page"><?= siteT('Home') ?></a><a href="#novidades"><?= siteT('News') ?></a><a href="#changelog">Changelog</a><a href="#guia"><?= siteT('Player guide') ?></a><a href="/sistemas.php">Custom systems</a><a href="#download"><?= siteT('Download') ?></a><a href="<?= wikiEscape($github) ?>">GitHub</a><a href="<?= wikiEscape($discord) ?>">Discord</a>
     </nav>
     <?= siteLanguageSwitcher() ?>
   </div>
@@ -63,7 +64,7 @@ $sections = [
         <h2><?= siteT('The project') ?></h2>
         <a href="#novidades"><?= siteT('News') ?></a><a href="#changelog">Changelog</a><a href="#download"><?= siteT('Download and test') ?></a><a href="<?= wikiEscape($github) ?>"><?= siteT('Source on GitHub') ?></a><a href="<?= wikiEscape($discord) ?>">Discord</a>
         <div class="side-rule" aria-hidden="true"></div>
-        <h2 class="wiki-menu-title"><?= siteT('Player guide') ?></h2>
+        <h2 class="wiki-menu-title"><?= siteT('Player guide') ?></h2><a href="/sistemas.php">Custom systems</a>
         <?php foreach ($sections as $id => [$title, $body]): ?><a href="#<?= wikiEscape($id) ?>"><?= siteT($title) ?></a><?php endforeach; ?>
         <div class="side-rule" aria-hidden="true"></div>
         <a href="/index.php?jogar=1#criar-conta"><?= siteT('Create account') ?></a><a href="/account.php"><?= siteT('My account') ?></a>
@@ -79,7 +80,7 @@ $sections = [
           <?php foreach ($updates as $update): ?>
           <article class="project-update" id="<?= wikiEscape($update['id']) ?>">
             <h3 class="news-ribbon"><time datetime="<?= wikiEscape($update['date']) ?>"><?= wikiEscape(date('d.m.Y', strtotime($update['date']))) ?></time><span><?= siteT($update['title']) ?></span></h3>
-            <div class="news-body"><p><?= siteT($update['summary']) ?></p><h4><?= siteT('What changed') ?></h4><ul class="gold-list"><?php foreach ($update['changes'] as $change): ?><li><?= siteT($change) ?></li><?php endforeach; ?></ul>
+            <div class="news-body"><p><?= siteT($update['summary']) ?></p><?php if ($update['changes'] !== []): ?><h4><?= siteT('What changed') ?></h4><ul class="gold-list"><?php foreach ($update['changes'] as $change): ?><li><?= siteT($change) ?></li><?php endforeach; ?></ul><?php endif; ?><?php foreach ($update['groups'] ?? [] as $group): ?><h4 class="update-group"><?= siteT($group['title']) ?></h4><ul class="gold-list"><?php foreach ($group['changes'] as $change): ?><li><?= siteT($change) ?></li><?php endforeach; ?></ul><?php endforeach; ?>
               <details class="project-details"><summary><?= siteT('Details and validation') ?></summary><?php foreach ($update['paragraphs'] as $paragraph): ?><p><?= siteT($paragraph) ?></p><?php endforeach; ?></details>
               <p><a href="<?= wikiEscape(projectSourceUrl($update['url'], $github)) ?>"><?= siteT('Read on GitHub') ?></a></p>
             </div>
@@ -99,7 +100,7 @@ $sections = [
       <?php foreach ($sections as $id => [$title, $body]): ?>
         <section class="wiki-entry" id="<?= wikiEscape($id) ?>"><h2><?= siteT($title) ?></h2><p><?= siteT($body) ?></p></section>
       <?php endforeach; ?>
-      <footer>Tibia 7.4 — A classic rpg version · <?= siteT('Independent community project, inspired by Tibia. Not affiliated with CipSoft.') ?><br><a href="<?= wikiEscape($github) ?>">GitHub</a> · <a href="<?= wikiEscape($github) ?>/blob/main/NOTICE.md"><?= siteT('Credits and licenses') ?></a></footer>
+      <footer>Tibia 7.4 — A classic rpg version · <?= siteT('Independent community project, inspired by Tibia. Not affiliated with CipSoft.') ?><br><a href="<?= wikiEscape($github) ?>">GitHub</a> · <a href="<?= wikiEscape($github) ?>/blob/main/NOTICE.md"><?= siteT('Credits and licenses') ?></a><?= siteViewsHtml() ?></footer>
     </main>
   </div>
 </body>

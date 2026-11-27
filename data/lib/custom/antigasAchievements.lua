@@ -157,10 +157,14 @@ function A.sendProgress(player)
 	for index, target in ipairs(A.LEVEL_MILESTONES) do
 		local state = storage(player, A.STORAGE.LEVEL_REWARD_BASE + index)
 		local retired = ItemType(5291):isRetired()
-		local completed, ready = state == 1, state == 2 and not retired
+		-- A retired reward item cannot be delivered, so its milestone counts as
+		-- completed from the live level alone. This is a pure read: the stored
+		-- qualification stays untouched in case the item ever returns.
+		local completed = state == 1 or (retired and (state == 2 or player:getLevel() >= target))
+		local ready = state == 2 and not retired
 		milestones[#milestones + 1] = {id='level_' .. index, category='Character level',
 			title=string.format('Reach level %d', target), progress=(completed or ready) and target or math.min(player:getLevel(), target), target=target,
-			completed=completed, ready=ready, reward=retired and 'Item reward retired' or '25% XP scroll (1 hour)'}
+			completed=completed, ready=ready, reward=retired and 'Rank progress' or '25% XP scroll (1 hour)'}
 	end
 	for _, skill in ipairs(skillOrder) do
 		local reward = skillRewards[skill]
@@ -169,10 +173,11 @@ function A.sendProgress(player)
 		for index, target in ipairs(A.SKILL_MILESTONES) do
 			local key = A.STORAGE.SKILL_REWARD_BASE + skill * 8 + index
 			local state = storage(player, key)
-			local completed, ready = state == 1, state == 2 and not retired
+			local completed = state == 1 or (retired and (state == 2 or current >= target))
+			local ready = state == 2 and not retired
 			milestones[#milestones + 1] = {id='skill_' .. skill .. '_' .. index, category=reward.name .. ' skill',
 				title=string.format('Reach %s skill %d', reward.name:lower(), target), progress=(completed or ready) and target or math.min(current, target), target=target,
-				completed=completed, ready=ready, reward=retired and 'Item reward retired' or reward.item == 5291 and '25% XP scroll (1 hour)' or string.format('One %s training weapon', reward.name:lower())}
+				completed=completed, ready=ready, reward=retired and 'Rank progress' or reward.item == 5291 and '25% XP scroll (1 hour)' or string.format('One %s training weapon', reward.name:lower())}
 		end
 	end
 	-- NetworkMessage.addString rejects strings above 8192 bytes. A complete

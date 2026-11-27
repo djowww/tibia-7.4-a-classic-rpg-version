@@ -1,310 +1,269 @@
-AchievementEntry < Panel
-  height: 74
-  background-color: #28292799
+HallImage < UIWidget
+  anchors.top: parent.top
+  anchors.left: parent.left
+  image-smooth: false
+  phantom: true
+  focusable: false
 
-  Label
-    id: title
-    anchors.top: parent.top
-    anchors.left: parent.left
-    anchors.right: parent.right
-    margin: 6 8 0 8
-    height: 14
-    color: #DDD8C6
-    text-align: left
+HallFrame < HallImage
+  border: 1 #f4dc9a
 
-  Label
-    id: reward
-    anchors.top: title.bottom
-    anchors.left: title.left
-    anchors.right: title.right
-    margin-top: 4
-    height: 14
-    color: #BCA473
-    text-align: left
+HallSpot < UIWidget
+  anchors.top: parent.top
+  anchors.left: parent.left
+  image-smooth: false
+  focusable: false
 
-  Label
-    id: progress
-    anchors.top: reward.bottom
-    anchors.left: title.left
-    anchors.right: title.right
-    margin-top: 4
-    height: 14
-    color: #C3C3BC
-    text-align: left
-
-  UIProgressBar
-    id: bar
-    anchors.top: progress.bottom
-    anchors.left: title.left
-    anchors.right: title.right
-    margin-top: 5
-    height: 5
-    background-color: #8E805E
-    border: 1 #1c1d1b
-    background-border: 1
+HallTier < UIWidget
+  size: 78 52
+  focusable: false
 
   UIWidget
-    id: separator
+    id: slot
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    size: 34 34
+    image-source: /images/ui/item
+    phantom: true
+
+    UIWidget
+      id: item
+      anchors.centerIn: parent
+      size: 32 32
+      image-source: /images/achievements/hall_items
+      image-smooth: false
+      phantom: true
+
+  Label
+    id: caption
+    anchors.top: slot.bottom
     anchors.left: parent.left
     anchors.right: parent.right
-    anchors.bottom: parent.bottom
-    height: 1
-    background-color: #ffffff16
+    margin-top: 2
+    height: 14
+    text-align: center
+    color: #8f8e84
     phantom: true
+
+HallBonus < UIWidget
+  size: 64 32
+
+  UIWidget
+    id: icon
+    anchors.top: parent.top
+    anchors.left: parent.left
+    size: 32 32
+    image-source: /images/achievements/hall_icons
+    image-smooth: false
+    phantom: true
+
+  Label
+    id: value
+    anchors.left: icon.right
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
+    height: 14
+    font: verdana-11px-rounded
+    color: #DDD8C6
+    text-align: left
+    phantom: true
+
+HallPlaque < Panel
+  anchors.top: parent.top
+  anchors.left: parent.left
+  background-color: #2b2b29f2
+  border: 1 #77766b
+  padding: 10
 
 MainWindow
   id: achievementWindow
   text: Achievements
-  size: 660 580
+  size: 1214 675
+  padding-top: 28
+  padding-left: 7
+  padding-right: 7
+  padding-bottom: 7
   @onEscape: modules.game_achievements.hide()
 
-  FlatPanel
-    id: rankBanner
+  UIWidget
+    id: hall
     anchors.top: parent.top
     anchors.left: parent.left
-    anchors.right: parent.right
-    height: 108
-    padding: 12
-    padding-top: 8
-    padding-bottom: 7
-    image-color: #b8b6a8
-    background-color: #282a27bb
+    size: 1200 640
+    background-color: #000000
+    image-source: /images/achievements/hall
+    image-smooth: false
 
-    Label
-      id: rankName
-      anchors.top: parent.top
-      anchors.left: parent.left
-      anchors.right: rankStars.left
-      margin-right: 12
-      height: 18
-      color: #DDD8C6
-      text: Achievement Ranks
-      text-align: left
-
-    Panel
-      id: rankStars
-      anchors.top: parent.top
-      anchors.right: parent.right
-      margin-top: 2
-      size: 76 12
-      layout:
-        type: horizontalBox
-        spacing: 4
-        fit-children: false
-
-      UIWidget
-        id: star1
-        size: 12 12
-        phantom: true
-        focusable: false
-
-      UIWidget
-        id: star2
-        size: 12 12
-        phantom: true
-        focusable: false
-
-      UIWidget
-        id: star3
-        size: 12 12
-        phantom: true
-        focusable: false
-
-      UIWidget
-        id: star4
-        size: 12 12
-        phantom: true
-        focusable: false
-
-      UIWidget
-        id: star5
-        size: 12 12
-        phantom: true
-        focusable: false
-
-    Label
-      id: rankProgress
-      anchors.top: rankName.bottom
-      anchors.left: parent.left
-      anchors.right: parent.right
-      margin-top: 2
-      height: 16
-      color: #AAA99E
-      text: Complete achievements to advance your rank.
-      text-align: left
-
-    Panel
-      id: rankTrack
-      anchors.top: rankProgress.bottom
-      anchors.left: parent.left
-      anchors.right: parent.right
-      margin-top: 5
-      height: 6
-      background-color: #20221f
-      border: 1 #181a17
-
-      UIProgressBar
-        id: rankBar
-        anchors.fill: parent
-        margin: 1
-        background-color: #BCA473
-        phantom: true
-
-    Panel
-      id: rankMilestones
-      anchors.top: rankTrack.bottom
-      anchors.left: parent.left
-      anchors.right: parent.right
-      margin-top: 9
-      height: 31
-      layout:
-        type: horizontalBox
-        spacing: 6
-        fit-children: false
-
-      Label
-        id: rank1
-        size: 95 31
-        text-align: center
-        color: #AAA99E
-
-      Label
-        id: rank2
-        size: 95 31
-        text-align: center
-        color: #AAA99E
-
-      Label
-        id: rank3
-        size: 95 31
-        text-align: center
-        color: #AAA99E
-
-      Label
-        id: rank4
-        size: 95 31
-        text-align: center
-        color: #AAA99E
-
-      Label
-        id: rank5
-        size: 95 31
-        text-align: center
-        color: #AAA99E
-
-      Label
-        id: rank6
-        size: 95 31
-        text-align: center
-        color: #AAA99E
-
-  ComboBox
-    id: filter
-    anchors.top: rankBanner.bottom
+  UIWidget
+    id: rankIcon
+    anchors.top: parent.top
     anchors.left: parent.left
-    margin-top: 10
-    width: 148
-    height: 22
+    margin-top: 6
+    margin-left: 12
+    size: 64 32
+    image-source: /images/achievements/hall_ranks
+    image-clip: 0 0 64 32
+    image-smooth: false
 
-  ComboBox
-    id: category
-    anchors.top: filter.top
-    anchors.left: filter.right
+  Label
+    id: rankName
+    anchors.top: parent.top
+    anchors.left: rankIcon.right
+    margin-top: 6
     margin-left: 6
-    width: 208
-    height: 22
+    size: 170 16
+    font: verdana-11px-rounded
+    color: #e2bd55
+    text: Novice
+    text-align: left
+    phantom: true
 
-  Button
-    id: refreshButton
-    anchors.top: filter.top
-    anchors.right: parent.right
-    width: 76
-    height: 22
-    text: Refresh
-    @onClick: modules.game_achievements.refresh()
+  UIProgressBar
+    id: rankBar
+    anchors.top: rankName.bottom
+    anchors.left: rankName.left
+    margin-top: 2
+    size: 170 14
+    background-color: #8E805E
+    border: 1 #1c1d1b
+    background-border: 1
+    color: #f2ecd8
+    text-align: center
+
+  Label
+    id: message
+    anchors.top: rankIcon.bottom
+    anchors.left: rankIcon.left
+    margin-top: 4
+    size: 420 14
+    color: #AAA99E
+    text: Connect to the game to view your achievement progress.
+    text-align: left
+    phantom: true
+
+  Panel
+    id: bonuses
+    anchors.top: parent.top
+    anchors.right: hall.right
+    margin-top: 6
+    margin-right: 12
+    size: 262 32
+    layout:
+      type: horizontalBox
+      spacing: 2
+      fit-children: false
+
+    HallBonus
+      id: speed
+      tooltip: Speed bonus
+
+    HallBonus
+      id: attack
+      tooltip: Damage bonus on direct physical and magic hits
+
+    HallBonus
+      id: pvp
+      tooltip: Extra damage against players
+
+    HallBonus
+      id: death
+      tooltip: Smaller loss on death
 
   Button
     id: claimButton
-    anchors.top: filter.top
-    anchors.right: refreshButton.left
-    margin-right: 6
+    anchors.top: bonuses.bottom
+    anchors.right: bonuses.right
+    margin-top: 4
     width: 114
     height: 22
     text: Claim rewards
     enabled: false
+    visible: false
     tooltip: Receive earned item rewards after making room in your inventory.
     @onClick: modules.game_achievements.claimRewards()
 
-  Label
-    id: summary
-    anchors.top: filter.bottom
-    anchors.left: parent.left
-    anchors.right: parent.right
-    margin-top: 10
-    height: 16
-    color: #DDD8C6
-    text: Achievement objectives
-    text-align: left
+  HallPlaque
+    id: plaque
+    size: 496 104
 
-  Label
-    id: bonuses
-    anchors.top: summary.bottom
-    anchors.left: parent.left
-    anchors.right: parent.right
-    margin-top: 4
-    height: 16
-    color: #AAA99E
-    text: Progress and rewards are saved per character.
-    text-align: left
+    UIWidget
+      id: bigFrame
+      anchors.left: parent.left
+      anchors.verticalCenter: parent.verticalCenter
+      size: 68 68
+      image-source: /images/ui/item
+      image-smooth: false
 
-  Label
-    id: objectiveHeading
-    anchors.top: bonuses.bottom
-    anchors.left: parent.left
-    margin-top: 8
-    size: 88 14
-    color: #DDD8C6
-    text: Objectives
+      UIWidget
+        id: bigItem
+        anchors.centerIn: parent
+        size: 64 64
+        image-source: /images/achievements/hall_items
+        image-smooth: false
+        phantom: true
 
-  HorizontalSeparator
-    anchors.verticalCenter: objectiveHeading.verticalCenter
-    anchors.left: objectiveHeading.right
-    anchors.right: parent.right
-    margin-left: 6
+    Label
+      id: trackName
+      anchors.top: parent.top
+      anchors.left: bigFrame.right
+      anchors.right: parent.right
+      margin-top: 14
+      margin-left: 12
+      height: 16
+      font: verdana-11px-rounded
+      color: #e2bd55
+      text-align: left
 
-  ScrollablePanel
-    id: entries
-    anchors.top: objectiveHeading.bottom
-    anchors.left: parent.left
-    anchors.right: entriesScroll.left
-    anchors.bottom: message.top
-    margin-top: 6
-    margin-right: 3
-    margin-bottom: 8
-    padding: 0
-    vertical-scrollbar: entriesScroll
-    layout:
-      type: verticalBox
-      spacing: 4
-      fit-children: false
+    Label
+      id: reward
+      anchors.top: trackName.top
+      anchors.left: trackName.left
+      anchors.right: parent.right
+      height: 16
+      font: verdana-11px-rounded
+      color: #8fbf7a
+      text-align: right
+      phantom: true
 
-  VerticalScrollBar
-    id: entriesScroll
-    anchors.top: objectiveHeading.bottom
-    anchors.right: parent.right
-    anchors.bottom: message.top
-    margin-top: 6
-    margin-bottom: 8
-    step: 78
-    pixels-scroll: true
+    UIProgressBar
+      id: bar
+      anchors.top: trackName.bottom
+      anchors.left: trackName.left
+      anchors.right: parent.right
+      margin-top: 8
+      height: 16
+      background-color: #8E805E
+      border: 1 #1c1d1b
+      background-border: 1
+      color: #f2ecd8
+      text-align: center
 
-  Label
-    id: message
-    anchors.left: parent.left
-    anchors.right: parent.right
-    anchors.bottom: parent.bottom
-    height: 26
-    color: #AAA99E
-    text-wrap: true
-    text-align: left
-    text: Connect to the game to view your achievement progress.
+  HallPlaque
+    id: tiers
+    size: 452 104
+
+    Panel
+      id: tierRow
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.verticalCenter: parent.verticalCenter
+      height: 52
+      layout:
+        type: horizontalBox
+        spacing: 3
+        fit-children: false
+
+      HallTier
+        id: tier1
+
+      HallTier
+        id: tier2
+
+      HallTier
+        id: tier3
+
+      HallTier
+        id: tier4
+
+      HallTier
+        id: tier5

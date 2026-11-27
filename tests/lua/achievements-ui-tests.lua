@@ -87,74 +87,55 @@ local anchorsValid, anchorError, dependencies=checkAnchorGraph(otui)
 assert(anchorsValid, anchorError)
 assert(dependencies>0, 'the actual UI anchor dependencies must be inspected')
 
-local callbacks, sent, children, events = {}, {}, {}, {}
+local callbacks, sent, events = {}, {}, {}
 local unread, eventId, now, online, featureEnabled = 0, 0, 0, true, false
 local gameEvents, windowEvents = {}, {}
-AnchorLeft, AnchorTop = 1, 2
-local function label(width, height)
-	local widget = {width=width or 600,height=height or 14,children={}}
-	function widget:setText(value) self.text=value end
-	function widget:setTooltip(value) self.tooltip=value end
-	function widget:setEnabled(value) self.enabled=value end
-	function widget:setColor(value) self.color=value end
-	function widget:setBackgroundColor(value) self.background=value end
-	function widget:setPercent(value) self.percent=value end
-	function widget:getWidth() return self.width end
-	function widget:getHeight() return self.height end
-	function widget:setHeight(value) self.height=value end
-	function widget:setSize(value) self.width,self.height=value.width,value.height end
-	function widget:setPhantom(value) self.phantom=value end
-	function widget:setFocusable(value) self.focusable=value end
-	function widget:setMarginLeft(value) self.marginLeft=value end
-	function widget:setMarginTop(value) self.marginTop=value end
-	function widget:addAnchor(edge, target, targetEdge)
-		self.anchors=self.anchors or {}; self.anchors[edge]={target=target,edge=targetEdge}
-	end
-	function widget:getTextSize()
-		local longest=0
-		for line in (self.text or ''):gmatch('[^\n]+') do longest=math.max(longest,#line) end
-		return {width=longest*6,height=14}
-	end
-	function widget:getChildById(id)
-		return self.children[id]
-	end
-	function widget:recursiveGetChildById(id)
-		if self.children[id] then return self.children[id] end
-		for _,child in pairs(self.children) do
-			local found=child:recursiveGetChildById(id)
-			if found then return found end
-		end
-	end
-	return widget
+local rootSize = {width=1024, height=640}
+
+-- A widget that records what the module sets on it. Children named in the
+-- OTUI are reachable as fields, like in the client.
+local function widget(class)
+	local self = {class=class, children={}, visible=true}
+	function self:setText(value) self.text=value end
+	function self:setTooltip(value) self.tooltip=value end
+	function self:setEnabled(value) self.enabled=value end
+	function self:setVisible(value) self.visible=value end
+	function self:isVisible() return self.visible end
+	function self:setColor(value) self.color=value end
+	function self:setBackgroundColor(value) self.background=value end
+	function self:setPercent(value) self.percent=value end
+	function self:setWidth(value) self.width=value end
+	function self:setSize(value) self.width,self.height=value.width,value.height end
+	function self:setMarginLeft(value) self.marginLeft=value end
+	function self:setMarginTop(value) self.marginTop=value end
+	function self:setImageSource(value) self.image=value end
+	function self:setImageClip(value) self.clip=value end
+	function self:setBorderWidth(value) self.borderWidth=value end
+	function self:destroyChildren() self.children={} end
+	function self:show() self.visible=true end
+	function self:hide() self.visible=false end
+	function self:raise() end
+	function self:focus() end
+	function self:destroy() self.destroyed=true end
+	return self
 end
-local function combo()
-	local widget = {options={}}
-	function widget:addOption(text, value) self.options[#self.options+1]={text=text,value=value} end
-	function widget:select(value)
-		for _, option in ipairs(self.options) do
-			if option.value == value then self.onOptionChange(self, option.text, value); return end
-		end
-		error('Unknown option: ' .. tostring(value))
-	end
-	return widget
+local window = widget('MainWindow')
+window.visible=false
+for _, id in ipairs({'hall','rankIcon','rankName','rankBar','message','bonuses','claimButton','plaque','tiers'}) do window[id]=widget(id) end
+for _, id in ipairs({'speed','attack','pvp','death'}) do
+	local chip=widget('HallBonus'); chip.icon=widget('icon'); chip.value=widget('value'); window.bonuses[id]=chip
 end
-local window = {visible=false,entries={},summary=label(),bonuses=label(),message=label(),claimButton=label(),
-	filter=combo(),category=combo(),entriesScroll={value=0}}
-local rankBanner=label()
-rankBanner.children={rankName=label(),rankProgress=label(),rankBar=label(),rankStars=label(),rankMilestones=label()}
-for index=1,5 do rankBanner.children.rankStars.children['star'..index]=label(12,12) end
-for index=1,6 do rankBanner.children.rankMilestones.children['rank'..index]=label(95,31) end
-function window:getChildById(id) return id=='rankBanner' and rankBanner or self[id] end
-function window:setSize(value) self.width,self.height=value.width,value.height end
-function window:hide() self.visible=false end
-function window:show() self.visible=true end
-function window:isVisible() return self.visible end
-function window:raise() end
-function window:focus() end
-function window:destroy() self.destroyed=true end
-function window.entries:destroyChildren() children={} end
-function window.entriesScroll:getValue() return self.value end
-function window.entriesScroll:setValue(value) self.value=value end
+window.plaque.bigFrame=widget('bigFrame'); window.plaque.bigFrame.bigItem=widget('bigItem')
+for _, id in ipairs({'trackName','bar','reward'}) do window.plaque[id]=widget(id) end
+window.tiers.tierRow = widget('tierRow')
+for tier=1,5 do
+	local box=widget('HallTier'); box.slot=widget('slot'); box.slot.item=widget('item'); box.caption=widget('caption')
+	window.tiers.tierRow['tier'..tier]=box
+end
+for _, id in ipairs({'hall','rankIcon','rankName','rankBar','message','bonuses','speed','attack','pvp','death','icon','value','claimButton','plaque','tiers','bigFrame','bigItem',
+	'trackName','bar','reward','tierRow','tier1','tier5','slot','item','caption'}) do
+	assert(otui:find('id: '..id..'\n',1,true), 'the OTUI must declare '..id)
+end
 
 g_game = {
 	isOnline=function() return online end,
@@ -168,18 +149,12 @@ g_clock = {millis=function() return now end}
 GameExtendedOpcode = 1
 g_ui = {
 	displayUI=function() return window end,
-	getRootWidget=function() return {getSize=function() return {width=1024,height=640} end} end,
+	getRootWidget=function() return {getSize=function() return rootSize end} end,
 	createWidget=function(name,parent)
-		if name=='UIWidget' then
-			local pixel=label()
-			parent.children[#parent.children+1]=pixel
-			return pixel
-		end
-		assert(name=='AchievementEntry' and parent==window.entries)
-		local row=label()
-		row.title,row.reward,row.progress,row.bar,row.separator=label(),label(),label(),label(),label()
-		children[#children+1]=row
-		return row
+		assert(parent==window.hall and ('\n'..otui):find('\n'..name..' < ',1,true), 'hall widgets use the styles of the OTUI: '..tostring(name))
+		local child=widget(name)
+		parent.children[#parent.children+1]=child
+		return child
 	end
 }
 ProtocolGame = {
@@ -221,18 +196,29 @@ local function advance(milliseconds)
 	end
 	now=target
 end
-local function pages(id, prefix, completedEvery)
+
+-- The server catalog: 12 tracks of 5 objectives. `values` gives the live
+-- counter of each track; a tier is completed once the counter reaches it.
+local prefixes={'steps_','level_','monsterKills_','pvpKills_','deaths_','skill_7_','skill_0_','skill_1_','skill_2_','skill_3_','skill_4_','skill_5_'}
+local targets={steps_={100,1000,10000,100000,1000000},monsterKills_={100,1000,10000,100000,1000000},
+	pvpKills_={1,10,100,1000,10000},deaths_={1,10,100,1000,10000},level_={20,50,100,150,200}}
+local function catalog(id, values, options)
+	options=options or {}
+	local entries={}
+	for index, prefix in ipairs(prefixes) do
+		for tier, target in ipairs(targets[prefix] or {40,60,80,100,120}) do
+			local value=values[index] or 0
+			entries[#entries+1]={id=prefix..tier,title=(options.title or 'Objective ')..prefix..tier,category=prefix,
+				reward=prefix=='steps_' and '+'..tier..' speed' or (options.reward or 'Rank progress'),
+				progress=math.min(value,target),target=target,completed=value>=target}
+		end
+	end
 	local result={}
 	for page=1,5 do
-		local entries={}
-		for index=(page-1)*12+1,page*12 do
-			local completed=index%completedEvery==0
-			entries[#entries+1]={id='objective_'..index,title=prefix..index,
-				category=index<=20 and 'Steps' or index<=40 and 'Monsters' or 'Skills',
-				reward='+1 speed',progress=completed and 100 or index,target=100,completed=completed}
-		end
-		result[page]={action='progress',snapshotId=id,page=page,pages=5,entries=entries,
-			unread=4,bonuses={speed=15,attack=5,pvp=5,deathReduction=5}}
+		local part={}
+		for index=(page-1)*12+1,page*12 do part[#part+1]=entries[index] end
+		result[page]={action='progress',snapshotId=id,page=page,pages=5,entries=part,
+			unread=options.unread or 4,bonuses={speed=6,attack=0,pvp=0,deathReduction=0}}
 	end
 	return result
 end
@@ -244,9 +230,20 @@ end
 local function receiveAll(snapshot)
 	for _,payload in ipairs(snapshot) do receive(payload) end
 end
-local function rowWithTitle(title)
-	for _,row in ipairs(children) do if row.title.text==title then return row end end
-	error('Missing displayed objective: '..title)
+local function count(class)
+	local total=0
+	for _,child in ipairs(window.hall.children) do if child.class==class then total=total+1 end end
+	return total
+end
+local function hallWidgets(image)
+	local list={}
+	for _,child in ipairs(window.hall.children) do if child.image==image then list[#list+1]=child end end
+	return list
+end
+local function spots()
+	local list={}
+	for _,child in ipairs(window.hall.children) do if child.class=='HallSpot' and child.onClick then list[#list+1]=child end end
+	return list
 end
 
 dofile(clientFile('modules/game_achievements/achievements.lua'))
@@ -256,187 +253,143 @@ window.claimButton.onClick=assert((loadstring or load)('return function() '..cla
 function window.claimButton:click() if self.enabled then self.onClick() end end
 init()
 assert(not window.visible and #sent==0, 'init must wait for the extended-opcode handshake')
-assert(window.filter.options[1].value=='next' and #window.filter.options==5 and not window.claimButton.enabled)
+assert(#spots()==12 and #hallWidgets('/images/achievements/hall_items')==12 and #hallWidgets('/images/achievements/hall_light')==12
+	and #hallWidgets('/images/achievements/hall_ranks')==6 and count('HallFrame')==12, 'the hall has twelve pedestals and six rank trophies')
+assert(window.width==614 and window.hall.width==600 and window.plaque.marginTop==326, 'small screens get the room at zoom 1 with the plaques below')
+assert(window.rankName.text=='Novice' and not window.claimButton.visible and not window.claimButton.enabled)
 advance(999)
 assert(#sent==0)
 featureEnabled=true
 advance(1)
 assert(#sent==1 and sent[1].action=='getProgress', 'request follows the startup delay')
 
-local first=pages(100,'Objective ',3)
-receive(first[3]); receive(first[1]); receive(first[1]); receive(first[5]); receive(first[2])
-assert(#children==0 and unread==0, 'out-of-order and duplicate pages cannot expose a partial catalog')
-receiveAll(pages(99,'Obsolete ',2))
-assert(#children==0, 'an obsolete snapshot cannot replace an incomplete newer one')
-receive(first[4])
-assert(#children==3 and unread==4, 'default Next objectives shows one unfinished objective per category')
-assert(children[1].title.text=='Objective 41' and children[2].title.text=='Objective 22' and children[3].title.text=='Objective 1',
-	'the next unfinished catalog tier per category is ordered by proximity')
-window.filter:select('all')
-assert(#children==60 and children[1].title.text=='Objective 59' and children[60].title.text=='[DONE] Objective 60')
-assert(rowWithTitle('[DONE] Objective 3').bar.percent==100 and rowWithTitle('Objective 1').bar.percent==1)
-assert(rowWithTitle('[DONE] Objective 3').background=='#2e302b99' and rowWithTitle('Objective 1').background=='#28292799')
-assert(rowWithTitle('Objective 1').title.tooltip=='Steps: Objective 1' and rowWithTitle('Objective 1').reward.tooltip=='+1 speed')
-assert(rowWithTitle('Objective 1').progress.text:find('1%%') and rowWithTitle('Objective 1').progress.text:find('99 remaining',1,true))
-assert(window.summary.text:find('20 / 60',1,true) and window.bonuses.text:find('Direct attack +5%',1,true)
-	and window.bonuses.text:find('Direct PvP +5%',1,true) and window.bonuses.tooltip:find('Periodic damage',1,true))
-assert(#window.category.options==4, 'categories are added only once')
+-- Pagination: partial, duplicate and obsolete pages never repaint the hall.
+local today=catalog(10,{14382,8,63,0,0,0,10,10,10,10,10,10})
+receive(today[2]); receive(today[2]); receive(today[1])
+assert(window.rankBar.text=='' and window.rankBar.percent==0 and not window.bonuses.visible and unread==0,
+	'out-of-order and duplicate pages cannot expose a partial catalog')
+receive(catalog(9,{})[1])
+receiveAll({today[3],today[4],today[5]})
+assert(window.rankBar.text=='3 / 6' and window.rankBar.percent==50 and window.rankBar.tooltip=='3 more to reach Adventurer' and unread==4)
+assert(window.bonuses.visible and window.bonuses.speed.value.text=='+6' and window.bonuses.death.value.text=='-0%' and window.message.text==''
+	and window.bonuses.pvp.icon.clip.x==64)
 
-window.entriesScroll:setValue(300)
-window.filter:select('active')
-assert(#children==40 and window.entriesScroll:getValue()==0)
-window.filter:select('completed')
-assert(#children==20)
-window.category:select('Steps')
-assert(#children==6)
-window.filter:select('active')
-assert(#children==14)
-window.filter:select('all')
-assert(#children==20)
-window.category:select('all')
-assert(#children==60)
+-- The room: lit items, silhouettes, light and dots follow the completed tiers.
+local items, lights = hallWidgets('/images/achievements/hall_items'), hallWidgets('/images/achievements/hall_light')
+assert(items[1].clip.x==64 and items[1].clip.y==0, 'three steps objectives put the third boots on the first pedestal')
+assert(lights[1].visible and lights[1].clip.x==256 and lights[1].clip.y==0)
+assert(items[3].clip.x==160 and items[3].clip.y==64 and not lights[3].visible, 'an empty pedestal shows the first item as a silhouette, unlit')
+local dots={}
+for _,child in ipairs(window.hall.children) do if child.class=='HallImage' and child.background then dots[#dots+1]=child end end
+assert(#dots==60 and dots[3].background=='#e6b84a' and dots[4].background=='#0c0c0c' and dots[11].background=='#0c0c0c')
+local trophies=hallWidgets('/images/achievements/hall_ranks')
+assert(trophies[1].clip.y==0 and trophies[2].clip.y==32 and trophies[2].tooltip=='Adventurer\n6 / 60')
 
-window.entriesScroll:setValue(132)
+-- The plaque follows the closest goal until the player clicks a pedestal.
+assert(window.plaque.trackName.text=='Monsters defeated' and window.plaque.bar.text=='63 / 100' and window.plaque.bar.percent==63)
+assert(window.plaque.reward.text=='' and window.plaque.bigFrame.tooltip=='', 'rank progress needs no reward text')
+spots()[1].onClick()
+assert(window.plaque.trackName.text=='Steps walked' and window.plaque.bar.text=='14,382 / 100,000' and window.plaque.reward.text=='+4 speed'
+	and window.plaque.bigFrame.tooltip=='Steel boots')
+local row=window.tiers.tierRow
+assert(row.tier1.caption.text=='100' and row.tier4.caption.text=='100k' and row.tier5.caption.text=='1M')
+assert(row.tier3.caption.color=='#8fbf7a' and row.tier4.caption.color=='#DDD8C6' and row.tier5.caption.color=='#8f8e84')
+assert(row.tier4.tooltip=='Walk 100,000 steps\nBoots of haste\n+4 speed\n85,618 to go' and row.tier5.tooltip:find('Locked',1,true))
+assert(row.tier3.slot.item.clip.x==64 and row.tier4.slot.item.clip.x==256, 'earned tiers are lit, the others are silhouettes')
+local frames={}
+for _,child in ipairs(window.hall.children) do if child.class=='HallFrame' then frames[#frames+1]=child end end
+assert(frames[1].visible and not frames[3].visible)
+
+-- Opening: big screens get zoom 2 with the plaques over the lower wall.
 show()
-assert(window.visible and unread==0 and sent[#sent].action=='markSeen')
-assert(#children==60 and window.entriesScroll:getValue()==132, 'opening preserves the cached catalog and scroll')
+assert(window.visible and unread==0 and sent[#sent].action=='markSeen' and window.width==614)
+hide()
+rootSize={width=1366,height=768}
+show()
+assert(window.width==1214 and window.height==675 and window.hall.width==1200 and window.plaque.marginTop==526 and window.tiers.marginLeft==734)
+assert(#spots()==12 and window.plaque.trackName.text=='Steps walked', 'rebuilding the room keeps the catalog and the chosen pedestal')
+assert(hallWidgets('/images/achievements/hall_items')[1].width==64 and window.plaque.bigFrame.width==68)
 local beforeRefresh=#sent
-refresh()
+refresh(); refresh()
 assert(#sent==beforeRefresh, 'rapid refresh requests share a delayed request')
 advance(2100)
-assert(sent[#sent].action=='getProgress' and #children==60, 'refresh never blanks existing objectives')
+assert(sent[#sent].action=='getProgress' and window.plaque.trackName.text=='Steps walked', 'refresh never blanks the hall')
 
-receive(pages(101,'Intermediate ',3)[1])
-local newer=pages(102,'Updated ',2)
-receive(newer[2])
-receiveAll(pages(101,'Intermediate ',3))
-assert(children[1].title.text=='Objective 59', 'a newer incomplete response preserves the rendered snapshot')
-for _,index in ipairs({5,3,1,4}) do receive(newer[index]) end
-assert(#children==60 and children[1].title.text=='Updated 59' and unread==0)
-assert(window.summary.text:find('30 / 60',1,true) and sent[#sent].action=='markSeen',
-	'new completions in the open window are acknowledged after rendering')
-assert(window.entriesScroll:getValue()==132 and #window.category.options==4)
-receiveAll(first); receiveAll(newer)
-assert(children[1].title.text=='Updated 59', 'obsolete and completed duplicate snapshots are ignored')
+-- Newer snapshots replace the hall only when complete.
+local later=catalog(11,{184220,74,12840,14,23,6,22,31,86,44,38,82},{unread=0})
+receive(later[1])
+assert(window.rankBar.text=='3 / 6', 'a newer incomplete response preserves the rendered snapshot')
+receiveAll({later[2],later[3],later[4],later[5]})
+assert(window.rankName.text=='Veteran' and window.rankBar.text=='20 / 30' and window.rankIcon.clip.x==128)
+assert(sent[#sent].action=='markSeen' and unread==0)
+receiveAll(today)
+assert(window.rankName.text=='Veteran', 'obsolete and completed duplicate snapshots are ignored')
+spots()[9].onClick()
+assert(window.plaque.bar.text:find(' / 100',1,true) and window.plaque.bigFrame.tooltip=='Two handed sword')
 
-refresh(); advance(2100)
-receive(pages(103,'Incomplete ',2)[1])
-advance(8000)
-assert(#children==60 and children[1].title.text=='Updated 59', 'timeout preserves the last complete catalog')
-assert(window.message.text:find('could not be updated',1,true))
-receiveAll(pages(103,'Expired ',2))
-assert(children[1].title.text=='Updated 59', 'timed-out snapshot fragments cannot replace the catalog')
-
-local invalid=pages(104,'Duplicate entry ',2)
-invalid[5].entries[12].id=invalid[1].entries[1].id
+-- Timeouts keep the last complete hall.
+advance(10000)
+advance(5900)
+assert(window.message.text:find('could not be updated',1,true) and window.rankName.text=='Veteran')
+local duplicate=catalog(12,{})
+duplicate[2].entries[1].id=duplicate[1].entries[1].id
+receiveAll(duplicate)
+assert(window.rankName.text=='Veteran', 'duplicate achievement ids invalidate an entire snapshot')
+local invalid=catalog(13,{})
+invalid[1].entries[1].progress=101
 receiveAll(invalid)
-assert(children[1].title.text=='Updated 59', 'duplicate achievement ids invalidate an entire snapshot')
-callbacks[126](nil,126,'{invalid')
-callbacks[126](nil,126,string.rep('a',8193))
-callbacks[126](nil,125,json.encode(pages(105,'Wrong opcode ',2)[1]))
-assert(children[1].title.text=='Updated 59')
+assert(window.rankName.text=='Veteran', 'out-of-range progress invalidates a snapshot')
 
+-- A server from before the trophy hall still names the retired reward.
+receiveAll(catalog(14,{184220,74,12840,14,23,6,22,31,86,44,38,82},{reward='Item reward retired',unread=0}))
+assert(window.plaque.reward.text=='')
+
+-- Everything completed: Legend, every pedestal glowing.
+receiveAll(catalog(15,{1e6,200,1e6,1e4,1e4,120,120,120,120,120,120,120},{unread=0}))
+assert(window.rankName.text=='Legend' and window.rankBar.text=='60 / 60' and window.rankBar.percent==100)
+local glows=hallWidgets('/images/achievements/hall_glow')
+assert(#glows==12 and glows[1].visible and glows[12].visible and window.plaque.bar.text=='120')
+assert(window.plaque.bar.percent==100 and window.plaque.bigFrame.tooltip=='Magic sword')
+assert(hallWidgets('/images/achievements/hall_ranks')[6].clip.y==0 and hallWidgets('/images/achievements/hall_statue')[1].clip.x==800)
+
+-- Hidden updates highlight the menu button; pending item rewards can be claimed.
 hide()
-receiveAll(pages(106,'Hidden update ',3))
+receiveAll(catalog(16,{1e6,200,1e6,1e4,1e4,120,120,120,120,120,120,120}))
 assert(not window.visible and unread==4, 'hidden updates restore the unread button highlight')
+local pending=catalog(17,{14382,20,63,0,0,0,10,10,10,10,10,10},{unread=0})
+pending[1].entries[6].completed=false; pending[1].entries[6].ready=true
+assert(pending[1].entries[6].id=='level_1')
+receiveAll(pending)
+assert(unread==1 and window.claimButton.visible and window.message.text:find('Claim rewards',1,true))
+show()
+for _,page in ipairs(pending) do page.snapshotId=18 end
+receiveAll(pending)
+advance(2100)
+local beforeClaim=#sent
+window.claimButton:click()
+advance(2100)
+assert(sent[#sent].action=='claimRewards' and #sent==beforeClaim+1 and not window.claimButton.enabled)
+window.claimButton:click(); refresh()
+advance(2100)
+assert(#sent==beforeClaim+1, 'duplicate claims and refreshes cannot overlap an in-flight claim')
+local paid=catalog(20,{14382,20,63,0,0,0,10,10,10,10,10,10},{unread=0})
+receiveAll(paid)
+assert(unread==0 and not window.claimButton.visible and not window.claimButton.enabled, 'paying the pending item removes its badge')
+local wrongReady=catalog(21,{})
+wrongReady[1].entries[1].ready='yes'
+receiveAll(wrongReady)
+assert(window.rankBar.text=='4 / 6', 'ready must be a boolean when provided')
 callbacks[126](nil,126,json.encode({action='seen'}))
 assert(unread==0)
 
-local function pendingPages(id)
-	local snapshot=pages(id,'Pending ',3)
-	for index=1,2 do
-		local entry=snapshot[1].entries[index]
-		entry.ready=true; entry.progress=index*20
-	end
-	return snapshot
-end
-receiveAll(pendingPages(107))
-assert(children[1].title.text=='[READY] Pending 1' and children[2].title.text=='[READY] Pending 2',
-	'pending rewards sort before closer active objectives; ties preserve catalog order')
-assert(children[1].bar.percent==100 and children[1].background=='#39362fbb')
-assert(children[1].progress.text:find('Reward pending',1,true) and children[1].progress.text:find('100 / 100',1,true)
-	and children[1].progress.text:find('0 remaining',1,true), 'a reached item objective keeps its achieved progress after a level drop')
-assert(window.summary.text:find('2 rewards pending',1,true) and window.claimButton.enabled)
-window.filter:select('next')
-assert(#children==3 and children[1].title.text=='[READY] Pending 1')
-window.category:select('Steps')
-assert(#children==1 and children[1].title.text=='[READY] Pending 1')
-window.category:select('all')
-window.filter:select('ready')
-assert(#children==2)
-window.entriesScroll:setValue(88)
-local beforeClaim=#sent
-window.claimButton:click()
-assert(#sent==beforeClaim+1 and sent[#sent].action=='claimRewards' and not window.claimButton.enabled)
-window.claimButton:click(); claimRewards(); refresh()
-assert(#sent==beforeClaim+1, 'duplicate claims and refreshes cannot overlap an in-flight claim')
-receiveAll(pendingPages(108))
-assert(#children==2 and children[1].title.text=='[READY] Pending 1' and window.entriesScroll:getValue()==88
-	and window.claimButton.enabled, 'a full-inventory claim response preserves the stable catalog and enables retry')
-window.claimButton:click(); window.claimButton:click(); claimRewards(); refresh()
-assert(#sent==beforeClaim+1 and not window.claimButton.enabled, 'the shared cooldown queues only one claim')
-advance(2099)
-assert(#sent==beforeClaim+1)
-advance(1)
-assert(#sent==beforeClaim+2 and sent[#sent].action=='claimRewards')
-local paid=pendingPages(109)
-for index=1,2 do paid[1].entries[index].ready=false; paid[1].entries[index].completed=true end
-receive(paid[1])
-assert(#children==2 and not window.claimButton.enabled, 'partial claim responses cannot remove displayed pending rewards')
-for page=2,5 do receive(paid[page]) end
-assert(#children==0 and not window.claimButton.enabled and window.summary.text:find('0 rewards pending',1,true))
-window.filter:select('all')
-assert(#children==60 and rowWithTitle('[DONE] Pending 1').bar.percent==100 and rowWithTitle('[DONE] Pending 1').progress.text:find('100 / 100',1,true),
-	'paid objective progress also remains completed after losing levels')
-beforeClaim=#sent
-window.claimButton:click(); claimRewards()
-assert(#sent==beforeClaim, 'a claim without pending rewards is not sent')
-receiveAll(pendingPages(110))
-window.entriesScroll:setValue(132)
-window.claimButton:click()
-advance(2100)
-assert(sent[#sent].action=='claimRewards' and not window.claimButton.enabled)
-receive(pendingPages(111)[1])
-advance(8000)
-assert(window.claimButton.enabled and #children==60 and children[1].title.text=='[READY] Pending 1'
-	and window.entriesScroll:getValue()==132 and window.message.text:find('could not be confirmed',1,true),
-	'a claim timeout preserves the catalog and permits another attempt')
-receiveAll(pendingPages(111))
-assert(children[1].title.text=='[READY] Pending 1', 'late expired claim snapshots remain ignored')
-local malformed=pendingPages(112)
-malformed[1].entries[1].ready='true'
-receiveAll(malformed)
-assert(#children==60 and children[1].title.text=='[READY] Pending 1', 'ready must be a boolean when provided')
-
-local onePending=pendingPages(113)
-onePending[1].entries[2].ready=false
-for _,page in ipairs(onePending) do page.unread=0 end
-receiveAll(onePending)
-assert(not window.visible and unread==1, 'a pending item alone highlights the hidden-window menu')
-show()
-assert(unread==1, 'opening the window acknowledges paid rewards while retaining pending attention')
-callbacks[126](nil,126,json.encode({action='seen'}))
-assert(unread==1, 'markSeen cannot clear the pending-reward indicator')
-for _,page in ipairs(onePending) do page.snapshotId=114 end
-receiveAll(onePending)
-assert(unread==1, 'repeated complete snapshots cannot add the pending count twice')
-window.claimButton:click()
-advance(2100)
-assert(sent[#sent].action=='claimRewards')
-local singleClaim=pages(115,'Single claim ',3)
-singleClaim[1].entries[1].completed=true
-singleClaim[1].entries[1].ready=false
-for _,page in ipairs(singleClaim) do page.unread=1 end
-receiveAll(singleClaim)
-assert(unread==0 and not window.claimButton.enabled, 'paying the pending item removes its badge in the open window')
-callbacks[126](nil,126,json.encode({action='seen'}))
-assert(unread==0, 'the paid response and markSeen never double-count or restore the pending badge')
 online=false; gameEvents.onGameEnd()
-assert(#children==0 and unread==0 and next(events)==nil and not window.claimButton.enabled, 'logout clears per-character state and all timers')
+assert(not window.visible and unread==0 and next(events)==nil and not window.claimButton.enabled
+	and window.rankBar.text=='' and not window.bonuses.visible
+	and window.message.text:find('Connect to the game',1,true), 'logout clears per-character state and all timers')
+assert(window.plaque.bar.text=='' and not hallWidgets('/images/achievements/hall_light')[1].visible)
 
 online=true; gameEvents.onGameStart()
 local beforeStartup=#sent
-assert(#sent==beforeStartup)
 show()
 assert(next(events)~=nil, 'startup, polling and request timers are active for termination coverage')
 terminate()
@@ -444,4 +397,4 @@ assert(window.destroyed and callbacks[126]==nil and next(events)==nil and next(g
 advance(20000)
 assert(#sent==beforeStartup+1, 'terminated timers cannot send subsequent requests')
 
-print('PASS Achievements UI: 60 objectives, default next goals/proximity, all filters, pending rewards/claim click/cooldown/timeouts, stable pagination, real OTUI anchors, old-server compatibility and timer cleanup')
+print('PASS Achievements UI: trophy hall with 12 pedestals, tiers, light, rank trophies, plaque selection, both zooms, pending claim/cooldown/timeouts, stable pagination, real OTUI anchors, old-server compatibility and timer cleanup')

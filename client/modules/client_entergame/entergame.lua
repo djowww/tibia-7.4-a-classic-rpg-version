@@ -56,23 +56,35 @@ local function onCharacterList(protocol, characters, account, otui)
     end
   end
 
-  if loadBox then
-    loadBox:destroy()
-    loadBox = nil
-  end
-    
-  CharacterList.create(characters, account, otui)
-  CharacterList.show()
+  G.characters = characters
+  G.characterAccount = account
   g_settings.save()
 
-  if motdEnabled then
-    local lastMotdNumber = g_settings.getNumber("motd")
-    if G.motdNumber and G.motdNumber ~= lastMotdNumber then
-      g_settings.set("motd", G.motdNumber)
-      motdWindow = displayInfoBox(tr('Message of the day'), G.motdMessage)
-      connect(motdWindow, { onOk = function() CharacterList.show() motdWindow = nil end })
-      CharacterList.hide()
+  local function openCharacterList()
+    if loadBox then
+      loadBox:destroy()
+      loadBox = nil
     end
+
+    CharacterList.create(characters, account, otui)
+    CharacterList.show()
+
+    if motdEnabled then
+      local lastMotdNumber = g_settings.getNumber("motd")
+      if G.motdNumber and G.motdNumber ~= lastMotdNumber then
+        g_settings.set("motd", G.motdNumber)
+        motdWindow = displayInfoBox(tr('Message of the day'), G.motdMessage)
+        connect(motdWindow, { onOk = function() CharacterList.show() motdWindow = nil end })
+        CharacterList.hide()
+      end
+    end
+  end
+
+  -- fade to black and open the character screen behind the curtain
+  if Transition then
+    Transition.fadeThrough(openCharacterList, 600)
+  else
+    openCharacterList()
   end
 end
 

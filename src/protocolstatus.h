@@ -40,6 +40,8 @@ class ProtocolStatus final : public Protocol
 
 		void sendStatusString();
 		void sendInfo(uint16_t requestedInfo, const std::string& characterName);
+		// Launcher sessions, see guardian.h.
+		void sendGuardian(uint8_t op, uint16_t launcherVersion, uint16_t clientVersion, uint8_t flags, const std::string& token, const std::string& detail);
 
 		static const uint64_t start;
 

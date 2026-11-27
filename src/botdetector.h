@@ -64,6 +64,14 @@ class BotDetector
 			int64_t burstWindowAt = 0;
 			uint32_t burstWindowCount = 0;
 			uint32_t bursts = 0;
+			// Client signature: what the official client (OTCv8) always sends
+			// and a headless bot usually does not.
+			uint32_t newPings = 0;   // 0x40, OTCv8 extended ping with ping and fps
+			uint32_t fpsMax = 0;
+			Ring localPings;         // ping the client reports, in ms
+			uint32_t extOpcodes = 0; // 0x32, custom client modules
+			uint32_t oldSteps = 0;   // 0x65-0x6D, one packet per step
+			uint32_t newSteps = 0;   // 0x45, OTCv8 new walking
 		};
 
 		static constexpr uint32_t BURST_LIMIT = 12;
@@ -74,6 +82,7 @@ class BotDetector
 
 		// network thread
 		void onPacket(uint32_t playerId, uint8_t recvbyte);
+		void onNewPing(uint32_t playerId, uint16_t localPing, uint16_t fps);
 		// dispatcher thread
 		void onStats(uint32_t playerId, int32_t health);
 		void forget(uint32_t playerId);

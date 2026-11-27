@@ -71,5 +71,3 @@ O launcher busca um manifesto por HTTPS e verifica sua assinatura ECDSA P-256 co
 [site/](../site/) contém páginas públicas, estilos, traduções e um manifesto de release. Cadastro e conta dependem da biblioteca privada externa `security.php` e de tabelas de banco que não estão integralmente incluídas aqui. A página inicial (`wiki.php`) funciona sem essas bibliotecas. A rota `coins.php` é uma página informativa sem compras: não carrega bibliotecas de pagamento, não cria pedidos e não exibe dados do recebedor nem códigos de cobrança.
 
 `ANTIGAS_WEB_LIB` permite indicar o diretório dessas bibliotecas. Disponibilize implementações compatíveis e suas configurações privadas antes de executar as páginas; copiar somente `site/` não completa a instalação. Revise também os links e o manifesto de downloads para sua distribuição.
-
-As referências em [infra/nginx/](../infra/nginx/) pressupõem uma infraestrutura específica. Revise caminhos, serviços e permissões ao adaptá-las. O [guia de infraestrutura](../infra/README.md) descreve o restante do diretório.

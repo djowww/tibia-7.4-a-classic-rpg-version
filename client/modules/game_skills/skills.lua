@@ -255,7 +255,7 @@ function offline()
   regenStatus = nil
 end
 
--- Food and water time left, sent by the server on opcode 131 and counted down here.
+-- Food time left, sent by the server on opcode 131 and counted down here.
 local function formatRegen(seconds)
   if seconds <= 0 then return '-' end
   local minutes = math.floor(seconds / 60)
@@ -265,21 +265,17 @@ end
 
 function updateRegen()
   if not skillsWindow then return end
-  local food, water = 0, 0
+  local food = 0
   if regenStatus then
-    local elapsed = os.time() - regenStatus.time
-    food = math.max(0, regenStatus.food - elapsed)
-    water = math.max(0, regenStatus.water - elapsed)
+    food = math.max(0, regenStatus.food - (os.time() - regenStatus.time))
   end
   setSkillValue('food', formatRegen(food))
   checkAlert('food', food, false, 60)
-  setSkillValue('water', formatRegen(water))
-  checkAlert('water', water, false, 60)
-  updateRegenRates(food, water)
+  updateRegenRates(food)
 end
 
 -- Health and mana regeneration, from the sources the server sends on opcode 131:
--- food (vocation), water (mana only) and the exploration chest bonuses.
+-- food (vocation) and the exploration chest bonuses.
 local function formatAmount(value)
   if math.abs(value - math.floor(value + 0.5)) < 0.05 then
     return tostring(math.floor(value + 0.5))
@@ -322,17 +318,13 @@ local function showRate(id, label, sources)
   skill:getChildById('value'):setTooltip(tooltip)
 end
 
-function updateRegenRates(food, water)
+function updateRegenRates(food)
   local regen = regenStatus and regenStatus.regen or {}
   local fed, chests = type(regen.food) == 'table' and regen.food or {}, type(regen.chests) == 'table' and regen.chests or {}
-  local drink = type(regen.water) == 'table' and regen.water or {}
   local hp, mana = {}, {}
   if food > 0 then
     table.insert(hp, {name = 'Food', source = fed.hp})
     table.insert(mana, {name = 'Food', source = fed.mana})
-  end
-  if water > 0 then
-    table.insert(mana, {name = 'Water', source = drink.mana})
   end
   table.insert(hp, {name = 'Treasure chests', source = chests.hp})
   table.insert(mana, {name = 'Treasure chests', source = chests.mana})
@@ -358,7 +350,7 @@ function onRegenStatus(protocol, opcode, buffer)
   local ok, data = pcall(function() return json.decode(buffer) end)
   if not ok or type(data) ~= 'table' or data.action ~= 'status' then return end
   regenStatus = {food = math.max(0, math.floor(tonumber(data.food) or 0)),
-    water = math.max(0, math.floor(tonumber(data.water) or 0)), time = os.time(),
+    time = os.time(),
     regen = type(data.regen) == 'table' and data.regen or nil}
   updateRegen()
 end

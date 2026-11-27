@@ -1,5 +1,107 @@
 [
   {
+    "id": "changelog-20261127",
+    "date": "2026-11-27",
+    "title": "Changelog: everything coming in the next update.",
+    "summary": "Every change made since 24 November, sorted by topic. They are being tested now and will reach the public server with the next update.",
+    "changes": [],
+    "groups": [
+      {
+        "title": "New features",
+        "changes": [
+          "Day and night: a game day lasts 4 real hours, with 2 hours of daylight and 2 of night, and the sky brightens and darkens slowly at dawn and dusk. Say !time to see the game hour.",
+          "Hunting night: from 19:00 to 05:00 game time, monsters give 25% more experience and loot and respawn 25% faster, but wild monsters also hit 10% harder. The server announces when the night starts and ends.",
+          "Bounty on player killers: whoever kills a player unjustly pays 100 gold per own level, taken from the bank or the backpack. That gold becomes a bounty on the killer's head, and whoever kills them collects it in the bank. Say !bounty to see the 10 biggest bounties.",
+          "Exploration chests: one hidden chest in each region (Thais, Carlin, Kazordoon, Ab'Dendriel, Edron, Darashia, Venore, Ankrahmun, Rookgaard and Port Hope). Whoever finds one picks a permanent bonus for the character: gold, mana or health."
+        ]
+      },
+      {
+        "title": "Gameplay",
+        "changes": [
+          "Hunting fatigue: hunting the same creature for a long time slowly lowers the experience it gives, 1% every 20 kills, down to at most 40% less. Fatigue wears off with time, and !fatigue shows which creatures are tiring you. Changing hunting spots keeps your experience at full.",
+          "Respawn follows the number of players online: with up to 10 players it stays normal, and it gets faster as more players join, up to twice as fast with 150 online.",
+          "Classic light: the lighting works like in 7.4 again, and torches last twice as long.",
+          "The Skills window shows how much health and mana you regenerate and where it comes from: food and exploration chests.",
+          "Your character is saved automatically every 5 minutes, and also when you close a trade or send a parcel, so much less progress is lost if the server goes down.",
+          "Bot detection: the server spots automated play and warns the staff."
+        ]
+      },
+      {
+        "title": "Economy",
+        "changes": [
+          "Gold now drops at the original 1x rate, like in 7.4.",
+          "NPC prices follow the market: when players sell a lot of the same item to NPCs, its price drops 1% for every 20 units sold on the server, down to half the price, and slowly recovers over the following hours. The trade window always shows the current price.",
+          "House rent is now weekly, at a quarter of the monthly price. If you can't pay, you get a warning each day for 7 days; after that you lose the house and your items go to your depot.",
+          "Mailbox: a parcel or letter without a valid label (an existing character and town) is refused and stays with you."
+        ]
+      },
+      {
+        "title": "Fixes",
+        "changes": [
+          "Fixes for known server crashes and abuses, such as bags nested inside bags without limit, containers above capacity and creatures removed in the middle of combat.",
+          "Reports (Ctrl+R): only the staff can close another player's report, and the report of a player who logs out is cancelled.",
+          "!frags shows the correct weekly and monthly counts.",
+          "The server keeps accepting logins when many players connect at the same time.",
+          "The rent warning stops as soon as the rent is paid, and bounty gold always reaches the player who collects it.",
+          "The server comes back on its own right after the daily server save."
+        ]
+      },
+      {
+        "title": "Client",
+        "changes": [
+          "Smoother walking with high ping: your next step starts as soon as the server confirms the previous one, and the server sends game data without waiting.",
+          "Widescreen: when you log in, the map already appears at the right width, without flashing the classic 15x11 view.",
+          "Closing a chat channel no longer causes an error, and item descriptions with charges no longer repeat the final period."
+        ]
+      },
+      {
+        "title": "Removed",
+        "changes": [
+          "The Bosstiary tab of the Game Wiki.",
+          "Drinking water no longer restores mana, and the Water line is gone from the Skills window."
+        ]
+      }
+    ],
+    "paragraphs": [
+      "Everything on this list is already running on our test server and will reach the public server with the next update.",
+      "Found a bug or have an idea? Tell us on Discord: discord.gg/CVneyh53mZ"
+    ],
+    "url": "https://github.com/djowww/tibia-7.4-a-classic-rpg-version/blob/main/CHANGELOG.md"
+  },
+  {
+    "id": "changelog-20261124",
+    "date": "2026-11-24",
+    "title": "Trade space warnings, longer food and water, and the Game Wiki.",
+    "summary": "Changes that are already live on the public server since 24 November.",
+    "changes": [],
+    "groups": [
+      {
+        "title": "Gameplay",
+        "changes": [
+          "Water and food last up to 1 hour, with the time left shown in the Food and Water lines of the Skills window.",
+          "Experience and skill bonuses are back, together with the achievement and Bestiary bonuses.",
+          "The labyrinth and the lever of the original map work again like in 7.4."
+        ]
+      },
+      {
+        "title": "Economy",
+        "changes": [
+          "The NPC trade window shows your capacity and warns you when a purchase won't fit in your weight or backpack, or when your change would fall to the floor."
+        ]
+      },
+      {
+        "title": "Client",
+        "changes": [
+          "Game Wiki (in development): a book inside the client with Bestiary, Itempedia, Hunting Guide and Bosstiary."
+        ]
+      }
+    ],
+    "paragraphs": [
+      "These changes have been on the public server since 24 November. You only need to open the launcher to get them."
+    ],
+    "url": "https://github.com/djowww/tibia-7.4-a-classic-rpg-version/blob/main/CHANGELOG.md"
+  },
+  {
     "id": "public-server-20261123",
     "date": "2026-11-23",
     "title": "The public server is back, with a fresh start.",

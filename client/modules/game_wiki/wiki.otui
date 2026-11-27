@@ -377,48 +377,6 @@ WikiHuntCard < UIWidget
     color: #45D145
     phantom: true
 
-WikiBossCell < UIWidget
-  background-color: #262626
-  border: 1 #555555
-  focusable: false
-
-  UIWidget
-    id: frame
-    size: 68 68
-    anchors.top: parent.top
-    anchors.horizontalCenter: parent.horizontalCenter
-    margin-top: 6
-    phantom: true
-
-    UICreature
-      id: creature
-      size: 64 64
-      anchors.centerIn: parent
-      old-scaling: true
-      outfit-center: true
-      animate: false
-      phantom: true
-
-  Label
-    id: name
-    anchors.top: frame.bottom
-    anchors.left: parent.left
-    anchors.right: parent.right
-    margin-top: 2
-    text-align: center
-    color: #CFCFCF
-    phantom: true
-
-  Label
-    id: info
-    anchors.top: name.bottom
-    anchors.left: parent.left
-    anchors.right: parent.right
-    margin-top: 2
-    text-align: center
-    color: #929292
-    phantom: true
-
 MainWindow
   id: wikiWindow
   visible: false
@@ -449,14 +407,6 @@ MainWindow
     margin-left: 4
     text: Hunting Guide
     @onClick: modules.game_wiki.setTab('hunting')
-
-  WikiTab
-    id: tab_bosstiary
-    anchors.top: parent.top
-    anchors.left: prev.right
-    margin-left: 4
-    text: Bosstiary (WIP)
-    @onClick: modules.game_wiki.setTab('bosstiary')
 
   Label
     id: xpBonus
@@ -1105,52 +1055,3 @@ MainWindow
         color: #929292
         visible: false
         phantom: true
-
-  Panel
-    id: bosstiaryPanel
-    anchors.fill: bestiaryPanel
-    visible: false
-
-    FlatPanel
-      id: bossNote
-      anchors.top: parent.top
-      anchors.left: parent.left
-      anchors.right: parent.right
-      height: 44
-      padding: 8
-
-      Label
-        id: bossNoteText
-        anchors.fill: parent
-        text-wrap: true
-        text-align: left
-        color: #F0C040
-        text: Work in progress. The great bosses of these lands are listed here; their lairs, loot and kill records open in a future update.
-
-    WikiInset
-      id: bossFrame
-      anchors.top: bossNote.bottom
-      anchors.left: parent.left
-      anchors.right: parent.right
-      anchors.bottom: parent.bottom
-      margin-top: 6
-
-      ScrollablePanel
-        id: bossList
-        anchors.fill: parent
-        margin: 5 18 5 5
-        vertical-scrollbar: bossScroll
-        layout:
-          type: grid
-          cell-size: 168 112
-          cell-spacing: 4
-          flow: true
-
-      VerticalScrollBar
-        id: bossScroll
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        margin: 1
-        pixels-scroll: true
-        step: 58

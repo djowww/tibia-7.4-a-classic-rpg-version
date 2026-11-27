@@ -1,4 +1,5 @@
--- Keep the sprite readable, with a restrained shimmer matching its pixel accents.
+-- Rarity is shown as light behind the sprite: the slot swaps its own background
+-- image for a pre-rendered aura frame, so nothing is ever drawn over the item.
 local families = {
   [0] = { {151, 125, 88}, {189, 161, 112}, {210, 190, 149} },
   [1] = { {93, 139, 110}, {129, 173, 137}, {167, 195, 151} },
@@ -12,14 +13,23 @@ local families = {
 -- Keep a strong wrapper in a plain Lua entry and share its token via the
 -- widget's native fields, so callbacks with another wrapper find the same slot.
 local slots = {}
+local animated = 0
 local animationEvent
 local ANIMATION_MS = 200
 local CYCLE_MS = 4200
 local TWO_PI = math.pi * 2
-local BOLT_PIXELS = {
-  {3, 0, 2}, {2, 1, 2}, {1, 2, 2}, {0, 3, 5},
-  {2, 4, 2}, {1, 5, 2}, {0, 6, 2}
-}
+local SLOT_IMAGE = '/images/ui/item'
+local SLOT_SIZE = 34
+-- rarity_aura.png: one row per tier, one 34x34 column per 200 ms frame.
+-- Each frame is the slot background with the light, the thin border and the
+-- bottom notches (one per tier) already painted, so the sprite stays on top.
+local AURA_IMAGE = '/images/ui/rarity_aura'
+local AURA_FRAMES = {1, 1, 1, 16, 32}
+local HALO_IMAGE = '/images/ui/rarity_halo'
+local AURA_COLORS = {'#5FAE78', '#5F8FCA', '#A074C8', '#D6A842', '#D2545A'}
+local NAME_COLORS = {'#7DC18D', '#7DA7DA', '#B78FD7', '#E4BF6B', '#E27677'}
+local TIER_NAMES = {'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic'}
+local tooltipStyled = false
 
 local function tierNumber(tier)
   return type(tier) == 'number' and tier == math.floor(tier)
@@ -61,21 +71,6 @@ function getTextColor(tier)
   return hex(families[tierNumber(tier)][2])
 end
 
-function getAccentColor(tier, now, seed)
-  return hex(colorAt(tier, now, seed))
-end
-
-function getSlotTint(tier, now, seed, locked)
-  tier = tierNumber(tier)
-  if tier == 0 then return '#FFFFFF' end
-  now = now or g_clock.millis()
-  local phase = (now + phaseSeed(seed)) / CYCLE_MS * TWO_PI
-  local shimmer = (1 - math.cos(phase)) * 0.5
-  local strength = 0.035 + shimmer * (0.065 + tier * 0.015)
-  if locked then strength = strength * 0.45 end
-  return hex(mix({255, 255, 255}, colorAt(tier, now, seed), strength))
-end
-
 function getWorldTint(tier, now, seed, surface)
   tier = tierNumber(tier)
   now = now or g_clock.millis()
@@ -95,94 +90,80 @@ local function alive(widget)
   return widget and not widget:isDestroyed()
 end
 
-local function pixel(parent, width, height, horizontal, vertical, insetX, insetY)
-  local child = g_ui.createWidget('UIWidget', parent)
-  child:setPhantom(true)
-  child:setFocusable(false)
-  child:setSize({width = width, height = height})
-  child:addAnchor(horizontal, 'parent', horizontal)
-  child:addAnchor(vertical, 'parent', vertical)
-  if horizontal == AnchorLeft then child:setMarginLeft(insetX)
-  else child:setMarginRight(insetX) end
-  if vertical == AnchorTop then child:setMarginTop(insetY)
-  else child:setMarginBottom(insetY) end
-  return child
+local function frameClip(tier, frame)
+  return {x = frame * SLOT_SIZE, y = (tier - 1) * SLOT_SIZE, width = SLOT_SIZE, height = SLOT_SIZE}
 end
 
-local function removeDecoration(entry)
-  for _, child in ipairs(entry.children) do
-    if alive(child) then child:destroy() end
-  end
+local function restoreBackground(widget)
+  widget:setImageSource(SLOT_IMAGE)
+  widget:setImageClip({x = 0, y = 0, width = SLOT_SIZE, height = SLOT_SIZE})
+  widget:setColor('#FFFFFF')
 end
 
-local function slotBolt(parent)
-  local children = {}
-  for _, rect in ipairs(BOLT_PIXELS) do
-    children[#children + 1] = pixel(parent, rect[3], 1, AnchorRight, AnchorTop,
-      3 + 5 - rect[1] - rect[3], 5 + rect[2])
-  end
-  return children
+-- The map is stretched to the window, but a tile widget is not: its size and
+-- margins stay in screen pixels. Follow the zoom so the halo keeps its place.
+local function groundScale()
+  local interface = modules.game_interface
+  local panel = interface and interface.getMapPanel and interface.getMapPanel()
+  if not panel or not panel.getVisibleDimension then return 1 end
+  local dimension = panel:getVisibleDimension()
+  if not dimension or dimension.width < 1 or dimension.height < 1 then return 1 end
+  local scale = math.min(panel:getWidth() / (dimension.width * 32), panel:getHeight() / (dimension.height * 32))
+  if scale ~= scale or scale < 0.25 then return 1 end
+  return math.min(scale, 4)
+end
+
+local function placeGroundHalo(widget, scale)
+  if widget.antigasRarityHaloScale == scale then return end
+  widget.antigasRarityHaloScale = scale
+  local tile = 32 * scale
+  widget:setSize({width = math.floor(44 * scale + 0.5), height = math.floor(22 * scale + 0.5)})
+  -- Tile centers its widget 32 screen pixels right and below the tile origin;
+  -- bring it to the middle of the tile, under the item's feet.
+  widget:setMarginLeft(math.floor(tile * 0.5 - 32 + 0.5))
+  widget:setMarginTop(math.floor(tile * 0.72 - 32 + 0.5))
 end
 
 -- The ground controller owns this parentless widget. Tile draws and projects it,
 -- so it never needs a screen-space overlay or an extra animation event.
-function createGroundBolt()
+function createGroundHalo()
   local widget = g_ui.createWidget('UIWidget')
   widget:setPhantom(true)
   widget:setFocusable(false)
-  widget:setSize({width = 10, height = 14})
-  widget:setMarginLeft(-8)
-  widget:setMarginTop(-20)
+  widget:setImageSource(HALO_IMAGE)
+  placeGroundHalo(widget, groundScale())
   widget:setOpacity(0)
-  local children = {}
-  for _, rect in ipairs(BOLT_PIXELS) do
-    children[#children + 1] = pixel(widget, rect[3] * 2, 2, AnchorLeft, AnchorTop,
-      rect[1] * 2, rect[2] * 2)
-  end
-  widget.antigasRarityBoltPixels = children
   return widget
 end
 
-function paintGroundBolt(widget, tier, now, seed, opacity)
+function paintGroundHalo(widget, tier, opacity)
   if not alive(widget) then return end
-  local color = getAccentColor(tier, now, seed)
-  if widget.antigasRarityBoltColor ~= color then
-    for _, child in ipairs(widget.antigasRarityBoltPixels) do
-      child:setBackgroundColor(color)
-    end
-    widget.antigasRarityBoltColor = color
+  placeGroundHalo(widget, groundScale())
+  local color = AURA_COLORS[tierNumber(tier)] or AURA_COLORS[1]
+  if widget.antigasRarityHaloColor ~= color then
+    widget:setImageColor(color)
+    widget.antigasRarityHaloColor = color
   end
   widget:setOpacity(math.max(0, math.min(1, opacity)))
 end
 
 local function paintSlot(widget, entry, now)
-  local spriteColor = getSlotTint(entry.tier, now, entry.seed, entry.locked)
-  -- Native item color preserves sprite shading; no extra overlay covers its art.
-  if entry.spriteColor ~= spriteColor then
-    widget:setColor(spriteColor)
-    entry.spriteColor = spriteColor
+  local frames = AURA_FRAMES[entry.tier]
+  local frame = 0
+  if frames > 1 and not entry.locked then
+    frame = math.floor((now + entry.seed) / ANIMATION_MS) % frames
   end
-  local color = getAccentColor(entry.tier, now, entry.seed)
-  if entry.locked then color = hex(mix(colorAt(entry.tier, now, entry.seed), {94, 91, 87}, 0.45)) end
-  if entry.color ~= color then
-    for _, child in ipairs(entry.accents) do child:setBackgroundColor(color) end
-    for _, child in ipairs(entry.bolt) do child:setBackgroundColor(color) end
-    entry.color = color
+  if entry.frame ~= frame then
+    widget:setImageClip(frameClip(entry.tier, frame))
+    entry.frame = frame
   end
-  local wave = (1 - math.cos((now + entry.seed) / CYCLE_MS * TWO_PI)) * 0.5
-  local boltOpacity = entry.locked and 0.3 or 0.4 + wave * 0.5
-  for _, child in ipairs(entry.bolt) do child:setOpacity(boltOpacity) end
-  if entry.glint then
-    local travel = ((now + entry.seed) % 5600) / 5600
-    -- A short, slow pass along the top edge, followed by a quiet interval.
-    local visible = travel < 0.34 and not entry.locked
-    entry.glint:setVisible(visible)
-    if visible then
-      local width = math.max(0, widget:getWidth() - 9)
-      entry.glint:setMarginLeft(3 + math.floor(width * travel / 0.34))
-      entry.glint:setBackgroundColor(hex(families[entry.tier][3]))
-    end
-  end
+end
+
+local function forget(entry)
+  if not slots[entry] then return end
+  slots[entry] = nil
+  if AURA_FRAMES[entry.tier] > 1 then animated = animated - 1 end
+  entry.widget = nil
 end
 
 local function animateSlots()
@@ -191,14 +172,19 @@ local function animateSlots()
   for entry in pairs(slots) do
     local widget = entry.widget
     if not alive(widget) then
-      slots[entry] = nil
-      removeDecoration(entry)
-      entry.widget = nil
-    elseif widget:isVisible() then
+      forget(entry)
+    elseif AURA_FRAMES[entry.tier] > 1 and widget:isVisible() then
       paintSlot(widget, entry, now)
     end
   end
-  if next(slots) then animationEvent = scheduleEvent(animateSlots, ANIMATION_MS) end
+  if animated > 0 then animationEvent = scheduleEvent(animateSlots, ANIMATION_MS) end
+end
+
+local function stopIdleTimer()
+  if animated <= 0 and animationEvent then
+    removeEvent(animationEvent)
+    animationEvent = nil
+  end
 end
 
 function clearSlot(widget)
@@ -206,14 +192,9 @@ function clearSlot(widget)
   local entry = widget.antigasRarityVisualEntry
   if not entry then return end
   widget.antigasRarityVisualEntry = nil
-  slots[entry] = nil
-  if alive(widget) then widget:setColor('#FFFFFF') end
-  removeDecoration(entry)
-  entry.widget = nil
-  if not next(slots) and animationEvent then
-    removeEvent(animationEvent)
-    animationEvent = nil
-  end
+  if alive(widget) then restoreBackground(widget) end
+  forget(entry)
+  stopIdleTimer()
 end
 
 function applySlot(widget, tier, locked)
@@ -225,57 +206,100 @@ function applySlot(widget, tier, locked)
   local entry = widget.antigasRarityVisualEntry
   if entry and entry.tier ~= tier then clearSlot(widget); entry = nil end
   if not entry then
-    entry = {widget = widget, tier = tier, seed = phaseSeed(tostring(widget)), children = {}, accents = {}, bolt = {}}
+    entry = {widget = widget, tier = tier, seed = phaseSeed(tostring(widget))}
     slots[entry] = true
+    if AURA_FRAMES[tier] > 1 then animated = animated + 1 end
     widget.antigasRarityVisualEntry = entry
-    local corners = {
-      {AnchorLeft, AnchorTop}, {AnchorRight, AnchorTop},
-      {AnchorLeft, AnchorBottom}, {AnchorRight, AnchorBottom}
-    }
-    for _, corner in ipairs(corners) do
-      for _, size in ipairs({{4, 1}, {1, 4}}) do
-        local child = pixel(widget, size[1], size[2], corner[1], corner[2], 1, 1)
-        entry.children[#entry.children + 1] = child
-        entry.accents[#entry.accents + 1] = child
-      end
-    end
-    -- Countable tier marks remain readable without relying only on color.
-    for i = 1, tier do
-      local child = pixel(widget, 2, 2, AnchorLeft, AnchorBottom, 7 + (i - 1) * 3, 1)
-      entry.children[#entry.children + 1] = child
-      entry.accents[#entry.accents + 1] = child
-    end
-    entry.bolt = slotBolt(widget)
-    for _, child in ipairs(entry.bolt) do
-      entry.children[#entry.children + 1] = child
-    end
-    if tier >= 3 then
-      entry.glint = pixel(widget, 3, 1, AnchorLeft, AnchorTop, 3, 1)
-      entry.children[#entry.children + 1] = entry.glint
-    end
   end
   entry.locked = locked == true
-  -- Inventory rarity refreshes first restore the native sprite to white.
-  entry.spriteColor = nil
+  -- A style refresh may have put the plain slot image back; claim it again.
+  widget:setImageSource(AURA_IMAGE)
+  entry.frame = nil
   paintSlot(widget, entry, g_clock.millis())
-  if not animationEvent then animationEvent = scheduleEvent(animateSlots, ANIMATION_MS) end
+  if animated > 0 and not animationEvent then
+    animationEvent = scheduleEvent(animateSlots, ANIMATION_MS)
+  end
 end
 
 function resetSlots()
   if animationEvent then removeEvent(animationEvent); animationEvent = nil end
   for entry in pairs(slots) do
-    slots[entry] = nil
-    if alive(entry.widget) then
-      entry.widget.antigasRarityVisualEntry = nil
-      entry.widget:setColor('#FFFFFF')
+    local widget = entry.widget
+    if alive(widget) then
+      widget.antigasRarityVisualEntry = nil
+      restoreBackground(widget)
     end
-    removeDecoration(entry)
-    entry.widget = nil
+    forget(entry)
   end
+  animated = 0
+end
+
+-- The shared tooltip is one label owned by corelib. A rare item restyles it
+-- (dark box, tier strip on top, tier name in its color) right after corelib
+-- fills it; the next ordinary tooltip gets the classic look back.
+local function tooltipLabel()
+  return rootWidget and rootWidget:getChildById('toolTip')
+end
+
+local function restoreTooltip()
+  if not tooltipStyled then return end
+  tooltipStyled = false
+  local label = tooltipLabel()
+  if not alive(label) then return end
+  label:setBackgroundColor('#c0c0c0')
+  label:setColor('#3f3f3f')
+  label:setBorderWidth(1)
+  label:setBorderColor('black')
+  label:setTextAlign(AlignCenter)
+  label:setTextOffset({x = 0, y = 0})
+end
+
+function tooltipParts(text, tier)
+  tier = tierNumber(tier)
+  local name = TIER_NAMES[tier]
+  if not name or type(text) ~= 'string' then return nil end
+  local first
+  if text:sub(1, #name) == name and (#text == #name or text:sub(#name + 1, #name + 1) == '\n') then
+    first = 1
+  else
+    local found = text:find('\n' .. name .. '\n', 1, true)
+    if found then
+      first = found + 1
+    elseif #text > #name and text:sub(-#name - 1) == '\n' .. name then
+      first = #text - #name + 1
+    end
+  end
+  if not first then return nil end
+  local plain = '#D8D8D8'
+  return {text:sub(1, first - 1), plain, name, NAME_COLORS[tier], text:sub(first + #name), plain}
+end
+
+local function onHoverChange(widget, hovered)
+  if not hovered then return end
+  local tier = widget.rarityTooltip and tierNumber(widget.rarityTier) or 0
+  local parts = tier > 0 and not g_mouse.isPressed() and tooltipParts(widget.tooltip, tier)
+  if not parts then
+    restoreTooltip()
+    return
+  end
+  local label = tooltipLabel()
+  if not alive(label) or label:getText() ~= widget.tooltip then return end
+  label:setColoredText(parts)
+  label:setBackgroundColor('#111111')
+  label:setColor('#D8D8D8')
+  label:setBorderWidth(1)
+  label:setBorderColor('black')
+  label:setBorderWidthTop(2)
+  label:setBorderColorTop(AURA_COLORS[tier])
+  label:setTextAlign(AlignLeft)
+  label:setTextOffset({x = 5, y = 1})
+  label:resize(label:getWidth() + 8, label:getHeight() + 4)
+  tooltipStyled = true
 end
 
 function init()
   connect(g_game, {onGameEnd = resetSlots})
+  connect(UIWidget, {onHoverChange = onHoverChange})
   if g_game.isOnline() then
     -- Restore existing authoritative slot metadata after reloading this module.
     for _, widget in ipairs(g_ui.getRootWidget():recursiveGetChildren()) do
@@ -288,5 +312,7 @@ end
 
 function terminate()
   disconnect(g_game, {onGameEnd = resetSlots})
+  disconnect(UIWidget, {onHoverChange = onHoverChange})
+  restoreTooltip()
   resetSlots()
 end

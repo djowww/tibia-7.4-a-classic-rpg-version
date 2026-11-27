@@ -30,6 +30,8 @@ class ProtocolLogin : public Protocol
 	public:
 		// static protocol information
 		uint16_t otclientV8 = 0;
+		// Set when the client asks for level, vocation, outfit and town in the character list.
+		bool characterDetails = false;
 		enum {server_sends_first = false};
 		enum {protocol_identifier = 0x01};
 		enum {use_checksum = true};

@@ -27,7 +27,6 @@ Scripts em [`tools/`](../tools/), executados a partir da raiz do repositório:
 - [`generate-minimap-markers.py`](../tools/generate-minimap-markers.py): gera as marcações prontas do minimapa (escadas, lojas, bancos, templos).
 - [`build-quest-catalog.py`](../tools/build-quest-catalog.py): gera o catálogo somente leitura do diário de quests.
 - [`generate-retired-items.py`](../tools/generate-retired-items.py): gera os ids estáveis dos itens aposentados a partir de `data/items/retired-items.json`.
-- [`restore_client_coin_assets.py`](../tools/restore_client_coin_assets.py): restaura a arte das Antigas Coins num cliente 7.72 de referência.
 - [`check_lua_lint.py`](../tools/check_lua_lint.py) e [`check_script_lint.py`](../tools/check_script_lint.py): lint de Lua, shell scripts e workflows, comparado com as baselines em `tests/`.
 - [`ReleaseSigner/`](../tools/ReleaseSigner/): assina o manifesto das releases do launcher.
 
@@ -35,7 +34,6 @@ Scripts em [`tools/`](../tools/), executados a partir da raiz do repositório:
 
 - [Como contribuir](../CONTRIBUTING.md)
 - [Testes](../tests/README.md)
-- [Infraestrutura](../infra/README.md)
 - [Política de segurança](../SECURITY.md)
 - [Origem do código e avisos de licença](../NOTICE.md) · [Licença](../LICENSE)
 

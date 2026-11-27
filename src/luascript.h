@@ -547,6 +547,7 @@ class LuaScriptInterface
 
 		static int luaGameGetTowns(lua_State* L);
 		static int luaGameGetHouses(lua_State* L);
+		static int luaGameFindItemsInArea(lua_State* L);
 		
 		static int luaGameGetOutfits(lua_State* L);
 

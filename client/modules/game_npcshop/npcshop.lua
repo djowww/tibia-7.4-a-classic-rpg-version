@@ -95,45 +95,94 @@ local function canTrade(offer, count)
   return offer.have >= offer.amount * count
 end
 
+local GOLD, RED, LOOK, WARN = '#E2BD55', '#E06A5A', '#00EB00', '#FFA3A3'
+local GRID_SLOTS = 30 -- three rows of ten, like an open backpack
+local lastSaid = {}
+local syncingBar = false
+
+-- "vial of manafluid" -> "vials of manafluid", "throwing knife" -> "throwing knives"
+local function plural(name)
+  local head, tail = name:match('^(.-)( of .+)$')
+  head, tail = head or name, tail or ''
+  if head:sub(-1) == 's' then
+    return name
+  elseif head:sub(-2) == 'fe' then
+    head = head:sub(1, -3) .. 'ves'
+  elseif head:match('[^aeiou]y$') then
+    head = head:sub(1, -2) .. 'ies'
+  elseif head:match('[xz]$') or head:match('[cs]h$') then
+    head = head .. 'es'
+  else
+    head = head .. 's'
+  end
+  return head .. tail
+end
+
+-- What the merchant says goes over the scene, in the yellow of the game.
+local function say(text)
+  if window then
+    window.scene.say:setText((npcName or 'NPC') .. ': ' .. text)
+  end
+end
+
+-- The same question the merchant asks in the 7.4 dialogue.
+local function ask()
+  local offer = selected
+  if not offer then return end
+  local units = amount * offer.amount
+  local what
+  if units > 1 then
+    what = units .. ' ' .. plural(offer.name)
+  else
+    what = (offer.article ~= '' and (offer.article .. ' ') or '') .. offer.name
+  end
+  say('Do you want to ' .. mode .. ' ' .. what .. ' for ' .. formatNumber(offer.price * amount) .. ' gold?')
+end
+
 local function updateDetail()
   if not window then return end
-  local detail = window.detail
+  local scene = window.scene
   local offer = selected
   window.money:setText(formatNumber(money) .. ' gp')
   local capacity = freeCapacity()
   window.capacity:setText(capacity and string.format('Cap: %.2f oz', capacity) or '')
 
+  local bar = window.amountBar
   if not offer then
-    detail:hide()
+    scene.item:hide()
+    scene.coins:hide()
+    scene.total:setText('')
+    window.amount:setText('')
     window.note:setText('')
+    window.action:setEnabled(false)
+    bar:setEnabled(false)
     return
   end
-  detail:show()
 
-  amount = math.max(1, math.min(amount, maxAmount(offer)))
+  local limit = maxAmount(offer)
+  amount = math.max(1, math.min(amount, limit))
   local total = offer.price * amount
-  local name = title(offer.name)
-  local article = offer.article ~= '' and (offer.article .. ' ') or ''
-
-  setOfferItem(detail.icon, offer)
-  detail.name:setText(name)
-  detail.description:setText('You see ' .. article .. offer.name .. '. It weighs ' .. formatWeight(offer.weight) .. '.')
-  detail.priceValue:setText(formatNumber(offer.price) .. ' gp')
-  detail.weightValue:setText(formatWeight(offer.weight))
-  detail.haveValue:setText(tostring(offer.have))
-  detail.amount:setText(tostring(amount))
-  detail.totalValue:setText(formatNumber(total) .. ' gp')
-
-  local single = offer.max <= 1
-  detail.minus:setEnabled(not single)
-  detail.plus:setEnabled(not single)
-  detail.ten:setEnabled(not single)
-  detail.max:setEnabled(not single)
-
-  local ok = canTrade(offer, amount)
   local units = amount * offer.amount
-  detail.action:setText((mode == 'buy' and 'Buy ' or 'Sell ') .. units .. 'x ' .. name)
-  detail.action:setEnabled(ok)
+  local ok = canTrade(offer, amount)
+
+  syncingBar = true
+  bar:setEnabled(limit > 1)
+  bar:setMinimum(1)
+  bar:setMaximum(limit)
+  bar:setValue(amount)
+  syncingBar = false
+  window.amount:setText(tostring(units))
+
+  scene.item:show()
+  setOfferItem(scene.item, offer, units)
+  scene.coins:setVisible(total > 0)
+  scene.coins:setItemId(3031) -- gold coin: the pile grows with the price
+  scene.coins:setItemCount(math.max(1, math.min(100, total)))
+  scene.total:setText(formatNumber(total) .. ' gp')
+  scene.total:setColor((mode == 'buy' and total > money) and RED or GOLD)
+
+  window.action:setText(mode == 'buy' and 'Buy' or 'Sell')
+  window.action:setEnabled(ok)
 
   local note = ''
   if not ok then
@@ -155,27 +204,37 @@ local function updateDetail()
       note = 'No room left: change may drop on the floor.'
     end
   end
-  window.note:setText(note)
+  if note == '' then
+    local article = offer.article ~= '' and (offer.article .. ' ') or ''
+    window.note:setText('You see ' .. article .. offer.name .. '. It weighs ' .. formatWeight(offer.weight) .. '.')
+    window.note:setColor(LOOK)
+  else
+    window.note:setText(note)
+    window.note:setColor(WARN)
+  end
+end
+
+local function mark(offer)
+  selected = offer
+  for _, cell in ipairs(cells) do
+    cell.item:setBorderWidth(cell.offer == offer and 1 or 0)
+  end
 end
 
 local function select(offer)
-  selected = offer
+  mark(offer)
   amount = 1
-  for _, cell in ipairs(cells) do
-    cell:setOn(cell.offer == offer)
-  end
   updateDetail()
+  ask()
 end
 
-local function refresh()
+local function refresh(keepSpeech)
   if not window then return end
   local list = offers[mode]
   window.buyTab:setOn(mode == 'buy')
   window.sellTab:setOn(mode == 'sell')
   window.buyTab:setEnabled(#offers.buy > 0)
   window.sellTab:setEnabled(#offers.sell > 0)
-  window.buyTab:setText('Buy from ' .. (npcName or 'NPC'))
-  window.sellTab:setText('Sell to ' .. (npcName or 'NPC'))
 
   window.grid:destroyChildren()
   cells = {}
@@ -183,22 +242,33 @@ local function refresh()
     local cell = g_ui.createWidget('NpcTradeCell', window.grid)
     cell.offer = offer
     setOfferItem(cell.item, offer, offer.amount)
-    cell.name:setText(title(offer.name))
-    cell.price:setText(formatNumber(offer.price) .. ' gp')
+    cell.price:setText(formatNumber(offer.price))
     cell:setTooltip(title(offer.name) .. '\n' .. formatNumber(offer.price) .. ' gp, ' .. formatWeight(offer.weight))
     if mode == 'sell' then
-      cell.have:setText('x' .. offer.have)
-      if offer.have < offer.amount then cell:setOpacity(0.45) end
+      cell.have:setText(offer.have > 0 and tostring(offer.have) or '')
+      if offer.have < offer.amount then
+        cell.item:setOpacity(0.35)
+        cell.price:setColor('#77766E')
+      end
     else
       cell.have:setText('')
+      if offer.price > money then cell.price:setColor(RED) end
     end
     cell.onClick = function() select(offer) end
     cells[#cells + 1] = cell
   end
+  -- Empty slots fill the rest, as in a backpack.
+  for _ = #list + 1, GRID_SLOTS do
+    local cell = g_ui.createWidget('NpcTradeCell', window.grid)
+    cell.price:setText('')
+    cell.have:setText('')
+  end
+  window.gridScroll:setVisible(#list > GRID_SLOTS)
+
   local units, total = sellAllSummary()
   window.sellAll:setVisible(mode == 'sell')
-  window.note:removeAnchor(AnchorRight)
-  window.note:addAnchor(AnchorRight, mode == 'sell' and 'sellAll' or 'close', AnchorLeft)
+  window.action:removeAnchor(AnchorRight)
+  window.action:addAnchor(AnchorRight, mode == 'sell' and 'sellAll' or 'close', AnchorLeft)
   window.sellAll:setEnabled(units > 0)
   window.sellAll:setTooltip(units > 0 and ('Sell ' .. units .. ' items for ' .. formatNumber(total) .. ' gp.\nEquipped items are kept.') or 'Nothing to sell (equipped items are kept).')
 
@@ -211,12 +281,21 @@ local function refresh()
       if offer.index == selected.index then keep = offer break end
     end
   end
-  local previousAmount = amount
-  select(keep or list[1])
   if keep then
-    amount = previousAmount
-    updateDetail()
+    mark(keep)
+  else
+    local first = list[1]
+    if mode == 'sell' then
+      -- Start on something the player actually has.
+      for _, offer in ipairs(list) do
+        if offer.have >= offer.amount then first = offer break end
+      end
+    end
+    mark(first)
+    amount = 1
   end
+  updateDetail()
+  if not keepSpeech then ask() end
 end
 
 local function send(text)
@@ -243,6 +322,7 @@ function setAmount(value)
   if not selected then return end
   amount = math.max(1, math.min(value, maxAmount(selected)))
   updateDetail()
+  ask()
 end
 
 function changeAmount(delta)
@@ -330,8 +410,23 @@ local function open(lines)
     selected = nil
   end
 
-  window:setText('Trade with ' .. npcName)
-  refresh()
+  window:setText(npcName)
+  window.moneyIcon:setItemId(3031) -- gold coin, drawn as a small pile
+  window.moneyIcon:setItemCount(10)
+  local creature = g_map.getCreatureById(npcId)
+  local npc = window.scene.npc
+  if creature then
+    npc:setOutfit(creature:getOutfit())
+    npc:setDirection(South)
+    npc:show()
+  else
+    npc:hide()
+  end
+
+  -- A list sent again after a trade keeps the merchant's answer on screen.
+  local spoke = not sameNpc and lastSaid.name == npcName and lastSaid.text or nil
+  refresh(sameNpc or spoke ~= nil)
+  if spoke then say(spoke) end
   if not window:isVisible() then
     window:show()
     window:raise()
@@ -350,7 +445,16 @@ local function onOpcode(protocol, opcode, buffer)
   end
 end
 
+local function onTalk(name, level, mode, message)
+  if not name or name == '' or type(message) ~= 'string' then return end
+  lastSaid = {name = name, text = message}
+  if window and window:isVisible() and name == npcName then
+    say(message)
+  end
+end
+
 local function onGameEnd()
+  lastSaid = {}
   if sellAllBox then sellAllBox:destroy() sellAllBox = nil end
   if window then window:hide() end
   npcId, npcName, selected = nil, nil, nil
@@ -361,16 +465,18 @@ end
 function init()
   window = g_ui.displayUI('npcshop')
   window:hide()
-  window.moneyIcon:setItemId(3031) -- gold coin, drawn as a small pile
-  window.moneyIcon:setItemCount(10)
   window.moneyIcon:setShowCount(false)
-  connect(g_game, {onGameEnd = onGameEnd})
+  window.scene.coins:setShowCount(false)
+  window.amountBar.onValueChange = function(_, value)
+    if not syncingBar then setAmount(value) end
+  end
+  connect(g_game, {onGameEnd = onGameEnd, onTalk = onTalk})
   connect(LocalPlayer, {onFreeCapacityChange = updateDetail})
   ProtocolGame.registerExtendedOpcode(OPCODE, onOpcode, true)
 end
 
 function terminate()
-  disconnect(g_game, {onGameEnd = onGameEnd})
+  disconnect(g_game, {onGameEnd = onGameEnd, onTalk = onTalk})
   disconnect(LocalPlayer, {onFreeCapacityChange = updateDetail})
   ProtocolGame.unregisterExtendedOpcode(OPCODE)
   if window then window:destroy() end

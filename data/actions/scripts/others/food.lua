@@ -1,4 +1,4 @@
-local MAX_FOOD_SECONDS = 60 * 60 -- food stacks up to 60 minutes, like water
+local MAX_FOOD_SECONDS = 60 * 60 -- food stacks up to 60 minutes
 
 function onUse(player, item, fromPosition, target, toPosition)
 	local itemType = ItemType(item:getId())
