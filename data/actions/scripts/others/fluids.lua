@@ -18,16 +18,6 @@ poison:addDamage(10, 4000, -1)
 poison:addDamage(8, 3950, -1)
 poison:addDamage(1, 3940, -1)
 
--- Drinking water: +1 mana every 10 seconds for one hour. Drinking again
--- restarts the hour; it does not stack and is separate from food.
-local hydration = Condition(CONDITION_REGENERATION, CONDITIONID_COMBAT)
-hydration:setParameter(CONDITION_PARAM_SUBID, 17870)
-hydration:setParameter(CONDITION_PARAM_TICKS, 60 * 60 * 1000)
-hydration:setParameter(CONDITION_PARAM_HEALTHGAIN, 0)
-hydration:setParameter(CONDITION_PARAM_HEALTHTICKS, 24 * 60 * 60 * 1000)
-hydration:setParameter(CONDITION_PARAM_MANAGAIN, 1)
-hydration:setParameter(CONDITION_PARAM_MANATICKS, 10 * 1000)
-
 local messages = {
 	[FLUID_WATER] = "Gulp.",
 	[FLUID_WINE] = "Aah...",
@@ -82,9 +72,6 @@ function onUse(player, item, fromPosition, target, toPosition)
 				player:addCondition(drunk)
 			elseif fluid == FLUID_SLIME then
 				player:addCondition(poison)
-			elseif fluid == FLUID_WATER then
-				player:addCondition(hydration)
-				RegenStatus.send(player)
 			elseif fluid == FLUID_MANAFLUID then
 				player:addMana(math.random(50, 150))
 				player:getPosition():sendMagicEffect(CONST_ME_MAGIC_BLUE)

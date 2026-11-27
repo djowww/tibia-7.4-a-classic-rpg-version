@@ -29,7 +29,7 @@ O launcher (versão atual: **v78**) baixa o cliente, confere as assinaturas e ma
 - **Market:** ofertas de compra e venda em Gold e Antigas Coins, negociações parciais, histórico e coleta de entregas.
 - **Achievements e Bestiary:** conquistas com recompensas e contadores de abates que dão bônus de experiência.
 - **Raridade de equipamentos:** cinco tiers, atributos adicionais e identificação visual no inventário, nos containers e no chão, com canal **Loot** colorido por raridade.
-- **Game Wiki:** livro dentro do cliente com Bestiary, Itempedia, Hunting Guide e Bosstiary.
+- **Game Wiki:** livro dentro do cliente com Bestiary, Itempedia e Hunting Guide.
 - **Baús de exploração:** um baú escondido por região dá um bônus permanente ao personagem que o encontra.
 - **Diário de quests** e **NPCs** com janela de trade, balão de conversa e cumprimento com clique direito.
 
@@ -50,10 +50,9 @@ Capturas feitas com o cliente do projeto (Game Wiki e Skills atualizadas em nove
 | | |
 | --- | --- |
 | ![Achievements com ranks, contadores e bônus](docs/screenshots/02-achievements.jpg) | ![Bestiary com o progresso de abates por monstro](docs/screenshots/03-bestiary.jpg) |
-| ![Market com ofertas de compra e venda](docs/screenshots/05-market.jpg) | ![Skills com as barras novas, comida, água e regeneração de vida e mana](docs/screenshots/06-skills-regen.jpg) |
+| ![Market com ofertas de compra e venda](docs/screenshots/05-market.jpg) | ![Skills com as barras novas, comida e regeneração de vida e mana](docs/screenshots/06-skills-regen.jpg) |
 | ![Trade avisando que só parte da compra cabe no peso](docs/screenshots/07-trade-espaco.jpg) | ![Trade avisando que a mochila está cheia](docs/screenshots/08-trade-mochila-cheia.jpg) |
 | ![Trade avisando que o troco vai cair no chão](docs/screenshots/09-trade-troco.jpg) | ![Game Wiki: Itempedia com atributos, quem dropa e NPCs](docs/screenshots/11-wiki-itempedia.jpg) |
-| ![Game Wiki: Bosstiary, ainda em desenvolvimento](docs/screenshots/13-wiki-bosstiary.jpg) | |
 
 </details>
 
@@ -61,6 +60,14 @@ Capturas feitas com o cliente do projeto (Game Wiki e Skills atualizadas em nove
 
 **Chegando no próximo update** (já na `main`, ainda não no servidor oficial):
 
+- **Launcher novo com Guardian:** confere os arquivos do cliente e avisa a equipe sobre bots conhecidos abertos no PC.
+- **Tela de personagem nova** com o personagem em destaque no templo da cidade dele.
+- **Raridade com aura de fundo** no slot e halo suave no chão.
+- **NPCs falam sozinhos** (rumores e dicas de quest) e **luzes das cidades** acesas a noite toda.
+- **Noite de caça:** à noite no jogo, os monstros dão mais XP e loot e nascem mais rápido, mas batem mais forte.
+- **Cansaço por criatura, preço dinâmico nos NPCs e ouro 1x:** caçar sempre o mesmo monstro ou vender muito do mesmo item rende cada vez menos.
+- **Recompensa por PK** (`!bounty`) e **aluguel semanal** das casas.
+- **Dia e noite** com amanhecer e entardecer, e **save automático** a cada 5 minutos.
 - **Baús de exploração:** um baú escondido em cada região. Quem encontra escolhe um bônus permanente para o personagem: ouro, mana ou vida.
 - **Barras de skill** mais discretas na janela Skills, que agora também mostra de onde vem a regeneração de vida e mana.
 - **Luz clássica:** iluminação sempre ligada, como no 7.4, e tochas com o dobro da duração.
@@ -82,7 +89,7 @@ Baixe o [pacote local para Windows](https://github.com/djowww/tibia-7.4-a-classi
 | Conta | Senha | Personagem |
 | --- | --- | --- |
 | `2` | `local123` | `Local Adventurer` |
-| `1` | `1` | `Dev` (GM, para testes) |
+| `1` | `1` | `Gamemaster on Antigas` (GOD, para testes) |
 
 Servidor e cliente usam **127.0.0.1**, nas portas **17173/17174**. Banco e chaves são preparados automaticamente, sem dados da produção. A primeira inicialização compila o servidor e pode demorar vários minutos; exige internet. Ao fechar o jogo, o servidor local é parado sem apagar o progresso.
 

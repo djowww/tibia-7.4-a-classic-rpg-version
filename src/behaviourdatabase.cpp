@@ -25,6 +25,7 @@
 #include "spells.h"
 #include "monster.h"
 #include "scheduler.h"
+#include "npcmarket.h"
 
 extern Game g_game;
 extern Monsters g_monsters;
@@ -768,7 +769,18 @@ void BehaviourDatabase::reactBehaviours(BehaviourSituation_t situation, Player* 
 			}
 		}
 		if (protectRaritySale && !raritySaleFailed && pendingSaleMoney > 0) {
-			g_game.addMoney(player, pendingSaleMoney);
+			// Preco dinamico: item muito vendido no servidor rende menos (ver npcmarket.h).
+			const uint16_t soldId = static_cast<uint16_t>(type);
+			const int32_t percent = NpcMarket::pricePercent(soldId);
+			const uint64_t paid = static_cast<uint64_t>(NpcMarket::applyPercent(static_cast<int64_t>(pendingSaleMoney), percent));
+			g_game.addMoney(player, paid);
+			NpcMarket::recordSale(soldId, static_cast<uint32_t>(std::max<int32_t>(1, amount)));
+			lastSalePaid = paid;
+			if (percent < 100 && !muteSpeech) {
+				std::ostringstream ss;
+				ss << "Too many " << Item::items[soldId].getPluralName() << " on the market: the merchant paid only " << percent << "% (" << paid << " gold).";
+				player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
+			}
 		}
 		
 		if (player->getID() == npc->focusCreature) {

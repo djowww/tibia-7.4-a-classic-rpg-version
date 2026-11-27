@@ -209,7 +209,13 @@ std::vector<Item*> MonsterType::createLootItem(const LootBlock& lootBlock)
 	uint32_t extraMoney = g_config.getNumber(ConfigManager::MONEY_RATE);
 	uint32_t countMax = lootBlock.countmax + 1;
 
-	if (randvalue < g_config.getNumber(ConfigManager::RATE_LOOT) * lootBlock.chance) {
+	// Noite de caca: chance de loot 25% maior.
+	uint64_t lootThreshold = static_cast<uint64_t>(g_config.getNumber(ConfigManager::RATE_LOOT)) * lootBlock.chance;
+	if (g_game.isHuntNight()) {
+		lootThreshold = lootThreshold * DayNight::NIGHT_LOOT_PERCENT / 100;
+	}
+
+	if (randvalue < lootThreshold) {
 		if (Item::items[lootBlock.id].stackable) {
 			if (lootBlock.id == 3031) {
 				countMax *= extraMoney;

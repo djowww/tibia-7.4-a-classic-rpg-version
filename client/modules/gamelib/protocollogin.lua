@@ -10,6 +10,10 @@ LoginServerUpdateNeeded = 30
 LoginServerSessionKey = 40
 LoginServerCharacterList = 100
 LoginServerExtendedCharacterList = 101
+-- Antigas: level, vocation, outfit and town of each character, sent before the list.
+LoginServerCharacterDetails = 102
+-- Marker after the password that asks the server for LoginServerCharacterDetails.
+CHARACTER_DETAILS_MARKER = 'ACL1'
 
 -- Since 10.76
 LoginServerRetry = 10
@@ -85,6 +89,7 @@ function ProtocolLogin:sendLoginPacket()
   end
 
   msg:addString(self.accountPassword)
+  msg:addString(CHARACTER_DETAILS_MARKER)
 
   if self.getLoginExtendedData then
     local data = self:getLoginExtendedData()
@@ -168,6 +173,8 @@ function ProtocolLogin:onRecv(msg)
       -- TODO: prompt for token here
       local unknown = msg:getU8()
       signalcall(self.onLoginError, self, tr("Invalid authentification token."))
+    elseif opcode == LoginServerCharacterDetails then
+      self:parseCharacterDetails(msg)
     elseif opcode == LoginServerCharacterList then
       self:parseCharacterList(msg)
     elseif opcode == LoginServerExtendedCharacterList then
@@ -242,6 +249,7 @@ function ProtocolLogin:parseCharacterList(msg)
         character.previewState = msg:getU8()
       end
 
+      character.details = self.characterDetails and self.characterDetails[i] or nil
       characters[i] = character
     end
   end
@@ -262,6 +270,30 @@ function ProtocolLogin:parseCharacterList(msg)
   end
 
   signalcall(self.onCharacterList, self, characters, account)
+end
+
+function ProtocolLogin:parseCharacterDetails(msg)
+  -- Fixed fields only, in the same order as the character list that follows.
+  local details = {}
+  local count = msg:getU8()
+  for i = 1, count do
+    if msg:getU8() == 1 then
+      local entry = {}
+      entry.level = msg:getU16()
+      entry.vocation = msg:getString():sub(1, 30)
+      local outfit = {}
+      outfit.type = msg:getU16()
+      outfit.head = msg:getU8()
+      outfit.body = msg:getU8()
+      outfit.legs = msg:getU8()
+      outfit.feet = msg:getU8()
+      outfit.addons = 0
+      entry.outfit = outfit
+      entry.town = msg:getString():sub(1, 30)
+      details[i] = entry
+    end
+  end
+  self.characterDetails = details
 end
 
 function ProtocolLogin:parseExtendedCharacterList(msg)

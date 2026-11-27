@@ -26,6 +26,10 @@ end
 
 dofile("data/lib/custom/onlineBonus.lua")
 dofile("data/lib/custom/antigasBestiary.lua")
+-- Night and fatigue rules are tested in hunt-rules-tests.lua.
+function Player:applyHuntRules(exp)
+	return exp
+end
 
 local function makePlayer(playerId, storedBonus)
 	local player = {

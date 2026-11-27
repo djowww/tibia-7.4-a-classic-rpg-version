@@ -4,6 +4,24 @@ As mudanças de cada dia de trabalho, da mais recente para a mais antiga. As not
 
 ## Em desenvolvimento (na `main`, ainda não no servidor oficial)
 
+### 2026-11-27
+
+- **Launcher novo com Guardian:** o launcher ganhou a tela nova (muralha com tochas, notícias do site e jogadores online) e o Guardian. Antes de abrir o jogo, ele confere cada arquivo do cliente com a lista assinada da versão, procura bots conhecidos abertos no computador e pede ao servidor um token para a sessão, que o cliente apresenta ao entrar. O que o launcher informa soma pontos no detector de bots do servidor. Continua sem punição automática: só a equipe é avisada.
+- **Raridade com aura de fundo:** o slot de um item com raridade acende por trás do sprite na cor do nível, com borda fina e um entalhe por nível na borda de baixo; lendário e mítico pulsam devagar. O raio sobre o item saiu do slot e do chão, onde entrou um halo suave. O tooltip mostra o nome do nível na cor dele.
+- **Tela de personagem nova:** depois do login, o personagem escolhido aparece em destaque no templo da cidade dele, com o cenário do próprio jogo ao fundo, e a lista mostra outfit, level e vocação de cada personagem. O servidor passa a mandar esses dados na lista de personagens para o cliente novo; clientes antigos continuam funcionando.
+- **NPCs falam sozinhos:** quando há jogador por perto e ninguém está conversando com eles, os NPCs soltam de tempos em tempos um rumor, uma dica de quest ou um comentário sobre o trabalho, em amarelo no mapa (cerca de 1.000 falas em inglês, algumas só de noite). Monstros continuam em laranja.
+- **Luzes das cidades à noite:** postes, lampiões de parede e tochas fixas perto dos templos acendem sozinhos às 17:30 do jogo e só apagam às 07:00; à noite ninguém consegue apagá-los (a equipe pode). De dia voltam ao estado original do mapa.
+- **Inspect bot para a equipe:** no menu do botão direito sobre um jogador, GM e GOD têm "Inspect bot" (janela com a chance de bot, sinais e detalhes do detector) e "Start bot check".
+- **Noite de caça:** das 19:00 às 05:00 do jogo, os monstros dão 25% a mais de XP e de loot, nascem 25% mais rápido e batem 10% mais forte. O servidor avisa no começo e no fim da noite.
+- **Cansaço por criatura:** caçar sempre o mesmo monstro reduz a XP dele aos poucos (até -40%), e o cansaço passa sozinho com o tempo. `!fatigue` mostra o cansaço atual.
+- **Preço dinâmico nos NPCs:** quanto mais um item é vendido aos NPCs no servidor, menos eles pagam por ele (até a metade do preço), e o preço volta ao normal com o tempo. A taxa de ouro dos monstros voltou para 1x.
+- **Recompensa por PK:** quem mata sem justificativa paga 100 gp por level, e o valor vira recompensa para quem matar o assassino. `!bounty` mostra os 10 maiores.
+- **Aluguel semanal:** as casas cobram o aluguel toda semana; depois de 7 avisos sem pagamento, a casa é perdida e os itens vão para o depot.
+- **Respawn pelo número de jogadores:** com poucos jogadores online os monstros nascem no tempo normal, e com mais gente o respawn fica mais rápido.
+- **Correções do teste com bots:** pagar o aluguel zera os avisos, quedas do servidor não contam como aviso extra, a recompensa do bounty é salva na hora e os descontos de cansaço e de preço arredondam certo.
+- **Removidos:** o Bosstiary da Game Wiki e o sistema de água (beber água não dá mais mana e a linha Water saiu da janela Skills). Beber da garrafa continua como no 7.4 original.
+- **Ping:** o próximo passo sai assim que o servidor confirma o anterior, o que deixa a andada mais contínua com ping alto. O servidor desliga o atraso de agrupamento de pacotes (TCP_NODELAY) em cada conexão.
+
 ### 2026-11-26
 
 - **Estabilidade:** limite de 100 níveis para bolsas dentro de bolsas, pedidos do Bestiary com limite de profundidade e de frequência, e proteções em troca de itens, zona de criatura e transformação de itens.
@@ -21,7 +39,7 @@ As mudanças de cada dia de trabalho, da mais recente para a mais antiga. As not
 
 - **Baús de exploração:** um baú escondido em cada região (Thais, Carlin, Kazordoon, Ab'Dendriel, Edron, Darashia, Venore, Ankrahmun, Rookgaard e Port Hope). Quem encontra escolhe um bônus permanente para o personagem: ouro, mana ou vida.
 - **Barras de skill** mais discretas na janela Skills, sem o contorno preto.
-- **Regeneração na janela Skills:** mostra quanto de vida e mana o personagem recupera e de onde vem (comida, água e baús de exploração).
+- **Regeneração na janela Skills:** mostra quanto de vida e mana o personagem recupera e de onde vem (comida e baús de exploração).
 - **Luz clássica:** a iluminação fica sempre ligada, como no 7.4, e as tochas duram o dobro.
 - **F1 para a equipe:** lista dos comandos de GM, montada pelo servidor a partir das talkactions.
 - **Detecção de bots:** o servidor identifica comportamento automatizado e avisa a equipe.

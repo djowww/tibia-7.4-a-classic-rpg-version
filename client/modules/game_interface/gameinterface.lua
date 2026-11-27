@@ -267,12 +267,14 @@ function load()
 end
 
 function updateFps()
+  if not gameRootPanel then return end
   fpsUpdateEvent = scheduleEvent(updateFps, 500)
   text = 'FPS: ' .. g_app.getFps()
   gameRootPanel:getChildById('fpsLabel'):setText(text)
 end
 
 function updatePing(ping)
+  if not gameRootPanel then return end
   if g_proxy and g_proxy.getPing() > 0 then
     ping = g_proxy.getPing()
   end
@@ -665,6 +667,14 @@ function createThingMenu(menuPosition, lookThing, useThing, creatureThing)
 
     menu:addSeparator()
     menu:addOption(tr('Copy Name'), function() g_window.setClipboardText(creatureThing:getName()) end)
+
+    -- GM and GOD only; the server checks the account again.
+    local botInspect = modules.game_botinspect
+    if botInspect and botInspect.canUse(creatureThing) then
+      menu:addSeparator()
+      menu:addOption(tr('Inspect bot'), function() botInspect.inspect(creatureThing) end)
+      menu:addOption(tr('Start bot check'), function() botInspect.startCheck(creatureThing) end)
+    end
   end
 
   -- hooked menu options

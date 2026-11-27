@@ -27,6 +27,7 @@
 #include "spawn.h"
 #include "script.h"
 #include "behaviourdatabase.h"
+#include "npcambient.h"
 
 extern Game g_game;
 
@@ -35,6 +36,8 @@ uint32_t Npc::npcAutoID = 0x80000000;
 void Npcs::reload()
 {
 	const std::map<uint32_t, Npc*>& npcs = g_game.getNpcs();
+
+	NpcAmbient::load();
 
 	for (const auto& it : npcs) {
 		it.second->reload();
@@ -55,6 +58,7 @@ Npc* Npc::createNpc(const std::string& name)
 Npc::Npc(const std::string& name) :
 	Creature(),
 	filename("data/npc/" + name + ".npc"),
+	ambientKey(asLowerCaseString(name)),
 	masterRadius(0),
 	staticMovementTime(0),
 	loaded(false),
@@ -293,6 +297,12 @@ void Npc::onThink(uint32_t interval)
 		return;
 	}
 
+	if (focusCreature == 0 && !spectators.empty()) {
+		thinkAmbient();
+	} else if (spectators.empty()) {
+		nextAmbientTime = 0;
+	}
+
 	if (focusCreature) {
 		Player* player = g_game.getPlayerByID(focusCreature);
 		if (player) {
@@ -328,8 +338,41 @@ void Npc::closeTradeRequest(Player* player)
 	}
 }
 
+void Npc::thinkAmbient()
+{
+	const int64_t now = OTSYS_TIME();
+	if (nextAmbientTime == 0) {
+		nextAmbientTime = now + uniform_random(NpcAmbient::FIRST_MIN, NpcAmbient::FIRST_MAX);
+		return;
+	}
+
+	if (now < nextAmbientTime) {
+		return;
+	}
+
+	const NpcAmbientLines* lines = NpcAmbient::get(ambientKey);
+	if (!lines) {
+		nextAmbientTime = now + 10 * NpcAmbient::MAX_INTERVAL;
+		return;
+	}
+
+	const Position& pos = getPosition();
+	if (!NpcAmbient::claimArea(pos.x, pos.y, pos.z, now)) {
+		nextAmbientTime = now + uniform_random(5000, 15000);
+		return;
+	}
+
+	const std::string* text = NpcAmbient::pick(*lines, g_game.isHuntNight(), lastAmbientIndex);
+	if (text) {
+		g_game.internalCreatureSay(this, TALKTYPE_MONSTER_SAY, *text, false);
+	}
+	nextAmbientTime = now + uniform_random(NpcAmbient::MIN_INTERVAL, NpcAmbient::MAX_INTERVAL);
+}
+
 void Npc::doSay(const std::string& text)
 {
+	nextAmbientTime = std::max<int64_t>(nextAmbientTime, OTSYS_TIME() + NpcAmbient::AFTER_TALK);
+
 	if (lastTalkCreature == focusCreature) {
 		conversationEndTime = OTSYS_TIME() + 60000;
 	}

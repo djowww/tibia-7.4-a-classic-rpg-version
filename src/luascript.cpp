@@ -19,12 +19,14 @@
 
 #include "otpch.h"
 #include <cstdlib>
+#include <unordered_set>
 
 #include <boost/range/adaptor/reversed.hpp>
 
 #include "luascript.h"
 #include "luacallwatchdog.h"
 #include "botdetector.h"
+#include "guardian.h"
 #include "chat.h"
 #include "player.h"
 #include "game.h"
@@ -887,6 +889,7 @@ void LuaScriptInterface::pushOutfit(lua_State* L, const Outfit_t& outfit)
 void LuaScriptInterface::registerFunctions()
 {
 	BotDetector::registerLua(luaState);
+	Guardian::registerLua(luaState);
 	//getPlayerFlagValue(cid, flag)
 	lua_register(luaState, "getPlayerFlagValue", LuaScriptInterface::luaGetPlayerFlagValue);
 
@@ -1667,6 +1670,7 @@ void LuaScriptInterface::registerFunctions()
 
 	registerMethod("Game", "getTowns", LuaScriptInterface::luaGameGetTowns);
 	registerMethod("Game", "getHouses", LuaScriptInterface::luaGameGetHouses);
+	registerMethod("Game", "findItemsInArea", LuaScriptInterface::luaGameFindItemsInArea);
 	
 	registerMethod("Game", "getOutfits", LuaScriptInterface::luaGameGetOutfits);
 
@@ -4093,6 +4097,71 @@ int LuaScriptInterface::luaGameGetHouses(lua_State* L)
 		pushUserdata<House>(L, houseEntry.second);
 		setMetatable(L, -1, "House");
 		lua_rawseti(L, -2, ++index);
+	}
+	return 1;
+}
+
+int LuaScriptInterface::luaGameFindItemsInArea(lua_State* L)
+{
+	// Game.findItemsInArea(fromPosition, toPosition, itemIds[, skipHouses = false])
+	// Procura no mapa, uma vez, itens fixos com esses ids. Devolve {{x, y, z, id}, ...}.
+	if (!isTable(L, 3)) {
+		lua_pushnil(L);
+		return 1;
+	}
+
+	const Position fromPos = getPosition(L, 1);
+	const Position toPos = getPosition(L, 2);
+	const bool skipHouses = getBoolean(L, 4, false);
+
+	std::unordered_set<uint16_t> ids;
+	lua_pushnil(L);
+	while (lua_next(L, 3) != 0) {
+		ids.insert(getNumber<uint16_t>(L, -1));
+		lua_pop(L, 1);
+	}
+
+	const uint16_t minX = std::min(fromPos.x, toPos.x), maxX = std::max(fromPos.x, toPos.x);
+	const uint16_t minY = std::min(fromPos.y, toPos.y), maxY = std::max(fromPos.y, toPos.y);
+	const uint8_t minZ = std::min(fromPos.z, toPos.z), maxZ = std::min<uint8_t>(std::max(fromPos.z, toPos.z), MAP_MAX_LAYERS - 1);
+
+	lua_newtable(L);
+	int index = 0;
+	auto pushFound = [&](const Item* item, uint16_t x, uint16_t y, uint8_t z) {
+		lua_createtable(L, 4, 0);
+		setField(L, "x", x);
+		setField(L, "y", y);
+		setField(L, "z", z);
+		setField(L, "id", item->getID());
+		lua_rawseti(L, -2, ++index);
+	};
+
+	if (ids.empty()) {
+		return 1;
+	}
+
+	for (uint8_t z = minZ; z <= maxZ; ++z) {
+		for (uint32_t y = minY; y <= maxY; ++y) {
+			for (uint32_t x = minX; x <= maxX; ++x) {
+				const Tile* tile = g_game.map.getTile(x, y, z);
+				if (!tile || (skipHouses && dynamic_cast<const HouseTile*>(tile))) {
+					continue;
+				}
+
+				const Item* ground = tile->getGround();
+				if (ground && ids.count(ground->getID())) {
+					pushFound(ground, x, y, z);
+				}
+
+				if (const TileItemVector* items = tile->getItemList()) {
+					for (const Item* item : *items) {
+						if (ids.count(item->getID())) {
+							pushFound(item, x, y, z);
+						}
+					}
+				}
+			}
+		}
 	}
 	return 1;
 }

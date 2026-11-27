@@ -1,0 +1,18 @@
+/* Custom systems page: same parchment, stone menu and ribbons as the player guide. */
+.systems-page .sys-group{margin:28px 0 4px}
+.systems-page .sys-group span{flex:1}
+.systems-page .sys-entry{display:block}
+.systems-page .sys-entry h3{margin:0 0 6px;color:#721414;font:normal 22px/1.25 Georgia,"Times New Roman",serif}
+.systems-page .sys-entry p{margin:6px 0}
+.systems-page .sys-has-side{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,46%);gap:18px;align-items:start}
+.systems-page .sys-has-side .sys-shots{margin-top:2px}
+.systems-page .sys-shots{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
+.systems-page .sys-shots figure{flex:1 1 220px;max-width:100%;margin:0;padding:4px;border:2px ridge #b49a60;background:#2b2218}
+.systems-page .sys-has-side .sys-shots figure{flex-basis:100%}
+.systems-page .sys-shots img{display:block;max-width:100%;height:auto;margin:0 auto}
+.systems-page .sys-shots figcaption{padding:4px 2px 1px;color:#e8d6ae;font:11px/1.4 Verdana,Arial,sans-serif}
+.systems-page .sys-cmd{font:12px/1.6 Verdana,Arial,sans-serif;color:#5b4222}
+.systems-page .sys-cmd code{padding:1px 6px;border:1px solid #b49a60;background:#f8edcf;color:#3f2a10;font:bold 12px Consolas,"Courier New",monospace}
+.systems-page .sys-new{display:inline-block;margin-left:6px;padding:1px 6px;border:1px solid #7d1a0d;background:#a3200f;color:#fff3d6;font:bold 10px/1.5 Verdana,Arial,sans-serif;letter-spacing:.5px;text-transform:uppercase;vertical-align:middle}
+.systems-page .project-small .sys-new{margin:0 2px}
+@media(max-width:760px){.systems-page .sys-has-side{display:block}.systems-page .sys-entry h3{font-size:20px}}

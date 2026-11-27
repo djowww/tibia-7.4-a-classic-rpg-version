@@ -45,6 +45,10 @@ $updatedInit = [regex]::Replace($init, $versionPattern, "APP_VERSION = $Version"
 [System.IO.File]::WriteAllText($initPath, $updatedInit, [System.Text.UTF8Encoding]::new($false))
 [System.IO.File]::WriteAllText((Join-Path $stage 'client.version'), "$Version`n", [System.Text.UTF8Encoding]::new($false))
 [System.IO.File]::WriteAllText((Join-Path $stage 'LEIA-ME.txt'), ([System.IO.File]::ReadAllText((Join-Path $PSScriptRoot 'CLIENT-README.txt')).Replace('{{VERSION}}', "$Version")), [System.Text.UTF8Encoding]::new($false))
+# Guardian: sign the list of every client file. The launcher compares the install with it before each game start.
+$signer = Join-Path $repo 'tools\ReleaseSigner\ReleaseSigner.csproj'
+& dotnet run --project $signer -- sign-files $Version $stage
+if ($LASTEXITCODE -ne 0) { throw 'Signing the client file list failed.' }
 Copy-Item -LiteralPath $launcher -Destination (Join-Path $stage 'AntigasLauncher.exe')
 
 Add-Type -AssemblyName System.IO.Compression
@@ -67,7 +71,6 @@ function Write-ClientZip([string]$Target, [bool]$IncludeLauncher) {
 Write-ClientZip $packagePath $IncludeLauncherInUpdate.IsPresent
 Write-ClientZip $bundlePath $true
 Copy-Item -LiteralPath $bundlePath -Destination $legacyPath
-$signer = Join-Path $repo 'tools\ReleaseSigner\ReleaseSigner.csproj'
 & dotnet run --project $signer -- sign $Version $packagePath $packageName $manifestPath
 if ($LASTEXITCODE -ne 0) { throw 'Release signing failed.' }
 Write-Output "Update package: $packagePath"

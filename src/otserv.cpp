@@ -22,6 +22,7 @@
 #include "server.h"
 
 #include "game.h"
+#include "npcambient.h"
 
 #ifndef _WIN32
 #include <csignal> // for sigemptyset()
@@ -303,6 +304,11 @@ void mainLoader(int, char*[], ServiceManager* services)
 		return;
 	}
 	std::cout << asUpperCaseString(worldType) << std::endl;
+
+	std::cout << ">> Loading npc ambient lines" << std::endl;
+	if (!NpcAmbient::load()) {
+		std::cout << "> WARNING: data/npc/ambient.txt not found, NPCs will not talk on their own." << std::endl;
+	}
 
 	std::cout << ">> Loading map" << std::endl;
 	if (!g_game.loadMainMap(g_config.getString(ConfigManager::MAP_NAME))) {

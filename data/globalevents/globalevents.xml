@@ -13,6 +13,9 @@
 	<globalevent type="startup" name="RashidSpawn" script="RashidSpawn.lua" />	
 	<globalevent name="SpawnRaid" interval="60000" script="raids.lua"/>
 	<globalevent name="BotDetector" interval="60000" script="custom/botdetector.lua"/>
+	<globalevent name="HuntNight" interval="10000" script="custom/hunt_night.lua"/>
+	<globalevent type="startup" name="CityLightsStartup" script="custom/city_lights.lua"/>
+	<globalevent name="CityLights" interval="10000" script="custom/city_lights.lua"/>
 	
 
 </globalevents>

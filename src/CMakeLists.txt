@@ -7,6 +7,7 @@ set(tfs_SRC
 	${CMAKE_CURRENT_LIST_DIR}/baseevents.cpp
 	${CMAKE_CURRENT_LIST_DIR}/bed.cpp
 	${CMAKE_CURRENT_LIST_DIR}/botdetector.cpp
+	${CMAKE_CURRENT_LIST_DIR}/guardian.cpp
 	${CMAKE_CURRENT_LIST_DIR}/behaviourdatabase.cpp
 	${CMAKE_CURRENT_LIST_DIR}/chat.cpp
 	${CMAKE_CURRENT_LIST_DIR}/combat.cpp
@@ -46,6 +47,7 @@ set(tfs_SRC
 	${CMAKE_CURRENT_LIST_DIR}/movement.cpp
 	${CMAKE_CURRENT_LIST_DIR}/networkmessage.cpp
 	${CMAKE_CURRENT_LIST_DIR}/npc.cpp
+	${CMAKE_CURRENT_LIST_DIR}/npcambient.cpp
 	${CMAKE_CURRENT_LIST_DIR}/npctrade.cpp
 	${CMAKE_CURRENT_LIST_DIR}/otserv.cpp
 	${CMAKE_CURRENT_LIST_DIR}/outfit.cpp

@@ -78,6 +78,7 @@ class Npc final : public Creature
 		}
 
 		void doSay(const std::string& text);
+		void thinkAmbient();
 
 		void handleTradeRequest(Player* player, size_t index, int32_t count);
 		void handleSellAllRequest(Player* player);
@@ -137,6 +138,9 @@ class Npc final : public Creature
 
 		std::string name;
 		std::string filename;
+		std::string ambientKey;
+		int64_t nextAmbientTime = 0;
+		int32_t lastAmbientIndex = -1;
 
 		Position masterPos;
 

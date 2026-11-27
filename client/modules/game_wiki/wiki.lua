@@ -1,7 +1,7 @@
--- Game Wiki: Bestiary (with kill progress), Itempedia, Hunting Guide and Bosstiary.
+-- Game Wiki: Bestiary (with kill progress), Itempedia, and Hunting Guide.
 -- The data files are generated from the server files by tools/generate-game-wiki.py.
 local catalog = dofile('/modules/game_wiki/data/monsters.lua')
-local monsters, bosses = catalog.monsters, catalog.bosses
+local monsters = catalog.monsters
 local items = dofile('/modules/game_wiki/data/items.lua')
 local hunts = dofile('/modules/game_wiki/data/hunts.lua')
 
@@ -11,7 +11,7 @@ local MAX_ITEM_ROWS = 120
 local HUNT_PAGE = 6       -- hunts shown at first, and added by "Show more"
 local HUNT_MIN_CREATURES = 4
 local MAP_FLAG_ICON = 9
-local TABS = {'bestiary', 'itempedia', 'hunting', 'bosstiary'}
+local TABS = {'bestiary', 'itempedia', 'hunting'}
 local RARITY = {'Very rare', 'Rare', 'Uncommon', 'Common'}
 local RARITY_COLOR = {'#F0C040', '#B070E0', '#5AA0E6', '#6E6E6E'}
 local VOCATION_NAME = {K = 'knight', P = 'paladin', S = 'sorcerer', D = 'druid'}
@@ -113,8 +113,6 @@ local function updateStatus()
 		text = #items .. ' items in the Itempedia. Click a creature to open it in the Bestiary.'
 	elseif activeTab == 'hunting' then
 		text = huntStatus
-	else
-		text = #bosses .. ' bosses known so far.'
 	end
 	child('status'):setText(text)
 end
@@ -524,19 +522,6 @@ function useMyCharacter()
 	end
 end
 
--- Bosstiary -------------------------------------------------------------
-
-local function buildBosses()
-	local list = child('bossList')
-	list:destroyChildren()
-	for _, boss in ipairs(bosses) do
-		local cell = g_ui.createWidget('WikiBossCell', list)
-		setCreaturePreview(cell.frame.creature, boss.look, 64)
-		cell.name:setText(boss.name)
-		cell.info:setText('HP ' .. formatNumber(boss.health) .. '   XP ' .. formatNumber(boss.experience))
-	end
-end
-
 -- Window ----------------------------------------------------------------
 
 function setTab(tab)
@@ -600,7 +585,7 @@ local function renameInventoryButton()
 	local button = inventory and inventory.inventoryWindow and inventory.inventoryWindow:recursiveGetChildById('logoutButton')
 	if button then
 		button:setText('Wiki')
-		button:setTooltip('Open the Game Wiki: bestiary, items, hunting places and bosses.')
+		button:setTooltip('Open the Game Wiki: bestiary, items and hunting places.')
 	end
 end
 
@@ -669,7 +654,6 @@ end
 local function build()
 	if built or not g_things.isDatLoaded() then return end
 	built = true
-	buildBosses()
 	refreshMonsterList(true)
 	showMonster(selectedMonster)
 	refreshItemList(true)

@@ -30,7 +30,7 @@ O Bestiary mantém contadores de abates por monstro e personagem. Os dados são 
 
 Cada Bestiary concluído concede um bônus permanente de **0,2% de experiência**. O servidor controla os contadores e o total de conclusões.
 
-No cliente, o Bestiary é uma aba da **Game Wiki** (botão Wiki do inventário), ao lado da Itempedia, do Hunting Guide e do Bosstiary. Os dados dessas abas são gerados dos arquivos do servidor por [`generate-game-wiki.py`](../tools/generate-game-wiki.py): locais vêm de `spawns.xml`, loot dos monstros, atributos de `items.srv` e compra e venda dos NPCs. Rode o script depois de mudar spawns, monstros, itens ou NPCs.
+No cliente, o Bestiary é uma aba da **Game Wiki** (botão Wiki do inventário), ao lado da Itempedia e do Hunting Guide. Os dados dessas abas são gerados dos arquivos do servidor por [`generate-game-wiki.py`](../tools/generate-game-wiki.py): locais vêm de `spawns.xml`, loot dos monstros, atributos de `items.srv` e compra e venda dos NPCs. Rode o script depois de mudar spawns, monstros, itens ou NPCs.
 
 Referências: [`antigasBestiary.lua`](../data/lib/custom/antigasBestiary.lua) e [`bestiary.lua`](../data/creaturescripts/scripts/custom/bestiary.lua).
 
@@ -84,13 +84,15 @@ Referências: [`options.lua`](../client/modules/client_options/options.lua), [`t
 
 ## Janela de Skills
 
-As barras de progresso das skills usam um trilho escuro discreto, sem contorno preto, e ficam vazias em 0%. A janela também mostra o tempo restante de comida e de água nas linhas Food e Water.
+As barras de progresso das skills usam um trilho escuro discreto, sem contorno preto, e ficam vazias em 0%. A janela também mostra o tempo restante de comida na linha Food.
 
 Referências: [`skills.otui`](../client/modules/game_skills/skills.otui) e [`skills.lua`](../client/modules/game_skills/skills.lua).
 
 ## Detecção de bots
 
 O servidor acompanha padrões de jogo automatizado e avisa a equipe quando um personagem parece usar bot. Nenhuma punição é automática: a decisão fica com a equipe. Os critérios não são documentados publicamente.
+
+O launcher oficial participa com o **Guardian**. Antes de abrir o jogo ele confere os arquivos do cliente com a lista assinada da versão (`client.files.json`), procura programas de bot conhecidos e pede ao servidor um token de sessão, que o cliente apresenta ao entrar e que o launcher renova a cada minuto. Quem entra sem o launcher, fecha o launcher durante o jogo ou joga com arquivos alterados soma pontos no mesmo alerta para a equipe. O launcher roda no computador do jogador e pode ser burlado, por isso o servidor nunca confia só nele; `requireLauncher` em [`guardian.lua`](../data/lib/custom/guardian.lua) permite recusar quem entra sem o launcher.
 
 ## Combate e conteúdo legado
 

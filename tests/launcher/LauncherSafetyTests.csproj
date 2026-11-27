@@ -12,5 +12,9 @@
     <Compile Include="../../launcher/AntigasLauncher/BoundedContentReader.cs" Link="BoundedContentReader.cs" />
     <Compile Include="../../launcher/AntigasLauncher/BoundedStreamCopy.cs" Link="BoundedStreamCopy.cs" />
     <Compile Include="../../launcher/AntigasLauncher/ClientPackage.cs" Link="ClientPackage.cs" />
+    <Compile Include="../../launcher/AntigasLauncher/ClientIntegrity.cs" Link="ClientIntegrity.cs" />
+    <Compile Include="../../launcher/AntigasLauncher/GuardianClient.cs" Link="GuardianClient.cs" />
+    <Compile Include="../../launcher/AntigasLauncher/ProcessScanner.cs" Link="ProcessScanner.cs" />
+    <Compile Include="../../launcher/AntigasLauncher/NewsService.cs" Link="NewsService.cs" />
   </ItemGroup>
 </Project>

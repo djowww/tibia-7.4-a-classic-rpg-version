@@ -19,11 +19,15 @@ BEGIN NOT ATOMIC
   END IF;
   IF EXISTS (SELECT 1 FROM accounts WHERE id = 1 AND password = SHA1('1')) THEN
     UPDATE accounts SET type = 5 WHERE id = 1;
-    IF EXISTS (SELECT 1 FROM players WHERE name = 'Dev') THEN
-      UPDATE players SET account_id = 1, group_id = 3 WHERE name = 'Dev';
+    -- The GOD character used to be called 'Dev': rename it in older saved worlds.
+    IF NOT EXISTS (SELECT 1 FROM players WHERE name = 'Gamemaster on Antigas') THEN
+      UPDATE players SET name = 'Gamemaster on Antigas' WHERE name = 'Dev' AND account_id = 1;
+    END IF;
+    IF EXISTS (SELECT 1 FROM players WHERE name = 'Gamemaster on Antigas') THEN
+      UPDATE players SET account_id = 1, group_id = 3 WHERE name = 'Gamemaster on Antigas';
     ELSE
       INSERT INTO players (name,account_id,group_id,town_id,posx,posy,posz,cap,conditions,comment,sex,looktype)
-      VALUES ('Dev',1,3,1,32369,32241,7,400,X'','Local developer character',1,75);
+      VALUES ('Gamemaster on Antigas',1,3,1,32369,32241,7,400,X'','Local developer character',1,75);
     END IF;
     SELECT 'dev-ok';
   ELSE
@@ -34,9 +38,9 @@ END//
     $result = $sql | & docker compose exec -T db mariadb -N -B -ulocalgame -plocalgame tibia_local 2>&1 | Out-String
     if ($result -match 'dev-ok') { return }
     if ($result -match 'dev-other-password') {
-        Write-Host 'Warning: account 1 already exists with another password in this saved world; the Dev account (1 / 1) was not created.' -ForegroundColor Yellow
+        Write-Host 'Warning: account 1 already exists with another password in this saved world; the GOD account (1 / 1) was not created.' -ForegroundColor Yellow
     } else {
-        Write-Host ('Warning: could not check the Dev account (1 / 1). ' + $result.Trim()) -ForegroundColor Yellow
+        Write-Host ('Warning: could not check the GOD account (1 / 1). ' + $result.Trim()) -ForegroundColor Yellow
     }
 }
 function Test-Docker {
@@ -63,7 +67,7 @@ try {
     Write-Host 'Starting local database and server. The first build takes several minutes.'
     Invoke-LocalCompose up -d --build --wait --wait-timeout 600
     Confirm-DevAccount
-    if ($NoClient) { Write-Host 'Server ready. Account: 2 / local123 | Dev (GOD): 1 / 1'; exit 0 }
+    if ($NoClient) { Write-Host 'Server ready. Account: 2 / local123 | Gamemaster on Antigas (GOD): 1 / 1'; exit 0 }
     $client = Join-Path $PSScriptRoot 'client'
     if (-not (Test-Path -LiteralPath (Join-Path $client '.local-client-complete'))) {
         $manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'client-release.json') -Raw | ConvertFrom-Json
@@ -93,7 +97,7 @@ try {
     $text = Get-Content -LiteralPath $init -Raw
     $text = [regex]::Replace($text, 'ANTIGAS_RSA_PUBLIC_KEY = "[^"]+"', ('ANTIGAS_RSA_PUBLIC_KEY = "' + $modulus + '"'))
     [IO.File]::WriteAllText($init, $text, (New-Object Text.UTF8Encoding($false)))
-    Write-Host 'Ready! Account: 2 | Password: local123 | Character: Local Adventurer. Dev (GOD): account 1 | password 1 | character Dev'
+    Write-Host 'Ready! Account: 2 | Password: local123 | Character: Local Adventurer. GOD: account 1 | password 1 | character Gamemaster on Antigas'
     if ($NoLaunch) { exit 0 }
     Start-Process -FilePath (Join-Path $client 'Antigas_gl.exe') -WorkingDirectory $client
 } catch {

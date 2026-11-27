@@ -43,6 +43,9 @@ def package(source, output):
     files['data/minimap.otmm'] = root / 'client/data/minimap.otmm'
     # Marks every player starts with, built by tools/generate-minimap-markers.py.
     files['data/minimap-markers.txt'] = root / 'client/data/minimap-markers.txt'
+    # Character screen sceneries built by tools/generate-charselect-scenes.py.
+    for p in sorted((root / 'client/data/images/charselect').glob('*.png')):
+        files['data/images/charselect/' + p.name] = p
     files['NOTICE.md'] = root / 'NOTICE.md'
     # Root config.otml, remembered passwords, logs, updater and production launcher
     # are deliberately absent. The starter installs a fresh local public key.

@@ -9,6 +9,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET' && !isset($_GET['jogar'])) {
 require (getenv('ANTIGAS_WEB_LIB')?:'/opt/antigas-web/private').'/security.php';
 webStart();
 require __DIR__.'/i18n.php';
+require __DIR__.'/visit-counter.php';
 $language=siteStartI18n();
 function e(string $v): string { return htmlspecialchars($v,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8'); }
 $message='';$messageType='info';$accountName='';$email='';$characterName='';$sex='1';
@@ -64,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
   <link rel="stylesheet" href="/home-improvements.css?v=20260927-2">
   <link rel="stylesheet" href="/news-changelog.css?v=20260927-1">
   <link rel="stylesheet" href="/language.css?v=security-20260928">
-  <link rel="stylesheet" href="/classic-refinement.css?v=classic-20261003-1">
+  <link rel="stylesheet" href="/classic-refinement.css?v=classic-20261127-2">
 </head>
 <body class="portal-home">
   <a class="skip-link" href="#conteudo"><?= siteT('Skip to content') ?></a>
@@ -347,7 +348,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
         <div><h2><?= siteT('Classic client') ?></h2><p><?= siteT('Download the client configured for this server. No extra software is needed.') ?></p></div>
         <a class="button download-button" href="<?= e($downloadUrl) ?>"><?= siteT('Download Antigas 7.4 client') ?></a>
       </section>
-      <footer id="sobre"><?= siteTHtml('Antigas 7.4 — An independent community project, not affiliated with CipSoft.<br>Tibia is a trademark of its respective owners.') ?></footer>
+      <footer id="sobre"><?= siteTHtml('Antigas 7.4 — An independent community project, not affiliated with CipSoft.<br>Tibia is a trademark of its respective owners.') ?><?= siteViewsHtml() ?></footer>
     </main>
   </div>
 </body>

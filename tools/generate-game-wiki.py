@@ -417,12 +417,6 @@ def build(root):
     bestiary.sort(key=lambda entry: entry["name"])
     listed = {entry["name"].lower() for entry in bestiary}
 
-    # --- Bosstiary (work in progress): the unique creatures, which nobody hunts a thousand times.
-    bosses = [{"name": monster["name"], "health": monster["health"], "experience": monster["exp"], "look": monster["look"]}
-              for key, monster in sorted(monsters.items())
-              if monster["unique"] and monster["look"] and monster["exp"] >= 100
-              and key not in TRAPS and "gamemaster" not in key]
-
     # --- Itempedia.
     by_name = {}
     for item_id in sorted(items):
@@ -502,7 +496,7 @@ def build(root):
             "danger": danger[:3] or None,
         })
     hunts.sort(key=lambda hunt: (hunt["exp"], hunt["area"]))
-    return bestiary, bosses, itempedia, hunts
+    return bestiary, itempedia, hunts
 
 
 def write(path, header, value):
@@ -513,13 +507,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--root", type=Path, default=ROOT)
     args = parser.parse_args()
-    bestiary, bosses, itempedia, hunts = build(args.root)
+    bestiary, itempedia, hunts = build(args.root)
     out = args.root / "client/modules/game_wiki/data"
     out.mkdir(parents=True, exist_ok=True)
-    write(out / "monsters.lua", "Bestiary and Bosstiary entries.", {"monsters": bestiary, "bosses": bosses})
+    write(out / "monsters.lua", "Bestiary entries.", {"monsters": bestiary})
     write(out / "items.lua", "Itempedia entries.", itempedia)
     write(out / "hunts.lua", "Hunting Guide places.", hunts)
     lib = args.root / "data/lib/custom/antigasBestiary.lua"
     text = lib.read_text(encoding="latin-1")
     lib.write_text(re.sub(r"CATALOG_SIZE = \d+", "CATALOG_SIZE = %d" % len(bestiary), text), encoding="latin-1", newline="")
-    print("bestiary %d, bosses %d, items %d, hunts %d" % (len(bestiary), len(bosses), len(itempedia), len(hunts)))
+    print("bestiary %d, items %d, hunts %d" % (len(bestiary), len(itempedia), len(hunts)))

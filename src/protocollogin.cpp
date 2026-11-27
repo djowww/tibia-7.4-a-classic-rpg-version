@@ -29,9 +29,66 @@
 #include "ban.h"
 #include "game.h"
 #include "scheduler.h"
+#include "database.h"
+#include "vocation.h"
 
 extern ConfigManager g_config;
 extern Game g_game;
+extern Vocations g_vocations;
+
+namespace {
+
+struct CharacterDetails {
+	uint16_t level = 1;
+	uint16_t lookType = 136;
+	uint8_t lookHead = 0;
+	uint8_t lookBody = 0;
+	uint8_t lookLegs = 0;
+	uint8_t lookFeet = 0;
+	std::string vocation;
+	std::string town;
+};
+
+// Accounts with more characters than this get the plain list only, so the
+// login reply always fits in one network message.
+const size_t maxDetailedCharacters = 50;
+
+uint8_t clampLookColor(int64_t value)
+{
+	return static_cast<uint8_t>(std::max<int64_t>(0, std::min<int64_t>(132, value)));
+}
+
+bool loadCharacterDetails(uint32_t accountId, std::map<std::string, CharacterDetails>& details)
+{
+	std::ostringstream query;
+	query << "SELECT `name`, `level`, `vocation`, `looktype`, `lookhead`, `lookbody`, `looklegs`, `lookfeet`, `town_id` FROM `players` WHERE `account_id` = " << accountId;
+	bool success = false;
+	DBResult_ptr result = Database::getInstance()->storeQuery(query.str(), &success);
+	if (!success || !result) {
+		return false;
+	}
+
+	do {
+		CharacterDetails row;
+		row.level = static_cast<uint16_t>(std::max<int64_t>(1, std::min<int64_t>(std::numeric_limits<uint16_t>::max(), result->getNumber<int64_t>("level"))));
+		row.lookType = static_cast<uint16_t>(std::max<int64_t>(0, std::min<int64_t>(std::numeric_limits<uint16_t>::max(), result->getNumber<int64_t>("looktype"))));
+		row.lookHead = clampLookColor(result->getNumber<int64_t>("lookhead"));
+		row.lookBody = clampLookColor(result->getNumber<int64_t>("lookbody"));
+		row.lookLegs = clampLookColor(result->getNumber<int64_t>("looklegs"));
+		row.lookFeet = clampLookColor(result->getNumber<int64_t>("lookfeet"));
+
+		if (const Vocation* vocation = g_vocations.getVocation(result->getNumber<uint16_t>("vocation"))) {
+			row.vocation = vocation->getVocName();
+		}
+		if (const Town* town = g_game.map.towns.getTown(result->getNumber<uint32_t>("town_id"))) {
+			row.town = town->getName();
+		}
+		details[result->getString("name")] = std::move(row);
+	} while (result->next());
+	return true;
+}
+
+}
 
 void ProtocolLogin::sendUpdateRequest()
 {
@@ -102,10 +159,39 @@ void ProtocolLogin::getCharacterList(uint32_t accountNumber, const std::string& 
 		output->addString(ss.str());
 	}
 
+	uint8_t size = std::min<size_t>(std::numeric_limits<uint8_t>::max(), account.characters.size());
+
+	//Add character details (only for clients that asked; sent before the list so
+	//the client has them when the list arrives)
+	if (characterDetails && size > 0 && size <= maxDetailedCharacters) {
+		std::map<std::string, CharacterDetails> details;
+		if (loadCharacterDetails(account.id, details)) {
+			output->addByte(0x66);
+			output->addByte(size);
+			for (uint8_t i = 0; i < size; i++) {
+				auto it = details.find(account.characters[i]);
+				if (it == details.end()) {
+					output->addByte(0x00);
+					continue;
+				}
+
+				const CharacterDetails& row = it->second;
+				output->addByte(0x01);
+				output->add<uint16_t>(row.level);
+				output->addString(row.vocation);
+				output->add<uint16_t>(row.lookType);
+				output->addByte(row.lookHead);
+				output->addByte(row.lookBody);
+				output->addByte(row.lookLegs);
+				output->addByte(row.lookFeet);
+				output->addString(row.town);
+			}
+		}
+	}
+
 	//Add char list
 	output->addByte(0x64);
 
-	uint8_t size = std::min<size_t>(std::numeric_limits<uint8_t>::max(), account.characters.size());
 	output->addByte(size);
 	for (uint8_t i = 0; i < size; i++) {
 		output->addString(account.characters[i]);
@@ -198,10 +284,13 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 		return;
 	}
 	
-	// OTCv8 version detection
-	uint16_t otcV8StringLength = msg.get<uint16_t>();
-	if(otcV8StringLength == 5 && msg.getString(5) == "OTCv8") {
+	// Optional client markers after the password. The random RSA padding of
+	// clients that send neither does not match them.
+	uint16_t markerLength = msg.get<uint16_t>();
+	if (markerLength == 5 && msg.getString(5) == "OTCv8") {
 		otclientV8 = msg.get<uint16_t>(); // 253, 260, 261, ...
+	} else if (markerLength == 4 && msg.getString(4) == "ACL1") {
+		characterDetails = true; // Antigas character list v1
 	}
 	// First packets retain their absolute end; the XTEA cursor helper uses a
 	// different length convention and would allow four undeclared bytes here.

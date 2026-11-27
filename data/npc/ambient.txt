@@ -1,0 +1,1706 @@
+# Falas espontaneas dos NPCs (lidas por src/npcambient.cpp).
+# [arquivo] = nome do .npc sem extensao. Linha comum vale sempre;
+# "night:" so na noite de caca (19:00-05:00 do jogo); "day:" so fora dela.
+# O NPC fala a cada 1-3 min, so com jogador por perto e sem conversa.
+# Recarregar sem reiniciar: /reload npc
+
+[adrenius]
+Sand, sand and again sand. Fafnar burns hot today.
+Doors, weapons, kings... who needs them? Free your mind, wanderer.
+night: Even Fafnar must sleep. The desert gets cold and hungry at night.
+
+[ahmet]
+Equipment of all sorts! Even mortals need a rope and a torch.
+Blessed be the pharaoh. One day I hope to be chosen.
+night: The scarabs dig deeper at night. Buy a torch before the dark takes you.
+
+[albert]
+Edron is a blessed isle. I thank the gods every day I left Thais.
+Hurt? Burning? Poisoned? Come to me, I will heal you.
+night: Hunters come back torn after dark. My hands are never idle at night.
+
+[aldee]
+Wares bugfree, totally bugfree! Look at the blackboards!
+Spears, ropes, shovels, torches! Do not leave town without them.
+One day I will return to the continent as a rich, a very rich man!
+night: Dark out there. A torch costs less than a funeral, you know.
+
+[aldo]
+Hats, trousers and shoes. Damned to sell them forever...
+Bills, bills, bills. And my wife waiting at home.
+night: Sold nothing today. Again. At least my wife is asleep.
+
+[alesar]
+Hmph. I forge for Malor, not for wandering humans.
+The hammer is the only friend that never lies to me.
+night: The forge glows brighter in the dark. Go away, human.
+
+[alexander]
+Runes, life rings and crystal balls for the well prepared.
+Edron's academy is far from the mundane troubles of Thais.
+night: Night hunts burn runes fast. Do not run out of them.
+
+[alia]
+May the gods protect you, traveller. Come to me if you are hurt.
+Five blessings in five sacred places. Ask me about the pilgrimage.
+night: Even the brave women of Carlin avoid the Ghostlands at night.
+
+[allen]
+Furniture for every home! A house is not a home without a chair.
+No time to chat, let's trade!
+night: Rent comes every week now. A cosy house is worth every coin.
+
+[amanda]
+Banor watches over Edron. Come, I will heal your wounds.
+Seek the five blessings before your life force fades.
+night: Pray before you hunt tonight. The beasts are restless.
+
+[amber]
+I crossed the sea on a raft. Horrible weather, high waves!
+I lost my notebook on my raft at the south eastern shore. Have you seen it?
+Two big caves in the east and a ruined tower in the northwest. Explore them!
+night: The rats in the sewers get bolder at night. Be careful, little one.
+
+[anerui]
+Fresh meat from our hunts. Nature provides, if you respect the balance.
+Every fool with a bow considers himself a hunter.
+night: The forest belongs to the hunters at night. Walk softly.
+
+[aneus]
+Sit down, traveller. Shall I tell you the story of the Fields of Glory?
+Keep away from Marlene. Trust me. *grin*
+night: Stories sound best under the stars. Ask me for one.
+
+[angelina]
+The monks of the humble path are impostors. Do not trust their promises.
+Their cult looks for the poor and the angry. Beware.
+night: I can still hear their chants in the dark...
+
+[angus]
+The Explorer Society always needs brave members. Ask me about missions.
+Our researchers wait for reports from fellow explorers.
+night: An astral bridge between our bases... what a time to be alive.
+
+[apparition]
+...cold... so cold...
+...remember me...
+night: ...the night... is ours...
+
+[arito]
+Welcome to the Old Scarab's Shell. Sit, drink, rest.
+Some blasphemous adventurers excavated a burial site in the desert, I heard.
+night: The arena is closed, but the drinks still flow at night.
+
+[arkhothep]
+Kneel before your pharaoh, mortal.
+In undeath, my chosen ones follow the path of ascension.
+night: The night is the hour of the eternal. Do you feel it, mortal?
+
+[aruda]
+Hello, handsome! Got some coins for a poor girl?
+Watch your purse in the crowd. Not that I would know anything about it.
+night: Shadows are a girl's best friend. Just saying.
+
+[ashtamor]
+The fire purges all. The soul departs with the smoke.
+Vases and amphoras, the perfect vessels for dusty remains.
+night: Death works at night too. So do I.
+
+[asima]
+Life and mana fluids, runes and spellbooks. Shalmar teaches, I sell.
+Poor Shalmar, his ears get worse every day.
+night: Hunting at night? Take extra mana fluids, it pays off.
+
+[asrak]
+Rage is the legacy of Blog. Control is the way of the Mooh'Tah.
+These gladiators are weak. They lack harmony.
+night: Even the pits must rest. A true warrior trains anyway.
+
+[avar]
+I fought Ferumbras several times. We are even, I would say.
+Excalibug is hidden beneath the Plains of Havoc. I am sure of it!
+There is great evil beneath this isle... and beneath most places, actually.
+night: Heroes do not sleep. Well, I do. Sometimes.
+
+[azil]
+Armor as numerous as the sand of the desert!
+Going to Drefia? Buy the best armor you can afford first, o brave one.
+night: Drefia's dead walk at night. Good armor is never wasted.
+
+[baaleal]
+That is GENERAL Baa'leal for you, human!
+The Efreet will conquer. The Marid are milksops.
+night: A good general plans his attacks at night.
+
+[bambi]
+Move along, citizen. Carlin is safe under our watch.
+Men in Carlin? Behave, or you will see the cells.
+night: Night shift again. Nothing gets past Bambi Bonecrusher.
+
+[bansheequeen]
+I guard the seventh and final seal. Few ever reach me.
+Pass the first six seals before you dare to ask for my kiss.
+night: My maidens sing to me in the dark. Can you hear them?
+
+[barbara]
+Keep the peace in Carlin, or I will keep it for you.
+The queen's laws apply to everyone. Even to you.
+night: Quiet night. I like it that way.
+
+[bashira]
+Shovels, ropes, torches and oil. Everything a traveller needs.
+Humans boast about their kingdoms, but their short lives doom everything.
+night: Oil and torches, for those who walk the forest in the dark.
+
+[basilisk]
+Hssss...
+Your eyes... look into my eyes...
+night: The deep is always dark. I like it.
+
+[baxter]
+It is rumoured that Ferumbras plans a new attack on our town!
+King Tibianus III is our wise and just leader!
+night: The castle gates are watched day and night.
+
+[beatrice]
+All kinds of useful equipment. Just look at the blackboard.
+There are always rumours about dangers in the far north of Edron.
+night: Hunting tonight? Do not forget your rope and torches.
+
+[beholder]
+Numbers are the secret behind everything. Do you understand? No.
+Elves moved in upstairs. Noisy creatures.
+night: Day, night, irrelevant. I have many eyes.
+
+[benjamin]
+The depots are free for all Tibian citizens! Hail our king!
+Ham? No thanks, I ate fish already.
+Parcels and letters, the Royal Tibia Mail delivers them all.
+night: The post office never closes. I think. Do I sleep here?
+
+[bezil]
+Ropes, shovels, buckets and torches. Do not go into the mines without them.
+Hungry? Go to the Jolly Axeman Tavern.
+night: Down here it is always night. Buy some oil for your lamp.
+
+[bigben]
+Hammer, hammer. Working steel is me profession.
+Lil' lil' ones are so fun. We often chat.
+night: Forge never sleep. Me not sleep much too.
+
+[billy]
+Fresh rats make a good stew! I buy them.
+I would love to try a pancake, but I lack a decent pan.
+Don't listen to Willie, I am the best cook around!
+night: Night time is stew time. Bring me some meat!
+
+[blindorc]
+Ikem pashak porak, bata, dora!
+Ba goshak maruk?
+night: Burka, burka... grofa.
+
+[blindprophet]
+Holy banana speaks to me in dreams.
+Me guard forbidden land behind great palisade.
+night: In dark, the lizards plot. Ape people must be on guard.
+
+[blood]
+HAIL TO KING TIBIANUS!
+Evil has many faces. Not all are as easy to recognize as Ferumbras.
+night: The castle is ready for any assault, day or night!
+
+[blossom]
+Keep moving. The queen's guards are watching you.
+No trouble in Carlin, or you will meet my fists.
+night: The night is long, but so is my patience. Mostly.
+
+[bonifacius]
+Meat, salmon, fruits, cookies and cheese! Fresh from Thais.
+I heard the corn prices in Thais are going to be increased.
+night: Never hunt with an empty stomach. Buy some food!
+
+[boozer]
+Food and drinks at the racing track. Anything else, go elsewhere.
+The swampelves down at Shadowthorn are up to trouble again.
+night: People drink until they puke at this hour. Good for business.
+[boques]
+Scarabee au Vin, Gabel's favourite dish! A real conno... conni... gourmet!
+The finest food on Darama, maybe in all Tibia, comes from my kitchen.
+night: The Efreet eat the most horrible things. Poor fellows.
+
+[borkas]
+Chests, boxes, crates! Containers for every home.
+My grandfather sold furniture, then my father, and now me.
+night: Got a house? With weekly rent, you better fill it with nice furniture.
+
+[bozo]
+Pay your taxes! Hehe, no, I'm just the jester.
+Want to hear a monstrous joke?
+To me it's just a profession, but for you it's a state of mind!
+night: Why did the troll cross the road? To get to the other night! Hehe.
+
+[brasith]
+Fruits and herbs, grown and gathered in harmony with nature.
+Venore's traders are suspiciously friendly. I don't trust them.
+night: The forest whispers at night. Few humans listen.
+
+[brengus]
+Weapons and armor! The jungle is no place for the unprepared.
+I miss Venore, but there is profit to earn here.
+night: The jungle does not sleep. Buy a good shield before you go out.
+
+[brewster]
+<hicks> The gods bless you. Probably.
+Venore's best thing is its brewery. <hicks>
+night: This jungle is a taste of hell. <hicks> Especially at night.
+
+[briasol]
+I exchange money and craft jewels. Thais pays well for them.
+I mourn humans. As soon as you get to know one, he's dead.
+night: Coins sleep safely in the bank. Your pockets, not so much.
+
+[brodrosch]
+All aboard the steamship! Kazordoon to Cormaya, beneath the earth!
+No wind needed, just fire! Mind your beard.
+night: Down here day or night, the furnace never stops.
+
+[bruno]
+Fresh fish! Caught this morning! *grin*
+My wife Marlene can't stop talking. Fishing is good for my ears.
+night: The fish bite best at night. Or so I tell Marlene.
+
+[budrik]
+Leave my miners and their drilling worms alone!
+The Horned Fox raids us with his bandits. He must have a hideout nearby.
+night: The bandits strike in the dark. Keep your eyes open around the mine.
+
+[bunny]
+HAIL TO QUEEN ELOISE! Join the army, sister!
+The Green Ferrets are our elite. Only some elves are better in the woods.
+night: Carlin's walls are guarded all night. The males can sleep in peace.
+
+[busty]
+Halt! Behave yourself in Carlin, stranger.
+Another drunk male? Not on my watch.
+night: The night patrol is mine. Nobody sneaks past me.
+
+[captain1]
+The Royal Tibia Line sails to Carlin, Ab'Dendriel, Venore and Edron!
+Darashia? Never! That route is cursed by a ghostship.
+night: Calm sea tonight. A fine night for sailing.
+
+[captain2]
+Thais, Ab'Dendriel, Venore or Edron. Where do you want to go?
+Captain Fearless sails to Darashia. Not me, not with that ghostship!
+night: The stars guide my ship. Ready to board?
+
+[captain3]
+All aboard! Thais, Carlin, Venore or Edron!
+Ankrahmun? Sorry, we don't serve that route.
+night: Night winds fill the sails. A good time to travel.
+
+[captain4]
+Thais, Carlin, Ab'Dendriel, Venore, Ankrahmun or Cormaya. Where to?
+Ice Islands? No, no. We don't serve those routes.
+night: The sea is dark, but my ship knows the way.
+
+[captain5]
+A ghostship between Venore and Darashia? Hah! I sail there anyway!
+Thais, Carlin, Ab'Dendriel, Edron, Darashia or Ankrahmun. Name it!
+night: Ghosts come out at night. Let them come, I'm Fearless!
+
+[captain6]
+My boat goes to Venore and Ankrahmun. Hop on!
+Ghosts? I don't believe in ghosts.
+night: Quiet waters tonight. Good for a trip to Ankrahmun.
+
+[captain7]
+My ship is the fastest in the whole world!
+Darashia, Venore or Edron. Where do you want to go?
+night: Even the pharaoh's sand cannot slow my ship.
+
+[carina]
+Wedding rings, golden amulets and ruby necklaces!
+The most beautiful jewels of the lands, right here.
+night: A jewel shines brightest in candle light.
+
+[charles]
+The Poodle is the proudest ship on all oceans!
+I know every major harbour in this world.
+Funny to see a tough dwarf turn green on the first breeze.
+night: I would explore this jungle, if only my duties allowed it.
+
+[chatterbone]
+... runes... mighty stones... buy them...
+... they build a new city... Carlin shall be its name...
+night: ... the night... I remember the night... so long ago...
+
+[chemar]
+Darashian airmail! Fly with me to the Femor Hills or Edron.
+Drefia was destroyed by the djinn. Its soil is still evil.
+night: Flying under the stars is beautiful. Where do you want to go?
+
+[chephan]
+See this fork? Imagine what a hero could do to Ferumbras with it!
+Thaian cooking gear is inferior. Upgrade it here!
+night: Taxes are killing me. Buy a plate, help a poor merchant.
+
+[chester]
+Everything I know is confidential.
+The TBI sees everything. Remember that.
+night: The night has many secrets. We collect them all.
+
+[christoph]
+Keep the peace in Venore. The trade barons pay me well for it.
+Pickpockets love the market. Watch your purse.
+night: Night watch. The swamp smells even worse in the dark.
+
+[chrystal]
+Letters and parcels to any town! The post never sleeps.
+Want to join the Postmasters' Guild? The headquarters are on the road from Thais to Kazordoon.
+night: Parcels need a label! Write the name and town on it.
+
+[cipfried]
+Welcome to Tibia! Ask me if you need help or healing.
+Visit Seymour in the academy and ask him about a mission.
+night: Rest your soul. The gods watch over Rookgaard at night.
+
+[clark]
+Law and order in Port Hope. Lord Seamus is ill, so I am in charge.
+The jungle is our first and foremost enemy.
+night: Stay inside the palisade at night. The jungle has teeth.
+
+[clyde]
+Welcome! Sit down and have a drink.
+They call it Port Hope. I haven't given up hope yet.
+night: The tavern is full when the jungle gets dark.
+
+[cobra]
+Hisssss... You bear not the mark of the cobra?
+Begone, or feel my poison.
+night: Hissss... the darkness is my home.
+
+[cornelia]
+Protect your life, buy my armor! Only dwarfs make better ones.
+The Ghostlands? Buy the best protection in store before you go!
+night: A good armor is never wasted on a night hunt.
+
+[costello]
+The White Raven Monastery guards the royal tombs of Thais.
+You may read in our library, but do not go further upstairs.
+night: The catacombs are restless at night. Pray for the old kings.
+
+[crone]
+I was Vashresamun's favourite handmaiden... once.
+Her tomb opens only to a melody: the secret of the rose garden.
+night: The night brings back memories. Too many memories.
+
+[dabui]
+Keep your weapons sheathed in Darashia, stranger.
+The caliph's peace is kept by us guards.
+night: The desert night is cold. My watch is long.
+
+[dagomir]
+Leave me alone, I'm busy!
+Who is knocking? Can't a man have some privacy?
+night: Not now! Come back in the morning!
+
+[dallheim]
+I defend Rookgaard from the beasts of the wilderness!
+Wolves, bears, snakes and spiders out there. Be careful!
+Hurt? Come to me, I can heal you.
+night: The beasts are bolder at night. Stay close to the bridge.
+
+[dane]
+Milk, water and lemonade. No alcohol in Carlin!
+Relax a little. Hunting can wait.
+night: A glass of milk before bed, maybe?
+
+[daniel]
+The Knights of Banor's Blood protect Edron.
+Kaine Kinslayer's treason cost us many brave knights.
+night: Edron's dark corners hide old evil. Our knights stand guard.
+
+[dario]
+I train distance fighters and sell their equipment.
+Scarabs are quick and their shells are hard as steel. Beware.
+night: Arrows fly true at night, if your eyes are good.
+
+[demongrd]
+...
+Turn back, mortal. This place is not for you.
+night: The darkness feeds what lies below.
+
+[demonskeleton]
+*rattle* *rattle*
+Your bones will join mine soon enough.
+night: *rattle* The dead do not sleep.
+
+[dermot]
+Fibula is not very dangerous. Only the wolves bother our farmers.
+The dungeon of Fibula is full of monsters. We sealed it with a solid door.
+night: Wolves howl outside the town wall at night. Stay inside.
+
+[digger]
+Life and mana fluids! The magic market has it all.
+Better don't cross the master Vladruc.
+night: Mana runs out fast at night. Stock up.
+
+[dixi]
+Grandpa Obi has everything you need. Look at the blackboards downstairs!
+Spears, rapiers, ropes and shovels. Ask me!
+night: Grandpa is asleep. I can still sell you something!
+
+[djema]
+Everybody calls me Djem. I hate my name.
+The library has few books. Most are about boring djinn things.
+night: The djinn never party. Not even at night. Boring!
+
+[don]
+The druids enchanted my fields. The wheat grows very quickly.
+Running a farm is hard, but rewarding.
+night: Wolves come close to the farm at night. Keep away from my sheep!
+
+[dove]
+Dove, like the bird! *giggles*
+The depots are free for all Tibian citizens.
+Parcels need a label with name and town, or the mailbox won't take them.
+night: The soldiers get so many letters each week!
+
+[duria]
+I'm the highknight of the dwarfs, jawoll!
+Too many plants and too few tunnels out there, if you ask me.
+night: Knights don't sleep before a good fight, jawoll.
+
+[dustrunner]
+*wags tail*
+Woof! Woof!
+night: *yawns*
+[ebenizer]
+The Royal Bank of Edron. Your gold is safe with me.
+The riches of our isle are its mineral resources.
+night: Gold in the bank does not get stolen on the way home.
+
+[edala]
+The suns bless those who seek wisdom, not power.
+Hurt? Burning? Poisoned? I can help you.
+night: Priyla, daughter of the stars, watches over us tonight.
+
+[eddy]
+Moved to a new home? I'm the specialist for equipping it!
+My offers are permanently extraordinary cheap!
+night: A pillow, a tapestry, a flower pot. Make your house cosy.
+
+[edoch]
+Bows, crossbows and ammunition. The desert is vast and dangerous.
+I visited Thais once. Horrible. I came back as soon as I could.
+night: Arrows! Bolts! Do not run dry in the middle of a night hunt.
+
+[edowir]
+Kings are children adorned with crowns.
+Man or monster, the difference is often just hides and scales.
+Rumours are an unsafe path to follow.
+night: The stars speak tonight. Few take the time to listen.
+
+[edvard]
+New home in Edron? I have everything to furnish it!
+Flowers, pillows, pottery and tapestries. Extraordinary cheap!
+night: The rent is weekly now. Make your house worth it.
+
+[elane]
+Paladins! Our guild helps its members.
+Someday I will slay Ferumbras myself!
+night: A paladin's eye sees far, even at night.
+
+[elathriel]
+The Kuridai keep the law in Ab'Dendriel.
+The hellgate is sealed. I hold the keys, and I keep them.
+night: Criminals love the night. The Kuridai love it more.
+
+[elfguard]
+This is the elven town of Ab'Dendriel. Behave.
+Cenath above, Deraisim on the ground, Kuridai below.
+night: No time to chat. The night watch is long.
+
+[elvith]
+Musical instruments of many kinds. Everything is a song.
+Dwarfs could at least use their hammers with more rhythm.
+night: The forest sings at night. Listen.
+
+[eremo]
+I retired to this island after a life of adventures.
+Promoted? I can teach you powerful spells. I also buy broken amulets.
+I give one of the five blessings. Ask me about it.
+night: The sea is calm tonight. A good night to reflect.
+
+[eroth]
+The Cenath guide the elves. Humans would not understand.
+Thais is a city of filth. Every elf should see it once, as a warning.
+night: Elves are children of light and darkness. The night is ours too.
+
+[etzel]
+Magic is not for the lazy or the impatient.
+Runes? Ask my brother Sigurd next door. <cough>
+night: Great power brings great responsibility, young one.
+
+[eva]
+The bank of Carlin. I can change your money.
+Deposit your gold before you go hunting!
+night: Carry less gold at night. Thieves are about.
+
+[fahradin]
+I am the wizard of the Marid. Slightly more magical than the others.
+Mal'ouquah has no unguarded front door... but maybe another way in.
+night: The Efreet scheme at night. So do I, scientifically speaking.
+
+[falk]
+Welcome to Edron castle! The shops are on the eastern side.
+The Horn of Plenty tavern is upstairs, in the southwest corner.
+night: The castle never sleeps. Ask me if you are lost.
+
+[faluae]
+The Deraisim are the scouts and hunters of Ab'Dendriel.
+Dwarven tunnels harm the forest.
+night: The Deraisim hunt by moonlight. Join us, if you can keep quiet.
+
+[feizuhl]
+Furniture for the mourned and the enlightened.
+Our pharaoh holds the key to our ascension.
+night: Even the dead deserve a fine chair.
+
+[fenbala]
+Carlin's laws are simple. Break them and you will regret it.
+Move along, there is nothing to see here.
+night: I watch the gate. Even at night.
+
+[fenech]
+Runes and spellbooks for the pyramid's visitors.
+Scarabs are dangerous. I stay away from them, and so should you.
+night: Hunting scarabs at night? Brave or stupid. Buy runes either way.
+
+[ferks]
+Port Hope's bank. Order and prosperity, that's what we bring.
+Exchange your coins here. Don't carry your gold into the jungle.
+night: The jungle steals gold faster than any thief.
+
+[ferryman1]
+The Nordic Tibia Ferries! To Senja, Folda and Vega.
+Our ferries stand the high waves of the Nordic Ocean.
+night: Cold night on the sea. Take a warm coat to the Ice Islands.
+
+[ferryman2]
+Senja to Folda, Vega or back to Tibia. Where do you want to go?
+The trip back to Tibia is included in the fee.
+night: Ice and wind. Keep moving or you freeze.
+
+[ferryman3]
+Folda, the coldest place I know. Ready to go?
+Senja, Vega or back to Tibia. Your choice.
+night: The wolves of Folda howl all night.
+
+[ferryman4]
+Vega, cold but beautiful. Need a ferry?
+We are four captains of the Nordic Tibia Ferries.
+night: Northern lights tonight. Worth the cold.
+
+[ferrymanjack]
+The monks sell wine and buy provisions. I carry both. HAR!
+With the abbot's permission I sail you to the continent.
+I prefer parrots. And monkeys! And snakes! HAR! HAR!
+night: Monks pray, I drink. Different ways to spend the night. HAR!
+
+[frans]
+Ruuuunes and spellboooooks!
+Floating ReeeeAnimated Necromantic Seeeervant... FRANS.
+night: Night is the best tiiime for necromancyyyy.
+
+[frodo]
+Welcome to Frodo's Hut! Food and drinks.
+Thanks to our beloved king, alcohol is so cheap!
+night: The Hut is full when the hunters come back. Grab a seat!
+
+[gabel]
+Malor is free again! The war is not over.
+One day all djinn will be reunited. I have not given up hope.
+night: Ashta'daramai is a gift of Daraman. We guard it day and night.
+
+[gail]
+Gems and jewellery, bought and sold.
+This continent is a challenge and an opportunity at the same time.
+night: Gems look best by candle light. Have a look.
+
+[galuna]
+Bows, crossbows and ammunition! Paladins, come here.
+The elves are the best in archery, they say. I disagree.
+night: Out of arrows in the dark? Bad idea. Buy them now.
+
+[gamel]
+Psst! Maces, staffs, daggers... cheap. No questions.
+Don't tell anyone my name, alright?
+night: Night time is business time. Psst!
+
+[gamon]
+New furniture man in town, and he's here to stay!
+Marsh willow wood! Nothing finer in this world.
+Rumours of Venore wanting independence? Paranoid nonsense.
+night: Nothing nicer than a marsh willow campfire at night.
+
+[gatekeeper]
+Come closer, young one. Are you prepared to leave this isle?
+Rookgaard is only the beginning.
+night: The gate is open, day and night, for those who are ready.
+
+[gorn]
+Equipment of all kinds! Ropes, shovels, torches!
+Hungry? Go to Frodo's Hut.
+night: Never leave town without a rope. Ask any dead adventurer.
+
+[graubart]
+Too many storms out there. No trips for now.
+The Seahawk and I rode out many stormy nights together.
+night: Pssst... is Marlene around? Good.
+
+[gregor]
+I trained some of the greatest heroes of Tibia!
+Ferumbras is fine game to hunt. But be careful, he cheats!
+night: Knights train at night too. Weakness never sleeps.
+
+[grof]
+North gate of Thais. Behave and you may pass.
+Trouble in town? Call the guards.
+night: The north gate stays watched all night.
+
+[gundralph]
+I teach powerful spells to those worthy of them.
+Spellbooks? Ask the stationer in the west tower.
+night: Sciences thrive on Edron. Even at night, the academy studies.
+
+[gurbasch]
+The steamship to Kazordoon departs from here!
+Beer only tastes fine in Kazordoon. Bah.
+night: Cormaya at night. Quiet. Too quiet for a dwarf.
+
+[habdel]
+Weapons as lethal as the bite of the desert lion!
+Even the undead of Drefia fall a second time to my weapons.
+night: The dead walk at night. A good weapon is the best friend you have.
+
+[hagor]
+I have travelled the Jakundaf desert for years.
+Fighting is an art. Know it and you will be strong.
+night: The desert hides many secrets. Most of them bite.
+
+[hairycles]
+Me great wizard. Me great doctor. Me know many plants.
+Snakemen evil. Spartaky chased them away from city.
+Kongra very angry very fast. Better climb on highest tree.
+night: Jungle dangerous at night. Me hear lizards.
+
+[halif]
+Torches, ropes, shovels and oil, o seeker of enlightenment.
+Everything for the brave traveller, o wisest of customers.
+night: The desert night is darker than you think. Buy a torch.
+
+[hanna]
+Gems, pearls and wonderful jewels!
+Small diamonds, sapphires, rubies, emeralds and amethysts. I buy and sell them.
+night: Found a gem on your hunt? Bring it to me.
+
+[hardek]
+I buy weapons and armor. Got something to sell?
+Show me your loot. Maybe it catches my interest.
+night: Loot from the night hunt? Bring it here.
+
+[haroun]
+No trade without Gabel's permission.
+Daraman taught us restraint. Most of us, anyway.
+night: Mal'ouquah is a hotbed of vice. Especially at night.
+
+[harsky]
+Keep moving. The castle is watched.
+No trouble near the king's castle.
+night: Night watch at the castle. Nothing gets in.
+
+[helor]
+Paladins serve the will of the gods, even on this continent.
+The jungle corrupts the weak. Stay strong.
+night: The jungle is always lurking. At night it gets closer.
+
+[hl]
+I buy armor and weapons. No questions asked.
+I was in the royal army once. Deserted. Don't want to talk about it.
+night: The camp is safe at night. Safer than Thais, anyway.
+[hofech]
+Furniture and decoration to grace your home.
+One day I will take my flying carpet and see the whole world.
+night: The caliph has the finest home in Darashia. Yours could be second.
+
+[hoggle]
+My boat sunk. I thought it would be more aerodynamic with holes in it.
+I saw a mermaid once! Body of a fish and head of a fish. Amazing!
+Can you keep a secret? I think fish can't breathe on land!
+night: Fish sleep at night. So I should too, probably.
+
+[hugo]
+Tailor and designer extraordinaire! Hugo Chief, the name says it all.
+Soldiers should not wear that ugly armor in town.
+night: Fashion never sleeps, darling.
+
+[humgolf]
+Rotworms! So cute, so intelligent. I buy fresh rats for them.
+Humans? Not cute and not intelligent.
+night: My worms get hungry at night. Got any meat?
+
+[humphrey]
+Nature needs guardians. I am one of them.
+I keep the embrace of Tibia, one of the five blessings.
+night: The forest breathes at night. Respect it.
+
+[hyacinth]
+Revitalizing life fluids, brewed by a follower of Crunor.
+Most monsters of this isle are just creatures of the gods.
+night: The forest is mine at night. Be quiet and you may stay.
+
+[imalas]
+Food! Have a look at my blackboard.
+The Ghostlands? Don't even talk about them.
+night: Hunting tonight? Don't go hungry. Buy some food.
+
+[imbul]
+Need a passage to the other end of the city? Ask me.
+We already lost many settlers to the jungle. Who is next?
+night: Nobody walks through the jungle at night. Take my boat.
+
+[irea]
+Bows, arrows, crossbows and bolts. Some spells too.
+Humans have so little time to learn.
+night: A Deraisim arrow finds its mark even in the dark.
+
+[ironeye]
+The Ironhouse forges, repairs and sells weapons and armor.
+Stop staring at my eye!
+The world is ready for a significant change.
+night: A true warrior never stops training. Not even at night.
+
+[ishebad]
+Ankrahmun will be the centre of a worldwide empire.
+The pharaoh must not be disturbed. Bring your matters to me.
+night: The scarabs keep secrets not meant for mortals. Remember that.
+
+[ishina]
+Gems, pearls and fine jewels. The caliph buys only the best.
+Looking for wisdom? Visit Kasmir in the Muhayin.
+night: Pearls and gems shine like stars. Have a look.
+
+[isimov]
+The Hall of the Ancients holds all the firstborn of our race. All but Durin.
+The greenskins are after all of us. Beware! Beware!
+night: The ancestors rest. Speak softly in their hall.
+
+[iwan]
+Our island is rich in precious stones.
+Small diamonds, sapphires, rubies, emeralds and amethysts!
+night: Gems from the night hunt? I pay well.
+
+[iwar]
+You moving to new home? Me specialist for equipping it!
+Me offers permanently extraordinary cheap!
+night: Weekly rent, jawoll. Make house worth it.
+
+[jakahr]
+The Royal Tibia Mail reaches even our sands.
+The Postmasters' Guild headquarters lie south of Kazordoon.
+night: Letters travel day and night, pilgrim.
+
+[james]
+May Crunor bless our harvests.
+Renegade knights in the northwest, behind the river and the mountain. Stay away.
+Bread, cheese, ham, meat and apples, fresh from my farm!
+night: The academy mages summon more food than I can grow.
+
+[jeanclaude]
+Venore is a city of trade. Keep your hands to yourself.
+Thieves in the market? Call me.
+night: The swamp breathes at night. Not a pleasant smell.
+
+[jezzara]
+Food of various kinds for the faithful of Ankrahmun.
+The temple is in the northeast of the city.
+night: Scarabs stay away from the city. Mostly.
+
+[jimbin]
+Welcome to the Jolly Axeman! Mushroom beer for everyone!
+Don't call my wife Bloody Mary. Trust me.
+Hidden places of ancient times appear out of nowhere these days, jawoll.
+night: Night or day, down here the beer flows, jawoll!
+
+[julian]
+Lyres, lutes, drums and fanfares! Bards come from all over the world.
+Music is the food of love.
+night: A song by the fire after a long hunt. Buy a lute!
+
+[karl]
+Psst... a man can buy what a man needs here.
+Todd took all our money to bring us the hard stuff from Thais. Still waiting...
+night: Keep your voice down. The queen's guards hunt smugglers.
+
+[kasmir]
+Don't look for news when you don't know the past.
+By enhancing the soul, a mortal can ascend to heaven.
+night: Meditation is easier under the stars.
+
+[kawill]
+The earth has a will. We geomancers listen to it.
+The blessing of the two suns is in the suntower near Ab'Dendriel.
+night: Fire and earth, our home. Too much water in this world.
+
+[kazzan]
+The necromancers of Drefia fell once. If they rise again, they will lose more.
+The pyramid is taboo for our people, as Daraman taught us.
+night: Darashia rests under the stars. Peace be with you.
+
+[kevin]
+The Postmasters' Guild is a vital part of Tibian society.
+Ask me about missions, if you think you are ready.
+night: Mail never stops. Neither does a good postman.
+
+[king]
+Honor the gods and pay your taxes!
+Brave adventurers bring the latest news to Frodo's tavern.
+night: My kingdom never sleeps. Neither does Ferumbras, I fear.
+
+[kroox]
+Best armor in land! Dwarfish are the best, jawoll!
+Foreigners not welcome in mines. Evil basilisk in deeper mines.
+night: Down here no night. Only armor and hammers, jawoll.
+
+[kruzak]
+Well, our home IS a fortress.
+Don't mention noodles! That beast was after the bones of our ancestors!
+night: Well, the old ones sleep little. Kings even less.
+
+[kulag]
+West gate of Thais. Keep moving.
+No monsters get past this gate. And no troublemakers.
+night: Night watch at the west gate. Quiet so far.
+
+[lea]
+Sorcery is for those who dedicate their whole life to the arcane.
+Some tricks are easy enough even for males. Card tricks, mostly.
+night: Magic flows stronger at night. Or so we tell the males.
+
+[lector]
+Ham and meat! Dragon steaks are out. <giggle>
+The mausoleum is haunted, I heard.
+night: Ghosts in the graveyard tonight? I stay in my shop.
+
+[leedelle]
+Make sure you have enough torches and a rope before going down!
+Buy equipment, kill monsters, sell their loot back to me!
+night: Rats are bolder at night. Need a better weapon?
+
+[leeland]
+The Useful Things Warehouse! Something you have desired for a long time.
+I sold Ferumbras torches for his first adventures. True story.
+night: Business always comes first. Even at night.
+
+[legola]
+Paladins are missile fighters unequaled in Tibia!
+No druid or sorcerer will ever defeat a paladin with a sword.
+night: Many tried to break the curse of the Ghostlands. None succeeded.
+
+[liane]
+Royal Carlin Mail at your service. Hail our Queen!
+Parcels need a label with name and town!
+night: Benjamin in Thais is slow, but he never sends a parcel wrong.
+
+[lightfoot]
+*sniff* *sniff*
+Woof!
+night: *curls up*
+
+[lily]
+Antidote runes against poison! And I buy blueberries.
+Don't let the snakes bite you, little one.
+night: The forest is calm at night. Nature rests.
+
+[livielle]
+Bananas, melons, oranges, strawberries! Your daily dose of vitamins!
+Alors, my fruits will drive away all nasty diseases!
+night: Bon appetit, even at night!
+
+[lokur]
+Royal postdwarf, and damned proud of it, jawoll!
+Kevin Postner is persistent as a dwarf. A worthy leader.
+night: Depot never closes. Neither does Lokur, jawoll.
+
+[lorbas]
+We monks of the humble path live in humility and poverty.
+The great cathedral fell on the day of doom. The will of the gods.
+night: Join us, friend. The humble path is open to all. Hehe.
+
+[lorek]
+A passage to the other end of the city? Just ask.
+I hope the guards protect us from the beasts out there.
+night: I won't walk the jungle at night. My boat is safer.
+
+[loria]
+I care for magic, not for money.
+The lake is named after my master, Alatar the Sage.
+Bring me the mystic bone of the lich lord below the House of Necromant, and I will reward you.
+night: Mana regenerates slowly. Eat well before you cast all night.
+
+[loui]
+I foolishly entered this unholy hole looking for herbs...
+Help! Is somebody there?
+night: It's so dark in here... Please, gods...
+
+[lubo]
+Equipment for adventurers! Ruffy, stay!
+A great magician lived on top of the mountain to the north. His banner was the black eye.
+Maps? Sorry, sold the last one five minutes ago.
+night: Strange lights on the mountain at night. Must be the magic.
+
+[lugri]
+The weak have to be slain by the strong.
+Life is war. Be the wolf, not the sheep.
+night: Zathroth's hour has come. The dark is ours.
+
+[luna]
+Herbs, mushrooms and flowers. Stone herbs, star herbs, ferns.
+I prefer the wilderness to cities.
+night: Some herbs only bloom under the moon.
+
+[lungelen]
+Magic is power. Power must be studied, not wasted.
+Sorcerers, come to me if you wish to learn.
+night: The stars align tonight. A good night for spells.
+
+[lynda]
+The grace of the gods must be earned, not bought!
+Lugri is a follower of evil. May the gods punish him.
+night: Pray before your night hunt. The gods listen.
+
+[maealil]
+The elves are an ancient race, abandoned by the gods.
+I would love to learn more about the Teshial.
+night: Healers do not sleep when the hunters return wounded.
+[malor]
+I am back, and this time I will finish what I have begun!
+Gabel thought he got rid of me for good. Fool.
+night: Mal'ouquah grows stronger every night.
+
+[maria]
+The upper part of the Hard Rock Tavern. Below is the Pit Tavern.
+In Venore, everyone is a king... until he runs out of luck or money.
+night: Good fighters need good entertainment. The night is young!
+
+[marlene]
+Have you heard the latest news about the seamonster?
+They say evil beings live in a dungeon below us. I went down the hole far to the southwest once...
+Bruno is a wonderful husband. He is just never at home.
+night: I saw something in the water near the docks one night. Something big!
+
+[marvik]
+Druids are preservers of life. Ask me about our guild.
+So much power and so little philosophy... Muriel worries me.
+night: The plants of the east fields grow under the moon too.
+
+[maryza]
+Dragon steaks? Only if somebody brings me a dragon, jawoll.
+The boys of the Savage Axe at the bridge are running wild these days.
+night: Hungry from the night hunt? The Jolly Axeman feeds you!
+
+[mehkesh]
+Potions brewed by the foremost alchemists of the land!
+The scarabs are keepers of ancient secrets.
+night: Scarabs are harder at night. Buy potions before you hunt them.
+
+[melchior]
+A coin for a poor blind beggar?
+Meet an Efreet? Say the word of greeting, DJANNI'HAH, or they will kill you.
+The djinn fortresses lie in the Kha'zeel mountains, west of the great desert.
+night: Day or night, it's all the same to a blind man.
+
+[memech]
+Weapons and armor to protect your mortal shell.
+The scarabs test each warrior's strength.
+night: The desert night is cold and dangerous. Buy a shield.
+
+[mirabell]
+Welcome to the Horn of Plenty, known far beyond Edron!
+The Knights of the True Blood are looking for Excalibug on this isle, I heard.
+night: Frodo is my cousin, but my tavern is better. Ask anyone tonight!
+
+[miraia]
+An oasis for the thirsty, home of shadow and relaxation.
+Foolish adventurers seek Excalibug in the haunted ruins of Drefia.
+night: Travellers tell their best tales at night. Sit and listen.
+
+[mortimer]
+The Explorer Society is always looking for new members.
+Our researchers in Port Hope need test results from fellow explorers.
+night: An astral bridge between our bases, imagine that!
+
+[morun]
+Peace in Darashia. Keep your blade sheathed.
+The caliph's law is kept by us.
+night: Long watch tonight. The desert is quiet... too quiet.
+
+[mugluf]
+Meat, ham and salmon, o hungry one!
+People say there is a dark cloud gathering in the west.
+night: The cries from Drefia carry far at night. Eat well, sleep badly.
+
+[muriel]
+Spellbooks and spells for sorcerers!
+Knights. Children with swords. Not worth any attention.
+night: Magic does not need daylight. Study, apprentice.
+
+[muzir]
+I watch over the caliph's fortune. I can change money for you too.
+Wealth must not taint the soul. Mine is still clean, I hope.
+night: Deposit your gold. The desert has thieves.
+
+[myra]
+The academy of Edron sent me here. Not by choice.
+I am working on a spell to destroy plant life. This jungle needs it.
+night: Even the jungle sleeps... no, it doesn't.
+
+[nahbob]
+Call me Bob. Nobody likes Nah'bob.
+The Efreet? Nothing but 'war!' and 'domination!' all day long. Loonies.
+night: Trading is quite a hassle, actually. Even more at night.
+
+[nelliem]
+Shovels, machetes, pitchforks and brand new crowbars!
+Keep your thumbs green, friend.
+night: Worms come out at night. Buy a sixpack, go fishing!
+
+[nemal]
+I always have a weapon with me. You never know what's behind the next corner.
+I don't believe in gods. Never met one.
+night: The desert at night... I feel it better than I see it.
+
+[nezil]
+Ropes, shovels, torches and oil! The mines are dark.
+Hungry? Visit the Jolly Axeman Tavern.
+night: Ran out of light down there? Buy oil, jawoll.
+
+[noodles]
+Woof! Woof!
+*sniff* *sniff* ...pork?
+night: *snores*
+
+[norbert]
+One day I might become a tailor, or a supermodel!
+The colour of the next season will be orange, I heard.
+night: Even at night, style matters.
+
+[norf]
+I provide one of the five blessings. Ask me about it.
+The spark of the phoenix is given by the dwarven priests in Kazordoon.
+night: Rest your soul in the whiteflower temple.
+
+[norma]
+Wares bugfree, totally bugfree! Read the blackboards!
+Weapons, armor and ropes! Don't go to the dungeons without them!
+night: Dark out there. Buy a torch, little one!
+
+[nydala]
+New home in Carlin? I have everything to furnish it.
+Flowers, pillows, pottery and tapestries. Extraordinarily cheap!
+night: The rent is weekly now. Make your house cosy!
+
+[obi]
+I sell much, much indeed! Read the blackboards!
+No one listens to Obi... no one listens to me.
+Amber is so beautiful. I hope I can impress her somehow.
+night: Hyacinth won't share his life fluid profits. Greedy druid!
+
+[odemara]
+Gems and pearls bought and sold. Great assortment!
+Small diamonds, sapphires, rubies, emeralds, amethysts.
+night: Found gems on your night hunt? I buy them.
+
+[oldadall]
+I was a sailor in my youth. Now I ferry people across town.
+Edron is not the lovely isle people think. Ancient evil lies beneath it.
+night: The jungle is for the young and daring. I stay here, especially at night.
+
+[olddragon]
+Who disturbs my rest...
+Bring me what I seek, little one, and I may spare you.
+night: The night is old, as old as I am.
+
+[oldrak]
+I guard this humble temple of the Nightmare Knights.
+These plains are not safe. It will take heroes to survive here.
+Goshnar, the greatest necromant, was defeated by the Nightmare Knights.
+night: The dreamers saw dark omens at night. I still do.
+
+[olrik]
+Royal Tibia Mail, at your service! Ask me about the mail system.
+What a noble and graceful race, the elves. I feel so clumsy.
+night: The elves dance under the stars. I just trip.
+
+[omur]
+Rare fruits and vegetables from distant places!
+The desert wind carries the cries of the tortured souls from Drefia.
+night: The desert is not called the Devourer for nothing.
+
+[oracle]
+Are you prepared to face your destiny?
+Only those who reached level eight may leave this isle.
+night: The stars have chosen. Will you?
+
+[ormuhn]
+The arena challenges your Akh. The temple takes care of your Uthun.
+Overcome a scarab and its spirit will forgive you.
+night: The arena never closes for true fighters.
+
+[oswald]
+I am the assistant of the great, the magnificent Durin!
+Monster? AHHHH! WHERE? WHERE?
+Want to see the dungeons? Just don't pay your taxes.
+night: I keep annoying people away from my boss. Even at night.
+
+[padreia]
+Druids preserve life. Our magic is about defence, healing and nature.
+Spellbooks? Visit Rachel.
+night: Carlin's fields rest at night. So should you.
+
+[partos]
+They told me this was the finest hotel in town. Lousy room service!
+A king robs people by law. I did it by night.
+night: Can't see the night from down here. I miss it.
+
+[pemaret]
+Fresh fish! And my boat brings you to Edron.
+Did you see the sandy beach in the west of Cormaya?
+night: Night fishing is the best. Want some fish?
+
+[penny]
+Criminal records and mail. Always so much paperwork.
+<sigh> It's an evil world, isn't it?
+night: Overtime again...
+
+[perac]
+Bows, crossbows and ammunition! Best marksman in the land.
+I went to the Ghostlands once. I got out before the illusions drove me mad.
+night: Night hunting? Take more arrows than you think you need.
+
+[perod]
+General goods, crucial for exploring the jungle.
+Got lost in Kazordoon a dozen times before I knew my way.
+night: Rope, torch, machete. Never enter the jungle at night without them.
+
+[phillip]
+Knowledge is free in my school.
+In some dungeons a bright mind serves you better than a blade.
+The dwarfs have a zoo in their town, it is said.
+night: Read a book tonight. Your mind needs training too.
+
+[pino]
+Carpet flights to Darashia or the Femor Hills!
+What a wonderful world, especially if you look down on it.
+night: Flying under the stars. Nothing like it. Where to?
+
+[prisoner]
+Hehehe! Can you solve my riddle? I have the key!
+I was a mighty mage... a what? What is a mage?
+night: Markwin, king of the minos, may he burn! Hehehe!
+
+[puffels]
+I teach the spells of least importance to fools.
+In Thais they mistook me for an ordinary rat! Can you believe that?
+night: Leave me alone. Even teachers need sleep.
+
+[pydar]
+Fire is a raw force. It can be understood and tamed.
+The blessing of the two suns is in the suntower near Ab'Dendriel.
+night: The flames never sleep in Kazordoon.
+
+[queen]
+Soon the whole land will be ruled by women at last!
+We bring justice and wisdom to all. Even to males.
+night: Carlin sleeps safe under my rule.
+
+[quentin]
+Welcome to the temple of Thais. Admire the beauty of Tibia.
+No backpack yet? Ask Gorn in the main street.
+night: Pray, rest, and heal. The temple is always open.
+
+[quero]
+Lyres, lutes, drums and fanfares!
+I love the music of the elves.
+night: A song for the night hunters? Buy a lute and play!
+
+[rachel]
+Mana and life fluids, runes and spellbooks!
+Wisdom arises from patience.
+night: Mana fluids for the night hunt? I have plenty.
+
+[rahkem]
+Our flesh is our weakness and our curse.
+I heal and teach spells to those spiritual enough.
+night: Mourn your mortal flesh, pilgrim. The night reminds us.
+
+[ratamari]
+Shh! The walls have ears!
+Fa'hradin turned me into a rat. 'Nobody will recognise you', he said!
+night: Spying is easier at night. Fewer cats, too.
+
+[ray]
+Mail and depots for the colony of Port Hope.
+Rumours speak of stone tablets about Excalibug in the ancient lizard ruins.
+night: Talk to the colonists and keep your ears open.
+
+[razan]
+The skill makes a fighter strong, not the weapon.
+I serve Caliph Kazzan, thrice praised be his name.
+night: I train by moonlight. A true fighter is never off guard.
+
+[riddler]
+Only those who pass the test of the three sigils may pass!
+The key? A malicious plant spirit guards it. Hehehe!
+night: My master's treasure waits. Riddle me this, mortal...
+[robin]
+I was Master of the Hunt for the king and for his father.
+These kids call themselves an army. In the old days we had a REAL army!
+night: The best game comes out at night. Old Robin knows.
+
+[roderick]
+I am the ambassador of King Tibianus III in Ab'Dendriel.
+Elves and humans can live in peace and harmony. I am sure of it.
+night: Diplomacy never sleeps. Unfortunately.
+
+[rodney]
+Local fruits, fresh from the swamp. Well, near the swamp.
+Amazons banished from Carlin took refuge near the swamps, they say.
+night: Don't go near the amazon camp at night.
+
+[rokyn]
+I change money. Gold, platinum, crystal.
+Venore's bank keeps your coins safe.
+night: Leave your gold here before the night hunt.
+
+[romella]
+Weapons for every purse! Don't forget a machete for the swamp.
+The amazons are looking for a certain magical weapon in this area, they say.
+night: Night in the swamp? Bring a good weapon. Or two.
+
+[rose]
+The most beautiful flowers in Venore!
+I'm not for sale. <giggles>
+night: A flower for your house? It smells better than the swamp.
+
+[rowenna]
+Weapons! Some of the finest in the land, including the famous Carlin swords.
+The crypts in the east are haunted, I heard.
+night: Ghosts in the crypts at night? Buy a good club.
+
+[rudolph]
+Oh, wonderful jackets, capes, tunics and scarfs!
+Oh, such handsome soldiers and such ugly uniforms.
+night: Oh, the tailors' code of honour forbids gossip. Even at night.
+
+[sam]
+Weapons and armor! The finest in Thais.
+Ferumbras is a threat to mankind. Buy weapons, be ready!
+night: My hammer rests at night. My shop does not.
+
+[sandra]
+Life and mana fluids and several potions.
+Thais is full of people with ill manners.
+night: Potions for the night hunt? Don't go without them.
+
+[sarina]
+Shovels, ropes, torches and fishing rods!
+The druids sealed the Ghostlands with magic. Maybe whatever haunted it is gone. Maybe not.
+night: Torches and oil! The night is long.
+
+[scott]
+Food at the inn of Senja. Bread, cheese, ham and meat.
+They say there are secrets to discover around the mage's castle.
+night: Cold night on Senja. Sit by the fire.
+
+[seymour]
+Read the books in our library. Ignorance may mean death!
+Talk to the oracle upstairs when you reach level 8.
+The Key to Adventure, only 5 gold!
+night: Don't challenge the arena monsters if you are inexperienced!
+
+[shalmar]
+I teach magic spells to the worthy.
+Asima sells the magic goods now. My ears... what did you say?
+night: Nothing important happens outside your own soul.
+
+[shanar]
+Weapons, shields and armor. Elven quality.
+Venore's merchants sell low quality weapons to ruin my trade.
+night: The Kuridai forge all night. Need a shield?
+
+[shauna]
+Sheriff of Carlin. Make trouble and you sit behind bars.
+I scared Todd so much he left town by night. HO, HO, HO!
+night: The night is peaceful. I keep it that way.
+
+[sherry]
+Bake some bread and I will buy it for 2 gold.
+The miller thinks his mill is spooked. Lazy fellow.
+night: Donald works the fields day and night.
+
+[shiantis]
+Containers, decoration, torches and books!
+Ferumbras dolls didn't sell. A strange guy bought them all, with needles.
+The merchants will petition the king to lower the taxes, I heard.
+night: Oil and coal basins for long nights!
+
+[shiriel]
+Mystic runes, spellbooks and fluids of life and mana.
+The Teshial were not prepared. We will be.
+night: Elven magic is older than the night itself.
+
+[shirith]
+I oversee the mines. Our trolls work, we profit.
+Humans are more annoying than our trolls.
+night: The mines never sleep. The trolls do, lazy creatures.
+
+[sigurd]
+Life and mana fluids, runes and spellbooks!
+My brother Etzel studies, I sell. Good deal.
+night: Runes for the night hunt, jawoll!
+
+[simon]
+A coin for poor Simon? The poorest human on the continent!
+I hate wolves. Please kill them... ALL.
+The magistrate sells something for the Fibula Dungeon, I heard.
+night: Wolves howl all night. I can't sleep.
+
+[skjaar]
+I only protect my master's crypt. Begone!
+My master's castle stood on this mountain. Now there is a volcano.
+night: The volcano's magic burns stronger at night.
+
+[smiley]
+... runes... mighty stones... other counter...
+... healing runes... intense... ultimate...
+night: ... dark... like the grave...
+
+[snakeeye]
+No closing time, no kings, no problems. Best tavern in Tibia!
+Gods? It's all crap! Superstition!
+night: Night is the best time here. Nobody asks questions.
+
+[soullost]
+...lost... I am lost...
+...help me... find the way...
+night: ...the night never ends here...
+
+[soultainted]
+...tainted... forever tainted...
+...the seals... beware the seals...
+night: ...darkness... it calls...
+
+[soultortured]
+...the pain... it never stops...
+...free us... please...
+night: ...they come at night... always at night...
+
+[spooky]
+...where is my love...
+...I wait... I always wait...
+night: ...the moon... he promised to come back under the moon...
+
+[stranger]
+That's my business, not yours. Get lost.
+*fumbles with his hat nervously*
+night: Bills? What bills? Never heard of them.
+
+[stutch]
+Silver guard. Keep away from the king's chambers.
+The castle is watched. Day and night.
+night: No visitors at this hour.
+
+[suzy]
+The bank of Thais. I can change money for you.
+Deposit your gold before going out!
+night: A thief can't steal what's in the bank.
+
+[sylvester]
+Keep the peace, citizen. Venore is watching.
+The swamp has eyes. So do I.
+night: The night watch in Venore. Rats, thieves and worse.
+
+[talesia]
+Crunor's Finest Warehouse! Fresh greens for everyone.
+We merchants hold this city together.
+night: Even bad news can be good news, if you play your cards well.
+
+[talphion]
+I AM THE CHIEF TECHNOMANCER!
+LET THE ORCS COME, I AM WORKING ON A LITTLE SURPRISE! <chuckles madly>
+night: NIGHT? DOWN HERE? NO SUCH THING!
+
+[tandros]
+Runes, life fluids and mana fluids. Items of magic power!
+The jungle eats mana. Stock up.
+night: Night hunts burn runes fast. Buy more.
+
+[tesha]
+Gems and jewelry, bought and sold.
+The priests say scarabs are sacred... <whispers> I find them scary!
+night: Gems from the night hunt? I buy them.
+
+[tezila]
+Glittering gems, precious pearls and jolly jewels! I exchange money too.
+Fine dwarfish wedding rings and ruby necklaces!
+night: Bank your gold before the night hunt, jawoll.
+
+[thanita]
+Green orcish raiders come in hundreds. My job is one of the toughest.
+This watchtower guards Carlin's lands. Nothing escapes my eyes.
+night: The orcs attack in the dark. I stay awake.
+
+[thomas]
+Spellbooks, scrolls, parchments, books and inkwells.
+Need a spellbook? I sell them.
+night: Writing by candle light. Buy a book.
+
+[tibra]
+The grace of the gods must be earned, not bought!
+Not everything you call a monster is evil to the core.
+night: Pray before the night hunt. Crunor watches.
+
+[tim]
+East gate of Thais. Keep moving.
+Monsters near the gate? Not while I'm here.
+night: Night shift at the east gate. Cold and boring.
+
+[timur]
+Equipment! Torches, ropes, arrows and a fine viking helmet.
+Not enough weapons on this isle to defeat all the wolves. I buy maces and hatchets.
+night: Wolves at night. Buy arrows if you go out.
+
+[todd]
+Uhh... my head. One of the beers was bad.
+Smuggler? Me? I'm an honest man!
+night: Todd? Never heard of him. Try Venore.
+
+[tokel]
+Greenshore's soil is dry and stony. Hard work.
+I pray to Crunor to bless our harvests.
+night: One day I'll move to Edron. They say life is easy there.
+
+[tom]
+Fresh corpses of rats, rabbits and wolves! I buy them.
+Troll leather stinks. Orc skin is too scratchy.
+night: Good hunting tonight? Bring me the corpses, fresh!
+
+[topsy]
+Runes, life and mana fluids, your best friends in any dungeon!
+The sorcerer guild is in the east of town.
+night: Never enter a dungeon at night without fluids!
+
+[tothdral]
+Listen to the scarabs, and they will reveal ancient secrets.
+The stars speak to those who know how to read them.
+night: The stars are clear tonight. The serpentine tower watches.
+
+[trimegis]
+The last courtmage was killed by Ferumbras. I won't make his mistakes.
+The king relies on my divinations and spells of protection.
+night: The stars show... trouble. As always.
+
+[trisha]
+Knights are the true heroes of Tibia! Brave women, join us!
+Fame can only be earned in hand to hand combat.
+night: A knight trains while others sleep.
+[tulf]
+Captain of the emperor's bodyguards. Behave in Kazordoon.
+The bandits of the Horned Fox raid our mines again and again.
+night: The Horned Fox's lair is well hidden. And well guarded.
+
+[turvy]
+Weaponry and armor for the courageous adventurers of Thais! Gold first.
+Help to self-help, that is my motto.
+A monster here? HERE?! Time to double the prices!
+night: May the king, in his infinite wisdom, reduce my taxes... and so on.
+
+[ubaid]
+Only the mighty Efreet may enter Mal'ouquah!
+Marid? Where? How many? RED ALERT!
+night: No meddler gets past me. Day or night.
+
+[ukea]
+New home in Ab'Dendriel? I'm the specialist for equipping it.
+Flowers, pillows, pottery and tapestries. Extraordinarily cheap!
+night: The rent is weekly now. Make your house worth it.
+
+[ulrik]
+Longswords, battle hammers and battle axes. Greenshore steel!
+Now and then an adventurer comes here looking for Excalibug.
+night: Quiet night in Greenshore. Most monsters live far away.
+
+[umar]
+Gatekeeper of Ashta'daramai. Same chair, same wall, all day.
+Sitting here all day makes you a philosopher. Mostly about girls.
+night: Another night staring at the wall. Deep thoughts.
+
+[urkalio]
+The Hard Rock Pits Tavern. Blood, battlecries and beer!
+Choose your enemies with care.
+night: The pits never close. Down here everyone is king as far as his weapons reach.
+
+[ursula]
+I teach some basic spells. Old Muriel taught me.
+The king spent a lot of money on our library.
+night: Studying late again. Magic doesn't learn itself.
+
+[uso]
+There IS gold out there. I feel it in my old bones, jawoll.
+I train knights in my spare time so my old body won't rust.
+night: The jungle is horrible at night. But the gold is still there, jawoll.
+
+[ustan]
+The jungle is vibrant with life. So much to learn!
+I teach spells to druids. My studies are not cheap.
+night: The jungle sounds different at night. Fascinating.
+
+[uzgod]
+Me sell weapons! You want buy?
+Me small, but very big muscles me have, jawoll.
+night: Night hunt? Me make big axe for you.
+
+[uzon]
+Carpet flights to Darashia or Edron!
+Haunted Drefia: vampires, mummies and ghosts. Many go there to test their skills.
+night: Another flight is scheduled soon. Hop on!
+
+[velvet]
+Pillows and tapestries for your home!
+A soft pillow after a long hunt. Nothing better.
+night: Sleep well on a Venore pillow.
+
+[vera]
+Moved to Senja? I have everything to furnish your home.
+Extraordinarily cheap, even here in the cold.
+night: A warm tapestry for the cold nights of Senja?
+
+[vladruc]
+Feel free to browse my humble shop below.
+I have been so long master that none other should be master of me.
+night: Ah, the night. Our ways are not your ways.
+
+[wally]
+Dove is as good as a dozen pigeons. He he he.
+Markwin is moody. He calls his guards as soon as he sees a stranger.
+Missions? Ask Mr. Postner upstairs.
+night: The guild never sleeps. Even kings tremble before our might.
+
+[walter]
+South gate of Thais. Keep moving.
+Trouble at the gate? Not on my watch.
+night: The south gate is watched all night.
+
+[warbert]
+Venore's guards keep the trade flowing. And the thieves out.
+Keep your purse close in the market.
+night: The night watch again. At least the swamp is quiet.
+
+[willard]
+Blacksmith of castle Bloodrock. Weapons, armor, helmets, shields!
+I would be honoured if one of my blades punished Ferumbras.
+night: Steel is forged day and night in Edron.
+
+[william]
+<hicks> In Todd we trust! TODD! TODD! TODD!
+Hey! That's my drink, buy your own!
+night: The sewers are our last refuge. <hicks> From womanhood.
+
+[willie]
+Give me a banana and I will make a banana pie. I'll reward you.
+I am a farmer and a cook. Sell me your food.
+night: Obi is a #@$*#! Don't buy from him!
+
+[windtrouser]
+My family was noble once. The Ghostlands took our fortune.
+My family's brooch was lost when the colony failed. If only someone found it...
+night: The fish bite at night. Not much else to do for a poor fisher.
+
+[wyat]
+I am the sheriff of the Thaian territory.
+Our enemies are numerous, and not all are obvious.
+night: Crime loves the night. So do I, then.
+
+[wyda]
+I am a witch. Didn't you notice?
+Paladins can use bows, but not brains.
+night: The swamp brews strange things at night. So do I.
+
+[xed]
+Distance weapons from the Ironhouse!
+I overheard the boss discussing shady deals with a man in a black cloak...
+night: Arrows! Bolts! Don't hunt at night without them.
+
+[xodet]
+Runes, life and mana fluids! The best magic shop in Thais.
+Sorcerers, the guild is in the east of town.
+night: The night hunt eats mana. Stock up!
+
+[yaman]
+Trading with humans. Better than having my brain bashed in a war.
+No trade without Malor's permission.
+night: Mal'ouquah means Malor's rage. The name fits.
+
+[yanni]
+Chain helmets, brass armor! Buy something, I work on commission.
+If I don't make some sales soon, my kids will get hungry!
+night: Please, one sale before night falls...
+
+[yberius]
+I just live for the gods of Tibia.
+Crunor watches over all plants, small and big.
+night: Pray, rest, and heal in the temple of Venore.
+
+[yoem]
+New home on Cormaya? I'm the specialist for equipping it!
+Flowers, pillows, pottery. Extraordinarily cheap.
+night: A peaceful island, a cosy house. What else do you need?
+
+[yulas]
+We are into home improvement. No chatting allowed.
+Allen wants to be one of us. Ha.
+night: No tables today. Come back tomorrow.
+
+[zaidal]
+Bamboo furniture! And I buy elephant tusks for my tusk tables.
+You call it a jungle, I call it furniture in the making.
+night: The jungle at night is full of furniture... and teeth.
+
+[zebron]
+Care for a game? I gamble now and then. Mostly then.
+Bless the king for the gambling licence of Venore!
+night: The night is young and the dice are hot!
+
+[zerbrus]
+I defend Rookgaard from the beasts of the wilderness!
+Wolves, bears, snakes and spiders out there. Be careful, young one.
+Wounded? Come here, I can heal you.
+night: The beasts come closer at night. Stay near the bridge.
+
+[zoltan]
+I teach the most powerful spells in Tibia.
+Visit Eremo on his little island. A wise old man.
+night: Sciences thrive on Edron. Even at night.
+
+[alwin]
+Venore's guard. No fighting near the market.
+The swamp is no place for a stroll. Stay on the roads.
+night: Night watch. I hear things in the swamp.
+
+[arnold]
+Keep moving, citizen. Venore is a city of order.
+Thieves get a cell, not a warning.
+night: The trade barons sleep. The guards don't.

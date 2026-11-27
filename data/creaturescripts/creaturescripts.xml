@@ -8,6 +8,8 @@
 	<event type="extendedopcode" name="RegenStatus" script="custom/regenstatus.lua"/>
 	<event type="extendedopcode" name="GhostWalk" script="custom/ghostwalk.lua"/>
 	<event type="extendedopcode" name="GmCommands" script="custom/gmcommands.lua"/>
+	<event type="extendedopcode" name="BotInspect" script="custom/botinspect.lua"/>
+	<event type="extendedopcode" name="Guardian" script="custom/guardian.lua"/>
 	<event type="advance" name="ExplorationAdvance" script="custom/exploration.lua"/>
 	<event type="extendedopcode" name="ExplorationOpcode" script="custom/exploration.lua"/>
 	<event type="kill" name="AchievementsKill" script="custom/achievements.lua"/>
@@ -16,6 +18,7 @@
 	<event type="extendedopcode" name="AchievementsOpcode" script="custom/achievements.lua"/>
 	<event type="login" name="FirstItems" script="firstitems.lua"/>
 	<event type="death" name="PlayerDeath" script="playerdeath.lua"/>
+	<event type="death" name="Bounty" script="custom/bounty.lua"/>
     <event type="death" name="death_animation_fireelemental" script="fireelemental.lua"/>
     <event type="death" name="death_animation_slime" script="slime.lua"/>
 	<event type="extendedopcode" name="Shop" script="custom/shop.lua" />

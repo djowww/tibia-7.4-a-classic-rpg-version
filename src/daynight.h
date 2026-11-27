@@ -64,6 +64,19 @@ inline int32_t lightLevelAt(int32_t minute)
 	}
 }
 
+// Noite de caca: das 19:00 as 05:00 do jogo os monstros dao mais XP e loot,
+// nascem mais rapido e batem um pouco mais forte.
+static constexpr int32_t HUNT_NIGHT_START = 19 * 60;
+static constexpr int32_t HUNT_NIGHT_END = 5 * 60;
+static constexpr int32_t NIGHT_LOOT_PERCENT = 125;
+static constexpr int32_t NIGHT_DAMAGE_PERCENT = 110;
+static constexpr int32_t NIGHT_RESPAWN_PERCENT = 75;
+
+inline bool isHuntNight(int32_t minute)
+{
+	return minute >= HUNT_NIGHT_START || minute < HUNT_NIGHT_END;
+}
+
 } // namespace DayNight
 
 #endif

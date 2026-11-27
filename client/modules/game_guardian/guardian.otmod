@@ -1,0 +1,11 @@
+Module
+  name: game_guardian
+  description: Sends the launcher session token (Guardian) to the server after login
+  author: Antigas
+  sandboxed: true
+  autoload: true
+  autoload-priority: 1008
+  dependencies: [ game_interface ]
+  scripts: [ guardian ]
+  @onLoad: init()
+  @onUnload: terminate()

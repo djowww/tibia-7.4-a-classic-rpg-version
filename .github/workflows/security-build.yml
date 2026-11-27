@@ -222,12 +222,12 @@ jobs:
       - name: Run inventory rarity UI regression tests
         run: luajit tests/lua/rarity-ui-tests.lua
 
-      - name: Run ground rarity bolt regression tests
-        run: luajit tests/lua/ground-rarity-bolt-tests.lua
+      - name: Run ground rarity halo regression tests
+        run: luajit tests/lua/ground-rarity-halo-tests.lua
 
       - name: Run gameplay system regression tests
         run: |
-          for suite in achievements bestiary killdeathcount loot-channel market-rate-limit online-bonus questlog; do
+          for suite in achievements bestiary city-lights killdeathcount loot-channel market-rate-limit online-bonus questlog; do
             luajit "tests/lua/${suite}-tests.lua"
           done
 

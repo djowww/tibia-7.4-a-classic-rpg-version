@@ -1130,7 +1130,13 @@ function onTalk(name, level, mode, message, channelId, creaturePos)
       end
       staticText:setColor(speaktype.color)
     end
-    staticText:addMessage(name, mode, staticMessage)
+    -- Fala espontanea de NPC (o servidor manda como monster say para nao entrar no Default):
+    -- mostra em cima do NPC como fala normal, amarela e com "diz:".
+    local textMode = mode
+    if (mode == MessageModes.MonsterSay or mode == MessageModes.MonsterYell) and isNpcAt(creaturePos, name) then
+      textMode = MessageModes.Say
+    end
+    staticText:addMessage(name, textMode, staticMessage)
     g_map.addThing(staticText, creaturePos, -1)
   end
 
@@ -1165,6 +1171,17 @@ function onTalk(name, level, mode, message, channelId, creaturePos)
       pwarning('message in channel id ' .. channelId .. ' which is unknown, this is a server bug, relogin if you want to see messages in this channel')
     end
   end
+end
+
+function isNpcAt(pos, name)
+  local tile = g_map.getTile(pos)
+  if not tile then return false end
+  for _, creature in ipairs(tile:getCreatures()) do
+    if creature:isNpc() and creature:getName() == name then
+      return true
+    end
+  end
+  return false
 end
 
 function onOpenChannel(channelId, channelName)

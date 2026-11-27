@@ -10,6 +10,7 @@
 #include "npc.h"
 #include "player.h"
 #include "tools.h"
+#include "npcmarket.h"
 
 extern Game g_game;
 
@@ -429,7 +430,9 @@ bool BehaviourDatabase::sendTrade(Player* player)
 		std::string article;
 		const std::string name = offerName(it, offer.data, article);
 		ss << (offer.sell ? 'S' : 'B') << '\t' << i << '\t' << offer.itemId << '\t' << offer.data << '\t'
-			<< offer.amount << '\t' << offer.price << '\t' << it.weight << '\t'
+			<< offer.amount << '\t'
+			<< (offer.sell ? NpcMarket::applyPercent(offer.price, NpcMarket::pricePercent(offer.itemId)) : offer.price) << '\t'
+			<< it.weight << '\t'
 			<< (offer.counted ? MAX_TRADE_COUNT : 1) << '\t' << have << '\t'
 			<< cleanField(article) << '\t' << cleanField(name) << '\t'
 			<< clientSubType(it, offer.data) << '\t' << sellable << '\n';
@@ -556,6 +559,7 @@ void BehaviourDatabase::handleSellAll(Player* player)
 	lastTradeTime = now;
 
 	uint64_t earned = 0;
+	uint64_t baseEarned = 0;
 	uint32_t sold = 0;
 	int32_t steps = 0;
 	std::set<std::pair<uint16_t, int32_t>> done;
@@ -598,6 +602,7 @@ void BehaviourDatabase::handleSellAll(Player* player)
 			topic = offer.topic;
 
 			npc->lastTalkCreature = player->getID();
+			lastSalePaid = 0;
 			react(SITUATION_NONE, player, "yes");
 			++steps;
 
@@ -605,7 +610,8 @@ void BehaviourDatabase::handleSellAll(Player* player)
 			if (after + static_cast<uint32_t>(amountValue) != before) {
 				break; // the NPC refused, stop instead of looping
 			}
-			earned += static_cast<uint64_t>(priceValue);
+			earned += lastSalePaid;
+			baseEarned += static_cast<uint64_t>(priceValue);
 			sold += static_cast<uint32_t>(amountValue);
 		}
 	}
@@ -616,6 +622,9 @@ void BehaviourDatabase::handleSellAll(Player* player)
 	} else {
 		std::ostringstream ss;
 		ss << "Ok. I bought " << sold << (sold == 1 ? " item" : " items") << " for " << earned << " gold.";
+		if (earned < baseEarned) {
+			ss << " The market is full of some of them, so I paid less.";
+		}
 		npc->doSay(ss.str());
 	}
 

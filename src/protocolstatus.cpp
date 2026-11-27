@@ -22,6 +22,7 @@
 #include "protocolstatus.h"
 #include "configmanager.h"
 #include "game.h"
+#include "guardian.h"
 #include "outputmessage.h"
 #include "statusqueryratelimiter.h"
 
@@ -47,6 +48,35 @@ enum RequestedInfo_t : uint16_t {
 
 void ProtocolStatus::onRecvFirstMessage(NetworkMessage& msg)
 {
+	const uint8_t request = msg.getByte();
+
+	// Launcher sessions ("Guardian") keep their own limits in guardian.cpp:
+	// a launcher asks for the status, a token and then one heartbeat a minute.
+	if (request == 0x47) {
+		const uint8_t op = msg.getByte();
+		uint16_t launcherVersion = 0;
+		uint16_t clientVersion = 0;
+		uint8_t flags = 0;
+		std::string token;
+		std::string detail;
+		if (op == 1) {
+			launcherVersion = msg.get<uint16_t>();
+			clientVersion = msg.get<uint16_t>();
+			flags = msg.getByte();
+			detail = msg.getString();
+		} else if (op == 2) {
+			token = msg.getString();
+			flags = msg.getByte();
+			detail = msg.getString();
+		} else if (op != 3) {
+			disconnect();
+			return;
+		}
+		g_dispatcher.addTask(createTask(std::bind(&ProtocolStatus::sendGuardian, std::static_pointer_cast<ProtocolStatus>(shared_from_this()),
+							  op, launcherVersion, clientVersion, flags, token, detail)));
+		return;
+	}
+
 	const uint32_t ip = getIP();
 	if (ip != 0x0100007F) {
 		const std::string ipStr = convertIPToString(ip);
@@ -59,7 +89,7 @@ void ProtocolStatus::onRecvFirstMessage(NetworkMessage& msg)
 		}
 	}
 
-	switch (msg.getByte()) {
+	switch (request) {
 		//XML info protocol
 		case 0xFF: {
 			if (msg.getString(4) == "info") {
@@ -85,6 +115,36 @@ void ProtocolStatus::onRecvFirstMessage(NetworkMessage& msg)
 		default:
 			break;
 	}
+	disconnect();
+}
+
+void ProtocolStatus::sendGuardian(uint8_t op, uint16_t launcherVersion, uint16_t clientVersion, uint8_t flags, const std::string& token, const std::string& detail)
+{
+	// Answer: 'G', op, status (0 = ok), players online and, for a new
+	// session, the heartbeat interval in seconds followed by the token.
+	auto output = OutputMessagePool::getOutputMessage();
+	setRawMessages(true);
+
+	Guardian& guardian = Guardian::instance();
+	const int64_t now = OTSYS_TIME();
+	const uint16_t players = static_cast<uint16_t>(std::min<size_t>(g_game.getPlayersOnline(), 0xFFFF));
+
+	output->addByte('G');
+	output->addByte(op);
+	if (op == 1) {
+		const std::string issued = guardian.issue(getIP(), launcherVersion, clientVersion, flags, detail, now);
+		output->addByte(issued.empty() ? 1 : 0);
+		output->add<uint16_t>(players);
+		output->add<uint16_t>(Guardian::HEARTBEAT_SECONDS);
+		output->addBytes(issued.c_str(), issued.size());
+	} else if (op == 2) {
+		output->addByte(guardian.heartbeat(token, getIP(), flags, detail, now) ? 0 : 1);
+		output->add<uint16_t>(players);
+	} else {
+		output->addByte(0);
+		output->add<uint16_t>(players);
+	}
+	send(output);
 	disconnect();
 }
 

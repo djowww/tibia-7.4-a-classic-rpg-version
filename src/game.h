@@ -466,6 +466,9 @@ class Game
 		int32_t getLightHour() const {
 			return lightHour;
 		}
+		bool isHuntNight() const {
+			return DayNight::isHuntNight(lightHour);
+		}
 		// Ajusta a hora do jogo (minuto 0-1439) e manda a luz nova na hora; usado por /worldtime.
 		void setLightHour(int32_t minute);
 

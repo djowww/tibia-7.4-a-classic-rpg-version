@@ -7,8 +7,9 @@
     <Nullable>enable</Nullable>
     <AssemblyName>AntigasLauncher</AssemblyName>
     <RootNamespace>AntigasLauncher</RootNamespace>
-    <Version>1.1.2</Version>
+    <Version>2.0.0</Version>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>tibia74.ico</ApplicationIcon>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>

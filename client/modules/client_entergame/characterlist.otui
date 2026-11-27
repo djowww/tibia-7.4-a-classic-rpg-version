@@ -1,0 +1,333 @@
+CharSelectRow < UIWidget
+  height: 46
+  focusable: true
+  background-color: alpha
+  border-width: 1
+  border-color: alpha
+  &updateOnStates: |
+    function(self)
+      local children = self:getChildren()
+      for i=1,#children do
+        children[i]:setOn(self:isFocused())
+      end
+    end
+  @onFocusChange: self:updateOnStates()
+  @onSetup: self:updateOnStates()
+
+  $hover:
+    background-color: #ffffff12
+
+  $focus:
+    background-color: #ffffff22
+    border-color: #8a7030
+
+  UIWidget
+    id: thumbBox
+    size: 34 34
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 6
+    background-color: #00000066
+    border-width: 1
+    border-color: #000000
+    phantom: true
+
+  UICreature
+    id: creature
+    size: 32 32
+    anchors.centerIn: thumbBox
+    old-scaling: true
+    outfit-center: true
+    animate: false
+    phantom: true
+
+  Label
+    id: name
+    anchors.left: thumbBox.right
+    anchors.top: parent.top
+    margin-left: 8
+    margin-top: 8
+    font: verdana-11px-rounded
+    color: #bbbbbb
+    text-auto-resize: true
+    background-color: alpha
+    phantom: true
+
+    $on:
+      color: #ffffff
+
+  Label
+    id: info
+    anchors.left: name.left
+    anchors.top: name.bottom
+    margin-top: 2
+    font: verdana-11px-antialised
+    color: #8f8a7c
+    text-auto-resize: true
+    background-color: alpha
+    phantom: true
+
+UIWindow
+  id: charactersWindow
+  anchors.fill: parent
+  visible: false
+  focusable: true
+  clipping: true
+  background-color: #000000
+  &static: true
+  @onEnter: CharacterList.doLogin()
+  @onEscape: CharacterList.hide(true)
+  @onSetup: |
+    g_keyboard.bindKeyPress('Up', function() self:recursiveGetChildById('characters'):focusPreviousChild(KeyboardFocusReason) end, self)
+    g_keyboard.bindKeyPress('Down', function() self:recursiveGetChildById('characters'):focusNextChild(KeyboardFocusReason) end, self)
+
+  UIWidget
+    id: scene
+    anchors.top: parent.top
+    anchors.left: parent.left
+    size: 3840 2112
+    image-smooth: false
+    phantom: true
+
+  UIWidget
+    id: heroTile
+    anchors.top: parent.top
+    anchors.left: parent.left
+    size: 96 96
+    phantom: true
+
+  UICreature
+    id: hero
+    size: 96 96
+    anchors.right: heroTile.right
+    anchors.bottom: heroTile.bottom
+    margin-right: 24
+    margin-bottom: 24
+    phantom: true
+
+  UIWidget
+    id: heroHealth
+    size: 29 5
+    anchors.horizontalCenter: hero.horizontalCenter
+    anchors.bottom: hero.top
+    margin-bottom: 2
+    background-color: #000000
+    phantom: true
+
+    UIWidget
+      anchors.fill: parent
+      margin: 1
+      background-color: #3ee03e
+      phantom: true
+
+  Label
+    id: heroName
+    anchors.horizontalCenter: hero.horizontalCenter
+    anchors.bottom: heroHealth.top
+    margin-bottom: 2
+    font: verdana-11px-rounded
+    color: #3ee03e
+    text-auto-resize: true
+    background-color: alpha
+    phantom: true
+
+  Button
+    id: rotateLeft
+    size: 26 26
+    anchors.right: heroTile.left
+    anchors.verticalCenter: heroTile.verticalCenter
+    margin-right: 40
+    text: <
+    @onClick: CharacterList.rotateHero(1)
+
+  Button
+    id: rotateRight
+    size: 26 26
+    anchors.left: heroTile.right
+    anchors.verticalCenter: heroTile.verticalCenter
+    margin-left: 40
+    text: >
+    @onClick: CharacterList.rotateHero(-1)
+
+  UIWidget
+    id: plate
+    size: 300 56
+    anchors.horizontalCenter: heroTile.horizontalCenter
+    anchors.top: heroTile.bottom
+    margin-top: 96
+    background-color: #16130fe6
+    border-width: 1
+    border-color: #8a7030
+    phantom: true
+
+    Label
+      id: plateName
+      anchors.top: parent.top
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 8
+      font: sans-bold-16px
+      color: #e2bd55
+      text-auto-resize: true
+      background-color: alpha
+
+    Label
+      id: plateInfo
+      anchors.top: prev.bottom
+      anchors.horizontalCenter: parent.horizontalCenter
+      margin-top: 3
+      font: verdana-11px-antialised
+      color: #cfc7b4
+      text-auto-resize: true
+      background-color: alpha
+
+  Button
+    id: buttonOk
+    !text: tr('Enter Game')
+    size: 150 30
+    anchors.top: plate.bottom
+    anchors.horizontalCenter: plate.horizontalCenter
+    margin-top: 12
+    font: verdana-11px-rounded
+    color: #e2bd55
+    @onClick: CharacterList.doLogin()
+
+  UIWidget
+    id: listPanel
+    anchors.top: parent.top
+    anchors.right: parent.left
+    anchors.bottom: parent.bottom
+    margin-top: 18
+    margin-bottom: 18
+    margin-right: 40
+    width: 232
+    background-color: #16130fe6
+    border-width: 1
+    border-color: #8a7030
+
+    Label
+      id: title
+      !text: tr('Select Character')
+      anchors.top: parent.top
+      anchors.left: parent.left
+      margin-top: 10
+      margin-left: 12
+      font: sans-bold-16px
+      color: #e2bd55
+      text-auto-resize: true
+      background-color: alpha
+
+    UIWidget
+      id: titleLine
+      height: 1
+      anchors.top: title.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-top: 8
+      background-color: #8a7030
+
+    Label
+      id: accountStatusLabel
+      !text: tr('Free Account')
+      anchors.left: parent.left
+      anchors.bottom: parent.bottom
+      margin-left: 10
+      margin-bottom: 10
+      color: #cfc7b4
+      text-auto-resize: true
+      background-color: alpha
+
+      $on:
+        color: #FF0000
+
+    Label
+      id: accountStatusCaption
+      !text: tr('Account Status') .. ':'
+      anchors.left: parent.left
+      anchors.bottom: accountStatusLabel.top
+      margin-left: 10
+      margin-bottom: 1
+      color: #8f8a7c
+      text-auto-resize: true
+      background-color: alpha
+
+    UIWidget
+      id: footLine
+      height: 1
+      anchors.bottom: accountStatusCaption.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      margin-bottom: 8
+      background-color: #8a7030
+
+    TextList
+      id: characters
+      anchors.top: titleLine.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: footLine.top
+      margin: 6
+      image-source:
+      background-color: alpha
+      focusable: false
+      auto-focus: first
+      vertical-scrollbar: characterListScrollBar
+
+    VerticalScrollBar
+      id: characterListScrollBar
+      anchors.top: characters.top
+      anchors.bottom: characters.bottom
+      anchors.right: characters.right
+      step: 46
+      pixels-scroll: true
+
+  Button
+    id: autoReconnect
+    width: 118
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    margin-left: 16
+    margin-bottom: 16
+
+    $!on:
+      image-color: #FF5252
+      !text: tr('Auto reconnect: Off')
+
+    $on:
+      !text: tr('Auto reconnect: On')
+      image-color: #52FF52
+
+  Button
+    id: buttonCancel
+    !text: tr('Logout')
+    width: 64
+    anchors.left: autoReconnect.right
+    anchors.bottom: parent.bottom
+    margin-left: 6
+    margin-bottom: 16
+    @onClick: CharacterList.hide(true)
+
+  Button
+    id: switchCharacter
+    size: 22 22
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-right: 16
+    margin-bottom: 16
+    text: >
+    opacity: 0.75
+    !tooltip: tr('Next character')
+    @onClick: CharacterList.nextCharacter()
+
+    $hover:
+      opacity: 1
+
+  Label
+    id: switchCount
+    anchors.right: switchCharacter.left
+    anchors.verticalCenter: switchCharacter.verticalCenter
+    margin-right: 6
+    font: verdana-11px-antialised
+    color: #8f8a7c
+    text-auto-resize: true
+    background-color: alpha
+    phantom: true

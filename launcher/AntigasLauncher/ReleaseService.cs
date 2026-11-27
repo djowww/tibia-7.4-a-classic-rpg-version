@@ -22,9 +22,9 @@ internal static class ReleaseService
     private const string SignatureAlgorithm = "ECDSA-P256-SHA256-P1363";
     private const string CanonicalPrefix = "ANTIGAS-CLIENT-RELEASE-V1";
     // Public verification key only. Its matching private key is held by the release publisher in Windows CNG.
-    private const string PublicKeyBase64 = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAELyhqZ/vlL8gMrlo3VHBmfALsf3k/RZaJyErvum5sJjUFabJRQqVtzn4j9JqR/iYgU5VRyuKiG0tRP6pCo4btJg==";
+    internal const string PublicKeyBase64 = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAELyhqZ/vlL8gMrlo3VHBmfALsf3k/RZaJyErvum5sJjUFabJRQqVtzn4j9JqR/iYgU5VRyuKiG0tRP6pCo4btJg==";
     private static readonly Uri SiteUri = new("https://tibia74.tech/");
-    private static readonly HttpClient Http = new(new HttpClientHandler
+    internal static readonly HttpClient Http = new(new HttpClientHandler
     {
         AllowAutoRedirect = false,
         CheckCertificateRevocationList = true,

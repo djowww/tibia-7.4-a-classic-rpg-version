@@ -20,13 +20,15 @@ internal static class Program
         catch (AbandonedMutexException) { ownsMutex = true; }
         if (!ownsMutex)
         {
-            if (!isUpdater) MessageBox.Show("O launcher do Antigas já está aberto.", "Antigas 7.4", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (!isUpdater) MessageBox.Show("The Tibia 7.4 launcher is already open.", "Tibia 7.4 Launcher", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
         try
         {
-            if (args.Length == 7 && isUpdater && int.TryParse(args[5], out var version) && int.TryParse(args[6], out var parentPid))
-                Application.Run(new UpdateApplyForm(args[1], args[2], args[3], args[4], version, parentPid));
+            // An eighth argument, --repair, reinstalls the version that is already installed.
+            var isRepair = args.Length == 8 && args[7] == "--repair";
+            if ((args.Length == 7 || isRepair) && isUpdater && int.TryParse(args[5], out var version) && int.TryParse(args[6], out var parentPid))
+                Application.Run(new UpdateApplyForm(args[1], args[2], args[3], args[4], version, parentPid, isRepair));
             else
                 Application.Run(new LauncherForm(args));
         }
